@@ -52,6 +52,9 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName(if (keyProps.isEmpty) "debug" else "release")
+            // Keep rules for ML Kit (on-device translation): R8 otherwise strips the constructors
+            // ML Kit creates by reflection and translation silently stops working in release.
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 

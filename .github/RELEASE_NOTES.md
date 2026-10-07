@@ -6,6 +6,11 @@
 
 **Ganj** — a free, open-source, *unofficial* reader for Persian poetry, made in tribute to **[Ganjoor](https://ganjoor.net)**: read and listen on your phone or computer, even offline.
 
+### New in 1.1.2
+
+- Android: translation works again in release builds (the code shrinker had been stripping ML Kit); if on-device translation ever fails, it continues online, then offers Google Translate
+- Text selection menu keeps only Copy and Select all
+
 ### New in 1.1.1
 
 - Windows: no more white window on older or budget computers; Windows N and Linux without libmpv explain how to enable audio

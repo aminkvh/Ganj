@@ -29,6 +29,7 @@ import '../translate/translation_line.dart';
 import '../../core/text/content_en.dart';
 import '../tajik/tajik_text.dart';
 import '../../widgets/home_button.dart';
+import '../../widgets/selection_menu.dart';
 
 class PoemScreen extends ConsumerStatefulWidget {
   const PoemScreen({super.key, required this.id, this.couplet, this.verse});
@@ -442,6 +443,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       },
       // Verses, meanings and the summary can be selected and copied.
       child: SelectionArea(
+        contextMenuBuilder: ganjSelectionMenu,
+
         child: CustomScrollView(
           controller: _scroll,
           slivers: [

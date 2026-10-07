@@ -15,6 +15,7 @@ import '../../../widgets/gold_card.dart';
 import '../../../l10n/l10n.dart';
 import '../../../core/text/content_en.dart';
 import '../../../core/net/disk_image.dart';
+import '../../../widgets/selection_menu.dart';
 
 /// Collapsible section that loads its list only when first opened.
 class LazyPanel<T> extends StatefulWidget {
@@ -224,7 +225,10 @@ class _CommentTile extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
-          SelectionArea(child: Text(comment.text, style: const TextStyle(height: 1.8))),
+          SelectionArea(
+            contextMenuBuilder: ganjSelectionMenu,
+            child: Text(comment.text, style: const TextStyle(height: 1.8)),
+          ),
           for (final r in comment.replies) _CommentTile(comment: r, depth: depth + 1),
           if (depth == 0) Divider(color: c.goldLight),
         ],

@@ -252,6 +252,68 @@ class GoogleWebTranslator implements Translator {
   }
 }
 
+/// Phones: on-device ML Kit while it works; the moment any step of it fails (no working Google
+/// Play services, model downloads blocked — common on phones in Iran), translation continues
+/// online through [backup] instead of failing silently. If that fails too, the error reaches
+/// the translation line, which offers Google Translate in the browser.
+class ResilientTranslator implements Translator {
+  ResilientTranslator({required this.primary, required this.backup});
+
+  final Translator primary;
+  final Translator backup;
+
+  /// Set once ML Kit has failed; from then on the backup is used.
+  bool _primaryBroken = false;
+
+  @override
+  bool get inApp => true;
+
+  @override
+  bool get needsModel => !_primaryBroken && primary.needsModel;
+
+  @override
+  Future<bool> isReady(String to) async {
+    if (_primaryBroken) return true;
+    try {
+      return await primary.isReady(to);
+    } catch (_) {
+      _primaryBroken = true;
+      return true;
+    }
+  }
+
+  @override
+  Future<void> prepare(String to) async {
+    if (_primaryBroken) return;
+    try {
+      await primary.prepare(to);
+    } catch (_) {
+      _primaryBroken = true;
+    }
+  }
+
+  @override
+  Future<void> remove(String to) async {
+    try {
+      await primary.remove(to);
+    } catch (_) {}
+  }
+
+  @override
+  Future<String> translate(String text, String to) async {
+    if (!_primaryBroken) {
+      try {
+        return await primary.translate(text, to);
+      } catch (_) {
+        _primaryBroken = true;
+      }
+    }
+    return backup.translate(text, to);
+  }
+}
+
 final translatorProvider = Provider<Translator>(
-  (ref) => !kIsWeb && (Platform.isAndroid || Platform.isIOS) ? MlKitTranslator() : GoogleWebTranslator(),
+  (ref) => !kIsWeb && (Platform.isAndroid || Platform.isIOS)
+      ? ResilientTranslator(primary: MlKitTranslator(), backup: GoogleWebTranslator())
+      : GoogleWebTranslator(),
 );

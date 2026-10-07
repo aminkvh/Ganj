@@ -8,6 +8,7 @@ import '../features/translate/translation_line.dart';
 import '../features/translate/translator.dart';
 import '../l10n/l10n.dart';
 import 'external_link.dart';
+import 'selection_menu.dart';
 
 /// Longer Persian prose (a poet's biography, a section's description): selectable, folded
 /// after a few lines, and — in the English interface — translatable on request.
@@ -45,6 +46,8 @@ class _ExpandableTextState extends ConsumerState<ExpandableText> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SelectionArea(
+          contextMenuBuilder: ganjSelectionMenu,
+
           child: Text(
             widget.text,
             maxLines: _open ? null : widget.maxLines,
@@ -56,6 +59,8 @@ class _ExpandableTextState extends ConsumerState<ExpandableText> {
         ),
         if (_translation case final f?)
           SelectionArea(
+            contextMenuBuilder: ganjSelectionMenu,
+
             child: TranslationLine(future: f, to: to, onOpenInBrowser: () => _openInBrowser(to)),
           ),
         Wrap(

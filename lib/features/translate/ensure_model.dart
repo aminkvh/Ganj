@@ -9,7 +9,13 @@ import 'translator.dart';
 /// When the download fails (Google's servers can be unreachable from some networks),
 /// [fallback] — opening the text in Google Translate — is offered instead.
 Future<bool> ensureTranslationModel(BuildContext context, Translator t, String to, {VoidCallback? fallback}) async {
-  if (await t.isReady(to)) return true;
+  bool ready;
+  try {
+    ready = await t.isReady(to);
+  } catch (_) {
+    ready = false; // can't even ask: offer the download (and its fallback) rather than do nothing
+  }
+  if (ready) return true;
   if (!context.mounted) return false;
   final l = context.l10n;
   final ok = await showDialog<bool>(
