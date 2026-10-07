@@ -764,7 +764,8 @@ class _TajikLines extends ConsumerWidget {
         lines.join('\n'),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
-        style: TextStyle(color: c.lapis, fontSize: 14, height: 1.7),
+        // Vazirmatn has no Cyrillic: fall back to Roboto (Android), else the system's font.
+        style: TextStyle(color: c.lapis, fontSize: 14, height: 1.7, fontFamilyFallback: const ['Roboto']),
       ),
     );
   }
