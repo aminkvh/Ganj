@@ -240,6 +240,19 @@ class _SpineState extends State<_Spine> {
 
 const _shadow = [Shadow(color: Color(0x59000000), offset: Offset(0, 1), blurRadius: 2)];
 
+/// Books whose title or poet matches [query] (English poet names too, in English).
+List<Book> matchingBooks(List<Book> books, String query) {
+  final q = query.trim();
+  if (q.isEmpty) return const [];
+  return [
+    for (final b in books)
+      if (matchesQuery(b.name, q) ||
+          matchesQuery(b.poetName, q) ||
+          localPoet(b.poetId, '').toLowerCase().contains(q.toLowerCase()))
+        b,
+  ];
+}
+
 /// Books matching the home search (by title or poet), as small covers like the site's.
 class BookResults extends ConsumerWidget {
   const BookResults({super.key, required this.query});
@@ -250,14 +263,7 @@ class BookResults extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final books = ref.watch(bookCatalogProvider).value ?? const <Book>[];
     final q = query.trim();
-    final hits = [
-      for (final b in books)
-        if (q.isNotEmpty &&
-            (matchesQuery(b.name, q) ||
-                matchesQuery(b.poetName, q) ||
-                localPoet(b.poetId, '').toLowerCase().contains(q.toLowerCase())))
-          b,
-    ];
+    final hits = matchingBooks(books, q);
     if (hits.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),

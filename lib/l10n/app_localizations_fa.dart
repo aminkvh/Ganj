@@ -161,6 +161,9 @@ class L10nFa extends L10n {
   String get searchPoet => 'جستجوی شاعر';
 
   @override
+  String get homeSearchHint => 'جستجوی سخنور، کتاب یا شعر';
+
+  @override
   String get birthplaceMap => 'نقشهٔ خاستگاه سخنوران';
 
   @override
@@ -208,8 +211,7 @@ class L10nFa extends L10n {
   String get modelRemoved => 'مدل ترجمه حذف شد';
 
   @override
-  String get translateInBrowser =>
-      'روی رایانه، ترجمه در Google Translate باز می‌شود';
+  String get translateInBrowser => 'روی رایانه، ترجمه در Google Translate باز می‌شود';
 
   @override
   String packReady(String name) {
@@ -227,8 +229,7 @@ class L10nFa extends L10n {
   }
 
   @override
-  String get packRemoveBody =>
-      'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
+  String get packRemoveBody => 'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
 
   @override
   String packRemoveFailed(String name) {
@@ -446,6 +447,44 @@ class L10nFa extends L10n {
   String get search => 'جستجو';
 
   @override
+  String get searchWords => 'واژه';
+
+  @override
+  String get searchMeaning => 'معنا';
+
+  @override
+  String get meaningHint => 'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
+
+  @override
+  String semanticScope(String scope) {
+    return 'نتایج محدود به: $scope';
+  }
+
+  @override
+  String get semanticGlobal => 'جستجوی سراسری';
+
+  @override
+  String get semanticResting => 'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
+
+  @override
+  String get semanticOffline => 'جستجوی معنایی به اینترنت نیاز دارد';
+
+  @override
+  String get semanticCredit => 'با جستجوی معنایی گنجور';
+
+  @override
+  String get clear => 'پاک کردن';
+
+  @override
+  String get tajikScript => 'خط تاجیکی (سیریلیک)';
+
+  @override
+  String get tajikScriptNote => 'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
+
+  @override
+  String get home => 'خانه';
+
+  @override
   String get poetLabel => 'شاعر: ';
 
   @override
@@ -505,8 +544,7 @@ class L10nFa extends L10n {
   String get clearCache => 'پاک‌کردن حافظهٔ موقت';
 
   @override
-  String get clearCacheNote =>
-      'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
+  String get clearCacheNote => 'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
 
   @override
   String get about => 'درباره';

@@ -27,14 +27,19 @@ import '../translate/ensure_model.dart';
 import '../translate/translator.dart';
 import '../translate/translation_line.dart';
 import '../../core/text/content_en.dart';
+import '../tajik/tajik_text.dart';
+import '../../widgets/home_button.dart';
 
 class PoemScreen extends ConsumerStatefulWidget {
-  const PoemScreen({super.key, required this.id, this.couplet});
+  const PoemScreen({super.key, required this.id, this.couplet, this.verse});
 
   final int id;
 
   /// Opens at this beyt (from a bookmark or note) instead of where the reader left off.
   final int? couplet;
+
+  /// Open at the beyt holding this verse (vOrder), e.g. a semantic-search match.
+  final int? verse;
 
   @override
   ConsumerState<PoemScreen> createState() => _PoemScreenState();
@@ -125,7 +130,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     final bookmarked = await _user.isBookmarked(p.id);
     final couplets = await _user.bookmarkedCouplets(p.id);
     final notes = await _user.notesFor(p.id);
-    final resume = widget.couplet ?? await _user.lastCouplet(p.id);
+    final resume = widget.couplet ?? _coupletOfVerse(p, widget.verse) ?? await _user.lastCouplet(p.id);
     if (!mounted) return;
     if (resume != null) _topCouplet = resume;
     _saveVisit(couplet: resume); // the visit counts as soon as the poem is open
@@ -314,6 +319,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       appBar: AppBar(
         title: Text(localTitle(poem?.title ?? ''), overflow: TextOverflow.ellipsis),
         actions: [
+          const HomeButton(),
           if (poem != null)
             IconButton(
               tooltip: context.l10n.bookmark,
@@ -358,6 +364,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                   if (poem != null) _copy(_withSource(poem, couplets.map((c) => c.text).join('\n')));
                 case 'share':
                   if (poem != null) _share(_withSource(poem, couplets.map((c) => c.text).join('\n')));
+                case 'tajik':
+                  ctrl.setShowTajik(!settings.showTajik);
                 case 'site':
                   if (poem != null) {
                     openExternal(context, ganjoorSiteUrl(poem.fullUrl), launcher: ref.read(urlLauncherProvider));
@@ -370,6 +378,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
               PopupMenuItem(value: 'theme', child: Text(context.l10n.switchTheme)),
               PopupMenuItem(value: 'copy', child: Text(context.l10n.copyPoem)),
               PopupMenuItem(value: 'share', child: Text(context.l10n.share)),
+              CheckedPopupMenuItem(value: 'tajik', checked: settings.showTajik, child: Text(context.l10n.tajikScript)),
               PopupMenuItem(value: 'site', child: Text(context.l10n.openOnGanjoor)),
             ],
           ),
@@ -523,6 +532,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                               bookmarked: _bookmarkedCouplets.contains(couplets[i].index),
                               onMenu: (at) => _beytMenu(p, couplets[i], at),
                             ),
+                            if (s.showTajik) _TajikLines(fullUrl: p.fullUrl, couplet: couplets[i]),
                             if (_translating)
                               TranslationLine(
                                 future: _translationOf(couplets[i], s.translateTo),
@@ -564,6 +574,14 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
 
   Future<void> _openTranslation(String text, String to) =>
       openExternal(context, googleTranslateUri(text, to).toString(), launcher: ref.read(urlLauncherProvider));
+
+  int? _coupletOfVerse(Poem p, int? vOrder) {
+    if (vOrder == null) return null;
+    for (final c in groupCouplets(p.verses)) {
+      if (c.verses.any((v) => v.vOrder == vOrder)) return c.index;
+    }
+    return null;
+  }
 
   Future<bool> _ensureModel(Translator t, String to) => ensureTranslationModel(context, t, to);
 
@@ -722,6 +740,31 @@ class _InfoChip extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// The beyt's Tajik (Cyrillic) text, under it, when the option is on and Ganjoor has it.
+class _TajikLines extends ConsumerWidget {
+  const _TajikLines({required this.fullUrl, required this.couplet});
+
+  final String fullUrl;
+  final Couplet couplet;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final texts = ref.watch(tajikPoemProvider(fullUrl)).value;
+    final lines = [for (final v in couplet.verses) ?texts?[v.vOrder]];
+    if (lines.isEmpty) return const SizedBox.shrink();
+    final c = context.ganj;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Text(
+        lines.join('\n'),
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+        style: TextStyle(color: c.lapis, fontSize: 14, height: 1.7),
       ),
     );
   }

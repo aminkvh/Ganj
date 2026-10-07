@@ -45,7 +45,6 @@ class PoetryRepository {
     }
   }
 
-  /// API (cache-first) for full detail; an installed pack when the network fails.
   /// API (cache-first) for full detail. When the item is in an installed pack, the API
   /// only gets [packTimeout] — a dead or hanging network falls back to the pack quickly.
   Future<T> _withPack<T>(Future<T> Function() api, Future<T?> Function(LocalPoetry l) pack) async {

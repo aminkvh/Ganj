@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:xml/xml.dart';
 
+import '../../core/net/api_client.dart' show kSemanticBase;
 import '../../core/net/http_cache.dart';
 import '../../core/net/request_pool.dart';
 import 'dto/book.dart';
@@ -12,6 +13,7 @@ import 'dto/extras.dart';
 import 'dto/poem.dart';
 import 'dto/poet.dart';
 import 'dto/recitation.dart';
+import 'dto/semantic.dart';
 import '../packs/pack_catalog.dart';
 
 /// Typed, cached access to api.ganjoor.net. Never use /api/ganjoor/page (≈513 KB).
@@ -103,6 +105,31 @@ class GanjoorApi {
   // ---- M4 extras: each panel is one lean, lazily-fetched endpoint. ----
 
   /// Uncached GET (random results, paged lists whose header we need).
+  /// Ganjoor's semantic search service (the site's «جستجوی معنایی» button). Online only:
+  /// the question is embedded on Ganjoor's server. [global] turns off the poet/book guess.
+  Future<SemanticResult> semanticSearch(String query, {bool global = false, int topK = 20}) async {
+    final r = await _pool.run(
+      () => _dio.post<String>(
+        '$kSemanticBase/api/ganjoor/search/semantic',
+        data: {'query': query, 'topK': topK, 'disableScopeDetection': global},
+        options: Options(contentType: Headers.jsonContentType, receiveTimeout: const Duration(seconds: 45)),
+      ),
+    );
+    return SemanticResult.fromJson(_map(r.data!));
+  }
+
+  /// Tells Ganjoor which result was opened, as its own site does, so it can tune the search.
+  /// Fire-and-forget: carries only the search's id, the poem and its rank.
+  Future<void> semanticClick({required int logId, required int poemId, required int rank}) async {
+    try {
+      await _dio.post<String>(
+        '$kSemanticBase/api/ganjoor/search/semantic/click',
+        data: {'logId': logId, 'poemId': poemId, 'rank': rank},
+        options: Options(contentType: Headers.jsonContentType),
+      );
+    } catch (_) {}
+  }
+
   Future<Response<String>> _fresh(String path, Map<String, String> query) =>
       _pool.run(() => _dio.get<String>(path, queryParameters: query));
 

@@ -9,12 +9,21 @@ import '../../data/providers.dart';
 import 'search_service.dart';
 import '../../l10n/l10n.dart';
 import '../../core/text/content_en.dart';
+import '../../data/api/dto/semantic.dart';
+import 'semantic_results.dart';
 
-/// Search poems by words, optionally within one poet; installed packs answer offline.
+/// Search poems by words (optionally within one poet; installed packs answer offline), or by
+/// meaning through Ganjoor's semantic search (online).
 class SearchScreen extends ConsumerStatefulWidget {
-  const SearchScreen({super.key, this.poetId});
+  const SearchScreen({super.key, this.poetId, this.meaning = false, this.query});
 
   final int? poetId;
+
+  /// Start in "by meaning" mode.
+  final bool meaning;
+
+  /// Run this search straight away (e.g. Enter in the home search box).
+  final String? query;
 
   @override
   ConsumerState<SearchScreen> createState() => _SearchScreenState();
@@ -34,6 +43,32 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   /// Only the newest request may update the list.
   int _request = 0;
+
+  late bool _meaning = widget.meaning;
+  Future<SemanticResult>? _semantic;
+  bool _global = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final q = widget.query?.trim() ?? '';
+    if (q.isNotEmpty) {
+      _field.text = q;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _submit());
+    }
+  }
+
+  void _submit() => _meaning ? _askMeaning() : _run();
+
+  void _askMeaning({bool global = false}) {
+    final q = _field.text.trim();
+    if (q.isEmpty) return;
+    setState(() {
+      _global = global;
+      // ignore(): the results widget reports a failure; it must not also surface as uncaught.
+      _semantic = ref.read(ganjoorApiProvider).semanticSearch(q, global: global)..ignore();
+    });
+  }
 
   @override
   void dispose() {
@@ -92,86 +127,115 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           controller: _field,
           autofocus: true,
           textInputAction: TextInputAction.search,
-          decoration: InputDecoration(hintText: context.l10n.searchPoems, border: InputBorder.none),
-          onSubmitted: (_) => _run(),
+          decoration: InputDecoration(
+            hintText: _meaning ? context.l10n.meaningHint : context.l10n.searchPoems,
+            border: InputBorder.none,
+          ),
+          onSubmitted: (_) => _submit(),
         ),
-        actions: [IconButton(tooltip: context.l10n.search, icon: const Icon(Icons.search), onPressed: _run)],
+        actions: [IconButton(tooltip: context.l10n.search, icon: const Icon(Icons.search), onPressed: _submit)],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: SegmentedButton<bool>(
+              key: const ValueKey('search-mode'),
+              segments: [
+                ButtonSegment(value: false, label: Text(context.l10n.searchWords), icon: const Icon(Icons.text_fields)),
+                ButtonSegment(
+                  value: true,
+                  label: Text(context.l10n.searchMeaning),
+                  icon: const Icon(Icons.psychology_alt),
+                ),
+              ],
+              selected: {_meaning},
+              onSelectionChanged: (v) {
+                setState(() => _meaning = v.first);
+                if (_field.text.trim().isNotEmpty) _submit();
+              },
+            ),
+          ),
+        ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
+      body: _meaning
+          ? (_semantic == null
+                ? const SizedBox.shrink()
+                : SemanticResults(future: _semantic!, global: _global, onSearchAll: () => _askMeaning(global: true)))
+          : Column(
               children: [
-                Text(context.l10n.poetLabel, style: TextStyle(color: c.muted)),
-                Expanded(
-                  child: DropdownButton<int?>(
-                    key: const ValueKey('poet-picker'),
-                    isExpanded: true,
-                    value: poets.any((p) => p.id == _poetId) ? _poetId : null,
-                    items: [
-                      DropdownMenuItem<int?>(value: null, child: Text(context.l10n.allPoets)),
-                      for (final p in poets)
-                        DropdownMenuItem<int?>(value: p.id, child: Text(localPoet(p.id, p.nickname))),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Text(context.l10n.poetLabel, style: TextStyle(color: c.muted)),
+                      Expanded(
+                        child: DropdownButton<int?>(
+                          key: const ValueKey('poet-picker'),
+                          isExpanded: true,
+                          value: poets.any((p) => p.id == _poetId) ? _poetId : null,
+                          items: [
+                            DropdownMenuItem<int?>(value: null, child: Text(context.l10n.allPoets)),
+                            for (final p in poets)
+                              DropdownMenuItem<int?>(value: p.id, child: Text(localPoet(p.id, p.nickname))),
+                          ],
+                          onChanged: (v) {
+                            setState(() => _poetId = v);
+                            if (_term != null) _run();
+                          },
+                        ),
+                      ),
                     ],
-                    onChanged: (v) {
-                      setState(() => _poetId = v);
-                      if (_term != null) _run();
+                  ),
+                ),
+                if (_offline)
+                  Container(
+                    width: double.infinity,
+                    color: c.goldLight,
+                    padding: const EdgeInsets.all(8),
+                    child: Text(context.l10n.offlineResults, textAlign: TextAlign.center),
+                  ),
+                if (_term != null && !_loading && _hits.isEmpty)
+                  Padding(padding: EdgeInsets.all(32), child: Text(context.l10n.nothingFound)),
+                if (_hits.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      // Offline we only know this page's matches; say so instead of a precise-looking number.
+                      context.l10n.resultCount(
+                        '${localDigits(_totalKnown ? _total : _hits.length)}${!_totalKnown && _hasMore ? '+' : ''}',
+                      ),
+                      style: TextStyle(color: c.muted, fontSize: 12),
+                    ),
+                  ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _hits.length + 1,
+                    itemBuilder: (context, i) {
+                      if (i == _hits.length) {
+                        if (_loading) {
+                          return const Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        }
+                        if (!_hasMore) return const SizedBox(height: 24);
+                        return Center(
+                          child: TextButton(onPressed: () => _run(more: true), child: Text(context.l10n.moreResults)),
+                        );
+                      }
+                      final h = _hits[i];
+                      return ListTile(
+                        key: ValueKey('hit-${h.poemId}'),
+                        title: Text(h.snippet, maxLines: 2, overflow: TextOverflow.ellipsis),
+                        subtitle: Text(localPath('${h.poetName} » ${h.poemTitle}'), style: TextStyle(color: c.muted)),
+                        trailing: h.local ? Icon(Icons.offline_pin, color: c.gold, size: 18) : null,
+                        onTap: () => context.push('/poem/${h.poemId}'),
+                      );
                     },
                   ),
                 ),
               ],
             ),
-          ),
-          if (_offline)
-            Container(
-              width: double.infinity,
-              color: c.goldLight,
-              padding: const EdgeInsets.all(8),
-              child: Text(context.l10n.offlineResults, textAlign: TextAlign.center),
-            ),
-          if (_term != null && !_loading && _hits.isEmpty)
-            Padding(padding: EdgeInsets.all(32), child: Text(context.l10n.nothingFound)),
-          if (_hits.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                // Offline we only know this page's matches; say so instead of a precise-looking number.
-                context.l10n.resultCount(
-                  '${localDigits(_totalKnown ? _total : _hits.length)}${!_totalKnown && _hasMore ? '+' : ''}',
-                ),
-                style: TextStyle(color: c.muted, fontSize: 12),
-              ),
-            ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _hits.length + 1,
-              itemBuilder: (context, i) {
-                if (i == _hits.length) {
-                  if (_loading) {
-                    return const Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Center(child: CircularProgressIndicator()),
-                    );
-                  }
-                  if (!_hasMore) return const SizedBox(height: 24);
-                  return Center(
-                    child: TextButton(onPressed: () => _run(more: true), child: Text(context.l10n.moreResults)),
-                  );
-                }
-                final h = _hits[i];
-                return ListTile(
-                  key: ValueKey('hit-${h.poemId}'),
-                  title: Text(h.snippet, maxLines: 2, overflow: TextOverflow.ellipsis),
-                  subtitle: Text(localPath('${h.poetName} » ${h.poemTitle}'), style: TextStyle(color: c.muted)),
-                  trailing: h.local ? Icon(Icons.offline_pin, color: c.gold, size: 18) : null,
-                  onTap: () => context.push('/poem/${h.poemId}'),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

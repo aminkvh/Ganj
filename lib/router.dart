@@ -49,8 +49,14 @@ final routerProvider = Provider<GoRouter>(
           ),
           GoRoute(
             path: '/poem/:id',
-            builder: (_, s) =>
-                _withId(s, (id) => PoemScreen(id: id, couplet: int.tryParse(s.uri.queryParameters['c'] ?? ''))),
+            builder: (_, s) => _withId(
+              s,
+              (id) => PoemScreen(
+                id: id,
+                couplet: int.tryParse(s.uri.queryParameters['c'] ?? ''),
+                verse: int.tryParse(s.uri.queryParameters['v'] ?? ''),
+              ),
+            ),
           ),
           GoRoute(path: '/faal', builder: (_, _) => const FaalScreen()),
           GoRoute(
@@ -69,7 +75,11 @@ final routerProvider = Provider<GoRouter>(
           GoRoute(path: '/map', builder: (_, _) => const PoetsMapScreen()),
           GoRoute(
             path: '/search',
-            builder: (_, s) => SearchScreen(poetId: int.tryParse(s.uri.queryParameters['poet'] ?? '')),
+            builder: (_, s) => SearchScreen(
+              poetId: int.tryParse(s.uri.queryParameters['poet'] ?? ''),
+              meaning: s.uri.queryParameters['mode'] == 'meaning',
+              query: s.uri.queryParameters['q'],
+            ),
           ),
         ],
       ),

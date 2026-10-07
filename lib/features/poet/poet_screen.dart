@@ -13,6 +13,8 @@ import '../home/poet_tile.dart';
 import '../../l10n/l10n.dart';
 import '../../widgets/external_link.dart';
 import '../../core/text/content_en.dart';
+import '../../widgets/home_button.dart';
+import '../library/poet_pack_button.dart';
 
 class PoetScreen extends ConsumerWidget {
   const PoetScreen({super.key, required this.id});
@@ -26,7 +28,10 @@ class PoetScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(async.value == null ? '' : localPoet(async.value!.poet.id, async.value!.poet.nickname)),
-        actions: [if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.poet.fullUrl)],
+        actions: [
+          const HomeButton(),
+          if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.poet.fullUrl),
+        ],
       ),
       body: async.when(
         skipLoadingOnRefresh: false,
@@ -50,6 +55,7 @@ class PoetScreen extends ConsumerWidget {
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                       Text(poetYears(context.l10n, pc.poet), style: TextStyle(color: c.muted)),
+                      PoetPackButton(poetId: pc.poet.id),
                       if (bio != null && bio.isNotEmpty) ...[const SizedBox(height: 12), ExpandableText(bio)],
                     ],
                   ),

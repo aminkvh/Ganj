@@ -9,6 +9,7 @@ import '../../widgets/gold_card.dart';
 import '../../widgets/list_tiles.dart';
 import '../../widgets/external_link.dart';
 import '../../core/text/content_en.dart';
+import '../../widgets/home_button.dart';
 
 class CategoryScreen extends ConsumerWidget {
   const CategoryScreen({super.key, required this.id});
@@ -21,7 +22,10 @@ class CategoryScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(localTitle(async.value?.cat.title ?? '')),
-        actions: [if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.cat.fullUrl)],
+        actions: [
+          const HomeButton(),
+          if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.cat.fullUrl),
+        ],
       ),
       body: async.when(
         skipLoadingOnRefresh: false,

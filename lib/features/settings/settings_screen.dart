@@ -12,6 +12,7 @@ import '../translate/translator.dart';
 import 'licenses.dart';
 import 'settings_controller.dart';
 import '../../l10n/l10n.dart';
+import '../../core/net/disk_image.dart';
 
 /// Public source repository; set once the project is published (the link is hidden while empty).
 const kSourceUrl = 'https://github.com/aminkvh/Ganj';
@@ -53,6 +54,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     try {
       await db.customStatement('DELETE FROM api_cache');
       await db.customStatement('VACUUM'); // give the space back to the disk
+      await DiskImage.clear();
     } catch (_) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.clearFailed)));
       return;
@@ -140,6 +142,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(context.l10n.showMeaningsDefault),
             value: s.showMeaning,
             onChanged: (_) => ctrl.toggleMeaning(),
+          ),
+          SwitchListTile(
+            title: Text(context.l10n.tajikScript),
+            subtitle: Text(context.l10n.tajikScriptNote, style: TextStyle(color: c.muted, fontSize: 12)),
+            value: s.showTajik,
+            onChanged: ctrl.setShowTajik,
           ),
           SwitchListTile(
             title: Text(context.l10n.useIranNastaliq),

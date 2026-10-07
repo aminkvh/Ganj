@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme/ganj_colors.dart';
+import '../core/net/disk_image.dart';
 
 /// Oval portrait with a double gold ring (76×96 by default).
 class PoetPortrait extends StatelessWidget {
@@ -32,7 +33,7 @@ class PoetPortrait extends StatelessWidget {
         child: ClipOval(
           child: url == null
               ? placeholder
-              : Image.network(url!, fit: BoxFit.cover, errorBuilder: (_, _, _) => placeholder),
+              : Image(image: DiskImage(url!), fit: BoxFit.cover, errorBuilder: (_, _, _) => placeholder),
         ),
       ),
     );

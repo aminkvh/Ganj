@@ -62,8 +62,7 @@ import 'app_localizations_fa.dart';
 /// be consistent with the languages listed in the L10n.supportedLocales
 /// property.
 abstract class L10n {
-  L10n(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -83,19 +82,15 @@ abstract class L10n {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('fa'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('fa')];
 
   /// No description provided for @appName.
   ///
@@ -384,6 +379,12 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'جستجوی شاعر'**
   String get searchPoet;
+
+  /// No description provided for @homeSearchHint.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی سخنور، کتاب یا شعر'**
+  String get homeSearchHint;
 
   /// No description provided for @birthplaceMap.
   ///
@@ -883,6 +884,78 @@ abstract class L10n {
   /// **'جستجو'**
   String get search;
 
+  /// No description provided for @searchWords.
+  ///
+  /// In fa, this message translates to:
+  /// **'واژه'**
+  String get searchWords;
+
+  /// No description provided for @searchMeaning.
+  ///
+  /// In fa, this message translates to:
+  /// **'معنا'**
+  String get searchMeaning;
+
+  /// No description provided for @meaningHint.
+  ///
+  /// In fa, this message translates to:
+  /// **'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا'**
+  String get meaningHint;
+
+  /// No description provided for @semanticScope.
+  ///
+  /// In fa, this message translates to:
+  /// **'نتایج محدود به: {scope}'**
+  String semanticScope(String scope);
+
+  /// No description provided for @semanticGlobal.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی سراسری'**
+  String get semanticGlobal;
+
+  /// No description provided for @semanticResting.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید'**
+  String get semanticResting;
+
+  /// No description provided for @semanticOffline.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی معنایی به اینترنت نیاز دارد'**
+  String get semanticOffline;
+
+  /// No description provided for @semanticCredit.
+  ///
+  /// In fa, this message translates to:
+  /// **'با جستجوی معنایی گنجور'**
+  String get semanticCredit;
+
+  /// No description provided for @clear.
+  ///
+  /// In fa, this message translates to:
+  /// **'پاک کردن'**
+  String get clear;
+
+  /// No description provided for @tajikScript.
+  ///
+  /// In fa, this message translates to:
+  /// **'خط تاجیکی (سیریلیک)'**
+  String get tajikScript;
+
+  /// No description provided for @tajikScriptNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند'**
+  String get tajikScriptNote;
+
+  /// No description provided for @home.
+  ///
+  /// In fa, this message translates to:
+  /// **'خانه'**
+  String get home;
+
   /// No description provided for @poetLabel.
   ///
   /// In fa, this message translates to:
@@ -1145,8 +1218,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'fa'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'fa'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;

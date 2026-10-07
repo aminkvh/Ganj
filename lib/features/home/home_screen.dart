@@ -23,6 +23,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObserver {
   String _query = '';
+  final _search = TextEditingController();
 
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
 
   @override
   void dispose() {
+    _search.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -104,9 +106,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           child: TextField(
             key: const ValueKey('poet-filter'),
+            controller: _search,
+            // Typing filters poets and books; Enter searches the poems themselves (as on ganjoor.net).
+            textInputAction: TextInputAction.search,
+            onSubmitted: (v) {
+              if (v.trim().isNotEmpty) context.push('/search?q=${Uri.encodeQueryComponent(v.trim())}');
+            },
             decoration: InputDecoration(
-              hintText: context.l10n.searchPoet,
+              hintText: context.l10n.homeSearchHint,
               prefixIcon: const Icon(Icons.search),
+              suffixIcon: _query.isEmpty
+                  ? null
+                  : IconButton(
+                      tooltip: context.l10n.clear,
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        _search.clear();
+                        setState(() => _query = '');
+                      },
+                    ),
               filled: true,
               fillColor: c.paper,
               isDense: true,
@@ -123,16 +141,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
 
     // Header + pinned row scroll away (NestedScrollView) so short screens, landscape
     // and an open keyboard never overflow.
-    final searching = _query.trim().isNotEmpty;
+    final typed = _query.trim().isNotEmpty;
     final seen = <int>{};
     final matches = [
-      if (searching)
+      if (typed)
         for (final cen in cs)
           for (final p in cen.poets)
             if (seen.add(p.id) &&
                 (matchesQuery(p.name, _query) || matchesQuery(p.nickname, _query) || _matchesEnglish(p.id, _query)))
               p,
     ];
+    // Nothing matched? Keep the home page as it was rather than an empty screen.
+    final books = matchingBooks(ref.watch(bookCatalogProvider).value ?? const [], _query);
+    final searching = typed && (matches.isNotEmpty || books.isNotEmpty);
     final pinned = [
       for (final cen in cs)
         if (cen.id == 0) ...cen.poets,

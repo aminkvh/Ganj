@@ -11,6 +11,7 @@ class Settings {
     this.iranNastaliq = false,
     this.language = 'fa',
     this.translateTo = 'en',
+    this.showTajik = false,
   });
 
   final ThemeMode themeMode;
@@ -24,6 +25,9 @@ class Settings {
   /// Target language of machine translation (a key of `kTranslateTargets`).
   final String translateTo;
 
+  /// Show the Tajik (Cyrillic) text under each verse, where Ganjoor has it.
+  final bool showTajik;
+
   Settings copyWith({
     ThemeMode? themeMode,
     double? fontScale,
@@ -31,6 +35,7 @@ class Settings {
     bool? iranNastaliq,
     String? language,
     String? translateTo,
+    bool? showTajik,
   }) => Settings(
     themeMode: themeMode ?? this.themeMode,
     fontScale: fontScale ?? this.fontScale,
@@ -38,6 +43,7 @@ class Settings {
     iranNastaliq: iranNastaliq ?? this.iranNastaliq,
     language: language ?? this.language,
     translateTo: translateTo ?? this.translateTo,
+    showTajik: showTajik ?? this.showTajik,
   );
 }
 
@@ -47,7 +53,8 @@ class SettingsController extends Notifier<Settings> {
       _kMeaning = 'showMeaning',
       _kIran = 'iranNastaliq',
       _kLanguage = 'language',
-      _kTranslateTo = 'translateTo';
+      _kTranslateTo = 'translateTo',
+      _kTajik = 'showTajik';
 
   @override
   Settings build() {
@@ -59,6 +66,7 @@ class SettingsController extends Notifier<Settings> {
       iranNastaliq: p.getBool(_kIran) ?? false,
       language: p.getString(_kLanguage) == 'en' ? 'en' : 'fa',
       translateTo: p.getString(_kTranslateTo) ?? 'en',
+      showTajik: p.getBool(_kTajik) ?? false,
     );
   }
 
@@ -94,6 +102,11 @@ class SettingsController extends Notifier<Settings> {
   void setTranslateTo(String to) {
     state = state.copyWith(translateTo: to);
     ref.read(sharedPrefsProvider).setString(_kTranslateTo, to);
+  }
+
+  void setShowTajik(bool on) {
+    state = state.copyWith(showTajik: on);
+    ref.read(sharedPrefsProvider).setBool(_kTajik, on);
   }
 
   void toggleMeaning() {

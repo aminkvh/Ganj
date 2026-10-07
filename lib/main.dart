@@ -21,6 +21,7 @@ import 'features/player/audio_handler.dart';
 import 'features/player/audio_store.dart';
 import 'features/player/player_controller.dart';
 import 'features/settings/licenses.dart';
+import 'core/net/disk_image.dart';
 
 Future<void> main() async {
   SmoothWheelBinding(); // smooth mouse-wheel scrolling on Windows/Linux
@@ -34,6 +35,10 @@ Future<void> main() async {
     centuries: await rootBundle.loadString('assets/seed/centuries.json'),
   );
   final db = AppDb(driftDatabase(name: 'ganj'));
+  // Pictures (portraits, manuscript thumbnails) are kept on disk, not fetched every launch.
+  DiskImage.configure(
+    directory: Directory('${(await getApplicationCacheDirectory()).path}${Platform.pathSeparator}images'),
+  );
   final audioDir = Directory('${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}audio');
   final backend = JustAudioBackend();
 

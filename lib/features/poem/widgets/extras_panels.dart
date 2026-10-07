@@ -14,6 +14,7 @@ import '../../../widgets/external_link.dart';
 import '../../../widgets/gold_card.dart';
 import '../../../l10n/l10n.dart';
 import '../../../core/text/content_en.dart';
+import '../../../core/net/disk_image.dart';
 
 /// Collapsible section that loads its list only when first opened.
 class LazyPanel<T> extends StatefulWidget {
@@ -120,7 +121,7 @@ class PoemExtras extends ConsumerWidget {
           itemBuilder: (context, r) => ListTile(
             leading: CircleAvatar(
               backgroundColor: c.goldLight,
-              backgroundImage: r.poetImageUrl.isEmpty ? null : NetworkImage('$kApiBase${r.poetImageUrl}'),
+              backgroundImage: r.poetImageUrl.isEmpty ? null : DiskImage('$kApiBase${r.poetImageUrl}'),
               onBackgroundImageError: r.poetImageUrl.isEmpty ? null : (_, _) {},
             ),
             title: Text(localPath(r.fullTitle), maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -155,8 +156,8 @@ class PoemExtras extends ConsumerWidget {
             leading: SizedBox(
               width: 48,
               height: 64,
-              child: Image.network(
-                im.thumb,
+              child: Image(
+                image: DiskImage(im.thumb),
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => Icon(Icons.image_not_supported, color: c.muted),
               ),

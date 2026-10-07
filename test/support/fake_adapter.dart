@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -19,6 +20,12 @@ class FakeAdapter implements HttpClientAdapter {
   /// Extra response headers by path (e.g. paging-headers).
   final headers = <String, Map<String, String>>{};
   final requests = <Uri>[];
+
+  /// Request bodies (for POSTs), in the order sent.
+  final bodies = <Object?>[];
+
+  /// Status codes to answer with, by path (e.g. 503 for a resting service).
+  final status = <String, int>{};
   bool offline = false;
 
   /// Simulated latency (a slow or hanging network).
@@ -27,12 +34,15 @@ class FakeAdapter implements HttpClientAdapter {
   @override
   Future<ResponseBody> fetch(RequestOptions o, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
     requests.add(o.uri);
+    if (o.data != null) bodies.add(o.data is String ? jsonDecode(o.data as String) : o.data);
     if (delay > Duration.zero) await Future<void>.delayed(delay);
     if (offline) throw DioException.connectionError(requestOptions: o, reason: 'offline');
     final accept = '${o.headers['Accept'] ?? ''}';
     if (_nonJsonFile.hasMatch(o.uri.path) && accept.contains('application/json')) {
       return ResponseBody.fromString('', 406);
     }
+    final code = status[o.uri.path];
+    if (code != null) return ResponseBody.fromString('', code);
     final bin = binary[o.uri.path];
     if (bin != null) return ResponseBody.fromBytes(bin, 200);
     final body = routes[o.uri.path];
