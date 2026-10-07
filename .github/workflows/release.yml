@@ -69,7 +69,9 @@ jobs:
 
   windows:
     needs: test
-    runs-on: windows-latest
+    # Visual Studio 2022: VS 2026's compiler drops the C++/WinRT coroutine support that
+    # just_audio_windows still uses.
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
