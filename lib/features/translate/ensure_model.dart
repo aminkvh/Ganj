@@ -6,7 +6,9 @@ import 'translator.dart';
 
 /// Makes sure [t] can translate Persian → [to]. A download (ML Kit, ~30 MB per language)
 /// happens only after the reader agrees; returns false when they decline or it fails.
-Future<bool> ensureTranslationModel(BuildContext context, Translator t, String to) async {
+/// When the download fails (Google's servers can be unreachable from some networks),
+/// [fallback] — opening the text in Google Translate — is offered instead.
+Future<bool> ensureTranslationModel(BuildContext context, Translator t, String to, {VoidCallback? fallback}) async {
   if (await t.isReady(to)) return true;
   if (!context.mounted) return false;
   final l = context.l10n;
@@ -30,7 +32,13 @@ Future<bool> ensureTranslationModel(BuildContext context, Translator t, String t
   } catch (_) {
     messenger
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(l.modelFailed)));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(l.modelFailed),
+          duration: const Duration(seconds: 8),
+          action: fallback == null ? null : SnackBarAction(label: l.openInGoogleTranslate, onPressed: fallback),
+        ),
+      );
     return false;
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/text/persian_normalize.dart';
@@ -13,6 +12,7 @@ import 'licenses.dart';
 import 'settings_controller.dart';
 import '../../l10n/l10n.dart';
 import '../../core/net/disk_image.dart';
+import '../../version.dart';
 
 /// Public source repository; set once the project is published (the link is hidden while empty).
 const kSourceUrl = 'https://github.com/aminkvh/Ganj';
@@ -27,17 +27,11 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int? _cacheBytes;
-  String _version = '';
 
   @override
   void initState() {
     super.initState();
     _loadCacheSize();
-    PackageInfo.fromPlatform()
-        .then((i) {
-          if (mounted) setState(() => _version = i.version);
-        })
-        .catchError((_) {});
   }
 
   Future<void> _loadCacheSize() async {
@@ -214,14 +208,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(context.l10n.licenses),
             onTap: () {
               registerLicenses();
-              showLicensePage(context: context, applicationName: context.l10n.appName, applicationVersion: _version);
+              showLicensePage(context: context, applicationName: context.l10n.appName, applicationVersion: kAppVersion);
             },
           ),
-          if (_version.isNotEmpty)
+          if (kAppVersion.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                context.l10n.versionN(localDigits(_version)),
+                context.l10n.versionN(localDigits(kAppVersion)),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: c.muted),
               ),

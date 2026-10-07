@@ -80,6 +80,7 @@ Widget testAppRouted(
   String location, {
   required SharedPreferences prefs,
   PoetryRepository? repo,
+  AudioBackend? backend,
   List<Override> overrides = const [],
 }) {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
@@ -89,7 +90,7 @@ Widget testAppRouted(
       appDbProvider.overrideWithValue(AppDb(NativeDatabase.memory())),
       sharedPrefsProvider.overrideWithValue(prefs),
       poetryRepositoryProvider.overrideWithValue(repo ?? FixtureRepository()),
-      audioBackendProvider.overrideWithValue(FakeAudioBackend()),
+      audioBackendProvider.overrideWithValue(backend ?? FakeAudioBackend()),
       initialLocationProvider.overrideWithValue(location),
       englishContentProvider.overrideWithValue(testEnglishContent),
       ...overrides,

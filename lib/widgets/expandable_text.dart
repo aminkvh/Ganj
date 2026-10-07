@@ -29,7 +29,7 @@ class _ExpandableTextState extends ConsumerState<ExpandableText> {
     final t = ref.read(translatorProvider);
     final to = ref.read(settingsProvider).translateTo;
     if (!t.inApp) return _openInBrowser(to);
-    if (!await ensureTranslationModel(context, t, to) || !mounted) return;
+    if (!await ensureTranslationModel(context, t, to, fallback: () => _openInBrowser(to)) || !mounted) return;
     setState(() {
       _translation = t.translate(widget.text, to);
     });

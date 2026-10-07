@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include "flutter_window.h"
+#include "renderer_choice.h"
 #include "utils.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
@@ -22,6 +23,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   std::vector<std::string> command_line_arguments =
       GetCommandLineArguments();
 
+  GanjLog("start");
+  // Older GPUs (e.g. Intel HD Graphics 3000) show a white window with Impeller: use Skia there.
+  project.set_impeller_switch(ShouldUseImpeller(command_line_arguments)
+                                  ? flutter::ImpellerSwitch::Enabled
+                                  : flutter::ImpellerSwitch::Disabled);
+
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
   FlutterWindow window(project);
@@ -29,8 +36,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   Win32Window::Size size(1280, 720);
   // Window title: Persian name and Latin name (escaped so the source stays ASCII for MSVC).
   if (!window.Create(L"\x06AF\x0646\x062C \x2014 Ganj", origin, size)) {
+    GanjLog("window could not be created");
     return EXIT_FAILURE;
   }
+  GanjLog("window created");
   window.SetQuitOnClose(true);
 
   ::MSG msg;

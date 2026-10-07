@@ -85,7 +85,9 @@ class BrowserTranslator implements Translator {
 
 /// Android/iOS: Google ML Kit on-device translation.
 class MlKitTranslator implements Translator {
-  final _models = OnDeviceTranslatorModelManager();
+  MlKitTranslator({ModelManager? models}) : _models = models ?? OnDeviceTranslatorModelManager();
+
+  final ModelManager _models;
   final _translators = <String, OnDeviceTranslator>{};
 
   static const _fa = 'fa';
@@ -96,8 +98,8 @@ class MlKitTranslator implements Translator {
   @override
   bool get needsModel => true;
 
-  // English is part of ML Kit itself; every other language is a download.
-  List<String> _needed(String to) => [_fa, if (to != 'en') to];
+  // Both sides need a model on the phone. (English may already be there — checked, not assumed.)
+  List<String> _needed(String to) => {_fa, to}.toList();
 
   @override
   Future<bool> isReady(String to) async {
@@ -110,7 +112,11 @@ class MlKitTranslator implements Translator {
   @override
   Future<void> prepare(String to) async {
     for (final m in _needed(to)) {
-      if (!await _models.isModelDownloaded(m)) await _models.downloadModel(m, isWifiRequired: false);
+      // ML Kit reports a failed download by returning false, e.g. when Google's servers
+      // can't be reached from the reader's network.
+      if (!await _models.isModelDownloaded(m) && !await _models.downloadModel(m, isWifiRequired: false)) {
+        throw StateError('translation model "$m" could not be downloaded');
+      }
     }
   }
 

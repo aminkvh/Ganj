@@ -7,6 +7,8 @@ import '../../core/theme/ganj_colors.dart';
 import 'player_controller.dart';
 import '../../l10n/l10n.dart';
 import '../../core/text/content_en.dart';
+import 'unavailable_audio.dart';
+import '../../widgets/external_link.dart';
 
 const _speeds = [0.75, 1.0, 1.25, 1.5];
 
@@ -75,7 +77,20 @@ class MiniPlayer extends ConsumerWidget {
                     onTap: () => GoRouter.maybeOf(context)?.push('/poem/${poem.id}'),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                      child: s.status == PlayerStatus.error
+                      child: s.status == PlayerStatus.error && ref.watch(audioUnavailableProvider) != null
+                          ? Row(
+                              children: [
+                                if (ref.watch(audioUnavailableProvider) == AudioUnavailableReason.windowsN) ...[
+                                  Expanded(child: Text(context.l10n.audioNeedsMediaPack)),
+                                  TextButton(
+                                    onPressed: () => openExternal(context, kMediaFeaturePackUrl),
+                                    child: Text(context.l10n.howToInstall),
+                                  ),
+                                ] else
+                                  Expanded(child: SelectableText(context.l10n.audioNeedsMpv)),
+                              ],
+                            )
+                          : s.status == PlayerStatus.error
                           ? Row(
                               children: [
                                 Expanded(child: Text(context.l10n.playFailed)),

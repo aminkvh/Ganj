@@ -84,6 +84,11 @@ jobs:
           $v = $env:TAG.TrimStart('v')
           New-Item -ItemType Directory out | Out-Null
           Copy-Item -Recurse build/windows/x64/runner/Release "Ganj"
+          # Microsoft's C++ runtime next to the exe (app-local deployment), so Ganj starts on a
+          # fresh Windows without installing the Visual C++ Redistributable first.
+          foreach ($dll in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
+            Copy-Item "$env:WINDIR\System32\$dll" "Ganj\"
+          }
           Compress-Archive -Path "Ganj" -DestinationPath "out/Ganj-$v-windows-x64.zip"
       - uses: actions/upload-artifact@v4
         with: { name: windows, path: out/* }

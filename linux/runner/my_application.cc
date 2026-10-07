@@ -58,6 +58,15 @@ static void my_application_activate(GApplication* application) {
   fl_dart_project_set_dart_entrypoint_arguments(
       project, self->dart_entrypoint_arguments);
 
+  // Skia by default, as on Windows: Impeller depends on a modern, well-behaved GPU driver and
+  // can show a blank window on old or cheap graphics (e.g. older Intel chips under Mesa).
+  // `--renderer=impeller` opts in.
+  gboolean impeller = FALSE;
+  for (char** a = self->dart_entrypoint_arguments; a != nullptr && *a != nullptr; a++) {
+    if (g_strcmp0(*a, "--renderer=impeller") == 0) impeller = TRUE;
+  }
+  fl_dart_project_set_enable_impeller(project, impeller);
+
   FlView* view = fl_view_new(project);
   GdkRGBA background_color;
   // Background defaults to black, override it here if necessary, e.g. #00000000

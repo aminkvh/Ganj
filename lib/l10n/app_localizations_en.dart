@@ -128,7 +128,8 @@ class L10nEn extends L10n {
       'O Hafez of Shiraz, keeper of every secret,\nI ask you by God and by your Shakh-e Nabat\nto reveal to me whatever is right and good for me.';
 
   @override
-  String get faalIntention => 'Hold your wish in your heart, then open your fortune.';
+  String get faalIntention =>
+      'Hold your wish in your heart, then open your fortune.';
 
   @override
   String get faalOpen => 'Open the fortune';
@@ -211,7 +212,8 @@ class L10nEn extends L10n {
   String get modelRemoved => 'Translation model removed';
 
   @override
-  String get translateInBrowser => 'On computers, translations open in Google Translate';
+  String get translateInBrowser =>
+      'On computers, translations open in Google Translate';
 
   @override
   String packReady(String name) {
@@ -229,7 +231,8 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get packRemoveBody => 'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
+  String get packRemoveBody =>
+      'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
 
   @override
   String packRemoveFailed(String name) {
@@ -336,6 +339,17 @@ class L10nEn extends L10n {
 
   @override
   String get playFailed => 'Couldn\'t play';
+
+  @override
+  String get audioNeedsMediaPack =>
+      'Recitations need Microsoft\'s free Media Feature Pack on this edition of Windows (N).';
+
+  @override
+  String get howToInstall => 'How to install';
+
+  @override
+  String get audioNeedsMpv =>
+      'Recitations on Linux need libmpv, e.g. sudo apt install libmpv2';
 
   @override
   String get speed => 'Speed';
@@ -453,7 +467,8 @@ class L10nEn extends L10n {
   String get searchMeaning => 'Meaning';
 
   @override
-  String get meaningHint => 'Ask in your own words, e.g. a poem about the world\'s fickleness';
+  String get meaningHint =>
+      'Ask in your own words, e.g. a poem about the world\'s fickleness';
 
   @override
   String semanticScope(String scope) {
@@ -464,7 +479,8 @@ class L10nEn extends L10n {
   String get semanticGlobal => 'Search all of Ganjoor';
 
   @override
-  String get semanticResting => 'Meaning search is resting right now; try again a little later';
+  String get semanticResting =>
+      'Meaning search is resting right now; try again a little later';
 
   @override
   String get semanticOffline => 'Meaning search needs the internet';
@@ -479,7 +495,8 @@ class L10nEn extends L10n {
   String get tajikScript => 'Tajik (Cyrillic) script';
 
   @override
-  String get tajikScriptNote => 'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
+  String get tajikScriptNote =>
+      'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
 
   @override
   String get home => 'Home';
@@ -491,7 +508,8 @@ class L10nEn extends L10n {
   String get allPoets => 'All poets';
 
   @override
-  String get offlineResults => 'Offline results — only from downloaded collections';
+  String get offlineResults =>
+      'Offline results — only from downloaded collections';
 
   @override
   String get nothingFound => 'Nothing found';
@@ -544,7 +562,8 @@ class L10nEn extends L10n {
   String get clearCache => 'Clear cache';
 
   @override
-  String get clearCacheNote => 'Downloaded collections, recitations and bookmarks are kept';
+  String get clearCacheNote =>
+      'Downloaded collections, recitations and bookmarks are kept';
 
   @override
   String get about => 'About';

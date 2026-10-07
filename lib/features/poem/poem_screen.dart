@@ -317,7 +317,11 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localTitle(poem?.title ?? ''), overflow: TextOverflow.ellipsis),
+        // On phones the toolbar leaves room for only a letter or two of the title («ب…»), and
+        // the title is already shown large on the page — so it appears here on wide screens only.
+        title: MediaQuery.sizeOf(context).width >= 600
+            ? Text(localTitle(poem?.title ?? ''), overflow: TextOverflow.ellipsis)
+            : null,
         actions: [
           const HomeButton(),
           if (poem != null)
@@ -373,13 +377,18 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
               }
             },
             itemBuilder: (_) => [
-              PopupMenuItem(value: 'zoomIn', child: Text(context.l10n.zoomIn)),
-              PopupMenuItem(value: 'zoomOut', child: Text(context.l10n.zoomOut)),
-              PopupMenuItem(value: 'theme', child: Text(context.l10n.switchTheme)),
-              PopupMenuItem(value: 'copy', child: Text(context.l10n.copyPoem)),
-              PopupMenuItem(value: 'share', child: Text(context.l10n.share)),
-              CheckedPopupMenuItem(value: 'tajik', checked: settings.showTajik, child: Text(context.l10n.tajikScript)),
-              PopupMenuItem(value: 'site', child: Text(context.l10n.openOnGanjoor)),
+              // Every item has an icon, so the texts line up (the Tajik switch shows its state there).
+              _menuItem('zoomIn', Icons.zoom_in, context.l10n.zoomIn),
+              _menuItem('zoomOut', Icons.zoom_out, context.l10n.zoomOut),
+              _menuItem('theme', Icons.brightness_6_outlined, context.l10n.switchTheme),
+              _menuItem('copy', Icons.copy, context.l10n.copyPoem),
+              _menuItem('share', Icons.share, context.l10n.share),
+              _menuItem(
+                'tajik',
+                settings.showTajik ? Icons.check_box : Icons.check_box_outline_blank,
+                context.l10n.tajikScript,
+              ),
+              _menuItem('site', Icons.open_in_new, context.l10n.openOnGanjoor),
             ],
           ),
         ],
@@ -569,7 +578,10 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       setState(() => _translating = false);
       return;
     }
-    if (await _ensureModel(t, to) && mounted) setState(() => _translating = true);
+    final all = couplets.map((c) => c.text).join('\n');
+    if (await _ensureModel(t, to, fallback: () => _openTranslation(all, to)) && mounted) {
+      setState(() => _translating = true);
+    }
   }
 
   Future<void> _openTranslation(String text, String to) =>
@@ -583,7 +595,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     return null;
   }
 
-  Future<bool> _ensureModel(Translator t, String to) => ensureTranslationModel(context, t, to);
+  Future<bool> _ensureModel(Translator t, String to, {VoidCallback? fallback}) =>
+      ensureTranslationModel(context, t, to, fallback: fallback);
 
   /// One request per beyt, kept while the target language stays the same.
   Future<String> _translationOf(Couplet c, String to) {
@@ -598,7 +611,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     final t = ref.read(translatorProvider);
     final to = ref.read(settingsProvider).translateTo;
     if (!t.inApp) return _openTranslation(couplet.text, to);
-    if (!await _ensureModel(t, to) || !mounted) return;
+    if (!await _ensureModel(t, to, fallback: () => _openTranslation(couplet.text, to)) || !mounted) return;
     await showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -676,6 +689,17 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       ),
     );
   }
+
+  PopupMenuItem<String> _menuItem(String value, IconData icon, String label) => PopupMenuItem(
+    value: value,
+    child: Row(
+      children: [
+        Icon(icon, size: 20),
+        const SizedBox(width: 12),
+        Flexible(child: Text(label)),
+      ],
+    ),
+  );
 
   Widget _navBar(Poem p) => SafeArea(
     child: Row(

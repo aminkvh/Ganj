@@ -6,10 +6,15 @@
 
 **Ganj** — a free, open-source, *unofficial* reader for Persian poetry, made in tribute to **[Ganjoor](https://ganjoor.net)**: read and listen on your phone or computer, even offline.
 
+### New in 1.1.1
+
+- Windows: no more white window on older or budget computers; Windows N and Linux without libmpv explain how to enable audio
+- Android: translation fixed (offers Google Translate when the model can't be downloaded); neater poem menu and toolbar
+- Smaller: unused libraries removed
+
 ### New in 1.1
 
-- Search by meaning (Ganjoor's semantic search) · جستجو با معنا
-- One home search box: poets and books as you type, Enter searches the poems · جستجوی یکپارچه
+- Search by meaning · جستجو با معنا — one search box for poets, books and poems · جستجوی یکپارچه
 - Tajik (Cyrillic) script under the verses · خط تاجیکی (سیریلیک)
 - Download a poet from their own page; home button everywhere; pictures kept for offline use
 
