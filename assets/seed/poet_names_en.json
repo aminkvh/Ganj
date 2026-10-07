@@ -1,0 +1,962 @@
+{
+ "2": {
+  "name": "Hafez Shirazi",
+  "nickname": "Hafez"
+ },
+ "3": {
+  "name": "Omar Khayyam",
+  "nickname": "Khayyam"
+ },
+ "4": {
+  "name": "Abolqasem Ferdowsi",
+  "nickname": "Ferdowsi"
+ },
+ "5": {
+  "name": "Jalal al-Din Mohammad Rumi (Mowlana)",
+  "nickname": "Rumi"
+ },
+ "6": {
+  "name": "Nezami Ganjavi",
+  "nickname": "Nezami"
+ },
+ "7": {
+  "name": "Saadi Shirazi",
+  "nickname": "Saadi"
+ },
+ "8": {
+  "name": "Parvin E'tesami",
+  "nickname": "Parvin E'tesami"
+ },
+ "9": {
+  "name": "Attar of Nishapur",
+  "nickname": "Attar"
+ },
+ "10": {
+  "name": "Sanai Ghaznavi",
+  "nickname": "Sanai"
+ },
+ "11": {
+  "name": "Vahshi Bafghi",
+  "nickname": "Vahshi Bafghi"
+ },
+ "12": {
+  "name": "Rudaki Samarqandi",
+  "nickname": "Rudaki"
+ },
+ "13": {
+  "name": "Naser Khosrow Qobadiani",
+  "nickname": "Naser Khosrow"
+ },
+ "14": {
+  "name": "Manuchehri Damghani",
+  "nickname": "Manuchehri"
+ },
+ "15": {
+  "name": "Farrokhi Sistani",
+  "nickname": "Farrokhi Sistani"
+ },
+ "16": {
+  "name": "Khaqani Shirvani",
+  "nickname": "Khaqani"
+ },
+ "17": {
+  "name": "Masud Sa'd Salman",
+  "nickname": "Masud Sa'd Salman"
+ },
+ "18": {
+  "name": "Anvari Abivardi",
+  "nickname": "Anvari"
+ },
+ "19": {
+  "name": "Owhadi Maraghei",
+  "nickname": "Owhadi Maraghei"
+ },
+ "20": {
+  "name": "Khaju Kermani",
+  "nickname": "Khaju Kermani"
+ },
+ "21": {
+  "name": "Fakhr al-Din Iraqi",
+  "nickname": "Iraqi"
+ },
+ "22": {
+  "name": "Saeb Tabrizi",
+  "nickname": "Saeb Tabrizi"
+ },
+ "23": {
+  "name": "Sheikh Mahmud Shabestari",
+  "nickname": "Sheikh Mahmud Shabestari"
+ },
+ "24": {
+  "name": "Abd al-Rahman Jami",
+  "nickname": "Jami"
+ },
+ "25": {
+  "name": "Hatef Esfahani",
+  "nickname": "Hatef Esfahani"
+ },
+ "26": {
+  "name": "Abu Sa'id Abolkheyr",
+  "nickname": "Abu Sa'id Abolkheyr"
+ },
+ "27": {
+  "name": "Malek o-Sho'ara Bahar",
+  "nickname": "Bahar"
+ },
+ "28": {
+  "name": "Baba Taher",
+  "nickname": "Baba Taher"
+ },
+ "29": {
+  "name": "Mohtasham Kashani",
+  "nickname": "Mohtasham Kashani"
+ },
+ "30": {
+  "name": "Sheikh Baha'i",
+  "nickname": "Sheikh Baha'i"
+ },
+ "31": {
+  "name": "Seyf Farghani",
+  "nickname": "Seyf Farghani"
+ },
+ "32": {
+  "name": "Foroughi Bastami",
+  "nickname": "Foroughi Bastami"
+ },
+ "33": {
+  "name": "Obeyd Zakani",
+  "nickname": "Obeyd Zakani"
+ },
+ "34": {
+  "name": "Amir Khosrow Dehlavi",
+  "nickname": "Amir Khosrow Dehlavi"
+ },
+ "35": {
+  "name": "Mohammad-Hossein Shahriar",
+  "nickname": "Shahriar"
+ },
+ "36": {
+  "name": "Rashheh",
+  "nickname": "Rashheh"
+ },
+ "37": {
+  "name": "Abd al-Vase Jabali",
+  "nickname": "Abd al-Vase Jabali"
+ },
+ "38": {
+  "name": "Fakhr al-Din As'ad Gorgani",
+  "nickname": "Fakhr al-Din As'ad Gorgani"
+ },
+ "39": {
+  "name": "Feyz Kashani",
+  "nickname": "Feyz Kashani"
+ },
+ "40": {
+  "name": "Salman Savoji",
+  "nickname": "Salman Savoji"
+ },
+ "41": {
+  "name": "Rahi Moayyeri",
+  "nickname": "Rahi Moayyeri"
+ },
+ "42": {
+  "name": "Muhammad Iqbal (Iqbal Lahori)",
+  "nickname": "Iqbal Lahori"
+ },
+ "43": {
+  "name": "Bidel Dehlavi",
+  "nickname": "Bidel Dehlavi"
+ },
+ "44": {
+  "name": "Ghaani Shirazi",
+  "nickname": "Ghaani"
+ },
+ "45": {
+  "name": "Kesai Marvazi",
+  "nickname": "Kesai"
+ },
+ "46": {
+  "name": "Orfi Shirazi",
+  "nickname": "Orfi"
+ },
+ "47": {
+  "name": "Razi al-Din Artimani",
+  "nickname": "Razi al-Din Artimani"
+ },
+ "48": {
+  "name": "Khalilullah Khalili",
+  "nickname": "Khalilullah Khalili"
+ },
+ "49": {
+  "name": "Nasrollah Monshi",
+  "nickname": "Nasrollah Monshi"
+ },
+ "50": {
+  "name": "Helali Chaghatai",
+  "nickname": "Helali Chaghatai"
+ },
+ "51": {
+  "name": "Shah Ne'matollah Vali",
+  "nickname": "Shah Ne'matollah Vali"
+ },
+ "52": {
+  "name": "Asadi Tusi",
+  "nickname": "Asadi Tusi"
+ },
+ "53": {
+  "name": "Ali ibn Osman Hujwiri",
+  "nickname": "Hujwiri"
+ },
+ "54": {
+  "name": "Mahsati Ganjavi",
+  "nickname": "Mahsati Ganjavi"
+ },
+ "55": {
+  "name": "Shater Abbas Sabuhi",
+  "nickname": "Shater Abbas Sabuhi"
+ },
+ "56": {
+  "name": "Baba Afzal Kashani",
+  "nickname": "Baba Afzal Kashani"
+ },
+ "57": {
+  "name": "Ibn Hesam Khusfi",
+  "nickname": "Ibn Hesam Khusfi"
+ },
+ "58": {
+  "name": "Rashid al-Din Vatvat",
+  "nickname": "Vatvat"
+ },
+ "59": {
+  "name": "Oman Samani",
+  "nickname": "Oman Samani"
+ },
+ "60": {
+  "name": "Rashid al-Din Meybodi",
+  "nickname": "Meybodi"
+ },
+ "61": {
+  "name": "Fayez Dashti",
+  "nickname": "Fayez"
+ },
+ "62": {
+  "name": "Onsori Balkhi",
+  "nickname": "Onsori"
+ },
+ "63": {
+  "name": "Azraqi Heravi",
+  "nickname": "Azraqi Heravi"
+ },
+ "64": {
+  "name": "Amir Moezzi Neyshaburi",
+  "nickname": "Amir Moezzi"
+ },
+ "65": {
+  "name": "Hakim Nezari Qohestani",
+  "nickname": "Hakim Nezari"
+ },
+ "66": {
+  "name": "Sa'd al-Din Varavini",
+  "nickname": "Sa'd al-Din Varavini"
+ },
+ "67": {
+  "name": "Kamal al-Din Esmail",
+  "nickname": "Kamal al-Din Esmail"
+ },
+ "68": {
+  "name": "Aref Qazvini",
+  "nickname": "Aref Qazvini"
+ },
+ "69": {
+  "name": "Zahir Faryabi",
+  "nickname": "Zahir Faryabi"
+ },
+ "70": {
+  "name": "Abdul Qadir Gilani",
+  "nickname": "Abdul Qadir Gilani"
+ },
+ "71": {
+  "name": "Qodsi Mashhadi",
+  "nickname": "Qodsi Mashhadi"
+ },
+ "72": {
+  "name": "Khwaja Abdullah Ansari",
+  "nickname": "Khwaja Abdullah Ansari"
+ },
+ "73": {
+  "name": "Kamal Khojandi",
+  "nickname": "Kamal Khojandi"
+ },
+ "74": {
+  "name": "Samet Borujerdi",
+  "nickname": "Samet Borujerdi"
+ },
+ "75": {
+  "name": "Homam Tabrizi",
+  "nickname": "Homam Tabrizi"
+ },
+ "76": {
+  "name": "Hazin Lahiji",
+  "nickname": "Hazin Lahiji"
+ },
+ "77": {
+  "name": "Ghobar Hamadani",
+  "nickname": "Ghobar Hamadani"
+ },
+ "78": {
+  "name": "Shams Maghrebi",
+  "nickname": "Shams Maghrebi"
+ },
+ "79": {
+  "name": "Nayyer Tabrizi",
+  "nickname": "Nayyer Tabrizi"
+ },
+ "80": {
+  "name": "Hakim Sabzevari",
+  "nickname": "Hakim Sabzevari"
+ },
+ "81": {
+  "name": "Vahdat Kermanshahi",
+  "nickname": "Vahdat Kermanshahi"
+ },
+ "82": {
+  "name": "Onsor al-Ma'ali Keykavus",
+  "nickname": "Onsor al-Ma'ali"
+ },
+ "83": {
+  "name": "Ebrahim Shahedi Dede",
+  "nickname": "Shahedi"
+ },
+ "84": {
+  "name": "Nezami Aruzi",
+  "nickname": "Nezami Aruzi"
+ },
+ "85": {
+  "name": "Jalal Azod",
+  "nickname": "Jalal Azod"
+ },
+ "86": {
+  "name": "Qassab Kashani",
+  "nickname": "Qassab Kashani"
+ },
+ "87": {
+  "name": "Mohammad-Hossein Gharavi Esfahani",
+  "nickname": "Gharavi Esfahani"
+ },
+ "88": {
+  "name": "Iraj Mirza",
+  "nickname": "Iraj Mirza"
+ },
+ "89": {
+  "name": "Hossein Kharazmi",
+  "nickname": "Hossein Kharazmi"
+ },
+ "90": {
+  "name": "Molla Masih Panipati",
+  "nickname": "Molla Masih"
+ },
+ "91": {
+  "name": "Sultan Walad",
+  "nickname": "Sultan Walad"
+ },
+ "92": {
+  "name": "Afsar ol-Moluk Ameli",
+  "nickname": "Afsar ol-Moluk Ameli"
+ },
+ "93": {
+  "name": "Reza-Qoli Khan Hedayat",
+  "nickname": "Reza-Qoli Khan Hedayat"
+ },
+ "94": {
+  "name": "Ayn al-Qozat Hamadani",
+  "nickname": "Ayn al-Qozat Hamadani"
+ },
+ "95": {
+  "name": "Abbadi Marvazi",
+  "nickname": "Abbadi Marvazi"
+ },
+ "96": {
+  "name": "Mohammad ibn Monavvar",
+  "nickname": "Mohammad ibn Monavvar"
+ },
+ "97": {
+  "name": "Asiri Lahiji",
+  "nickname": "Asiri Lahiji"
+ },
+ "98": {
+  "name": "Qa'em-Maqam Farahani",
+  "nickname": "Qa'em-Maqam Farahani"
+ },
+ "99": {
+  "name": "Amir Hosseini Heravi",
+  "nickname": "Amir Hosseini Heravi"
+ },
+ "100": {
+  "name": "Kalim",
+  "nickname": "Kalim"
+ },
+ "101": {
+  "name": "Abu Ali Hasan ibn Ahmad Osmani",
+  "nickname": "Abu Ali Osmani"
+ },
+ "102": {
+  "name": "Najm al-Din Razi",
+  "nickname": "Najm al-Din Razi"
+ },
+ "103": {
+  "name": "Amir Shahi Sabzevari",
+  "nickname": "Amir Shahi"
+ },
+ "104": {
+  "name": "Khalid Naqshbandi",
+  "nickname": "Khalid Naqshbandi"
+ },
+ "105": {
+  "name": "Sultan Bahu",
+  "nickname": "Sultan Bahu"
+ },
+ "106": {
+  "name": "Ibn Yamin Faryumadi",
+  "nickname": "Ibn Yamin"
+ },
+ "107": {
+  "name": "Jamal al-Din Abd al-Razzaq Esfahani",
+  "nickname": "Jamal al-Din Abd al-Razzaq"
+ },
+ "108": {
+  "name": "Safa Esfahani",
+  "nickname": "Safa Esfahani"
+ },
+ "109": {
+  "name": "Osman Mokhtari",
+  "nickname": "Osman Mokhtari"
+ },
+ "110": {
+  "name": "Abolfaraj Runi",
+  "nickname": "Abolfaraj Runi"
+ },
+ "111": {
+  "name": "Nou'i Khabushani",
+  "nickname": "Nou'i Khabushani"
+ },
+ "112": {
+  "name": "Daqiqi Tusi",
+  "nickname": "Daqiqi"
+ },
+ "113": {
+  "name": "Mohit Qomi",
+  "nickname": "Mohit Qomi"
+ },
+ "114": {
+  "name": "Abolhasan Farahani",
+  "nickname": "Abolhasan Farahani"
+ },
+ "115": {
+  "name": "Baba Faghani Shirazi",
+  "nickname": "Baba Faghani"
+ },
+ "116": {
+  "name": "Emami Heravi",
+  "nickname": "Emami Heravi"
+ },
+ "117": {
+  "name": "Owhad al-Din Kermani",
+  "nickname": "Owhad al-Din Kermani"
+ },
+ "118": {
+  "name": "Khiali Bokharai",
+  "nickname": "Khiali Bokharai"
+ },
+ "119": {
+  "name": "Ashofteh Shirazi",
+  "nickname": "Ashofteh Shirazi"
+ },
+ "120": {
+  "name": "Salim Tehrani",
+  "nickname": "Salim Tehrani"
+ },
+ "121": {
+  "name": "Juya Tabrizi",
+  "nickname": "Juya Tabrizi"
+ },
+ "122": {
+  "name": "Ahli Shirazi",
+  "nickname": "Ahli Shirazi"
+ },
+ "123": {
+  "name": "Ghalib Dehlavi",
+  "nickname": "Ghalib"
+ },
+ "124": {
+  "name": "Ayyuqi",
+  "nickname": "Ayyuqi"
+ },
+ "125": {
+  "name": "Asjadi Marvazi",
+  "nickname": "Asjadi"
+ },
+ "126": {
+  "name": "Poet of the Faramarznameh",
+  "nickname": "Faramarznameh Poet"
+ },
+ "127": {
+  "name": "Iranshan ibn Abi al-Kheyr",
+  "nickname": "Iranshan"
+ },
+ "128": {
+  "name": "Sa'ida",
+  "nickname": "Sa'ida"
+ },
+ "129": {
+  "name": "Qasem Anvar",
+  "nickname": "Qasem Anvar"
+ },
+ "130": {
+  "name": "Asir Shahrestani",
+  "nickname": "Asir Shahrestani"
+ },
+ "131": {
+  "name": "Heydar Shirazi",
+  "nickname": "Heydar Shirazi"
+ },
+ "132": {
+  "name": "Molla Ahmad Naraqi",
+  "nickname": "Molla Ahmad Naraqi"
+ },
+ "133": {
+  "name": "Salimi Jaruni",
+  "nickname": "Salimi Jaruni"
+ },
+ "134": {
+  "name": "Farrokhi Yazdi",
+  "nickname": "Farrokhi Yazdi"
+ },
+ "135": {
+  "name": "Sahab Esfahani",
+  "nickname": "Sahab Esfahani"
+ },
+ "136": {
+  "name": "Am'aq Bokhari",
+  "nickname": "Am'aq Bokhari"
+ },
+ "137": {
+  "name": "Jahan Malek Khatun",
+  "nickname": "Jahan Malek Khatun"
+ },
+ "138": {
+  "name": "Tabib Esfahani",
+  "nickname": "Tabib Esfahani"
+ },
+ "139": {
+  "name": "Mirza Aqa Khan Kermani",
+  "nickname": "Mirza Aqa Khan Kermani"
+ },
+ "140": {
+  "name": "Mojir al-Din Beylaqani",
+  "nickname": "Mojir al-Din Beylaqani"
+ },
+ "141": {
+  "name": "Falaki Shirvani",
+  "nickname": "Falaki Shirvani"
+ },
+ "142": {
+  "name": "Qatran Tabrizi",
+  "nickname": "Qatran Tabrizi"
+ },
+ "143": {
+  "name": "Asir Akhsikati",
+  "nickname": "Asir Akhsikati"
+ },
+ "144": {
+  "name": "Seyyed Hasan Ghaznavi",
+  "nickname": "Seyyed Hasan Ghaznavi"
+ },
+ "145": {
+  "name": "Fuzuli Baghdadi",
+  "nickname": "Fuzuli"
+ },
+ "146": {
+  "name": "Emad al-Din Nasimi",
+  "nickname": "Nasimi"
+ },
+ "147": {
+  "name": "Adib ol-Mamalek Farahani",
+  "nickname": "Adib ol-Mamalek"
+ },
+ "148": {
+  "name": "Azar Bigdeli",
+  "nickname": "Azar Bigdeli"
+ },
+ "149": {
+  "name": "Neshat Esfahani",
+  "nickname": "Neshat Esfahani"
+ },
+ "150": {
+  "name": "Toghrol Ahrari",
+  "nickname": "Toghrol Ahrari"
+ },
+ "151": {
+  "name": "Amir Ali-Shir Nava'i",
+  "nickname": "Ali-Shir Nava'i"
+ },
+ "152": {
+  "name": "Majd Hamgar",
+  "nickname": "Majd Hamgar"
+ },
+ "153": {
+  "name": "Mirzadeh Eshghi",
+  "nickname": "Mirzadeh Eshghi"
+ },
+ "154": {
+  "name": "Moshtaq Esfahani",
+  "nickname": "Moshtaq Esfahani"
+ },
+ "155": {
+  "name": "Elhami Kermanshahi",
+  "nickname": "Elhami Kermanshahi"
+ },
+ "156": {
+  "name": "Adib Saber",
+  "nickname": "Adib Saber"
+ },
+ "157": {
+  "name": "Naziri Neyshaburi",
+  "nickname": "Naziri Neyshaburi"
+ },
+ "158": {
+  "name": "Vaez Qazvini",
+  "nickname": "Vaez Qazvini"
+ },
+ "159": {
+  "name": "Mohammad Kusaj",
+  "nickname": "Mohammad Kusaj"
+ },
+ "160": {
+  "name": "Imam Mohammad Ghazali",
+  "nickname": "Ghazali"
+ },
+ "161": {
+  "name": "Khwaja Nasir al-Din Tusi",
+  "nickname": "Khwaja Nasir al-Din Tusi"
+ },
+ "162": {
+  "name": "Hamid al-Din Balkhi",
+  "nickname": "Hamid al-Din Balkhi"
+ },
+ "163": {
+  "name": "Yaghma Jandaqi",
+  "nickname": "Yaghma Jandaqi"
+ },
+ "164": {
+  "name": "Afsar Kermani",
+  "nickname": "Afsar Kermani"
+ },
+ "165": {
+  "name": "Vahid al-Zaman Qazvini",
+  "nickname": "Vahid al-Zaman Qazvini"
+ },
+ "166": {
+  "name": "Seraj Qomri",
+  "nickname": "Seraj Qomri"
+ },
+ "167": {
+  "name": "Rafiq Esfahani",
+  "nickname": "Rafiq Esfahani"
+ },
+ "168": {
+  "name": "Safayi Jandaqi",
+  "nickname": "Safayi Jandaqi"
+ },
+ "169": {
+  "name": "Nezam Qari",
+  "nickname": "Nezam Qari"
+ },
+ "170": {
+  "name": "Mirza Habib Khorasani",
+  "nickname": "Mirza Habib Khorasani"
+ },
+ "171": {
+  "name": "Kuhi",
+  "nickname": "Kuhi"
+ },
+ "172": {
+  "name": "Fayyaz Lahiji",
+  "nickname": "Fayyaz Lahiji"
+ },
+ "173": {
+  "name": "Boland Eqbal",
+  "nickname": "Boland Eqbal"
+ },
+ "174": {
+  "name": "Saber Hamadani",
+  "nickname": "Saber Hamadani"
+ },
+ "175": {
+  "name": "Vafayi Mahabadi",
+  "nickname": "Vafayi Mahabadi"
+ },
+ "176": {
+  "name": "Vafayi Shushtari",
+  "nickname": "Vafayi Shushtari"
+ },
+ "177": {
+  "name": "Suzani Samarqandi",
+  "nickname": "Suzani Samarqandi"
+ },
+ "178": {
+  "name": "Jeyhun Yazdi",
+  "nickname": "Jeyhun Yazdi"
+ },
+ "179": {
+  "name": "Qavami Razi",
+  "nickname": "Qavami Razi"
+ },
+ "180": {
+  "name": "Labibi",
+  "nickname": "Labibi"
+ },
+ "181": {
+  "name": "Seyyeda Nasafi",
+  "nickname": "Seyyeda Nasafi"
+ },
+ "182": {
+  "name": "Saghir Esfahani",
+  "nickname": "Saghir Esfahani"
+ },
+ "183": {
+  "name": "Meyli",
+  "nickname": "Meyli"
+ },
+ "184": {
+  "name": "Toghra Mashhadi",
+  "nickname": "Toghra Mashhadi"
+ },
+ "185": {
+  "name": "Fasihi Heravi",
+  "nickname": "Fasihi Heravi"
+ },
+ "186": {
+  "name": "Mir Damad",
+  "nickname": "Mir Damad"
+ },
+ "187": {
+  "name": "Safi Ali Shah",
+  "nickname": "Safi Ali Shah"
+ },
+ "188": {
+  "name": "Sufi Mohammad Heravi",
+  "nickname": "Sufi Mohammad Heravi"
+ },
+ "189": {
+  "name": "Torki Shirazi",
+  "nickname": "Torki Shirazi"
+ },
+ "190": {
+  "name": "Hajeb Shirazi",
+  "nickname": "Hajeb Shirazi"
+ },
+ "191": {
+  "name": "Nur Ali Shah",
+  "nickname": "Nur Ali Shah"
+ },
+ "192": {
+  "name": "Zahiri Samarqandi",
+  "nickname": "Zahiri Samarqandi"
+ },
+ "193": {
+  "name": "Baha al-Din Walad",
+  "nickname": "Baha Walad"
+ },
+ "194": {
+  "name": "Abolfazl Beyhaqi",
+  "nickname": "Abolfazl Beyhaqi"
+ },
+ "195": {
+  "name": "Amir Pazevari",
+  "nickname": "Amir Pazevari"
+ },
+ "196": {
+  "name": "Mohammad ibn Emad al-Din Khorasani",
+  "nickname": "Ibn Emad"
+ },
+ "197": {
+  "name": "Sam Mirza Safavi",
+  "nickname": "Sam Mirza Safavi"
+ },
+ "198": {
+  "name": "Naser Bokharai",
+  "nickname": "Naser Bokharai"
+ },
+ "199": {
+  "name": "Ghani Kashmiri",
+  "nickname": "Ghani Kashmiri"
+ },
+ "200": {
+  "name": "Hanzala Badghisi",
+  "nickname": "Hanzala Badghisi"
+ },
+ "201": {
+  "name": "Mohammad Vasif Sagzi",
+  "nickname": "Mohammad Vasif Sagzi"
+ },
+ "202": {
+  "name": "Firuz Mashreqi",
+  "nickname": "Firuz Mashreqi"
+ },
+ "203": {
+  "name": "Abu Salik Gorgani",
+  "nickname": "Abu Salik Gorgani"
+ },
+ "204": {
+  "name": "Bassam Kurd",
+  "nickname": "Bassam Kurd"
+ },
+ "205": {
+  "name": "Mahmud Varraq Heravi",
+  "nickname": "Mahmud Varraq Heravi"
+ },
+ "206": {
+  "name": "Mohammad ibn Mokhalled Sagzi",
+  "nickname": "Mohammad ibn Mokhalled Sagzi"
+ },
+ "207": {
+  "name": "Shahid Balkhi",
+  "nickname": "Shahid Balkhi"
+ },
+ "208": {
+  "name": "Abu Eshaq Juybari",
+  "nickname": "Abu Eshaq Juybari"
+ },
+ "209": {
+  "name": "Abolhossein Khareji",
+  "nickname": "Abolhossein Khareji"
+ },
+ "210": {
+  "name": "Masudi Marvazi",
+  "nickname": "Masudi Marvazi"
+ },
+ "211": {
+  "name": "Abol'ala Shushtari",
+  "nickname": "Abol'ala Shushtari"
+ },
+ "212": {
+  "name": "Abu Hafs Soghdi",
+  "nickname": "Abu Hafs Soghdi"
+ },
+ "213": {
+  "name": "Abu Tayyeb Mos'abi",
+  "nickname": "Abu Tayyeb Mos'abi"
+ },
+ "214": {
+  "name": "Abolmasal Bokharai",
+  "nickname": "Abolmasal Bokharai"
+ },
+ "215": {
+  "name": "Abolmoayyad Balkhi",
+  "nickname": "Abolmoayyad Balkhi"
+ },
+ "216": {
+  "name": "Ahmad Barmaki",
+  "nickname": "Ahmad Barmaki"
+ },
+ "217": {
+  "name": "Bal'ami",
+  "nickname": "Bal'ami"
+ },
+ "218": {
+  "name": "Torki Keshi",
+  "nickname": "Torki Keshi"
+ },
+ "219": {
+  "name": "Jallab Bokharai",
+  "nickname": "Jallab Bokharai"
+ },
+ "220": {
+  "name": "Shaker Bokharai",
+  "nickname": "Shaker Bokharai"
+ },
+ "221": {
+  "name": "Rowneqi Bokharai",
+  "nickname": "Rowneqi Bokharai"
+ },
+ "222": {
+  "name": "Sepehri Bokharai",
+  "nickname": "Sepehri Bokharai"
+ },
+ "223": {
+  "name": "Sane' Balkhi",
+  "nickname": "Sane' Balkhi"
+ },
+ "224": {
+  "name": "Tokhari",
+  "nickname": "Tokhari"
+ },
+ "225": {
+  "name": "Moradi",
+  "nickname": "Moradi"
+ },
+ "226": {
+  "name": "Faralavi",
+  "nickname": "Faralavi"
+ },
+ "227": {
+  "name": "Abd al-Karim Eshraq Birjandi",
+  "nickname": "Eshraq Birjandi"
+ },
+ "228": {
+  "name": "Fanudi",
+  "nickname": "Fanudi"
+ },
+ "229": {
+  "name": "Ayati Birjandi",
+  "nickname": "Ayati Birjandi"
+ },
+ "230": {
+  "name": "Jonayd Shirazi",
+  "nickname": "Jonayd Shirazi"
+ },
+ "231": {
+  "name": "Abd al-Rahim Haeri",
+  "nickname": "Abd al-Rahim Haeri"
+ },
+ "232": {
+  "name": "Majzub Tabrizi",
+  "nickname": "Majzub Tabrizi"
+ },
+ "233": {
+  "name": "Saghar Kangavari",
+  "nickname": "Saghar Kangavari"
+ },
+ "234": {
+  "name": "Nowras Damavandi",
+  "nickname": "Nowras Damavandi"
+ },
+ "235": {
+  "name": "Fath-Ali Shah Qajar",
+  "nickname": "Fath-Ali Shah"
+ },
+ "236": {
+  "name": "Emadi Shahriari",
+  "nickname": "Emadi Shahriari"
+ },
+ "237": {
+  "name": "Naser Bojei",
+  "nickname": "Naser Bojei"
+ },
+ "238": {
+  "name": "Yusef Khusfi",
+  "nickname": "Yusef Khusfi"
+ },
+ "239": {
+  "name": "Naim Frasheri",
+  "nickname": "Naim Frasheri"
+ },
+ "240": {
+  "name": "Ali Ashtari",
+  "nickname": "Ali Ashtari"
+ },
+ "241": {
+  "name": "Vaqef Lahori",
+  "nickname": "Vaqef Lahori"
+ }
+}

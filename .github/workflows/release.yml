@@ -1,0 +1,156 @@
+# Builds Ganj for every platform and publishes a GitHub release when a version tag is
+# pushed (git tag v1.0.0 && git push origin v1.0.0). Can also be run by hand for a tag.
+#
+# Android is signed with the release key from repository secrets:
+#   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS
+# macOS and iOS builds are unsigned (no Apple developer account): see the release notes.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to build and publish (e.g. v1.0.0)
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: 3.47.6
+  TAG: ${{ github.event.inputs.tag || github.ref_name }}
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test --exclude-tags golden
+
+  android:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - name: Release signing key
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          echo "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/ganj-release.jks"
+          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=%s\n' \
+            "$PASSWORD" "$PASSWORD" "$ALIAS" "$RUNNER_TEMP/ganj-release.jks" > android/key.properties
+      - run: flutter build apk --release
+      - run: flutter build apk --release --split-per-abi
+      - run: flutter build appbundle --release
+      - name: Name the files
+        run: |
+          V="${TAG#v}"; mkdir out
+          cp build/app/outputs/flutter-apk/app-release.apk             "out/Ganj-$V-android.apk"
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk   "out/Ganj-$V-android-arm64.apk"
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "out/Ganj-$V-android-arm32.apk"
+          cp build/app/outputs/flutter-apk/app-x86_64-release.apk      "out/Ganj-$V-android-x86_64.apk"
+          cp build/app/outputs/bundle/release/app-release.aab          "out/Ganj-$V-android.aab"
+      - uses: actions/upload-artifact@v4
+        with: { name: android, path: out/* }
+
+  windows:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter build windows --release
+      - name: Zip
+        shell: pwsh
+        run: |
+          $v = $env:TAG.TrimStart('v')
+          New-Item -ItemType Directory out | Out-Null
+          Copy-Item -Recurse build/windows/x64/runner/Release "Ganj"
+          Compress-Archive -Path "Ganj" -DestinationPath "out/Ganj-$v-windows-x64.zip"
+      - uses: actions/upload-artifact@v4
+        with: { name: windows, path: out/* }
+
+  linux:
+    needs: test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libmpv-dev
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter build linux --release
+      - name: Pack
+        run: |
+          V="${TAG#v}"; mkdir out
+          cp -r build/linux/x64/release/bundle Ganj
+          tar -czf "out/Ganj-$V-linux-x64.tar.gz" Ganj
+      - uses: actions/upload-artifact@v4
+        with: { name: linux, path: out/* }
+
+  macos:
+    needs: test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter build macos --release
+      - name: Zip
+        run: |
+          V="${TAG#v}"; mkdir out
+          ditto -c -k --keepParent build/macos/Build/Products/Release/ganj.app "out/Ganj-$V-macos.zip"
+      - uses: actions/upload-artifact@v4
+        with: { name: macos, path: out/* }
+
+  ios:
+    needs: test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter build ios --release --no-codesign
+      - name: Package unsigned IPA
+        run: |
+          V="${TAG#v}"; mkdir -p out Payload
+          cp -r build/ios/iphoneos/Runner.app Payload/
+          zip -qr "out/Ganj-$V-ios-unsigned.ipa" Payload
+      - uses: actions/upload-artifact@v4
+        with: { name: ios, path: out/* }
+
+  publish:
+    needs: [android, windows, linux, macos, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ env.TAG }}' }
+      - uses: actions/download-artifact@v4
+        with: { path: dist, merge-multiple: true }
+      - name: Checksums
+        run: cd dist && sha256sum * > SHA256SUMS.txt
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" dist/* \
+            --title "Ganj ${TAG#v} · گنج" \
+            --notes-file .github/RELEASE_NOTES.md

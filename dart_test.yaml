@@ -1,0 +1,3 @@
+tags:
+  golden:
+    # Pixel goldens are generated on Windows; other OSes render fonts slightly differently.
