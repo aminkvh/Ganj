@@ -16,6 +16,7 @@ option) any later version — see `LICENSE`. It comes with no warranty.
 - The look of the app follows ganjoor.net, whose code ([GanjoorService](https://github.com/ganjoor/GanjoorService))
   is GPL-3.0. The map icon (`assets/images/map.gif`) and the bookshelf design come from ganjoor.net.
 - English poet names (`assets/seed/poet_names_en.json`) were compiled for Ganj.
+- The app icon was made for this project.
 
 ## Third-party software and services
 
@@ -27,7 +28,3 @@ option) any later version — see `LICENSE`. It comes with no warranty.
   are machine-made and labelled as such.
 - Open-source Flutter packages, each under its own license; the full list is in the app under
   Settings → Licenses.
-
-## Author
-
-Designed and built by Amin Akbari («امین اکبری»). The app icon was made for this project.
