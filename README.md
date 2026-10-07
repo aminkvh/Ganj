@@ -54,6 +54,7 @@ come from Ganjoor and its contributors. If you enjoy Ganj, please [support Ganjo
   built by many volunteers; each recitation belongs to its reciter.
 - Code: **GPL-3.0-or-later** (see [`LICENSE`](LICENSE)), like Ganjoor's own
   [GanjoorService](https://github.com/ganjoor/GanjoorService). Third-party notices: [`NOTICE.md`](NOTICE.md).
+- Privacy: no accounts, ads or tracking; see [`PRIVACY.md`](PRIVACY.md).
 
 ## Build
 
