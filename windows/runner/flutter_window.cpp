@@ -3,6 +3,7 @@
 #include <optional>
 
 #include "flutter/generated_plugin_registrant.h"
+#include "renderer_choice.h"
 
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
     : project_(project) {}
@@ -28,6 +29,9 @@ bool FlutterWindow::OnCreate() {
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
 
   flutter_controller_->engine()->SetNextFrameCallback([&]() {
+    // The window is only shown once Flutter has drawn a frame: a visible window means the
+    // engine ran and presented something, even when that something is blank.
+    GanjLog("first frame presented; showing window");
     this->Show();
   });
 

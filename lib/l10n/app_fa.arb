@@ -61,6 +61,7 @@
   "translate": "ترجمه",
   "translateBeyt": "ترجمهٔ بیت",
   "machineTranslation": "ترجمهٔ ماشینی",
+  "machineTranslationOfMeaning": "ترجمهٔ ماشینیِ معنی بیت",
   "modelTitle": "بارگیری مدل ترجمه",
   "modelBody": "برای ترجمه روی همین دستگاه، مدل ترجمه (حدود {size} برای هر زبان) یک بار بارگیری می‌شود؛ پس از آن بی‌اینترنت هم کار می‌کند.",
   "@modelBody": {"placeholders": {"size": {"type": "String"}}},

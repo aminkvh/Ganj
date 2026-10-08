@@ -14,6 +14,7 @@ import 'app.dart';
 import 'startup_error.dart';
 import 'router.dart' show initialLocationProvider;
 import 'core/ui/smooth_wheel.dart';
+import 'core/diag/startup_log.dart';
 import 'core/net/api_client.dart';
 import 'core/text/content_en.dart';
 import 'data/db/app_db.dart';
@@ -27,11 +28,17 @@ import 'features/settings/licenses.dart';
 import 'core/net/disk_image.dart';
 
 /// `--route=/poem/2130` (desktop) opens the app on that page — handy for screenshots and checks.
+/// Start-up steps go to %TEMP%/ganj.log next to the Windows runner's lines, so a computer
+/// that shows an empty window can tell us how far the app got.
+final _startup = StartupLog(StartupLog.defaultFile());
+
 Future<void> main(List<String> args) async {
+  _startup.step('main');
   SmoothWheelBinding(); // smooth mouse-wheel scrolling on Windows/Linux
   try {
     await _start(args);
   } catch (e, st) {
+    _startup.step('start-up failed: $e');
     // A failure before the first screen used to leave an empty white window. Show it instead,
     // and keep the details in a log the reader can send.
     String? log;
@@ -109,5 +116,7 @@ Future<void> _start(List<String> args) async {
   handler?.onSkip = (delta) =>
       delta > 0 ? container.read(playerProvider.notifier).next() : container.read(playerProvider.notifier).previous();
 
+  _startup.step('runApp');
+  WidgetsBinding.instance.addPostFrameCallback((_) => _startup.step('first frame built'));
   runApp(UncontrolledProviderScope(container: container, child: const GanjApp()));
 }

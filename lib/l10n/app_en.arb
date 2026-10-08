@@ -58,6 +58,7 @@
   "translate": "Translate",
   "translateBeyt": "Translate couplet",
   "machineTranslation": "Machine translation",
+  "machineTranslationOfMeaning": "Machine translation of the meaning",
   "modelTitle": "Download translation model",
   "modelBody": "To translate on this device, a translation model (about {size} per language) is downloaded once; after that it works offline too.",
   "modelDownloading": "Downloading the translation model…",

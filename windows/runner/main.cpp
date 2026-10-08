@@ -24,10 +24,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
       GetCommandLineArguments();
 
   GanjLog("start");
+  LogEnvironment();
+  if (DiagOnly(command_line_arguments)) {
+    // `ganj.exe --diag`: the facts above are all we wanted; no window.
+    GanjLog("diag done");
+    ::CoUninitialize();
+    return EXIT_SUCCESS;
+  }
   // Older GPUs (e.g. Intel HD Graphics 3000) show a white window with Impeller: use Skia there.
   project.set_impeller_switch(ShouldUseImpeller(command_line_arguments)
                                   ? flutter::ImpellerSwitch::Enabled
                                   : flutter::ImpellerSwitch::Disabled);
+  // Laptops with two graphics chips: `--gpu=low` / `--gpu=high` picks which one draws Ganj.
+  switch (GpuPreferenceFromArgs(command_line_arguments)) {
+    case 1:
+      project.set_gpu_preference(flutter::GpuPreference::LowPowerPreference);
+      break;
+    case 2:
+      project.set_gpu_preference(flutter::GpuPreference::HighPerformancePreference);
+      break;
+    default:
+      break;
+  }
 
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 

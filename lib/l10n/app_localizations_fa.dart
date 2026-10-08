@@ -182,6 +182,9 @@ class L10nFa extends L10n {
   String get machineTranslation => 'ترجمهٔ ماشینی';
 
   @override
+  String get machineTranslationOfMeaning => 'ترجمهٔ ماشینیِ معنی بیت';
+
+  @override
   String get modelTitle => 'بارگیری مدل ترجمه';
 
   @override
@@ -211,8 +214,7 @@ class L10nFa extends L10n {
   String get modelRemoved => 'مدل ترجمه حذف شد';
 
   @override
-  String get translateInBrowser =>
-      'روی رایانه، ترجمه در Google Translate باز می‌شود';
+  String get translateInBrowser => 'روی رایانه، ترجمه در Google Translate باز می‌شود';
 
   @override
   String packReady(String name) {
@@ -230,8 +232,7 @@ class L10nFa extends L10n {
   }
 
   @override
-  String get packRemoveBody =>
-      'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
+  String get packRemoveBody => 'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
 
   @override
   String packRemoveFailed(String name) {
@@ -347,8 +348,7 @@ class L10nFa extends L10n {
   String get howToInstall => 'راهنمای نصب';
 
   @override
-  String get audioNeedsMpv =>
-      'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
+  String get audioNeedsMpv => 'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
 
   @override
   String get speed => 'سرعت';
@@ -466,8 +466,7 @@ class L10nFa extends L10n {
   String get searchMeaning => 'معنا';
 
   @override
-  String get meaningHint =>
-      'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
+  String get meaningHint => 'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
 
   @override
   String semanticScope(String scope) {
@@ -478,8 +477,7 @@ class L10nFa extends L10n {
   String get semanticGlobal => 'جستجوی سراسری';
 
   @override
-  String get semanticResting =>
-      'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
+  String get semanticResting => 'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
 
   @override
   String get semanticOffline => 'جستجوی معنایی به اینترنت نیاز دارد';
@@ -494,8 +492,7 @@ class L10nFa extends L10n {
   String get tajikScript => 'خط تاجیکی (سیریلیک)';
 
   @override
-  String get tajikScriptNote =>
-      'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
+  String get tajikScriptNote => 'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
 
   @override
   String get home => 'خانه';
@@ -560,8 +557,7 @@ class L10nFa extends L10n {
   String get clearCache => 'پاک‌کردن حافظهٔ موقت';
 
   @override
-  String get clearCacheNote =>
-      'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
+  String get clearCacheNote => 'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
 
   @override
   String get about => 'درباره';

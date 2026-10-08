@@ -24,6 +24,7 @@ import 'widgets/extras_panels.dart';
 import '../../l10n/l10n.dart';
 import '../../widgets/external_link.dart';
 import '../translate/ensure_model.dart';
+import '../translate/translation_source.dart';
 import '../translate/translator.dart';
 import '../translate/translation_line.dart';
 import '../../core/text/content_en.dart';
@@ -549,7 +550,9 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                               TranslationLine(
                                 future: _translationOf(couplets[i], s.translateTo),
                                 to: s.translateTo,
-                                onOpenInBrowser: () => _openTranslation(couplets[i].text, s.translateTo),
+                                fromMeaning: translationSource(couplets[i]).fromMeaning,
+                                onOpenInBrowser: () =>
+                                    _openTranslation(translationSource(couplets[i]).text, s.translateTo),
                               ),
                             if (i < couplets.length - 1) wide ? const OrnamentSeparator() : const DashedDivider(),
                           ],
@@ -574,14 +577,14 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     final t = ref.read(translatorProvider);
     final to = ref.read(settingsProvider).translateTo;
     if (!t.inApp) {
-      await _openTranslation(couplets.map((c) => c.text).join('\n'), to);
+      await _openTranslation(translationSourceForPoem(couplets), to);
       return;
     }
     if (_translating) {
       setState(() => _translating = false);
       return;
     }
-    final all = couplets.map((c) => c.text).join('\n');
+    final all = translationSourceForPoem(couplets);
     if (await _ensureModel(t, to, fallback: () => _openTranslation(all, to)) && mounted) {
       setState(() => _translating = true);
     }
@@ -607,14 +610,18 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       _translations.clear();
       _translatedTo = to;
     }
-    return _translations.putIfAbsent(c.index, () => ref.read(translatorProvider).translate(c.text, to));
+    return _translations.putIfAbsent(
+      c.index,
+      () => ref.read(translatorProvider).translate(translationSource(c).text, to),
+    );
   }
 
   Future<void> _translateBeyt(Couplet couplet) async {
     final t = ref.read(translatorProvider);
     final to = ref.read(settingsProvider).translateTo;
-    if (!t.inApp) return _openTranslation(couplet.text, to);
-    if (!await _ensureModel(t, to, fallback: () => _openTranslation(couplet.text, to)) || !mounted) return;
+    if (!t.inApp) return _openTranslation(translationSource(couplet).text, to);
+    final src = translationSource(couplet);
+    if (!await _ensureModel(t, to, fallback: () => _openTranslation(src.text, to)) || !mounted) return;
     await showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -622,7 +629,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
         content: TranslationLine(
           future: _translationOf(couplet, to),
           to: to,
-          onOpenInBrowser: () => _openTranslation(couplet.text, to),
+          fromMeaning: src.fromMeaning,
+          onOpenInBrowser: () => _openTranslation(src.text, to),
         ),
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: Text(context.l10n.close))],
       ),

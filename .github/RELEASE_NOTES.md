@@ -6,6 +6,11 @@
 
 **Ganj** — a free, open-source, *unofficial* reader for Persian poetry, made in tribute to **[Ganjoor](https://ganjoor.net)**: read and listen on your phone or computer, even offline.
 
+### New in 1.1.3
+
+- Translation now uses Ganjoor's plain-Persian meaning of each beyt when there is one (much better results than translating the verse itself)
+- Windows: start-up diagnostics — `Ganj-diagnose.cmd` collects a report for computers that show an empty window; `--gpu=low|high` picks the graphics chip on dual-GPU laptops
+
 ### New in 1.1.2
 
 - Android: translation works again in release builds (the code shrinker had been stripping ML Kit); if on-device translation ever fails, it continues online, then offers Google Translate

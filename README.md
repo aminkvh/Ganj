@@ -56,6 +56,21 @@ come from Ganjoor and its contributors. If you enjoy Ganj, please [support Ganjo
   [GanjoorService](https://github.com/ganjoor/GanjoorService). Third-party notices: [`NOTICE.md`](NOTICE.md).
 - Privacy: no accounts, ads or tracking; see [`PRIVACY.md`](PRIVACY.md).
 
+## If Ganj shows an empty window (Windows)
+
+Run **`Ganj-diagnose.cmd`** from the Ganj folder: it writes `ganj-diagnostics.zip` to your Desktop (Ganj's
+start-up log, DirectX's report on your graphics chip and driver, the Windows version — nothing personal), and
+you can send that file in an [issue](https://github.com/aminkvh/Ganj/issues). Things to try meanwhile:
+`ganj.exe --gpu=low` or `--gpu=high` (laptops with two graphics chips), `ganj.exe --renderer=impeller`
+(the newer renderer; Skia is the default), and updating the graphics driver. The log is `%TEMP%\ganj.log`.
+
+<div dir="rtl">
+
+اگر گنج پنجره‌ای خالی نشان می‌دهد، `Ganj-diagnose.cmd` را از پوشهٔ گنج اجرا کنید و فایل `ganj-diagnostics.zip`
+ساخته‌شده روی دسکتاپ را برایمان بفرستید.
+
+</div>
+
 ## Build
 
 Flutter 3.47+: `flutter pub get`, `flutter test`, then `flutter run -d <windows|macos|linux|android|ios>`.

@@ -89,6 +89,8 @@ jobs:
           foreach ($dll in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
             Copy-Item "$env:WINDIR\System32\$dll" "Ganj\"
           }
+          # One-click diagnostics collector for computers where Ganj shows nothing.
+          Copy-Item windows/Ganj-diagnose.cmd "Ganj\"
           Compress-Archive -Path "Ganj" -DestinationPath "out/Ganj-$v-windows-x64.zip"
       - uses: actions/upload-artifact@v4
         with: { name: windows, path: out/* }

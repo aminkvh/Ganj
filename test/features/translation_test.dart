@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ganj/features/poem/couplets.dart';
 import 'package:ganj/features/poem/poem_screen.dart';
 import 'package:ganj/features/poet/poet_screen.dart';
 import 'package:ganj/features/settings/settings_screen.dart';
@@ -97,7 +98,7 @@ void main() {
     await settle(tester);
     expect(t.prepared, ['en']);
     expect(find.textContaining('[en]'), findsWidgets);
-    expect(find.text('ترجمهٔ ماشینی'), findsWidgets);
+    expect(find.textContaining('ترجمهٔ ماشینی'), findsWidgets);
     await unmount(tester);
   });
 
@@ -132,7 +133,9 @@ void main() {
     expect(u.host, 'translate.google.com');
     expect(u.queryParameters['sl'], 'fa');
     expect(u.queryParameters['tl'], 'en');
-    expect(u.queryParameters['text'], contains(firstHemistich));
+    // Meanings go to the translator where Ganjoor has them (they translate far better than verse).
+    final meaning1 = groupCouplets(poem2130().verses).first.summary!.text;
+    expect(u.queryParameters['text'], contains(meaning1));
     await unmount(tester);
   });
 
@@ -145,8 +148,9 @@ void main() {
     await tester.tap(find.text('ترجمهٔ بیت'));
     await settle(tester);
     final text = opened.single.queryParameters['text']!;
-    expect(text, contains(verse3));
-    expect(text, isNot(contains(firstHemistich)));
+    final couplets = groupCouplets(poem2130().verses);
+    expect(text, contains(couplets[1].summary!.text), reason: "beyt 2's meaning");
+    expect(text, isNot(contains(couplets[0].summary!.text)), reason: 'not beyt 1');
     await unmount(tester);
   });
 
@@ -162,7 +166,7 @@ void main() {
     await tester.tap(retry.first);
     await settle(tester);
     expect(opened.single.host, 'translate.google.com');
-    expect(opened.single.queryParameters['text'], contains(firstHemistich));
+    expect(opened.single.queryParameters['text'], contains(groupCouplets(poem2130().verses).first.summary!.text));
     await unmount(tester);
   });
 
@@ -198,6 +202,17 @@ void main() {
     );
     await settle(tester);
     expect(find.widgetWithText(TextButton, 'ترجمه'), findsNothing);
+  });
+
+  testWidgets('a beyt with a plain-Persian meaning is translated from the meaning, and says so', (tester) async {
+    final t = FakeDeviceTranslator(ready: true);
+    await pumpPoem(tester, t);
+    await tester.tap(find.byTooltip('ترجمه'));
+    await settle(tester);
+    final meaning = groupCouplets(poem2130().verses).first.summary!.text;
+    expect(t.asked.first, meaning, reason: 'the meaning is sent, not the verse');
+    expect(find.text('ترجمهٔ ماشینیِ معنی بیت'), findsWidgets);
+    await unmount(tester);
   });
 
   test('a very long poem is cut to fit a Google Translate link', () {

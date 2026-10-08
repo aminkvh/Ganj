@@ -7,7 +7,13 @@ const _rtlTargets = {'ar', 'ur'};
 
 /// A beyt's machine translation, under the beyt, marked as machine-made.
 class TranslationLine extends StatelessWidget {
-  const TranslationLine({super.key, required this.future, required this.to, this.onOpenInBrowser});
+  const TranslationLine({
+    super.key,
+    required this.future,
+    required this.to,
+    this.onOpenInBrowser,
+    this.fromMeaning = false,
+  });
 
   final Future<String> future;
 
@@ -16,6 +22,9 @@ class TranslationLine extends StatelessWidget {
 
   /// Offered when translating in the app fails: the same text in Google Translate.
   final VoidCallback? onOpenInBrowser;
+
+  /// True when what was translated is Ganjoor's plain-Persian meaning of the beyt.
+  final bool fromMeaning;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +61,7 @@ class TranslationLine extends StatelessWidget {
                 style: TextStyle(color: c.lapis, fontStyle: FontStyle.italic, height: 1.6),
               ),
               Text(
-                context.l10n.machineTranslation,
+                fromMeaning ? context.l10n.machineTranslationOfMeaning : context.l10n.machineTranslation,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: c.gold, fontSize: 10.5),
               ),
