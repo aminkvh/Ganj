@@ -24,9 +24,22 @@ void LogEnvironment();
 // `--renderer=impeller` (or `--renderer=skia`) on the command line overrides the default.
 bool ShouldUseImpeller(const std::vector<std::string>& args);
 
-// `--gpu=low` (integrated chip) or `--gpu=high` (discrete chip) on laptops with two GPUs.
-// Returns 0 for no preference, 1 for low power, 2 for high performance.
+// Which GPU Flutter should prefer: 1 = low power (the integrated chip), 2 = high performance.
+// Low power is the default: Ganj is text, the integrated chip is plenty, it saves battery,
+// and on an Optimus laptop (Intel + NVIDIA, 2016 drivers) rendering on the NVIDIA chip and
+// copying frames across to the Intel-driven screen produced a white window — with the
+// integrated chip it works. `--gpu=high` overrides.
 int GpuPreferenceFromArgs(const std::vector<std::string>& args);
+
+// Windows' own per-app graphics choice (Settings > System > Display > Graphics settings):
+// registers this exe as "Power saving" when the user has made no choice yet, because the
+// NVIDIA switching layer honours that setting where Flutter's own preference may be ignored.
+// Returns true when the value was just written — it only applies to processes started
+// afterwards, so the caller relaunches once.
+bool EnsureWindowsGpuPreferencePowerSaving();
+
+// Starts this exe again with the same arguments plus `--relaunched` (never loops).
+bool RelaunchOnce(const std::vector<std::string>& args);
 
 // `--diag`: log the environment and exit without opening a window.
 bool DiagOnly(const std::vector<std::string>& args);

@@ -194,15 +194,66 @@ bool ShouldUseImpeller(const std::vector<std::string>& args) {
 }
 
 int GpuPreferenceFromArgs(const std::vector<std::string>& args) {
-  if (HasArg(args, "--gpu=low")) {
-    GanjLog("gpu preference: low power (--gpu=low)");
-    return 1;
-  }
   if (HasArg(args, "--gpu=high")) {
     GanjLog("gpu preference: high performance (--gpu=high)");
     return 2;
   }
-  return 0;
+  GanjLog(HasArg(args, "--gpu=low") ? "gpu preference: low power (--gpu=low)"
+                                     : "gpu preference: low power (default)");
+  return 1;
+}
+
+bool EnsureWindowsGpuPreferencePowerSaving() {
+  wchar_t exe[MAX_PATH] = {0};
+  if (::GetModuleFileNameW(nullptr, exe, MAX_PATH) == 0) {
+    return false;
+  }
+  HKEY key = nullptr;
+  if (::RegCreateKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\DirectX\\UserGpuPreferences", 0,
+                        nullptr, 0, KEY_READ | KEY_WRITE, nullptr, &key, nullptr) != ERROR_SUCCESS) {
+    GanjLog("windows gpu preference: registry not writable");
+    return false;
+  }
+  bool wrote = false;
+  DWORD type = 0;
+  DWORD size = 0;
+  const LONG r = ::RegQueryValueExW(key, exe, nullptr, &type, nullptr, &size);
+  if (r == ERROR_FILE_NOT_FOUND) {
+    // The same value Settings > Graphics settings > "Power saving" writes.
+    const wchar_t value[] = L"GpuPreference=1;";
+    wrote = ::RegSetValueExW(key, exe, 0, REG_SZ, reinterpret_cast<const BYTE*>(value),
+                             sizeof(value)) == ERROR_SUCCESS;
+    GanjLog(wrote ? "windows gpu preference: set to power saving for this exe"
+                  : "windows gpu preference: could not be set");
+  } else {
+    GanjLog("windows gpu preference: already chosen (left as is)");
+  }
+  ::RegCloseKey(key);
+  return wrote;
+}
+
+bool RelaunchOnce(const std::vector<std::string>& args) {
+  if (HasArg(args, "--relaunched")) {
+    return false;
+  }
+  std::wstring cmd = ::GetCommandLineW();
+  cmd += L" --relaunched";
+  STARTUPINFOW si = {};
+  si.cb = sizeof(si);
+  PROCESS_INFORMATION pi = {};
+  // CreateProcessW may modify the command line buffer, so give it a writable copy.
+  std::vector<wchar_t> buf(cmd.begin(), cmd.end());
+  buf.push_back(L'\0');
+  const BOOL ok = ::CreateProcessW(nullptr, buf.data(), nullptr, nullptr, FALSE, 0, nullptr, nullptr,
+                                   &si, &pi);
+  if (ok) {
+    ::CloseHandle(pi.hThread);
+    ::CloseHandle(pi.hProcess);
+    GanjLog("relaunching once so the graphics choice applies");
+  } else {
+    GanjLog("relaunch failed; continuing in this process");
+  }
+  return ok == TRUE;
 }
 
 bool DiagOnly(const std::vector<std::string>& args) { return HasArg(args, "--diag"); }

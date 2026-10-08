@@ -60,9 +60,12 @@ come from Ganjoor and its contributors. If you enjoy Ganj, please [support Ganjo
 
 Run **`Ganj-diagnose.cmd`** from the Ganj folder: it writes `ganj-diagnostics.zip` to your Desktop (Ganj's
 start-up log, DirectX's report on your graphics chip and driver, the Windows version — nothing personal), and
-you can send that file in an [issue](https://github.com/aminkvh/Ganj/issues). Things to try meanwhile:
-`ganj.exe --gpu=low` or `--gpu=high` (laptops with two graphics chips), `ganj.exe --renderer=impeller`
-(the newer renderer; Skia is the default), and updating the graphics driver. The log is `%TEMP%\ganj.log`.
+you can send that file in an [issue](https://github.com/aminkvh/Ganj/issues). Ganj draws on the integrated
+graphics chip by default (on dual-GPU laptops it also registers itself as "Power saving" in Windows' Graphics
+settings the first time it runs); `ganj.exe --gpu=high` picks the discrete chip instead, and
+`ganj.exe --renderer=impeller` tries the newer renderer (Skia is the default). Old graphics drivers are the usual
+cause of an empty window — for NVIDIA GeForce 400/500-series laptops the last driver is 391.35. The log is
+`%TEMP%\ganj.log`.
 
 <div dir="rtl">
 

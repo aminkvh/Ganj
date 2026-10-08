@@ -35,16 +35,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   project.set_impeller_switch(ShouldUseImpeller(command_line_arguments)
                                   ? flutter::ImpellerSwitch::Enabled
                                   : flutter::ImpellerSwitch::Disabled);
-  // Laptops with two graphics chips: `--gpu=low` / `--gpu=high` picks which one draws Ganj.
-  switch (GpuPreferenceFromArgs(command_line_arguments)) {
-    case 1:
-      project.set_gpu_preference(flutter::GpuPreference::LowPowerPreference);
-      break;
-    case 2:
-      project.set_gpu_preference(flutter::GpuPreference::HighPerformancePreference);
-      break;
-    default:
-      break;
+  // The integrated graphics chip by default (see renderer_choice.h); `--gpu=high` overrides.
+  const int gpu = GpuPreferenceFromArgs(command_line_arguments);
+  project.set_gpu_preference(gpu == 2 ? flutter::GpuPreference::HighPerformancePreference
+                                      : flutter::GpuPreference::LowPowerPreference);
+  // Also tell Windows itself (per-app graphics setting), once, and start again so it applies
+  // to this very first run too.
+  if (gpu == 1 && EnsureWindowsGpuPreferencePowerSaving() && RelaunchOnce(command_line_arguments)) {
+    ::CoUninitialize();
+    return EXIT_SUCCESS;
   }
 
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
