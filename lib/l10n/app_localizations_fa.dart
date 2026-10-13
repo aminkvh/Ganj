@@ -214,7 +214,8 @@ class L10nFa extends L10n {
   String get modelRemoved => 'مدل ترجمه حذف شد';
 
   @override
-  String get translateInBrowser => 'روی رایانه، ترجمه در Google Translate باز می‌شود';
+  String get translateInBrowser =>
+      'روی رایانه، ترجمه در Google Translate باز می‌شود';
 
   @override
   String packReady(String name) {
@@ -232,7 +233,8 @@ class L10nFa extends L10n {
   }
 
   @override
-  String get packRemoveBody => 'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
+  String get packRemoveBody =>
+      'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
 
   @override
   String packRemoveFailed(String name) {
@@ -348,7 +350,8 @@ class L10nFa extends L10n {
   String get howToInstall => 'راهنمای نصب';
 
   @override
-  String get audioNeedsMpv => 'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
+  String get audioNeedsMpv =>
+      'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
 
   @override
   String get speed => 'سرعت';
@@ -466,7 +469,8 @@ class L10nFa extends L10n {
   String get searchMeaning => 'معنا';
 
   @override
-  String get meaningHint => 'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
+  String get meaningHint =>
+      'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
 
   @override
   String semanticScope(String scope) {
@@ -477,7 +481,8 @@ class L10nFa extends L10n {
   String get semanticGlobal => 'جستجوی سراسری';
 
   @override
-  String get semanticResting => 'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
+  String get semanticResting =>
+      'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
 
   @override
   String get semanticOffline => 'جستجوی معنایی به اینترنت نیاز دارد';
@@ -492,7 +497,8 @@ class L10nFa extends L10n {
   String get tajikScript => 'خط تاجیکی (سیریلیک)';
 
   @override
-  String get tajikScriptNote => 'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
+  String get tajikScriptNote =>
+      'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
 
   @override
   String get home => 'خانه';
@@ -557,7 +563,8 @@ class L10nFa extends L10n {
   String get clearCache => 'پاک‌کردن حافظهٔ موقت';
 
   @override
-  String get clearCacheNote => 'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
+  String get clearCacheNote =>
+      'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
 
   @override
   String get about => 'درباره';
@@ -629,4 +636,198 @@ class L10nFa extends L10n {
 
   @override
   String get noNotes => 'هنوز یادداشتی ننوشته‌اید';
+
+  @override
+  String get shahnamehWorld => 'جهان شاهنامه';
+
+  @override
+  String get shBannerSubtitle =>
+      'نامبردگان، تبارنامه‌ها، گاه‌شمار داستان‌ها و نقشه';
+
+  @override
+  String get shTimeline => 'گاه‌شمار';
+
+  @override
+  String get shMap => 'نقشه';
+
+  @override
+  String get shPeople => 'نامبردگان';
+
+  @override
+  String get shTrees => 'تبارنامه‌ها';
+
+  @override
+  String get shSearchPeople => 'جستجوی نامبردگان…';
+
+  @override
+  String get shMajorFigures => 'نامداران';
+
+  @override
+  String get shOthers => 'دیگران';
+
+  @override
+  String get shList => 'فهرست';
+
+  @override
+  String get shNetwork => 'شبکه';
+
+  @override
+  String get shAliases => 'نام‌های دیگر';
+
+  @override
+  String get shAppearsIn => 'حضور در داستان‌ها';
+
+  @override
+  String get shRelatives => 'خویشاوندان';
+
+  @override
+  String get shTies => 'وابستگی‌های غیرخویشاوندی';
+
+  @override
+  String get shTaggedPoems => 'اشعار برچسب‌خورده';
+
+  @override
+  String get shPlaces => 'جای‌ها';
+
+  @override
+  String shEvidence(String n) {
+    return 'مستند ($n)';
+  }
+
+  @override
+  String shGenerations(String n) {
+    return 'با فاصلهٔ $n نسل';
+  }
+
+  @override
+  String get shFamilyTree => 'تبارنامه';
+
+  @override
+  String get shShowNetwork => 'نمایش در شبکه';
+
+  @override
+  String get shWholeNetwork => 'همهٔ شبکه';
+
+  @override
+  String get shOneStep => 'پیوندهای نزدیک';
+
+  @override
+  String get shTwoSteps => 'دو گام';
+
+  @override
+  String get shPassing => 'یادکرد گذرا';
+
+  @override
+  String get shNoTies => 'پیوندی ثبت نشده است';
+
+  @override
+  String get shStoryOrder => 'ترتیب داستان‌ها';
+
+  @override
+  String get shStories => 'داستان‌ها';
+
+  @override
+  String get shRiver => 'رود زمان';
+
+  @override
+  String get shAddPerson => 'افزودن شخصیت';
+
+  @override
+  String get shRead => 'خواندن';
+
+  @override
+  String get shShowOnMap => 'روی نقشه';
+
+  @override
+  String get shOnTimeline => 'در گاه‌شمار';
+
+  @override
+  String get shAllAges => 'همهٔ دوران‌ها';
+
+  @override
+  String get shAllStories => 'همهٔ داستان‌ها';
+
+  @override
+  String get shGanjoorOnly => 'فقط برچسب‌های گنجور';
+
+  @override
+  String get shTilesNeedInternet => 'نقشهٔ زمینه به اینترنت نیاز دارد';
+
+  @override
+  String get shMythic => 'جای سنتی و افسانه‌ای';
+
+  @override
+  String get shApprox => 'جای تقریبی';
+
+  @override
+  String get shStoriesHere => 'داستان‌های این‌جا';
+
+  @override
+  String get shFromGanjoor => 'از گنجور';
+
+  @override
+  String get shAnyPersonTree => 'تبارنامهٔ هر کس';
+
+  @override
+  String shSections(String n) {
+    return '$n بخش';
+  }
+
+  @override
+  String get shDataCredit =>
+      'نامبردگان، پیوندها و برچسب‌ها از گنجور (بسیاری پیشنهاد هوش مصنوعی و تأییدشدهٔ داوطلبان گنجور)؛ دوران‌ها، داستان‌ها، جای‌ها و نام‌های انگلیسی را هوش مصنوعی برای گنج نوشته و هنوز بازبینی نشده است.';
+
+  @override
+  String get shKin => 'خویشاوندی';
+
+  @override
+  String get shConflict => 'دشمنی';
+
+  @override
+  String get shService => 'خدمت';
+
+  @override
+  String get shAlliance => 'همراهی';
+
+  @override
+  String get shCouldNotLoad => 'این بخش بارگیری نشد';
+
+  @override
+  String get shNoResults => 'کسی پیدا نشد';
+
+  @override
+  String get shStory => 'داستان';
+
+  @override
+  String get shRoute => 'مسیر';
+
+  @override
+  String get shRegion => 'سرزمین';
+
+  @override
+  String shPeopleCount(String n) {
+    return '$n نفر';
+  }
+
+  @override
+  String get shGanjAi => 'هوش مصنوعی · گنج';
+
+  @override
+  String get shGanjAiNote =>
+      'نوشتهٔ هوش مصنوعی برای گنج؛ از گنجور نیست و هنوز بازبینی نشده است.';
+
+  @override
+  String get shReport => 'گزارش خطا';
+
+  @override
+  String get shReportWhat => 'چه چیزی نادرست است؟';
+
+  @override
+  String get shAiTagsNote =>
+      'برچسب‌ها را هوش مصنوعی گنجور پیشنهاد داده و داوطلبان گنجور تأیید کرده‌اند.';
+
+  @override
+  String shReportCopied(String email) {
+    return 'برنامهٔ ایمیلی پیدا نشد؛ متن گزارش رونوشت شد. لطفاً آن را به $email بفرستید.';
+  }
 }

@@ -128,7 +128,8 @@ class L10nEn extends L10n {
       'O Hafez of Shiraz, keeper of every secret,\nI ask you by God and by your Shakh-e Nabat\nto reveal to me whatever is right and good for me.';
 
   @override
-  String get faalIntention => 'Hold your wish in your heart, then open your fortune.';
+  String get faalIntention =>
+      'Hold your wish in your heart, then open your fortune.';
 
   @override
   String get faalOpen => 'Open the fortune';
@@ -182,7 +183,8 @@ class L10nEn extends L10n {
   String get machineTranslation => 'Machine translation';
 
   @override
-  String get machineTranslationOfMeaning => 'Machine translation of the meaning';
+  String get machineTranslationOfMeaning =>
+      'Machine translation of the meaning';
 
   @override
   String get modelTitle => 'Download translation model';
@@ -214,7 +216,8 @@ class L10nEn extends L10n {
   String get modelRemoved => 'Translation model removed';
 
   @override
-  String get translateInBrowser => 'On computers, translations open in Google Translate';
+  String get translateInBrowser =>
+      'On computers, translations open in Google Translate';
 
   @override
   String packReady(String name) {
@@ -232,7 +235,8 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get packRemoveBody => 'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
+  String get packRemoveBody =>
+      'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
 
   @override
   String packRemoveFailed(String name) {
@@ -348,7 +352,8 @@ class L10nEn extends L10n {
   String get howToInstall => 'How to install';
 
   @override
-  String get audioNeedsMpv => 'Recitations on Linux need libmpv, e.g. sudo apt install libmpv2';
+  String get audioNeedsMpv =>
+      'Recitations on Linux need libmpv, e.g. sudo apt install libmpv2';
 
   @override
   String get speed => 'Speed';
@@ -466,7 +471,8 @@ class L10nEn extends L10n {
   String get searchMeaning => 'Meaning';
 
   @override
-  String get meaningHint => 'Ask in your own words, e.g. a poem about the world\'s fickleness';
+  String get meaningHint =>
+      'Ask in your own words, e.g. a poem about the world\'s fickleness';
 
   @override
   String semanticScope(String scope) {
@@ -477,7 +483,8 @@ class L10nEn extends L10n {
   String get semanticGlobal => 'Search all of Ganjoor';
 
   @override
-  String get semanticResting => 'Meaning search is resting right now; try again a little later';
+  String get semanticResting =>
+      'Meaning search is resting right now; try again a little later';
 
   @override
   String get semanticOffline => 'Meaning search needs the internet';
@@ -492,7 +499,8 @@ class L10nEn extends L10n {
   String get tajikScript => 'Tajik (Cyrillic) script';
 
   @override
-  String get tajikScriptNote => 'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
+  String get tajikScriptNote =>
+      'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
 
   @override
   String get home => 'Home';
@@ -504,7 +512,8 @@ class L10nEn extends L10n {
   String get allPoets => 'All poets';
 
   @override
-  String get offlineResults => 'Offline results — only from downloaded collections';
+  String get offlineResults =>
+      'Offline results — only from downloaded collections';
 
   @override
   String get nothingFound => 'Nothing found';
@@ -557,7 +566,8 @@ class L10nEn extends L10n {
   String get clearCache => 'Clear cache';
 
   @override
-  String get clearCacheNote => 'Downloaded collections, recitations and bookmarks are kept';
+  String get clearCacheNote =>
+      'Downloaded collections, recitations and bookmarks are kept';
 
   @override
   String get about => 'About';
@@ -629,4 +639,198 @@ class L10nEn extends L10n {
 
   @override
   String get noNotes => 'No notes yet';
+
+  @override
+  String get shahnamehWorld => 'World of the Shahnameh';
+
+  @override
+  String get shBannerSubtitle =>
+      'People, family trees, a timeline of the stories and a map';
+
+  @override
+  String get shTimeline => 'Timeline';
+
+  @override
+  String get shMap => 'Map';
+
+  @override
+  String get shPeople => 'People';
+
+  @override
+  String get shTrees => 'Family trees';
+
+  @override
+  String get shSearchPeople => 'Search people…';
+
+  @override
+  String get shMajorFigures => 'Major figures';
+
+  @override
+  String get shOthers => 'Others';
+
+  @override
+  String get shList => 'List';
+
+  @override
+  String get shNetwork => 'Network';
+
+  @override
+  String get shAliases => 'Also called';
+
+  @override
+  String get shAppearsIn => 'Appears in the stories';
+
+  @override
+  String get shRelatives => 'Relatives';
+
+  @override
+  String get shTies => 'Other ties';
+
+  @override
+  String get shTaggedPoems => 'Tagged couplets';
+
+  @override
+  String get shPlaces => 'Places';
+
+  @override
+  String shEvidence(String n) {
+    return 'Evidence ($n)';
+  }
+
+  @override
+  String shGenerations(String n) {
+    return '$n generations apart';
+  }
+
+  @override
+  String get shFamilyTree => 'Family tree';
+
+  @override
+  String get shShowNetwork => 'Show in the network';
+
+  @override
+  String get shWholeNetwork => 'Whole network';
+
+  @override
+  String get shOneStep => 'Close ties';
+
+  @override
+  String get shTwoSteps => 'Two steps';
+
+  @override
+  String get shPassing => 'Mentioned in passing';
+
+  @override
+  String get shNoTies => 'No recorded ties';
+
+  @override
+  String get shStoryOrder => 'Story order';
+
+  @override
+  String get shStories => 'Stories';
+
+  @override
+  String get shRiver => 'River';
+
+  @override
+  String get shAddPerson => 'Add a person';
+
+  @override
+  String get shRead => 'Read';
+
+  @override
+  String get shShowOnMap => 'On the map';
+
+  @override
+  String get shOnTimeline => 'On the timeline';
+
+  @override
+  String get shAllAges => 'All ages';
+
+  @override
+  String get shAllStories => 'All stories';
+
+  @override
+  String get shGanjoorOnly => 'Ganjoor tags only';
+
+  @override
+  String get shTilesNeedInternet => 'Map tiles need internet';
+
+  @override
+  String get shMythic => 'Traditional, legendary location';
+
+  @override
+  String get shApprox => 'Approximate location';
+
+  @override
+  String get shStoriesHere => 'Stories set here';
+
+  @override
+  String get shFromGanjoor => 'From Ganjoor';
+
+  @override
+  String get shAnyPersonTree => 'Anyone\'s family tree';
+
+  @override
+  String shSections(String n) {
+    return '$n sections';
+  }
+
+  @override
+  String get shDataCredit =>
+      'People, ties and tags from ganjoor.net (much of it suggested by AI and approved by Ganjoor\'s volunteers); the ages, stories, places and English names were written by AI for Ganj and are not yet reviewed.';
+
+  @override
+  String get shKin => 'Kin';
+
+  @override
+  String get shConflict => 'Conflict';
+
+  @override
+  String get shService => 'Service';
+
+  @override
+  String get shAlliance => 'Alliance';
+
+  @override
+  String get shCouldNotLoad => 'Couldn\'t load this part';
+
+  @override
+  String get shNoResults => 'No one found';
+
+  @override
+  String get shStory => 'Story';
+
+  @override
+  String get shRoute => 'Route';
+
+  @override
+  String get shRegion => 'Region';
+
+  @override
+  String shPeopleCount(String n) {
+    return '$n people';
+  }
+
+  @override
+  String get shGanjAi => 'AI · Ganj';
+
+  @override
+  String get shGanjAiNote =>
+      'Written by AI for Ganj — not from Ganjoor, and not yet reviewed.';
+
+  @override
+  String get shReport => 'Report a problem';
+
+  @override
+  String get shReportWhat => 'What\'s wrong?';
+
+  @override
+  String get shAiTagsNote =>
+      'Tags suggested by Ganjoor\'s AI and approved by Ganjoor\'s volunteers.';
+
+  @override
+  String shReportCopied(String email) {
+    return 'No email app found — the report was copied. Please send it to $email.';
+  }
 }

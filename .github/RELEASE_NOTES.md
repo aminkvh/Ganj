@@ -8,6 +8,35 @@
 
 ## What's new · تازه‌ها
 
+### 1.2
+- **World of the Shahnameh**: a new section for Ferdowsi's Shahnameh, opened from its pages or the home menu, and
+  usable offline.
+  - **Timeline:** the four ages, their kings and 38 stories, as a story list or as a "river" that shows where each
+    hero appears in the book.
+  - **Map:** the Shahnameh's places, with the journeys of stories such as Rostam's seven labours.
+  - **People (نامبردگان):** everyone named in the epic, from Ganjoor's data. Each person shows their relatives and
+    other ties with the couplets that prove them, a network of ties, and family trees.
+  - **Under every Shahnameh poem:** the people and places named in it.
+- Ganjoor's AI-suggested data carries the usual AI label. What AI wrote for Ganj (the ages, stories, places and
+  English names) carries «AI · Ganj» until reviewed.
+- «Report a problem» on every person, story and place sends an email to Ganj_app@protonmail.com.
+
+<div dir="rtl">
+
+- **جهان شاهنامه**: بخشی تازه برای شاهنامهٔ فردوسی که از برگه‌های شاهنامه یا منوی خانه باز می‌شود و بی‌اینترنت هم
+  کار می‌کند.
+  - **گاه‌شمار:** چهار دوران، شاهان و ۳۸ داستان، به‌صورت فهرست داستان‌ها یا «رود زمان» که نشان می‌دهد هر پهلوان کجای
+    کتاب حاضر است.
+  - **نقشه:** جای‌های شاهنامه با مسیر داستان‌هایی چون هفت‌خوان رستم.
+  - **نامبردگان:** همهٔ کسانی که در حماسه نامشان آمده، از داده‌های گنجور؛ برای هر کس خویشاوندان و دیگر پیوندها با
+    بیت‌های مستند، شبکهٔ پیوندها و تبارنامه‌ها.
+  - **زیر هر شعر شاهنامه:** کسان و جای‌هایی که در آن نام برده شده‌اند.
+- داده‌هایی که هوش مصنوعی گنجور پیشنهاد داده نشان معمول «هوش مصنوعی» دارند؛ آنچه هوش مصنوعی برای گنج نوشته
+  (دوران‌ها، داستان‌ها، جای‌ها و نام‌های انگلیسی) تا بازبینی نشان «هوش مصنوعی · گنج» دارد.
+- «گزارش خطا» روی هر شخصیت، داستان و جا، ایمیلی به Ganj_app@protonmail.com می‌فرستد.
+
+</div>
+
 ### 1.1.4
 - Windows: Ganj draws on the integrated graphics chip by default and registers itself as "Power saving" in Windows' graphics settings — fixes the empty white window on dual-GPU (Optimus) laptops with older drivers; `--gpu=high` overrides.
 

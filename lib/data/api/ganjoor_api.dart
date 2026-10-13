@@ -10,6 +10,7 @@ import '../../core/net/request_pool.dart';
 import 'dto/book.dart';
 import 'dto/cat.dart';
 import 'dto/extras.dart';
+import 'dto/people.dart';
 import 'dto/poem.dart';
 import 'dto/poet.dart';
 import 'dto/recitation.dart';
@@ -168,6 +169,23 @@ class GanjoorApi {
     Duration ttl,
     T Function(Map<String, dynamic>) f,
   ) async => [for (final e in jsonDecode(await _get(path, q, ttl)) as List) f(e as Map<String, dynamic>)];
+
+  /// «نامبردگان»: a person's kin and ties, with up to three evidence couplets each.
+  Future<PersonRelations> personRelations(int id) async =>
+      PersonRelations.fromJson(_map(await _get('/api/people/$id/relations', const {'evidenceLimit': '3'}, _month)));
+
+  /// Couplets of the Shahnameh tagged with a person.
+  Future<List<TaggedPoem>> personPoems(int id) =>
+      _list('/api/people/$id/poems', const {'catId': '33'}, _month, TaggedPoem.fromJson);
+
+  /// Place tags of one book section (the response also carries every person tag — 0.3–0.8 MB).
+  Future<List<PlaceTag>> catPlaceTags(int catId) async => [
+    for (final t in jsonDecode(await _get('/api/ganjoor/cat/$catId/geotag', const {}, _month)) as List)
+      if ((t as Map)['locationId'] case final int loc)
+        PlaceTag(poemId: t['poemId'] as int, coupletIndex: (t['coupletIndex'] as int?) ?? 0, locationId: loc),
+  ];
+
+  Future<List<GanjLocation>> locations() => _list('/api/locations', const {}, _month, GanjLocation.fromJson);
 
   Future<List<PoemImage>> images(int poemId) =>
       _list('/api/ganjoor/poem/$poemId/images', const {}, _week, PoemImage.fromJson);

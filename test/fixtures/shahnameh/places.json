@@ -1,0 +1,6 @@
+{"places":[
+ {"id":"alborz","fa":"البرز","en":"Alborz","lat":36.0,"lng":51.5,"region":"iran","precision":"mythic","noteEn":"Traditional home of the Simorgh","stories":["kayumars"]},
+ {"id":"damavand","fa":"دماوند","en":"Damavand","lat":35.95,"lng":52.11,"region":"iran","precision":"exact","stories":["zahhak"]},
+ {"id":"amol","fa":"آمل","en":"Amol","lat":36.47,"lng":52.35,"region":"iran","precision":"exact","ganjoorId":91,"stories":["zahhak"]}
+],
+"routes":[{"id":"r1","fa":"راه ضحاک","en":"Zahhak's road","story":"zahhak","places":["damavand","amol"]}]}

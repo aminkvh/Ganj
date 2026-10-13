@@ -10,6 +10,7 @@ import '../../data/providers.dart';
 import '../../widgets/error_retry.dart';
 import '../extras/random_poem.dart';
 import 'book_shelf.dart';
+import '../shahnameh/ui/shahnameh_entry.dart';
 import 'poet_tile.dart';
 import '../../l10n/l10n.dart';
 import '../../core/text/content_en.dart';
@@ -87,6 +88,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
                 PopupMenuItem(value: 'random', child: Text(context.l10n.randomPoem)),
                 PopupMenuItem(value: '/metres', child: Text(context.l10n.metres)),
                 PopupMenuItem(value: '/map', child: Text(context.l10n.birthplaceMap)),
+                PopupMenuItem(value: '/shahnameh', child: Text(context.l10n.shahnamehWorld)),
                 PopupMenuItem(value: '/me', child: Text(context.l10n.bookmarksAndNotes)),
                 PopupMenuItem(value: '/settings', child: Text(context.l10n.settingsAndAbout)),
               ],
@@ -215,6 +217,7 @@ class _HomeEnd extends StatelessWidget {
       const Divider(height: 32, indent: 32, endIndent: 32),
       Text(context.l10n.birthplaceMap, style: nastaliqOf(context, 22).copyWith(color: context.ganj.lapis)),
       const _MapTile(),
+      const ShahnamehBanner(),
       const BookShelf(),
       const SizedBox(height: 24),
     ],

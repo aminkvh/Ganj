@@ -62,7 +62,8 @@ import 'app_localizations_fa.dart';
 /// be consistent with the languages listed in the L10n.supportedLocales
 /// property.
 abstract class L10n {
-  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  L10n(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -82,15 +83,19 @@ abstract class L10n {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('fa')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('fa'),
+  ];
 
   /// No description provided for @appName.
   ///
@@ -1231,6 +1236,366 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'هنوز یادداشتی ننوشته‌اید'**
   String get noNotes;
+
+  /// No description provided for @shahnamehWorld.
+  ///
+  /// In fa, this message translates to:
+  /// **'جهان شاهنامه'**
+  String get shahnamehWorld;
+
+  /// No description provided for @shBannerSubtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'نامبردگان، تبارنامه‌ها، گاه‌شمار داستان‌ها و نقشه'**
+  String get shBannerSubtitle;
+
+  /// No description provided for @shTimeline.
+  ///
+  /// In fa, this message translates to:
+  /// **'گاه‌شمار'**
+  String get shTimeline;
+
+  /// No description provided for @shMap.
+  ///
+  /// In fa, this message translates to:
+  /// **'نقشه'**
+  String get shMap;
+
+  /// No description provided for @shPeople.
+  ///
+  /// In fa, this message translates to:
+  /// **'نامبردگان'**
+  String get shPeople;
+
+  /// No description provided for @shTrees.
+  ///
+  /// In fa, this message translates to:
+  /// **'تبارنامه‌ها'**
+  String get shTrees;
+
+  /// No description provided for @shSearchPeople.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی نامبردگان…'**
+  String get shSearchPeople;
+
+  /// No description provided for @shMajorFigures.
+  ///
+  /// In fa, this message translates to:
+  /// **'نامداران'**
+  String get shMajorFigures;
+
+  /// No description provided for @shOthers.
+  ///
+  /// In fa, this message translates to:
+  /// **'دیگران'**
+  String get shOthers;
+
+  /// No description provided for @shList.
+  ///
+  /// In fa, this message translates to:
+  /// **'فهرست'**
+  String get shList;
+
+  /// No description provided for @shNetwork.
+  ///
+  /// In fa, this message translates to:
+  /// **'شبکه'**
+  String get shNetwork;
+
+  /// No description provided for @shAliases.
+  ///
+  /// In fa, this message translates to:
+  /// **'نام‌های دیگر'**
+  String get shAliases;
+
+  /// No description provided for @shAppearsIn.
+  ///
+  /// In fa, this message translates to:
+  /// **'حضور در داستان‌ها'**
+  String get shAppearsIn;
+
+  /// No description provided for @shRelatives.
+  ///
+  /// In fa, this message translates to:
+  /// **'خویشاوندان'**
+  String get shRelatives;
+
+  /// No description provided for @shTies.
+  ///
+  /// In fa, this message translates to:
+  /// **'وابستگی‌های غیرخویشاوندی'**
+  String get shTies;
+
+  /// No description provided for @shTaggedPoems.
+  ///
+  /// In fa, this message translates to:
+  /// **'اشعار برچسب‌خورده'**
+  String get shTaggedPoems;
+
+  /// No description provided for @shPlaces.
+  ///
+  /// In fa, this message translates to:
+  /// **'جای‌ها'**
+  String get shPlaces;
+
+  /// No description provided for @shEvidence.
+  ///
+  /// In fa, this message translates to:
+  /// **'مستند ({n})'**
+  String shEvidence(String n);
+
+  /// No description provided for @shGenerations.
+  ///
+  /// In fa, this message translates to:
+  /// **'با فاصلهٔ {n} نسل'**
+  String shGenerations(String n);
+
+  /// No description provided for @shFamilyTree.
+  ///
+  /// In fa, this message translates to:
+  /// **'تبارنامه'**
+  String get shFamilyTree;
+
+  /// No description provided for @shShowNetwork.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمایش در شبکه'**
+  String get shShowNetwork;
+
+  /// No description provided for @shWholeNetwork.
+  ///
+  /// In fa, this message translates to:
+  /// **'همهٔ شبکه'**
+  String get shWholeNetwork;
+
+  /// No description provided for @shOneStep.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیوندهای نزدیک'**
+  String get shOneStep;
+
+  /// No description provided for @shTwoSteps.
+  ///
+  /// In fa, this message translates to:
+  /// **'دو گام'**
+  String get shTwoSteps;
+
+  /// No description provided for @shPassing.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادکرد گذرا'**
+  String get shPassing;
+
+  /// No description provided for @shNoTies.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیوندی ثبت نشده است'**
+  String get shNoTies;
+
+  /// No description provided for @shStoryOrder.
+  ///
+  /// In fa, this message translates to:
+  /// **'ترتیب داستان‌ها'**
+  String get shStoryOrder;
+
+  /// No description provided for @shStories.
+  ///
+  /// In fa, this message translates to:
+  /// **'داستان‌ها'**
+  String get shStories;
+
+  /// No description provided for @shRiver.
+  ///
+  /// In fa, this message translates to:
+  /// **'رود زمان'**
+  String get shRiver;
+
+  /// No description provided for @shAddPerson.
+  ///
+  /// In fa, this message translates to:
+  /// **'افزودن شخصیت'**
+  String get shAddPerson;
+
+  /// No description provided for @shRead.
+  ///
+  /// In fa, this message translates to:
+  /// **'خواندن'**
+  String get shRead;
+
+  /// No description provided for @shShowOnMap.
+  ///
+  /// In fa, this message translates to:
+  /// **'روی نقشه'**
+  String get shShowOnMap;
+
+  /// No description provided for @shOnTimeline.
+  ///
+  /// In fa, this message translates to:
+  /// **'در گاه‌شمار'**
+  String get shOnTimeline;
+
+  /// No description provided for @shAllAges.
+  ///
+  /// In fa, this message translates to:
+  /// **'همهٔ دوران‌ها'**
+  String get shAllAges;
+
+  /// No description provided for @shAllStories.
+  ///
+  /// In fa, this message translates to:
+  /// **'همهٔ داستان‌ها'**
+  String get shAllStories;
+
+  /// No description provided for @shGanjoorOnly.
+  ///
+  /// In fa, this message translates to:
+  /// **'فقط برچسب‌های گنجور'**
+  String get shGanjoorOnly;
+
+  /// No description provided for @shTilesNeedInternet.
+  ///
+  /// In fa, this message translates to:
+  /// **'نقشهٔ زمینه به اینترنت نیاز دارد'**
+  String get shTilesNeedInternet;
+
+  /// No description provided for @shMythic.
+  ///
+  /// In fa, this message translates to:
+  /// **'جای سنتی و افسانه‌ای'**
+  String get shMythic;
+
+  /// No description provided for @shApprox.
+  ///
+  /// In fa, this message translates to:
+  /// **'جای تقریبی'**
+  String get shApprox;
+
+  /// No description provided for @shStoriesHere.
+  ///
+  /// In fa, this message translates to:
+  /// **'داستان‌های این‌جا'**
+  String get shStoriesHere;
+
+  /// No description provided for @shFromGanjoor.
+  ///
+  /// In fa, this message translates to:
+  /// **'از گنجور'**
+  String get shFromGanjoor;
+
+  /// No description provided for @shAnyPersonTree.
+  ///
+  /// In fa, this message translates to:
+  /// **'تبارنامهٔ هر کس'**
+  String get shAnyPersonTree;
+
+  /// No description provided for @shSections.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} بخش'**
+  String shSections(String n);
+
+  /// No description provided for @shDataCredit.
+  ///
+  /// In fa, this message translates to:
+  /// **'نامبردگان، پیوندها و برچسب‌ها از گنجور (بسیاری پیشنهاد هوش مصنوعی و تأییدشدهٔ داوطلبان گنجور)؛ دوران‌ها، داستان‌ها، جای‌ها و نام‌های انگلیسی را هوش مصنوعی برای گنج نوشته و هنوز بازبینی نشده است.'**
+  String get shDataCredit;
+
+  /// No description provided for @shKin.
+  ///
+  /// In fa, this message translates to:
+  /// **'خویشاوندی'**
+  String get shKin;
+
+  /// No description provided for @shConflict.
+  ///
+  /// In fa, this message translates to:
+  /// **'دشمنی'**
+  String get shConflict;
+
+  /// No description provided for @shService.
+  ///
+  /// In fa, this message translates to:
+  /// **'خدمت'**
+  String get shService;
+
+  /// No description provided for @shAlliance.
+  ///
+  /// In fa, this message translates to:
+  /// **'همراهی'**
+  String get shAlliance;
+
+  /// No description provided for @shCouldNotLoad.
+  ///
+  /// In fa, this message translates to:
+  /// **'این بخش بارگیری نشد'**
+  String get shCouldNotLoad;
+
+  /// No description provided for @shNoResults.
+  ///
+  /// In fa, this message translates to:
+  /// **'کسی پیدا نشد'**
+  String get shNoResults;
+
+  /// No description provided for @shStory.
+  ///
+  /// In fa, this message translates to:
+  /// **'داستان'**
+  String get shStory;
+
+  /// No description provided for @shRoute.
+  ///
+  /// In fa, this message translates to:
+  /// **'مسیر'**
+  String get shRoute;
+
+  /// No description provided for @shRegion.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرزمین'**
+  String get shRegion;
+
+  /// No description provided for @shPeopleCount.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} نفر'**
+  String shPeopleCount(String n);
+
+  /// No description provided for @shGanjAi.
+  ///
+  /// In fa, this message translates to:
+  /// **'هوش مصنوعی · گنج'**
+  String get shGanjAi;
+
+  /// No description provided for @shGanjAiNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوشتهٔ هوش مصنوعی برای گنج؛ از گنجور نیست و هنوز بازبینی نشده است.'**
+  String get shGanjAiNote;
+
+  /// No description provided for @shReport.
+  ///
+  /// In fa, this message translates to:
+  /// **'گزارش خطا'**
+  String get shReport;
+
+  /// No description provided for @shReportWhat.
+  ///
+  /// In fa, this message translates to:
+  /// **'چه چیزی نادرست است؟'**
+  String get shReportWhat;
+
+  /// No description provided for @shAiTagsNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'برچسب‌ها را هوش مصنوعی گنجور پیشنهاد داده و داوطلبان گنجور تأیید کرده‌اند.'**
+  String get shAiTagsNote;
+
+  /// No description provided for @shReportCopied.
+  ///
+  /// In fa, this message translates to:
+  /// **'برنامهٔ ایمیلی پیدا نشد؛ متن گزارش رونوشت شد. لطفاً آن را به {email} بفرستید.'**
+  String shReportCopied(String email);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
@@ -1242,7 +1607,8 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'fa'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'fa'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;

@@ -10,6 +10,7 @@ import '../../widgets/list_tiles.dart';
 import '../../widgets/external_link.dart';
 import '../../core/text/content_en.dart';
 import '../../widgets/home_button.dart';
+import '../shahnameh/ui/shahnameh_entry.dart';
 
 class CategoryScreen extends ConsumerWidget {
   const CategoryScreen({super.key, required this.id});
@@ -39,6 +40,7 @@ class CategoryScreen extends ConsumerWidget {
                 child: Breadcrumb(crumbsFor(pc, includeSelf: false)),
               ),
             ),
+            if (isShahnamehCat(pc.cat)) const SliverToBoxAdapter(child: ShahnamehBanner()),
             if (pc.cat.description?.isNotEmpty ?? false)
               SliverToBoxAdapter(child: GoldCard(child: ExpandableText(pc.cat.description!))),
             ...catContentSlivers(pc.cat),

@@ -1,0 +1,8 @@
+{"ages":[
+ {"id":"pishdadian","fa":"پیشدادیان","en":"Pishdadians","from":0,"to":1,
+  "reigns":[{"king":1,"fa":"کیومرث","en":"Kayumars","from":0,"to":0},{"king":4,"fa":"هوشنگ","en":"Hushang","from":1,"to":1}],
+  "stories":[{"id":"kayumars","fa":"کیومرث","en":"Kayumars, the first king","sections":[0],"people":[1,2],"places":["alborz"],"summaryEn":"The first king rules from the mountains."}]},
+ {"id":"kayanian","fa":"کیانیان","en":"Kayanians","from":2,"to":2,
+  "reigns":[{"king":8,"fa":"ضحاک","en":"Zahhak","from":2,"to":2}],
+  "stories":[{"id":"zahhak","fa":"ضحاک ماردوش","en":"Zahhak","sections":[2],"people":[8],"places":["damavand","amol"]}]}
+]}

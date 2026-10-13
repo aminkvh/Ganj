@@ -17,6 +17,10 @@ import 'features/poem/poem_screen.dart';
 import 'features/poet/poet_screen.dart';
 import 'features/search/search_screen.dart';
 import 'features/settings/settings_screen.dart';
+import 'features/shahnameh/ui/hub_screen.dart';
+import 'features/shahnameh/ui/person_sheet.dart';
+import 'features/shahnameh/ui/tree_view.dart';
+import 'widgets/home_button.dart';
 import 'features/user/user_screen.dart';
 import 'l10n/l10n.dart';
 
@@ -73,6 +77,30 @@ final routerProvider = Provider<GoRouter>(
           ),
           GoRoute(path: '/library', builder: (_, _) => const LibraryScreen()),
           GoRoute(path: '/map', builder: (_, _) => const PoetsMapScreen()),
+          GoRoute(
+            path: '/shahnameh',
+            builder: (_, s) => ShahnamehHubScreen(
+              tab: s.uri.queryParameters['tab'],
+              focus: int.tryParse(s.uri.queryParameters['focus'] ?? ''),
+              section: int.tryParse(s.uri.queryParameters['section'] ?? ''),
+              place: s.uri.queryParameters['place'],
+              story: s.uri.queryParameters['story'],
+            ),
+          ),
+          GoRoute(
+            path: '/shahnameh/tree/:id',
+            builder: (_, s) => _withId(s, (id) => FamilyTreeScreen(id: id)),
+          ),
+          GoRoute(
+            path: '/shahnameh/person/:id',
+            builder: (context, s) => _withId(
+              s,
+              (id) => Scaffold(
+                appBar: AppBar(actions: const [HomeButton()]),
+                body: PersonPanel(id: id),
+              ),
+            ),
+          ),
           GoRoute(
             path: '/search',
             builder: (_, s) => SearchScreen(

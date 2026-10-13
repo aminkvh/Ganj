@@ -1,0 +1,133 @@
+{
+  "ages": [
+    {
+      "id": "pishdadian",
+      "fa": "پیشدادیان",
+      "en": "The Pishdadians",
+      "from": 0,
+      "to": 9,
+      "reigns": [
+        {"king": 1, "fa": "کیومرث", "en": "Kayumars", "from": 0, "to": 0},
+        {"king": 4, "fa": "هوشنگ", "en": "Hushang", "from": 1, "to": 1},
+        {"king": 5, "fa": "طهمورث", "en": "Tahmuras", "from": 2, "to": 2},
+        {"king": 6, "fa": "جمشید", "en": "Jamshid", "from": 3, "to": 3},
+        {"king": 8, "fa": "ضحاک", "en": "Zahhak", "from": 4, "to": 4},
+        {"king": 24, "fa": "فریدون", "en": "Fereydun", "from": 5, "to": 5},
+        {"king": 38, "fa": "منوچهر", "en": "Manuchehr", "from": 6, "to": 6},
+        {"king": 55, "fa": "نوذر", "en": "Nowzar", "from": 7, "to": 7},
+        {"king": 80, "fa": "زو طهماسپ", "en": "Zav", "from": 8, "to": 8},
+        {"king": 81, "fa": "گرشاسپ", "en": "Garshasp", "from": 9, "to": 9}
+      ],
+      "stories": [
+        {"id": "kayumars", "fa": "کیومرث، نخستین شاه", "en": "Kayumars, the first king", "sections": [0], "people": [1, 2, 4, 11, 12], "places": ["alborz"], "summaryEn": "The first king lives among the mountains in leopard skins; his son Siamak falls to the demon's son, and Hushang avenges him."},
+        {"id": "hushang-fire", "fa": "هوشنگ و پیدایش آتش", "en": "Hushang finds fire", "sections": [1], "people": [4], "places": [], "summaryEn": "Hushang hurls a stone at a serpent, strikes a spark from the rock and discovers fire; the feast of Sadeh is founded."},
+        {"id": "tahmuras", "fa": "طهمورث دیوبند", "en": "Tahmuras, binder of demons", "sections": [2], "people": [5], "places": [], "summaryEn": "Tahmuras rides Ahriman like a horse and binds the demons, who buy their lives by teaching him to write."},
+        {"id": "jamshid", "fa": "جمشید و فرّ ایزدی", "en": "Jamshid and the divine glory", "sections": [3], "people": [6, 8], "places": [], "summaryEn": "Jamshid's golden age of crafts and Nowruz ends in pride; the divine glory leaves him and Zahhak takes his throne."},
+        {"id": "zahhak", "fa": "ضحاک ماردوش و کاوهٔ آهنگر", "en": "Zahhak the serpent-shouldered and Kaveh the smith", "sections": [4], "people": [8, 15, 26, 24, 23], "places": ["jerusalem", "arvand", "damavand"], "summaryEn": "Serpents fed on young men's brains grow from Zahhak's shoulders; Kaveh raises his leather apron as a banner, and Fereydun binds the tyrant on Mount Damavand."},
+        {"id": "fereydun-sons", "fa": "فریدون و سه پسر", "en": "Fereydun and his three sons", "sections": [5], "people": [24, 32, 33, 34, 38], "places": ["tamisheh", "yemen", "rum", "chin"], "summaryEn": "Fereydun divides the world: Rum to Salm, Turan and Chin to Tur, Iran to Iraj. The elder brothers murder Iraj, and the feud of Iran and Turan begins."},
+        {"id": "zal-rudabeh", "fa": "زال و رودابه", "en": "Zal and Rudabeh", "sections": [6], "people": [48, 54, 53, 58, 56, 57, 38, 60], "places": ["alborz", "zabol", "kabul"], "summaryEn": "Abandoned white-haired child Zal is raised by the Simorgh, loves Rudabeh of Kabul against every objection, and their son Rostam is born."},
+        {"id": "nowzar", "fa": "نوذر و یورش افراسیاب", "en": "Nowzar and Afrasiab's invasion", "sections": [7], "people": [55, 62, 61, 70, 42], "places": ["dehestan"], "summaryEn": "Afrasiab of Turan invades, captures Nowzar and beheads him; his own brother Aghriras is killed for sparing the Iranian captives."},
+        {"id": "rakhsh", "fa": "رستم و رخش", "en": "Rostam chooses Rakhsh", "sections": [9], "people": [60, 54, 82], "places": ["zabol"], "summaryEn": "Young Rostam picks the colt Rakhsh from the herds of Zabol and rides out against Afrasiab."}
+      ]
+    },
+    {
+      "id": "kayanian",
+      "fa": "کیانیان",
+      "en": "The Kayanians",
+      "from": 10,
+      "to": 31,
+      "reigns": [
+        {"king": 83, "fa": "کیقباد", "en": "Kay Qobad", "from": 10, "to": 10},
+        {"king": 85, "fa": "کی‌کاووس", "en": "Kay Kavus", "from": 11, "to": 14},
+        {"king": 153, "fa": "کیخسرو", "en": "Kay Khosrow", "from": 15, "to": 22},
+        {"king": 176, "fa": "لهراسپ", "en": "Lohrasp", "from": 23, "to": 23},
+        {"king": 177, "fa": "گشتاسپ", "en": "Goshtasp", "from": 24, "to": 27},
+        {"king": 221, "fa": "بهمن", "en": "Bahman", "from": 28, "to": 28},
+        {"fa": "همای چهرزاد", "en": "Homay Chehrzad", "from": 29, "to": 29},
+        {"king": 242, "fa": "داراب", "en": "Darab", "from": 30, "to": 30},
+        {"king": 247, "fa": "دارا", "en": "Dara", "from": 31, "to": 31}
+      ],
+      "stories": [
+        {"id": "kay-qobad", "fa": "آوردن کیقباد از البرز", "en": "Kay Qobad brought from the Alborz", "sections": [10], "people": [83, 60], "places": ["alborz"], "summaryEn": "Rostam fetches Kay Qobad from the Alborz mountains to the empty throne, founding the Kayanian line."},
+        {"id": "haftkhan-rostam", "fa": "هفت‌خوان رستم", "en": "The seven labours of Rostam", "sections": [11], "people": [60, 85, 82, 102, 103, 100], "places": ["zabol", "lut", "mazandaran", "white-div-cave"], "summaryEn": "Kay Kavus is blinded and captured in Mazandaran; Rostam rides through seven trials, kills the White Div and heals the king's eyes with its blood."},
+        {"id": "hamavaran", "fa": "کاووس در هاماوران", "en": "Kavus in Hamavaran", "sections": [12], "people": [85, 116, 115, 60], "places": ["hamavaran"], "summaryEn": "Kavus marries Sudabeh, daughter of the king of Hamavaran, is imprisoned by her father, freed by Rostam, and later tries to fly to the heavens."},
+        {"id": "sohrab", "fa": "رستم و سهراب", "en": "Rostam and Sohrab", "sections": [13], "people": [60, 128, 129, 133, 132], "places": ["samangan", "white-fortress"], "summaryEn": "A night in Samangan gives Rostam a son he never meets; years later, neither knowing the other, Rostam kills Sohrab in single combat."},
+        {"id": "siavash", "fa": "داستان سیاوش", "en": "The tale of Siavash", "sections": [14], "people": [121, 116, 85, 62, 125, 67, 149, 147], "places": ["balkh", "jeyhun", "siavashgerd", "gang-dezh"], "summaryEn": "Siavash rides through fire to prove his innocence, crosses into Turan, builds Siavashgerd, and is murdered on Afrasiab's order."},
+        {"id": "kay-khosrow-return", "fa": "بازآوردن کیخسرو", "en": "Giv brings Kay Khosrow home", "sections": [15], "people": [153, 95, 149], "places": ["jeyhun"], "summaryEn": "After seven years of searching Turan, Giv finds Siavash's son and brings him and Farangis back across the Jeyhun."},
+        {"id": "farud", "fa": "فرود سیاوش", "en": "Farud, son of Siavash", "sections": [16], "people": [150, 73, 147, 165], "places": ["kalat"], "summaryEn": "Tus disobeys the king and marches past Kalat, where Kay Khosrow's half-brother Farud is killed and his mother Jarireh dies with him."},
+        {"id": "kamus", "fa": "کاموس کشانی", "en": "Kamus of Kashan", "sections": [17], "people": [167, 60, 125, 132], "places": ["hamavan"], "summaryEn": "The Iranian army is trapped on Mount Hamavan until Rostam arrives and lassos the giant Kamus."},
+        {"id": "khaqan", "fa": "خاقان چین", "en": "The Khaqan of Chin", "sections": [18], "people": [168, 60, 125], "places": ["hamavan", "chin"], "summaryEn": "Rostam defeats the allied armies of Turan and the Khaqan of Chin and drags the Khaqan from his white elephant."},
+        {"id": "akvan", "fa": "اکوان دیو", "en": "Akvan the demon", "sections": [19], "people": [170, 60], "places": [], "summaryEn": "A demon in the shape of a wild ass lifts the sleeping Rostam and asks whether to drop him on the mountains or the sea."},
+        {"id": "bijan-manijeh", "fa": "بیژن و منیژه", "en": "Bijan and Manijeh", "sections": [20], "people": [165, 547, 96, 62, 60], "places": ["arman", "bijan-pit"], "summaryEn": "Betrayed by Gorgin, Bijan falls in love with Afrasiab's daughter Manijeh and is thrown into a pit under a boulder; Rostam comes disguised as a merchant to free him."},
+        {"id": "twelve-rooks", "fa": "دوازده رخ", "en": "The twelve champions", "sections": [21], "people": [94, 125, 95, 165, 132], "places": ["gonabad"], "summaryEn": "Twelve champions of Iran meet twelve of Turan in single combat at Mount Gonabad; old Goudarz kills Piran."},
+        {"id": "great-war", "fa": "جنگ بزرگ کیخسرو", "en": "Kay Khosrow's great war", "sections": [22], "people": [153, 62, 67, 60], "places": ["kharazm", "gang-dezh", "chichast", "afrasiab-cave"], "summaryEn": "Kay Khosrow takes Gang Dezh, hunts Afrasiab to a cave and the lake of Chichast, avenges Siavash, then gives up the throne and vanishes into the snow."},
+        {"id": "goshtasp-rum", "fa": "گشتاسپ در روم", "en": "Goshtasp in Rum", "sections": [23], "people": [176, 177, 183, 120], "places": ["balkh", "rum"], "summaryEn": "Angry with his father Lohrasp, Goshtasp goes to Rum, wins Caesar's daughter Katayun and returns to rule from Balkh."},
+        {"id": "zoroaster", "fa": "زردشت و جنگ ارجاسپ", "en": "Zoroaster and the war with Arjasp", "sections": [24], "people": [177, 202, 178, 66, 198, 205, 203], "places": ["balkh"], "summaryEn": "Goshtasp accepts the faith of Zoroaster; Arjasp of Turan makes war, Zarir falls, and Esfandiyar turns the battle."},
+        {"id": "haftkhan-esfandiyar", "fa": "هفت‌خوان اسفندیار", "en": "The seven labours of Esfandiyar", "sections": [25], "people": [198, 66, 199], "places": ["balkh", "ruin-dezh"], "summaryEn": "To free his sisters, Esfandiyar passes seven trials and takes Arjasp's Brazen Fortress."},
+        {"id": "rostam-esfandiyar", "fa": "رستم و اسفندیار", "en": "Rostam and Esfandiyar", "sections": [26], "people": [60, 198, 54, 53, 177, 199], "places": ["zabol"], "summaryEn": "Sent to bring Rostam in chains, the invulnerable Esfandiyar is killed by a tamarisk arrow to the eyes, shot on the Simorgh's advice."},
+        {"id": "shaghad", "fa": "رستم و شغاد", "en": "The death of Rostam", "sections": [27], "people": [60, 237, 238, 82, 54], "places": ["kabul"], "summaryEn": "His half-brother Shaghad lures Rostam into a pit of spears; dying, Rostam pins him to a tree with one last arrow."},
+        {"id": "bahman-homay", "fa": "بهمن و همای", "en": "Bahman and Homay", "sections": [28, 29], "people": [221], "places": ["zabol"], "summaryEn": "Bahman takes revenge on Rostam's house in Zabol; his daughter Homay sets her infant son Darab adrift in a box on the river."},
+        {"id": "darab-dara", "fa": "داراب و دارا", "en": "Darab and Dara", "sections": [30, 31], "people": [242, 247, 248, 251], "places": ["rum", "istakhr"], "summaryEn": "Darab, raised by a washerman, regains his crown and marries a princess of Rum; their son Dara faces Alexander."}
+      ]
+    },
+    {
+      "id": "ashkanian",
+      "fa": "اسکندر و اشکانیان",
+      "en": "Alexander and the Ashkanians",
+      "from": 32,
+      "to": 33,
+      "reigns": [
+        {"king": 250, "fa": "اسکندر", "en": "Alexander", "from": 32, "to": 32},
+        {"fa": "اشکانیان", "en": "The Ashkanian kings", "from": 33, "to": 33}
+      ],
+      "stories": [
+        {"id": "alexander", "fa": "پادشاهی اسکندر", "en": "The reign of Alexander", "sections": [32], "people": [250, 247], "places": ["istakhr", "kanauj", "mecca", "egypt", "andalus", "darkness", "babylon"], "summaryEn": "Alexander defeats Dara, then travels the world from India to Mecca, Andalus and the Land of Darkness in search of the water of life, and dies in Babylon."},
+        {"id": "ardashir", "fa": "اردشیر بابکان", "en": "The rise of Ardashir", "sections": [33, 34], "people": [377, 291, 292, 294, 298, 375], "places": ["istakhr", "kerman"], "summaryEn": "Ardashir flees Ardavan's court with Golnar, overthrows the last Ashkanian, kills the worm of Haftvad and founds the Sasanian line."}
+      ]
+    },
+    {
+      "id": "sasanian",
+      "fa": "ساسانیان",
+      "en": "The Sasanians",
+      "from": 34,
+      "to": 59,
+      "reigns": [
+        {"king": 377, "fa": "اردشیر", "en": "Ardashir", "from": 34, "to": 34},
+        {"fa": "شاپور", "en": "Shapur", "from": 35, "to": 35},
+        {"fa": "اورمزد", "en": "Ormazd", "from": 36, "to": 36},
+        {"fa": "بهرام اورمزد", "en": "Bahram son of Ormazd", "from": 37, "to": 37},
+        {"fa": "بهرام بهرام", "en": "Bahram son of Bahram", "from": 38, "to": 38},
+        {"fa": "بهرام بهرامیان", "en": "Bahram Bahramian", "from": 39, "to": 39},
+        {"fa": "نرسی", "en": "Narsi", "from": 40, "to": 40},
+        {"king": 379, "fa": "اورمزد نرسی", "en": "Ormazd son of Narsi", "from": 41, "to": 41},
+        {"fa": "شاپور ذوالاکتاف", "en": "Shapur of the Shoulders", "from": 42, "to": 42},
+        {"fa": "اردشیر نکوکار", "en": "Ardashir the Good", "from": 43, "to": 43},
+        {"fa": "شاپور سوم", "en": "Shapur III", "from": 44, "to": 44},
+        {"fa": "بهرام شاپور", "en": "Bahram son of Shapur", "from": 45, "to": 45},
+        {"king": 323, "fa": "یزدگرد بزه‌گر", "en": "Yazdgerd the Sinner", "from": 46, "to": 46},
+        {"king": 344, "fa": "بهرام گور", "en": "Bahram Gur", "from": 47, "to": 47},
+        {"fa": "یزدگرد", "en": "Yazdgerd II", "from": 48, "to": 48},
+        {"king": 627, "fa": "قباد", "en": "Qobad", "from": 49, "to": 49},
+        {"king": 405, "fa": "کسری نوشین‌روان", "en": "Khosrow Anushirvan", "from": 50, "to": 50},
+        {"king": 417, "fa": "هرمزد", "en": "Hormozd", "from": 51, "to": 51},
+        {"king": 469, "fa": "خسرو پرویز", "en": "Khosrow Parviz", "from": 52, "to": 52},
+        {"king": 479, "fa": "شیرویه", "en": "Shiruy", "from": 53, "to": 53},
+        {"fa": "اردشیر شیروی", "en": "Ardashir son of Shiruy", "from": 54, "to": 54},
+        {"fa": "فرایین", "en": "Farayin", "from": 55, "to": 55},
+        {"king": 487, "fa": "پوران‌دخت", "en": "Purandokht", "from": 56, "to": 56},
+        {"king": 488, "fa": "آزرم‌دخت", "en": "Azarmdokht", "from": 57, "to": 57},
+        {"fa": "فرخ‌زاد", "en": "Farrokhzad", "from": 58, "to": 58},
+        {"king": 691, "fa": "یزدگرد سوم", "en": "Yazdgerd III", "from": 59, "to": 59}
+      ],
+      "stories": [
+        {"id": "shapur-rum", "fa": "شاپور ذوالاکتاف در روم", "en": "Shapur captive in Rum", "sections": [42], "people": [], "places": ["rum", "ctesiphon"], "summaryEn": "Shapur goes to Rum in disguise, is sewn into an ass's hide by Caesar, escapes with a Roman girl's help and wins back his land."},
+        {"id": "bahram-gur", "fa": "بهرام گور", "en": "Bahram Gur", "sections": [46, 47], "people": [344, 323, 326, 389], "places": ["hira", "ctesiphon", "kanauj"], "summaryEn": "Raised by the Arabs of Hira, Bahram Gur takes the crown from between two lions, hunts, feasts, and visits Shangul's court in India in disguise."},
+        {"id": "mazdak", "fa": "قباد و مزدک", "en": "Qobad and Mazdak", "sections": [49], "people": [627, 406, 405], "places": ["ctesiphon"], "summaryEn": "Mazdak preaches the sharing of wealth and wins King Qobad; the young prince Khosrow destroys him and his followers."},
+        {"id": "anushirvan", "fa": "کسری نوشین‌روان", "en": "Khosrow Anushirvan", "sections": [50], "people": [405], "places": ["ctesiphon", "kanauj"], "summaryEn": "The just king's long reign: wars with Rum, the sage Bozorgmehr, and the games of chess from India and backgammon in reply."},
+        {"id": "bahram-chubineh", "fa": "بهرام چوبینه", "en": "Bahram Chubineh", "sections": [51, 52], "people": [418, 417, 469, 464, 195, 410], "places": ["herat", "rey", "ctesiphon", "rum"], "summaryEn": "The general Bahram Chubineh crushes Saveh Shah, is insulted by Hormozd, rebels, and drives Khosrow Parviz to seek help from Rum."},
+        {"id": "khosrow-shirin", "fa": "خسرو و شیرین", "en": "Khosrow and Shirin", "sections": [52, 53], "people": [469, 470, 479], "places": ["ctesiphon"], "summaryEn": "Khosrow Parviz brings Shirin to his palace; his son Shiruy kills him, and Shirin takes her life at his tomb."},
+        {"id": "fall", "fa": "یزدگرد و پایان ساسانیان", "en": "Yazdgerd and the fall of the Sasanians", "sections": [59], "people": [691, 492], "places": ["qadisiyyah", "marv"], "summaryEn": "The Iranian army falls at Qadisiyyah; Yazdgerd flees east and is murdered in a mill near Marv."}
+      ]
+    }
+  ]
+}

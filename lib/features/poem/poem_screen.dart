@@ -21,6 +21,8 @@ import '../settings/settings_controller.dart';
 import 'couplets.dart';
 import 'widgets/beyt_view.dart';
 import 'widgets/extras_panels.dart';
+import '../shahnameh/ui/reader_chips.dart';
+import '../shahnameh/ui/shahnameh_entry.dart' show isShahnamehCat;
 import '../../l10n/l10n.dart';
 import '../../widgets/external_link.dart';
 import '../translate/ensure_model.dart';
@@ -489,6 +491,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                         ],
                       ),
                     ),
+                  if (p.category case final c? when isShahnamehCat(c.cat)) ShahnamehPeopleChips(poemId: p.id),
                   if (p.summary != null)
                     GoldCard(
                       color: c.inner,
