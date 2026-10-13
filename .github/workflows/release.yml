@@ -40,6 +40,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
+      - name: Latest Shahnameh data
+        # The newest data published by the shahnameh-data workflow; the committed copy otherwise.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download shahnameh-data -R "$GITHUB_REPOSITORY" -p shahnameh.json.gz -O data.json.gz &&
+            gunzip -c data.json.gz > data.json; then
+            mv data.json assets/seed/shahnameh/generated.json
+          else
+            echo "Keeping the committed Shahnameh data"
+          fi
+          rm -f data.json.gz data.json
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
       - uses: subosito/flutter-action@v2
@@ -75,6 +88,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
+      - name: Latest Shahnameh data
+        # The newest data published by the shahnameh-data workflow; the committed copy otherwise.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download shahnameh-data -R "$GITHUB_REPOSITORY" -p shahnameh.json.gz -O data.json.gz &&
+            gunzip -c data.json.gz > data.json; then
+            mv data.json assets/seed/shahnameh/generated.json
+          else
+            echo "Keeping the committed Shahnameh data"
+          fi
+          rm -f data.json.gz data.json
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
       - run: flutter build windows --release
@@ -101,6 +127,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
+      - name: Latest Shahnameh data
+        # The newest data published by the shahnameh-data workflow; the committed copy otherwise.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download shahnameh-data -R "$GITHUB_REPOSITORY" -p shahnameh.json.gz -O data.json.gz &&
+            gunzip -c data.json.gz > data.json; then
+            mv data.json assets/seed/shahnameh/generated.json
+          else
+            echo "Keeping the committed Shahnameh data"
+          fi
+          rm -f data.json.gz data.json
       - run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libmpv-dev
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
@@ -119,6 +158,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
+      - name: Latest Shahnameh data
+        # The newest data published by the shahnameh-data workflow; the committed copy otherwise.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download shahnameh-data -R "$GITHUB_REPOSITORY" -p shahnameh.json.gz -O data.json.gz &&
+            gunzip -c data.json.gz > data.json; then
+            mv data.json assets/seed/shahnameh/generated.json
+          else
+            echo "Keeping the committed Shahnameh data"
+          fi
+          rm -f data.json.gz data.json
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
       - run: flutter build macos --release
@@ -135,6 +187,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: '${{ env.TAG }}' }
+      - name: Latest Shahnameh data
+        # The newest data published by the shahnameh-data workflow; the committed copy otherwise.
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download shahnameh-data -R "$GITHUB_REPOSITORY" -p shahnameh.json.gz -O data.json.gz &&
+            gunzip -c data.json.gz > data.json; then
+            mv data.json assets/seed/shahnameh/generated.json
+          else
+            echo "Keeping the committed Shahnameh data"
+          fi
+          rm -f data.json.gz data.json
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
       - run: flutter build ios --release --no-codesign

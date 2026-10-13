@@ -127,17 +127,27 @@ class ShCredit extends StatelessWidget {
 /// Where in the book a person appears: 60 slots in story order, tinted by age; passing
 /// mentions faint. Runs right to left in the Persian interface, like the book.
 class PresenceBar extends StatelessWidget {
-  const PresenceBar({super.key, required this.world, required this.person, this.height = 6, this.onTapSection});
+  const PresenceBar({
+    super.key,
+    required this.world,
+    required this.person,
+    this.height = 6,
+    this.onTapSection,
+    this.present,
+  });
 
   final ShWorld world;
   final int person;
+
+  /// Where the person appears, when known fresher than the bundled data.
+  final List<int>? present;
   final double height;
   final ValueChanged<int>? onTapSection;
 
   @override
   Widget build(BuildContext context) {
     final n = world.sections.length;
-    final present = world.presence[person] ?? const [];
+    final present = this.present ?? world.presence[person] ?? const [];
     final passing = world.passing[person] ?? const [];
     final tints = [for (var i = 0; i < world.ages.length; i++) ageTint(context, i)];
     final rtl = Directionality.of(context) == TextDirection.rtl;

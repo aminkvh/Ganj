@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/features/shahnameh/data/force_layout.dart';
 import 'package:ganj/features/shahnameh/data/relation_kinds.dart';
@@ -61,5 +63,28 @@ void main() {
     final g = neighbourhood(w, 999999);
     expect(g.ids, [999999]);
     expect(forceLayout(g, center: 999999), {999999: (0.0, 0.0)});
+  });
+
+  test('the whole network, scaled for its canvas, stays inside it', () {
+    final g = neighbourhood(w, null);
+    final pos = forceLayout(g);
+    const side = 1000.0;
+    final k = canvasScale(pos, side);
+    for (final p in pos.values) {
+      expect(p.$1.abs() * k, lessThanOrEqualTo(side * 0.45 + 1e-6));
+      expect(p.$2.abs() * k, lessThanOrEqualTo(side * 0.45 + 1e-6));
+    }
+  });
+
+  test('small detached groups sit near the main network, not far away', () {
+    final g = neighbourhood(w, null);
+    final pos = forceLayout(g);
+    final r = [for (final p in pos.values) math.sqrt(p.$1 * p.$1 + p.$2 * p.$2)]..sort();
+    final typical = r[(r.length * 0.9).floor()];
+    expect(
+      r.last,
+      lessThanOrEqualTo(typical * 1.7),
+      reason: 'the farthest person is not off on their own (was over 4x)',
+    );
   });
 }

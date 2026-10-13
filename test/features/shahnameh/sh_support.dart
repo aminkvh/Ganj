@@ -42,9 +42,7 @@ List<Override> shOverrides({FakeAdapter? adapter, ShWorld? world, bool brokenWor
         '/api/locations': '[]',
       });
   return [
-    shahnamehWorldProvider.overrideWith(
-      (ref) async => brokenWorld ? throw const FormatException('broken bundle') : (world ?? realWorld),
-    ),
+    shahnamehWorldProvider.overrideWith(() => _FixedWorld(brokenWorld ? null : (world ?? realWorld))),
     ganjoorApiProvider.overrideWithValue(
       GanjoorApi(
         dio: createDio(adapter: a),
@@ -101,4 +99,14 @@ Future<Finder> revealPin(WidgetTester tester, String id) async {
     await settle(tester);
   }
   return pin;
+}
+
+/// A world that is simply there (or broken), without the bundle or the published data.
+class _FixedWorld extends ShahnamehWorldNotifier {
+  _FixedWorld(this.world);
+
+  final ShWorld? world;
+
+  @override
+  Future<ShWorld> build() async => world ?? (throw const FormatException('broken bundle'));
 }

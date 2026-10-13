@@ -833,4 +833,71 @@ class L10nEn extends L10n {
   String shReportCopied(String email) {
     return 'No email app found — the report was copied. Please send it to $email.';
   }
+
+  @override
+  String get shHide => 'Hide';
+
+  @override
+  String get shFocusHere => 'Focus here';
+
+  @override
+  String get shOpen => 'Open';
+
+  @override
+  String get shZoomIn => 'Zoom in';
+
+  @override
+  String get shZoomOut => 'Zoom out';
+
+  @override
+  String get shShowAll => 'Show all';
+
+  @override
+  String get shHidden => 'Hidden';
+
+  @override
+  String get shExpand => 'Show branch';
+
+  @override
+  String get shCollapse => 'Hide branch';
+
+  @override
+  String shTiesCount(String n) {
+    return '$n ties';
+  }
+
+  @override
+  String get shLegend => 'Legend';
+
+  @override
+  String get shLegendParent => 'Parent and child';
+
+  @override
+  String get shLegendAncestor => 'Ancestor, several generations apart';
+
+  @override
+  String get shLegendSpouse => 'Spouses';
+
+  @override
+  String get shLegendSibling => 'Siblings whose parents are unknown';
+
+  @override
+  String get shLegendRoot => 'The person this tree is about';
+
+  @override
+  String get shLegendAges => 'Box colour: the age they first appear in';
+
+  @override
+  String get shLegendBranch =>
+      'Folded (+) or open (−) branch; tap to fold or open';
+
+  @override
+  String get shLegendFocus => 'The person the network is centred on';
+
+  @override
+  String get shLegendSize => 'Bigger circle: a greater figure';
+
+  @override
+  String get shLegendLines =>
+      'Solid: kin and conflict; dashed: service; dotted: alliance';
 }

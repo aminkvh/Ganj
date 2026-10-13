@@ -1596,6 +1596,132 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'برنامهٔ ایمیلی پیدا نشد؛ متن گزارش رونوشت شد. لطفاً آن را به {email} بفرستید.'**
   String shReportCopied(String email);
+
+  /// No description provided for @shHide.
+  ///
+  /// In fa, this message translates to:
+  /// **'پنهان کردن'**
+  String get shHide;
+
+  /// No description provided for @shFocusHere.
+  ///
+  /// In fa, this message translates to:
+  /// **'مرکز شبکه شود'**
+  String get shFocusHere;
+
+  /// No description provided for @shOpen.
+  ///
+  /// In fa, this message translates to:
+  /// **'باز کردن'**
+  String get shOpen;
+
+  /// No description provided for @shZoomIn.
+  ///
+  /// In fa, this message translates to:
+  /// **'بزرگ‌نمایی'**
+  String get shZoomIn;
+
+  /// No description provided for @shZoomOut.
+  ///
+  /// In fa, this message translates to:
+  /// **'کوچک‌نمایی'**
+  String get shZoomOut;
+
+  /// No description provided for @shShowAll.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمایش همه'**
+  String get shShowAll;
+
+  /// No description provided for @shHidden.
+  ///
+  /// In fa, this message translates to:
+  /// **'پنهان‌شده‌ها'**
+  String get shHidden;
+
+  /// No description provided for @shExpand.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمایش شاخه'**
+  String get shExpand;
+
+  /// No description provided for @shCollapse.
+  ///
+  /// In fa, this message translates to:
+  /// **'بستن شاخه'**
+  String get shCollapse;
+
+  /// No description provided for @shTiesCount.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} پیوند'**
+  String shTiesCount(String n);
+
+  /// No description provided for @shLegend.
+  ///
+  /// In fa, this message translates to:
+  /// **'راهنما'**
+  String get shLegend;
+
+  /// No description provided for @shLegendParent.
+  ///
+  /// In fa, this message translates to:
+  /// **'پدر یا مادر و فرزند'**
+  String get shLegendParent;
+
+  /// No description provided for @shLegendAncestor.
+  ///
+  /// In fa, this message translates to:
+  /// **'نیا و نواده، با چند نسل فاصله'**
+  String get shLegendAncestor;
+
+  /// No description provided for @shLegendSpouse.
+  ///
+  /// In fa, this message translates to:
+  /// **'همسران'**
+  String get shLegendSpouse;
+
+  /// No description provided for @shLegendSibling.
+  ///
+  /// In fa, this message translates to:
+  /// **'خواهر و برادر، بی‌پدر و مادرِ شناخته'**
+  String get shLegendSibling;
+
+  /// No description provided for @shLegendRoot.
+  ///
+  /// In fa, this message translates to:
+  /// **'کسی که تبارنامه‌اش را می‌بینید'**
+  String get shLegendRoot;
+
+  /// No description provided for @shLegendAges.
+  ///
+  /// In fa, this message translates to:
+  /// **'رنگ قاب: دورانی که نخستین بار در آن می‌آید'**
+  String get shLegendAges;
+
+  /// No description provided for @shLegendBranch.
+  ///
+  /// In fa, this message translates to:
+  /// **'شاخهٔ بسته (+) یا باز (−)؛ برای باز و بسته کردن بزنید'**
+  String get shLegendBranch;
+
+  /// No description provided for @shLegendFocus.
+  ///
+  /// In fa, this message translates to:
+  /// **'کسی که شبکه بر گرد او است'**
+  String get shLegendFocus;
+
+  /// No description provided for @shLegendSize.
+  ///
+  /// In fa, this message translates to:
+  /// **'گوی بزرگ‌تر: نامدارتر'**
+  String get shLegendSize;
+
+  /// No description provided for @shLegendLines.
+  ///
+  /// In fa, this message translates to:
+  /// **'خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی'**
+  String get shLegendLines;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

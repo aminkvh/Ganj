@@ -8,6 +8,29 @@
 
 ## What's new · تازه‌ها
 
+### 1.2.1
+- World of the Shahnameh, easier to explore:
+  - **Zoom controls** (+, −, show all) on the people network and the family trees.
+  - **Compact family trees** whose branches open and fold with +/−.
+  - **The network:** hide people, add anyone by search, and the whole network fits on screen.
+  - **A legend** (راهنما) explains every line and colour.
+  - **Smoother** panning and zooming.
+- **Hover cards:** on Windows, Linux and macOS, resting the mouse on a person shows who they are.
+- **Always current:** the Shahnameh's people data now refreshes from Ganjoor every two weeks without a new app release, and opening a person or a poem fetches Ganjoor's latest tags.
+
+<div dir="rtl">
+
+- گشت‌وگذار آسان‌تر در جهان شاهنامه:
+  - **ابزار بزرگ‌نمایی** (+، −، نمایش همه) در شبکهٔ نامبردگان و تبارنامه‌ها.
+  - **تبارنامه‌های فشرده** که شاخه‌هایشان با +/− باز و بسته می‌شوند.
+  - **شبکه:** پنهان کردن کسان، افزودن هر کس با جستجو، و جا شدن همهٔ شبکه در صفحه.
+  - **راهنما** برای همهٔ خط‌ها و رنگ‌ها.
+  - جابه‌جایی و بزرگ‌نمایی **روان‌تر**.
+- **کارت معرفی:** در ویندوز، لینوکس و مک، نگه داشتن نشانگر روی هر کس، او را معرفی می‌کند.
+- **همیشه به‌روز:** داده‌های نامبردگان شاهنامه هر دو هفته از گنجور تازه می‌شود، بی‌نیاز به نسخهٔ تازهٔ برنامه؛ با باز کردن هر کس یا هر شعر نیز تازه‌ترین برچسب‌های گنجور گرفته می‌شود.
+
+</div>
+
 ### 1.2
 - **World of the Shahnameh**: a new section for Ferdowsi's Shahnameh, opened from its pages or the home menu, and
   usable offline.

@@ -103,5 +103,58 @@ Map<int, (double, double)> forceLayout(NetGraph g, {int? center, int iterations 
     }
     t *= 0.985;
   }
+  _gatherDetached(n, links, xs, ys);
   return {for (final (i, id) in g.ids.indexed) id: (xs[i], ys[i])};
+}
+
+/// Groups not tied to the main network drift far out in a force layout and squeeze it when the
+/// view fits everything: bring each one in to sit just outside the main group, same direction.
+void _gatherDetached(int n, List<(int, int)> links, List<double> xs, List<double> ys) {
+  final group = List<int>.filled(n, -1);
+  final next = <int, List<int>>{};
+  for (final (a, b) in links) {
+    next.putIfAbsent(a, () => []).add(b);
+    next.putIfAbsent(b, () => []).add(a);
+  }
+  final groups = <List<int>>[];
+  for (var i = 0; i < n; i++) {
+    if (group[i] >= 0) continue;
+    final members = <int>[i];
+    group[i] = groups.length;
+    for (var k = 0; k < members.length; k++) {
+      for (final o in next[members[k]] ?? const <int>[]) {
+        if (group[o] < 0) {
+          group[o] = groups.length;
+          members.add(o);
+        }
+      }
+    }
+    groups.add(members);
+  }
+  if (groups.length < 2) return;
+  groups.sort((a, b) => b.length.compareTo(a.length));
+  final main = groups.first;
+  final cx = main.map((i) => xs[i]).reduce((a, b) => a + b) / main.length;
+  final cy = main.map((i) => ys[i]).reduce((a, b) => a + b) / main.length;
+  final radii = [for (final i in main) math.sqrt(math.pow(xs[i] - cx, 2) + math.pow(ys[i] - cy, 2))]..sort();
+  final rim = radii[(radii.length * 0.9).floor().clamp(0, radii.length - 1)] * 1.1 + 0.05;
+  for (final members in groups.skip(1)) {
+    final gx = members.map((i) => xs[i]).reduce((a, b) => a + b) / members.length;
+    final gy = members.map((i) => ys[i]).reduce((a, b) => a + b) / members.length;
+    final d = math.sqrt(math.pow(gx - cx, 2) + math.pow(gy - cy, 2));
+    if (d <= rim) continue;
+    final f = rim / d;
+    final dx = cx + (gx - cx) * f - gx, dy = cy + (gy - cy) * f - gy;
+    for (final i in members) {
+      xs[i] += dx;
+      ys[i] += dy;
+    }
+  }
+}
+
+/// Pixels per layout unit so every position fits within 45% of [side] from the middle — a
+/// few people settle far out, and "show all" must show them too.
+double canvasScale(Map<int, (double, double)> pos, double side) {
+  final extent = pos.values.fold(0.5, (m, p) => math.max(m, math.max(p.$1.abs(), p.$2.abs())));
+  return side * 0.45 / extent;
 }

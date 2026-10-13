@@ -11,6 +11,12 @@ class HttpCache {
   final AppDb _db;
   final DateTime Function() _clock;
 
+  /// The saved body for [key], however old, without touching the network (null if none).
+  Future<String?> peek(String key) async {
+    final row = await (_db.select(_db.apiCache)..where((t) => t.key.equals(key))).getSingleOrNull();
+    return row == null ? null : utf8.decode(gzip.decode(row.body));
+  }
+
   /// Fresh hit → cached body. Otherwise [network] (stored on success);
   /// if that throws, a stale body is returned, else the error is rethrown.
   Future<String> fetch(String key, Duration ttl, Future<String> Function() network) async {

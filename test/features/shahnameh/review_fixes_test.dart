@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ganj/core/text/content_en.dart';
 import 'package:ganj/core/text/persian_normalize.dart';
 import 'package:ganj/features/poem/poem_screen.dart';
+import 'package:ganj/features/shahnameh/data/models.dart';
 import 'package:ganj/features/shahnameh/data/shahnameh_providers.dart';
 import 'package:ganj/features/shahnameh/ui/timeline_river.dart';
 import 'package:ganj/features/shahnameh/ui/timeline_vertical.dart';
@@ -122,14 +123,23 @@ void main() {
         repo: FixtureRepository(),
         overrides: [
           ...shOverrides(),
-          shahnamehWorldProvider.overrideWith((ref) async {
-            loads++;
-            return realWorld;
-          }),
+          shahnamehWorldProvider.overrideWith(() => _CountingWorld(() => loads++)),
         ].skip(1).toList(),
       ),
     );
     await settle(tester);
     expect(loads, 0);
   });
+}
+
+class _CountingWorld extends ShahnamehWorldNotifier {
+  _CountingWorld(this.onLoad);
+
+  final void Function() onLoad;
+
+  @override
+  Future<ShWorld> build() async {
+    onLoad();
+    return realWorld;
+  }
 }

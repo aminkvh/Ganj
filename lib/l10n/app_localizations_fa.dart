@@ -830,4 +830,71 @@ class L10nFa extends L10n {
   String shReportCopied(String email) {
     return 'برنامهٔ ایمیلی پیدا نشد؛ متن گزارش رونوشت شد. لطفاً آن را به $email بفرستید.';
   }
+
+  @override
+  String get shHide => 'پنهان کردن';
+
+  @override
+  String get shFocusHere => 'مرکز شبکه شود';
+
+  @override
+  String get shOpen => 'باز کردن';
+
+  @override
+  String get shZoomIn => 'بزرگ‌نمایی';
+
+  @override
+  String get shZoomOut => 'کوچک‌نمایی';
+
+  @override
+  String get shShowAll => 'نمایش همه';
+
+  @override
+  String get shHidden => 'پنهان‌شده‌ها';
+
+  @override
+  String get shExpand => 'نمایش شاخه';
+
+  @override
+  String get shCollapse => 'بستن شاخه';
+
+  @override
+  String shTiesCount(String n) {
+    return '$n پیوند';
+  }
+
+  @override
+  String get shLegend => 'راهنما';
+
+  @override
+  String get shLegendParent => 'پدر یا مادر و فرزند';
+
+  @override
+  String get shLegendAncestor => 'نیا و نواده، با چند نسل فاصله';
+
+  @override
+  String get shLegendSpouse => 'همسران';
+
+  @override
+  String get shLegendSibling => 'خواهر و برادر، بی‌پدر و مادرِ شناخته';
+
+  @override
+  String get shLegendRoot => 'کسی که تبارنامه‌اش را می‌بینید';
+
+  @override
+  String get shLegendAges => 'رنگ قاب: دورانی که نخستین بار در آن می‌آید';
+
+  @override
+  String get shLegendBranch =>
+      'شاخهٔ بسته (+) یا باز (−)؛ برای باز و بسته کردن بزنید';
+
+  @override
+  String get shLegendFocus => 'کسی که شبکه بر گرد او است';
+
+  @override
+  String get shLegendSize => 'گوی بزرگ‌تر: نامدارتر';
+
+  @override
+  String get shLegendLines =>
+      'خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی';
 }

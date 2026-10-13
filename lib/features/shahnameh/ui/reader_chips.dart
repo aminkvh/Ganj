@@ -19,16 +19,52 @@ class ShahnamehPeopleChips extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final w = ref.watch(shahnamehWorldProvider).value;
-    final people = w?.poemPeople[poemId];
-    if (w == null || people == null || people.isEmpty) return const SizedBox.shrink();
+    if (w == null) return const SizedBox.shrink();
+    // Ganjoor's current tags when it answers; the bundled ones meanwhile and offline.
+    final live = ref.watch(poemTagsProvider(poemId)).value;
+    final List<(int, int)> people;
+    final Set<int> aiPeople;
+    final List<(int locationId, String name, double lat, double lng)> liveSpots;
+    if (live != null && live.isNotEmpty) {
+      final best = <int, int>{};
+      for (final t in live) {
+        if (t.personId case final id? when w.people.containsKey(id)) {
+          best[id] = best.containsKey(id) && best[id]! < t.mention ? best[id]! : t.mention;
+        }
+      }
+      people = [for (final e in best.entries) (e.key, e.value)];
+      aiPeople = {
+        for (final t in live)
+          if (t.ai && t.personId != null) t.personId!,
+      };
+      final locations = {for (final l in ref.watch(ganjoorLocationsProvider).value ?? const []) l.id: l};
+      liveSpots = [
+        for (final t in live)
+          if (t.locationId case final loc?)
+            if (locations[loc] case final l?) (l.id, l.name, l.lat, l.lng),
+      ];
+    } else {
+      people = w.poemPeople[poemId] ?? const [];
+      aiPeople = {
+        for (final (id, _) in people)
+          if (w.isAiTag(poemId, id)) id,
+      };
+      liveSpots = const [];
+    }
+    if (people.isEmpty && liveSpots.isEmpty) return const SizedBox.shrink();
     final c = context.ganj;
     final ordered = [...people]..sort((a, b) => a.$2.compareTo(b.$2));
     // Map place id → label; places only Ganjoor knows are addressed as `g<location id>`.
     final places = <String, String>{};
-    for (final t in w.ganjoorTags) {
-      if (t.poemId != poemId) continue;
-      final curated = w.places.where((p) => p.ganjoorId == t.locationId).firstOrNull;
-      places[curated?.id ?? 'g${t.locationId}'] ??= curated == null ? t.name : placeName(context, curated);
+    final spots = live != null && live.isNotEmpty
+        ? liveSpots
+        : [
+            for (final t in w.ganjoorTags)
+              if (t.poemId == poemId) (t.locationId, t.name, t.lat, t.lng),
+          ];
+    for (final (loc, name, _, _) in spots) {
+      final curated = w.places.where((p) => p.ganjoorId == loc).firstOrNull;
+      places[curated?.id ?? 'g$loc'] ??= curated == null ? name : placeName(context, curated);
     }
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -38,7 +74,7 @@ class ShahnamehPeopleChips extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(context.l10n.shPeople, style: TextStyle(color: c.muted, fontSize: 13)),
-              if (people.any((p) => w.isAiTag(poemId, p.$1))) ...[
+              if (aiPeople.isNotEmpty) ...[
                 const SizedBox(width: 6),
                 Tooltip(
                   message: context.l10n.shAiTagsNote,

@@ -71,10 +71,12 @@ void main() {
     expect(count(tester), lessThan(before));
   });
 
-  testWidgets('tapping the person in the middle opens them', (tester) async {
+  testWidgets('tapping the person in the middle, then «باز کردن», opens them', (tester) async {
     await open(tester, '/shahnameh?tab=people&focus=60');
     final canvas = find.byKey(const ValueKey('network-canvas'));
     await tester.tap(canvas);
+    await settle(tester);
+    await tester.tap(find.text('باز کردن'));
     await settle(tester);
     expect(find.byType(PersonPanel), findsOneWidget);
   });

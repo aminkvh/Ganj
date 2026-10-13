@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/features/shahnameh/data/models.dart';
+import 'package:ganj/features/shahnameh/data/shahnameh_data.dart';
 import 'package:ganj/features/shahnameh/data/world_loader.dart';
 
 /// The real bundled world: curated files must agree with Ganjoor's snapshot.
@@ -98,5 +99,9 @@ void main() {
         expect(w.people[p]!.en, isNotNull, reason: '${s.id} → ${w.people[p]!.name}');
       }
     }
+  });
+
+  test("the bundled data passes the app's own check for published data", () {
+    expect(usableShahnamehData(File('assets/seed/shahnameh/generated.json').readAsStringSync()), isTrue);
   });
 }

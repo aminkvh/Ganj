@@ -27,12 +27,48 @@ class TreeLink {
 }
 
 class TreeLayout {
-  const TreeLayout(this.nodes, this.links, this.gens, this.width);
+  const TreeLayout(
+    this.nodes,
+    this.links,
+    this.gens,
+    this.width, {
+    this.hiddenBelow = const {},
+    this.withChildren = const {},
+  });
 
   final List<TreeNode> nodes;
   final List<TreeLink> links;
   final int gens;
   final double width;
+
+  /// Collapsed person → how many people are hidden below them.
+  final Map<int, int> hiddenBelow;
+
+  /// People with children of their own in this tree (they get a +/− toggle).
+  final Set<int> withChildren;
+
+  bool hasChildren(int id) => withChildren.contains(id);
+}
+
+/// Big trees open compact: as many generations below [rootId] as fit in about [maxPeople]
+/// (at least two); everyone whose children would go deeper starts collapsed, to be opened
+/// one level at a time. Small trees open whole.
+Set<int> compactCollapse(ShWorld w, int rootId, {int maxPeople = 40}) {
+  final full = layoutTree(w, rootId);
+  if (full.nodes.length <= maxPeople) return const {};
+  final gen = {for (final n in full.nodes) n.id: n.gen};
+  final rootGen = gen[rootId]!;
+  Set<int> deeperThan(int depth) => {
+    for (final l in full.links)
+      if (l.kind == TreeLinkKind.parent && gen[l.to]! > rootGen + depth && gen[l.from]! <= gen[l.to]!) l.from,
+  };
+  var best = deeperThan(2);
+  for (var depth = 3; depth < full.gens; depth++) {
+    final next = deeperThan(depth);
+    if (next.isEmpty || layoutTree(w, rootId, collapsed: next).nodes.length > maxPeople) break;
+    best = next;
+  }
+  return best;
 }
 
 /// Ganjoor's kinship graph is not a strict tree (two parents with their own lines, siblings
@@ -40,7 +76,7 @@ class TreeLayout {
 /// giving each person a generation the first time they're reached; hang each person under one
 /// "primary" parent; put spouses and parentless siblings beside the person who led to them;
 /// then lay subtrees side by side with parents centred over their children.
-TreeLayout layoutTree(ShWorld w, int rootId) {
+TreeLayout layoutTree(ShWorld w, int rootId, {Set<int> collapsed = const {}}) {
   final kin = [
     for (final e in w.edges)
       if (e.kind.isKin) e,
@@ -152,12 +188,15 @@ TreeLayout layoutTree(ShWorld w, int rootId) {
   }
 
   final nodes = {for (final p in order) p: TreeNode(p, gen[p]!)};
+  // A collapsed person's children (and everyone below them) are not laid out at all.
+  List<int> kidsOf(int p) => collapsed.contains(p) ? const [] : (children[p] ?? const []);
+  final shown = <int>{};
   void shift(int p, double dx) {
     nodes[p]!.x += dx;
     for (final s in beside[p] ?? const <int>[]) {
       nodes[s]!.x += dx;
     }
-    for (final k in children[p] ?? const <int>[]) {
+    for (final k in kidsOf(p)) {
       shift(k, dx);
     }
   }
@@ -165,8 +204,11 @@ TreeLayout layoutTree(ShWorld w, int rootId) {
   // Returns the width of p's subtree, laid out from slot [left].
   double place(int p, double left) {
     final sats = beside[p] ?? const <int>[];
+    shown
+      ..add(p)
+      ..addAll(sats);
     final unit = 1.0 + sats.length;
-    final kids = children[p] ?? const <int>[];
+    final kids = kidsOf(p);
     var span = 0.0;
     for (final k in kids) {
       span += place(k, left + span);
@@ -196,18 +238,63 @@ TreeLayout layoutTree(ShWorld w, int rootId) {
   for (final r in roots) {
     width += place(r, width);
   }
+  if (collapsed.isNotEmpty) {
+    // Collapsing can cut whole blocks off (a parent known only through someone now hidden):
+    // keep the blocks still joined to the chosen person, and lay those out again.
+    final joined = <int>{rootId};
+    final queue = Queue<int>()..add(rootId);
+    while (queue.isNotEmpty) {
+      final cur = queue.removeFirst();
+      for (final e in byPerson[cur]!) {
+        final o = e.other(cur);
+        if (shown.contains(o) && joined.add(o)) queue.add(o);
+      }
+    }
+    final keep = [
+      for (final r in roots)
+        if (joined.contains(r)) r,
+    ];
+    if (keep.length < roots.length) {
+      shown.clear();
+      width = 0;
+      for (final r in keep) {
+        width += place(r, width);
+      }
+    }
+  }
 
-  final top = gen.values.reduce(math.min);
-  final laid = [for (final p in order) TreeNode(p, gen[p]! - top)..x = nodes[p]!.x];
+  int below(int p) {
+    var n = 0;
+    for (final k in children[p] ?? const <int>[]) {
+      n += 1 + (beside[k]?.length ?? 0) + below(k);
+    }
+    return n;
+  }
+
+  final top = shown.map((p) => gen[p]!).reduce(math.min);
+  final laid = [
+    for (final p in order)
+      if (shown.contains(p)) TreeNode(p, gen[p]! - top)..x = nodes[p]!.x,
+  ];
+  bool descendsVia(int p, int ancestor) {
+    final seen = <int>{};
+    for (var q = parentOf[p]; q != null && seen.add(q); q = parentOf[q]) {
+      if (q == ancestor) return true;
+    }
+    return false;
+  }
+
   final links = <TreeLink>[];
   final drawn = <String>{};
   for (final e in kin) {
-    if (!gen.containsKey(e.a) || !gen.containsKey(e.b) || e.a == e.b) continue;
+    if (!shown.contains(e.a) || !shown.contains(e.b) || e.a == e.b) continue;
     final pair = e.a < e.b ? '${e.a}-${e.b}' : '${e.b}-${e.a}';
     if (!drawn.add('$pair-${e.kind.key}')) continue;
     switch (e.kind.key) {
       case 'R:0' || 'R:3':
         final (elder, younger) = gen[e.a]! <= gen[e.b]! ? (e.a, e.b) : (e.b, e.a);
+        // An ancestor already reached through the drawn parents needs no second, dashed line.
+        if (e.kind.key == 'R:3' && parentOf[younger] != elder && descendsVia(younger, elder)) continue;
         final d = gen[younger]! - gen[elder]!;
         links.add(TreeLink(elder, younger, TreeLinkKind.parent, gap: d > 1 ? d : null));
       case 'R:2':
@@ -216,5 +303,18 @@ TreeLayout layoutTree(ShWorld w, int rootId) {
         links.add(TreeLink(e.a, e.b, TreeLinkKind.sibling));
     }
   }
-  return TreeLayout(laid, links, gen.values.reduce(math.max) - top + 1, width);
+  return TreeLayout(
+    laid,
+    links,
+    shown.map((p) => gen[p]!).reduce(math.max) - top + 1,
+    width,
+    hiddenBelow: {
+      for (final p in collapsed)
+        if (shown.contains(p) && (children[p]?.isNotEmpty ?? false)) p: below(p),
+    },
+    withChildren: {
+      for (final e in children.entries)
+        if (e.value.isNotEmpty && shown.contains(e.key)) e.key,
+    },
+  );
 }

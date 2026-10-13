@@ -112,6 +112,29 @@ class TaggedPoem {
   final bool ai;
 }
 
+/// One tag on a poem's couplet: a person (in the story or in passing) or a place.
+class PoemTag {
+  const PoemTag({required this.coupletIndex, this.personId, this.mention = 0, this.locationId, this.ai = false});
+
+  factory PoemTag.fromJson(Map<String, dynamic> j) => PoemTag(
+    coupletIndex: (j['coupletIndex'] as int?) ?? 0,
+    personId: j['personId'] as int?,
+    mention: (j['personMention'] as int?) ?? 0,
+    locationId: j['locationId'] as int?,
+    ai: ((j['note'] as String?) ?? '').startsWith('پیشنهاد هوش مصنوعی'),
+  );
+
+  final int coupletIndex;
+  final int? personId;
+
+  /// 0 in the story, 1 only in passing.
+  final int mention;
+  final int? locationId;
+
+  /// Ganjoor's AI suggested it (a volunteer then approved it).
+  final bool ai;
+}
+
 class PlaceTag {
   const PlaceTag({required this.poemId, required this.coupletIndex, required this.locationId});
 

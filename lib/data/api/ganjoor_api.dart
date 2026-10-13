@@ -185,6 +185,20 @@ class GanjoorApi {
         PlaceTag(poemId: t['poemId'] as int, coupletIndex: (t['coupletIndex'] as int?) ?? 0, locationId: loc),
   ];
 
+  /// The book's story sections (Ganjoor category ids) in which a person takes part.
+  Future<List<int>> personPresence(int id) async {
+    final j = _map(await _get('/api/people/$id/presence', const {'masterCatId': '33'}, _week));
+    final columns = [for (final c in (j['columns'] as List? ?? const [])) (c as Map)['catId'] as int];
+    for (final p in (j['people'] as List? ?? const [])) {
+      if ((p as Map)['id'] == id) return [for (final i in p['columns'] as List) columns[i as int]];
+    }
+    return const [];
+  }
+
+  /// The people and places tagged in one poem.
+  Future<List<PoemTag>> poemTags(int poemId) =>
+      _list('/api/ganjoor/poem/$poemId/geotag', const {}, _week, PoemTag.fromJson);
+
   Future<List<GanjLocation>> locations() => _list('/api/locations', const {}, _month, GanjLocation.fromJson);
 
   Future<List<PoemImage>> images(int poemId) =>

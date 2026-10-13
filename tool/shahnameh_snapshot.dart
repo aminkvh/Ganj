@@ -156,7 +156,9 @@ Future<void> main() async {
 
   List<int> sorted(Set<int> s) => s.toList()..sort();
   final snapshot = {
-    'builtAt': DateTime.now().toUtc().toIso8601String().substring(0, 10),
+    // The app's kShahnamehDataSchema: bump both when the shape below changes incompatibly.
+    'schema': 1,
+    'builtAt': '${DateTime.now().toUtc().toIso8601String().substring(0, 19)}Z',
     'masterCatId': _book,
     'people': people,
     'edges': edges,

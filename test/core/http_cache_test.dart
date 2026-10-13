@@ -48,4 +48,11 @@ void main() {
     await cache.fetch('fa', week, () async => '{"t":"اَلا یا اَیُّهَا السّاقی"}');
     expect(await cache.fetch('fa', week, () async => 'x'), '{"t":"اَلا یا اَیُّهَا السّاقی"}');
   });
+
+  test('peek returns a saved body however old, without the network', () async {
+    expect(await cache.peek('k'), isNull);
+    await cache.fetch('k', week, () async => 'saved');
+    now = now.add(const Duration(days: 400));
+    expect(await cache.peek('k'), 'saved');
+  });
 }

@@ -1,25 +1,81 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/net/api_client.dart';
+import '../../../core/net/http_cache.dart';
 import '../../../data/api/dto/people.dart';
 import '../../../data/providers.dart';
 import 'models.dart';
+import 'shahnameh_data.dart';
 import 'world_loader.dart';
 
-/// The whole bundled world; works offline from the first launch.
-final shahnamehWorldProvider = FutureProvider<ShWorld>((ref) async {
-  Future<String> load(String name) => rootBundle.loadString('assets/seed/shahnameh/$name');
-  return loadWorld(
-    generated: await load('generated.json'),
-    ages: await load('ages.json'),
-    places: await load('places.json'),
-    namesEn: await load('names_en.json'),
-  );
-}, retry: noAutoRetry);
+final shahnamehDataSourceProvider = Provider<ShahnamehDataSource>(
+  (ref) => ShahnamehDataSource(dio: createDio(), cache: HttpCache(ref.watch(appDbProvider))),
+);
+
+/// The whole world, offline from the first launch: the newest of the bundled data and the
+/// last published copy downloaded. Then, in the background, a newer published copy (checked
+/// at most weekly) replaces it.
+class ShahnamehWorldNotifier extends AsyncNotifier<ShWorld> {
+  late String _ages, _places, _namesEn;
+
+  ShWorld _load(String generated) => loadWorld(generated: generated, ages: _ages, places: _places, namesEn: _namesEn);
+
+  @override
+  Future<ShWorld> build() async {
+    Future<String> load(String name) => rootBundle.loadString('assets/seed/shahnameh/$name');
+    _ages = await load('ages.json');
+    _places = await load('places.json');
+    _namesEn = await load('names_en.json');
+    var generated = await load('generated.json');
+    try {
+      final saved = await ref.read(shahnamehDataSourceProvider).saved();
+      if (saved != null &&
+          usableShahnamehData(saved) &&
+          shahnamehDataBuiltAt(saved).compareTo(shahnamehDataBuiltAt(generated)) > 0) {
+        generated = saved;
+      }
+    } catch (_) {
+      // No saved copy to read: the bundled data it is.
+    }
+    final world = _load(generated);
+    Future(() => _refresh(world.builtAt));
+    return world;
+  }
+
+  Future<void> _refresh(String current) async {
+    try {
+      final text = await ref.read(shahnamehDataSourceProvider).latest();
+      if (!ref.mounted || shahnamehDataBuiltAt(text).compareTo(current) <= 0) return;
+      state = AsyncData(_load(text));
+    } catch (_) {
+      // Offline, or nothing newer: keep what we have.
+    }
+  }
+}
+
+final shahnamehWorldProvider = AsyncNotifierProvider<ShahnamehWorldNotifier, ShWorld>(
+  ShahnamehWorldNotifier.new,
+  retry: noAutoRetry,
+);
 
 /// Kin and ties with evidence couplets (live, cached a month).
 final personRelationsProvider = FutureProvider.autoDispose.family<PersonRelations, int>(
   (ref, id) => ref.watch(ganjoorApiProvider).personRelations(id),
+  retry: noAutoRetry,
+);
+
+/// Where in the book a person appears, from Ganjoor now (story orders; cached a week).
+final personPresenceProvider = FutureProvider.autoDispose.family<List<int>, int>((ref, id) async {
+  final w = await ref.watch(shahnamehWorldProvider.future);
+  final orderOf = {for (final s in w.sections) s.catId: s.order};
+  final cats = await ref.watch(ganjoorApiProvider).personPresence(id);
+  return {for (final c in cats) ?orderOf[c]}.toList()..sort();
+}, retry: noAutoRetry);
+
+/// The people and places tagged in a poem, from Ganjoor now (cached a week).
+final poemTagsProvider = FutureProvider.autoDispose.family<List<PoemTag>, int>(
+  (ref, poemId) => ref.watch(ganjoorApiProvider).poemTags(poemId),
   retry: noAutoRetry,
 );
 

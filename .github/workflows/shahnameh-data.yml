@@ -1,0 +1,58 @@
+# Keeps «جهان شاهنامه» current between app releases: every two weeks (1st and 15th of the month)
+# rebuilds the Shahnameh people data from Ganjoor's API (tool/shahnameh_snapshot.dart), checks it
+# against the curated files, and — when Ganjoor's data changed — publishes it to the
+# "shahnameh-data" pre-release, where the app looks for it about once a week and release builds
+# pick it up. Can also be run by hand.
+name: shahnameh-data
+
+on:
+  schedule:
+    - cron: '23 3 1,15 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shahnameh-data
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: 3.47.6
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter pub get
+      - name: Build the data from Ganjoor
+        run: dart run tool/shahnameh_snapshot.dart
+      - name: Check it against the curated ages, stories, places and names
+        run: flutter test test/features/shahnameh/assets_validation_test.dart test/features/shahnameh/world_loader_test.dart
+      - name: Publish if Ganjoor's data changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          new=assets/seed/shahnameh/generated.json
+          if gh release view shahnameh-data >/dev/null 2>&1; then
+            # Compare everything but the build time.
+            if gh release download shahnameh-data -p shahnameh.json.gz -O old.json.gz; then
+              if cmp -s <(jq -S 'del(.builtAt)' "$new") <(gunzip -c old.json.gz | jq -S 'del(.builtAt)'); then
+                echo "Ganjoor's Shahnameh data is unchanged; nothing to publish."
+                exit 0
+              fi
+            fi
+          else
+            gh release create shahnameh-data --prerelease --target "$GITHUB_SHA" \
+              --title "Shahnameh data · داده‌های شاهنامه" \
+              --notes "Data for Ganj's World of the Shahnameh, rebuilt from Ganjoor every two weeks. Not an app release: Ganj downloads it by itself.
+
+          داده‌های «جهان شاهنامه» در گنج که هر دو هفته از گنجور بازسازی می‌شود. این نسخهٔ برنامه نیست؛ گنج خودش آن را بارگیری می‌کند."
+          fi
+          gzip -9 -n -c "$new" > shahnameh.json.gz
+          gh release upload shahnameh-data shahnameh.json.gz --clobber
+          echo "Published $(jq -r .builtAt "$new"): $(stat -c %s shahnameh.json.gz) bytes."

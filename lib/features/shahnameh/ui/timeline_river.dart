@@ -8,7 +8,8 @@ import '../../../core/theme/ganj_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../data/lifelines.dart';
 import '../data/models.dart';
-import '../data/person_search.dart';
+import 'person_hover.dart';
+import 'person_picker.dart';
 import 'person_sheet.dart';
 import 'sh_style.dart';
 import 'story_card.dart';
@@ -80,13 +81,7 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
   }
 
   Future<void> _add() async {
-    final id = await showModalBottomSheet<int>(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      showDragHandle: true,
-      builder: (_) => _PersonPicker(world: w),
-    );
+    final id = await pickPerson(context, w, where: (p) => w.presence.containsKey(p.id));
     if (id != null && !_people.contains(id)) setState(() => _people.add(id));
   }
 
@@ -189,33 +184,39 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
                         SizedBox(
                           key: ValueKey('lifeline-$id'),
                           height: _rowH,
-                          child: InkWell(
-                            onTap: () => setState(() => _selected = _selected == id ? null : id),
-                            onLongPress: () => openPerson(context, id),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.only(start: 8, end: 4),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      personName(context, w, id),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: lit.isEmpty || lit.contains(id) ? c.ink : c.muted.withValues(alpha: 0.5),
-                                        fontWeight: id == _selected ? FontWeight.bold : FontWeight.normal,
+                          child: PersonHover(
+                            world: w,
+                            id: id,
+                            child: InkWell(
+                              onTap: () => setState(() => _selected = _selected == id ? null : id),
+                              onLongPress: () => openPerson(context, id),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.only(start: 8, end: 4),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        personName(context, w, id),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: lit.isEmpty || lit.contains(id)
+                                              ? c.ink
+                                              : c.muted.withValues(alpha: 0.5),
+                                          fontWeight: id == _selected ? FontWeight.bold : FontWeight.normal,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () => setState(() {
-                                      _people.remove(id);
-                                      if (_selected == id) _selected = null;
-                                    }),
-                                    child: Icon(Icons.close, size: 14, color: c.muted),
-                                  ),
-                                ],
+                                    InkWell(
+                                      onTap: () => setState(() {
+                                        _people.remove(id);
+                                        if (_selected == id) _selected = null;
+                                      }),
+                                      child: Icon(Icons.close, size: 14, color: c.muted),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -441,56 +442,4 @@ class _LifelinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_LifelinePainter old) => old.col != col || old.dim != dim || old.segments != segments;
-}
-
-class _PersonPicker extends StatefulWidget {
-  const _PersonPicker({required this.world});
-
-  final ShWorld world;
-
-  @override
-  State<_PersonPicker> createState() => _PersonPickerState();
-}
-
-class _PersonPickerState extends State<_PersonPicker> {
-  String _q = '';
-
-  @override
-  Widget build(BuildContext context) {
-    final w = widget.world;
-    final found = searchPeople(w, _q).where((p) => w.presence.containsKey(p.id)).take(40).toList();
-    return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.6,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                autofocus: true,
-                onChanged: (v) => setState(() => _q = v),
-                decoration: InputDecoration(
-                  hintText: context.l10n.shSearchPeople,
-                  prefixIcon: const Icon(Icons.search),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  for (final p in found)
-                    ListTile(
-                      title: Text(personName(context, w, p.id)),
-                      subtitle: PresenceBar(world: w, person: p.id, height: 4),
-                      onTap: () => Navigator.of(context).pop(p.id),
-                    ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

@@ -127,4 +127,42 @@ void main() {
     final t = layoutTree(realWorld, 64);
     expect(node(t, 60).gen, node(t, 54).gen + 1);
   });
+
+  test('collapsing a person hides everyone below them, and counts them', () {
+    // 1 → 2 → 3 → 4 ; 1 → 5
+    final w = tiny([(1, 2, 0, null), (2, 3, 0, null), (3, 4, 0, null), (1, 5, 0, null)]);
+    final t = layoutTree(w, 1, collapsed: {2});
+    expect(t.nodes.map((n) => n.id).toSet(), {1, 2, 5});
+    expect(t.hiddenBelow[2], 2);
+    expect(t.hasChildren(2), isTrue);
+    expect(t.hasChildren(5), isFalse);
+    expect(t.links.where((l) => l.to == 3 || l.to == 4), isEmpty);
+    noOverlap(t);
+  });
+
+  test('a big tree starts compact: as many generations as fit, at least two', () {
+    final full = layoutTree(realWorld, 1);
+    final compact = layoutTree(realWorld, 1, collapsed: compactCollapse(realWorld, 1));
+    expect(compact.nodes.length, lessThan(full.nodes.length));
+    final rootGen = compact.nodes.firstWhere((n) => n.id == 1).gen;
+    expect(compact.nodes.any((n) => n.gen >= rootGen + 2), isTrue, reason: 'at least two generations below');
+    expect(compact.hiddenBelow.values.fold(0, (a, b) => a + b), greaterThan(0));
+  });
+
+  test('a small tree is shown whole', () {
+    final w = tiny([(1, 2, 0, null), (2, 3, 0, null)]);
+    expect(compactCollapse(w, 1), isEmpty);
+  });
+
+  test('an ancestor link already drawn through parents is left out (no stray «n generations»)', () {
+    // 1 → 2 → 3, and Ganjoor also says 1 is 3's ancestor.
+    final t = layoutTree(tiny([(1, 2, 0, null), (2, 3, 0, null), (1, 3, 3, 2)]), 1);
+    expect(t.links.where((l) => l.gap != null), isEmpty);
+    expect(t.links.where((l) => l.kind == TreeLinkKind.parent), hasLength(2));
+  });
+
+  test("Kayumars' tree has no gap link from Kayumars to Hushang", () {
+    final t = layoutTree(realWorld, 1);
+    expect(t.links.where((l) => l.from == 1 && l.to == 4), isEmpty);
+  });
 }

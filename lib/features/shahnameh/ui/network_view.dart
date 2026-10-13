@@ -10,13 +10,18 @@ import '../../../l10n/l10n.dart';
 import '../data/force_layout.dart';
 import '../data/models.dart';
 import '../data/relation_kinds.dart';
+import 'legend.dart';
+import 'person_hover.dart';
+import 'person_picker.dart';
 import 'person_sheet.dart';
 import 'sh_style.dart';
+import 'zoom_controls.dart';
 
 enum _Reach { one, two, all }
 
 /// The people network, focused on one person (one or two steps out) or whole. Ties are
-/// coloured and dashed by family; tap a person to open them, long-press to refocus.
+/// coloured and dashed by family. Tap a person to open them, focus on them or hide them;
+/// add anyone by search; zoom out to see everything.
 class NetworkView extends StatefulWidget {
   const NetworkView({super.key, required this.world, required this.focus});
 
@@ -35,6 +40,10 @@ class _NetworkViewState extends State<NetworkView> {
   Map<int, (double, double)>? _pos;
   int _job = 0;
 
+  /// Taken out of / brought into the view by the reader.
+  final _hidden = <int>{};
+  final _added = <int>{};
+
   @override
   void initState() {
     super.initState();
@@ -51,12 +60,21 @@ class _NetworkViewState extends State<NetworkView> {
   }
 
   void _rebuild() {
-    _graph = neighbourhood(
+    final base = neighbourhood(
       widget.world,
       _reach == _Reach.all ? null : _focus,
       hops: _reach == _Reach.two ? 2 : 1,
       families: _families,
     );
+    final ids = {...base.ids, ..._added}..removeAll(_hidden);
+    final edges = [
+      ...base.edges.where((e) => ids.contains(e.a) && ids.contains(e.b)),
+      // Ties of the people added by hand, to anyone in view.
+      for (final a in _added)
+        for (final e in widget.world.edgesOf(a))
+          if (_families.contains(e.kind.family) && ids.contains(e.a) && ids.contains(e.b) && !base.edges.contains(e)) e,
+    ];
+    _graph = NetGraph((ids.toList()..sort()), edges.toSet().toList());
     final g = _graph;
     final job = ++_job;
     // Big graphs settle off the UI thread; small ones right away.
@@ -74,6 +92,49 @@ class _NetworkViewState extends State<NetworkView> {
     f();
     _rebuild();
   });
+
+  Future<void> _add() async {
+    final w = widget.world;
+    final id = await pickPerson(context, w, where: (p) => w.edgesOf(p.id).isNotEmpty);
+    if (id != null && mounted) {
+      _set(() {
+        _hidden.remove(id);
+        _added.add(id);
+      });
+    }
+  }
+
+  /// Open, focus here, or hide — for the person tapped at [at] (global position).
+  Future<void> _menu(int id, Offset at) async {
+    final l = context.l10n;
+    final box = Overlay.of(context).context.findRenderObject()! as RenderBox;
+    final choice = await showMenu<String>(
+      context: context,
+      position: RelativeRect.fromRect(at & const Size(1, 1), Offset.zero & box.size),
+      items: [
+        PopupMenuItem(enabled: false, child: Text(personName(context, widget.world, id))),
+        PopupMenuItem(value: 'open', child: Text(l.shOpen)),
+        if (id != _focus) PopupMenuItem(value: 'focus', child: Text(l.shFocusHere)),
+        PopupMenuItem(value: 'hide', child: Text(l.shHide)),
+      ],
+    );
+    if (!mounted) return;
+    switch (choice) {
+      case 'open':
+        openPerson(context, id);
+      case 'focus':
+        _set(() {
+          _focus = id;
+          _hidden.remove(id);
+          if (_reach == _Reach.all) _reach = _Reach.one;
+        });
+      case 'hide':
+        _set(() {
+          _hidden.add(id);
+          _added.remove(id);
+        });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +159,7 @@ class _NetworkViewState extends State<NetworkView> {
                   onSelectionChanged: (s) => _set(() => _reach = s.single),
                 ),
               ),
+              IconButton(tooltip: l.shAddPerson, icon: const Icon(Icons.person_add_alt), onPressed: _add),
             ],
           ),
         ),
@@ -127,6 +189,27 @@ class _NetworkViewState extends State<NetworkView> {
             ],
           ),
         ),
+        if (_hidden.isNotEmpty)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                Text('${l.shHidden}:', style: TextStyle(color: c.muted, fontSize: 12)),
+                for (final id in _hidden)
+                  Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: InputChip(
+                      key: ValueKey('hidden-$id'),
+                      visualDensity: VisualDensity.compact,
+                      label: Text(personName(context, widget.world, id)),
+                      deleteIcon: const Icon(Icons.close, size: 16),
+                      onDeleted: () => _set(() => _hidden.remove(id)),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         Expanded(
           child: _pos == null
               ? const Center(child: CircularProgressIndicator())
@@ -136,7 +219,7 @@ class _NetworkViewState extends State<NetworkView> {
                   graph: _graph,
                   pos: _pos!,
                   focus: _focus,
-                  onOpen: (id) => openPerson(context, id),
+                  onTap: _menu,
                   onFocus: (id) => _set(() {
                     _focus = id;
                     if (_reach == _Reach.all) _reach = _Reach.one;
@@ -157,7 +240,7 @@ class _Canvas extends StatefulWidget {
     required this.graph,
     required this.pos,
     required this.focus,
-    required this.onOpen,
+    required this.onTap,
     required this.onFocus,
   });
 
@@ -165,42 +248,94 @@ class _Canvas extends StatefulWidget {
   final NetGraph graph;
   final Map<int, (double, double)> pos;
   final int focus;
-  final ValueChanged<int> onOpen, onFocus;
+
+  /// A person tapped, with where (global position) — for the menu.
+  final void Function(int id, Offset at) onTap;
+  final ValueChanged<int> onFocus;
 
   @override
   State<_Canvas> createState() => _CanvasState();
 }
 
-class _CanvasState extends State<_Canvas> {
+class _CanvasState extends State<_Canvas> with SingleTickerProviderStateMixin {
   final _transform = TransformationController();
+  late final _ease = TransformAnimator(this, _transform);
 
   /// The viewport and canvas the view was last centred for; recentre when either changes.
   (Size, Size)? _centred;
 
+  /// The person under the mouse (desktop), shown with a card.
+  int? _hover;
+
+  /// Names laid out once per graph, focus, language and theme — not on every frame.
+  Map<int, (TextPainter, TextPainter)> _labels = const {};
+  Object? _labelsFor;
+
   @override
   void dispose() {
+    _ease.dispose();
     _transform.dispose();
     super.dispose();
+  }
+
+  Map<int, (TextPainter, TextPainter)> _labelsOf(BuildContext context, Set<int> labelled) {
+    final c = context.ganj;
+    final key = (widget.graph, widget.focus, Localizations.localeOf(context), c.ink, c.paper);
+    if (key == _labelsFor) return _labels;
+    _labelsFor = key;
+    final dir = Directionality.of(context);
+    final base = TextStyle(color: c.ink, fontSize: 11, fontFamily: kBodyFont);
+    return _labels = {
+      for (final id in labelled)
+        id: () {
+          final style = id == widget.focus ? base.copyWith(fontWeight: FontWeight.bold, fontSize: 13) : base;
+          final name = personName(context, widget.world, id);
+          final halo = TextPainter(
+            text: TextSpan(
+              text: name,
+              style: style.copyWith(
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 3
+                  ..color = c.paper,
+              ),
+            ),
+            textDirection: dir,
+          )..layout(maxWidth: 120);
+          final text = TextPainter(
+            text: TextSpan(text: name, style: style),
+            textDirection: dir,
+          )..layout(maxWidth: 120);
+          return (halo, text);
+        }(),
+    };
   }
 
   @override
   Widget build(BuildContext context) {
     final c = context.ganj;
-    final _Canvas(:world, :graph, :pos, :focus, :onOpen, :onFocus) = widget;
+    final _Canvas(:world, :graph, :pos, :focus, :onTap, :onFocus) = widget;
     return LayoutBuilder(
       builder: (context, box) {
+        final viewport = box.biggest;
         final n = graph.ids.length;
-        // Bigger networks get a bigger canvas to pan around; small ones fit the screen.
+        // Bigger networks get a bigger canvas; zoom out (or "show all") to see it whole.
         final side = math.max(math.min(box.maxWidth, box.maxHeight), 90.0 * math.sqrt(n));
         final size = Size(math.max(box.maxWidth, side), math.max(box.maxHeight, side));
+        // Fit the layout's real extent inside the canvas (a few people settle far out).
+        final k = canvasScale(pos, side);
         Offset at(int id) {
           final p = pos[id]!;
-          return Offset(size.width / 2 + p.$1 * side * 0.42, size.height / 2 + p.$2 * side * 0.42);
+          return Offset(size.width / 2 + p.$1 * k, size.height / 2 + p.$2 * k);
         }
 
         final neighbours = {
           for (final e in graph.edges)
             if (e.a == focus || e.b == focus) e.other(focus),
+        };
+        final labelled = {
+          for (final id in graph.ids)
+            if (id == focus || n <= 40 || neighbours.contains(id) || (world.people[id]?.importance ?? 0) > 0) id,
         };
         int? hit(Offset local) {
           int? best;
@@ -220,44 +355,82 @@ class _CanvasState extends State<_Canvas> {
           at: at,
           focus: focus,
           importance: (id) => world.people[id]?.importance ?? 0,
-          labelled: (id) =>
-              id == focus || n <= 40 || neighbours.contains(id) || (world.people[id]?.importance ?? 0) > 0,
-          name: (id) => personName(context, world, id),
+          labels: _labelsOf(context, labelled),
           edgeColor: (f) => familyColor(context, f),
           node: c.paper,
           nodeBorder: c.gold,
           focusFill: c.brandRed,
-          text: TextStyle(color: c.ink, fontSize: 11, fontFamily: kBodyFont),
-          textDirection: Directionality.of(context),
+          hover: _hover,
         );
-        final canvas = GestureDetector(
-          onTapUp: (d) {
-            final id = hit(d.localPosition);
-            if (id != null) onOpen(id);
-          },
-          onLongPressStart: (d) {
-            final id = hit(d.localPosition);
-            if (id != null) onFocus(id);
-          },
-          child: CustomPaint(size: size, painter: painter),
-        );
-        final fits = size.width <= box.maxWidth + 0.5 && size.height <= box.maxHeight + 0.5;
-        if (fits) return canvas;
-        if (_centred != (box.biggest, size)) {
-          _centred = (box.biggest, size);
+        final minScale = fitMinScale(viewport, size);
+        if (_centred != (viewport, size)) {
+          _centred = (viewport, size);
           _transform.value = Matrix4.translationValues(
-            (box.maxWidth - size.width) / 2,
-            (box.maxHeight - size.height) / 2,
+            (viewport.width - size.width) / 2,
+            (viewport.height - size.height) / 2,
             0,
           );
         }
-        return InteractiveViewer(
-          constrained: false,
-          minScale: 0.3,
-          maxScale: 3,
-          boundaryMargin: const EdgeInsets.all(200),
-          transformationController: _transform,
-          child: canvas,
+        return Stack(
+          children: [
+            InteractiveViewer(
+              constrained: false,
+              minScale: minScale,
+              maxScale: 3,
+              boundaryMargin: EdgeInsets.all(math.max(viewport.width, viewport.height)),
+              transformationController: _transform,
+              child: MouseRegion(
+                onHover: (e) {
+                  final id = hit(e.localPosition);
+                  if (id != _hover) setState(() => _hover = id);
+                },
+                onExit: (_) {
+                  if (_hover != null) setState(() => _hover = null);
+                },
+                child: GestureDetector(
+                  onTapUp: (d) {
+                    final id = hit(d.localPosition);
+                    if (id != null) onTap(id, d.globalPosition);
+                  },
+                  onLongPressStart: (d) {
+                    final id = hit(d.localPosition);
+                    if (id != null) onFocus(id);
+                  },
+                  // Panning moves one picture instead of redrawing every tie and name.
+                  child: AnimatedSwitcher(
+                    // A new set of people cross-fades in rather than jumping.
+                    duration: const Duration(milliseconds: 220),
+                    child: RepaintBoundary(
+                      key: ValueKey(graph),
+                      child: CustomPaint(key: const ValueKey('network-paint'), size: size, painter: painter),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            if (_hover case final id? when pos.containsKey(id))
+              () {
+                // Beside the person, kept inside the view.
+                final p = MatrixUtils.transformPoint(_transform.value, at(id));
+                return Positioned(
+                  left: (p.dx + 18).clamp(4, math.max(4, viewport.width - 290)),
+                  top: (p.dy + 12).clamp(4, math.max(4, viewport.height - 200)),
+                  child: IgnorePointer(
+                    child: PersonHoverCard(world: world, id: id),
+                  ),
+                );
+              }(),
+            const PositionedDirectional(top: 10, start: 10, child: LegendToggle(legend: NetworkLegend())),
+            PositionedDirectional(
+              end: 12,
+              bottom: 12,
+              child: ZoomControls(
+                onZoomIn: () => _ease.to(zoomedBy(_transform.value, 1.4, viewport, min: minScale, max: 3)),
+                onZoomOut: () => _ease.to(zoomedBy(_transform.value, 1 / 1.4, viewport, min: minScale, max: 3)),
+                onShowAll: () => _ease.to(fitMatrix(viewport, size)),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -270,26 +443,24 @@ class _NetPainter extends CustomPainter {
     required this.at,
     required this.focus,
     required this.importance,
-    required this.labelled,
-    required this.name,
+    required this.labels,
     required this.edgeColor,
     required this.node,
     required this.nodeBorder,
     required this.focusFill,
-    required this.text,
-    required this.textDirection,
+    this.hover,
   });
 
+  final int? hover;
   final NetGraph graph;
   final Offset Function(int) at;
   final int focus;
   final int Function(int) importance;
-  final bool Function(int) labelled;
-  final String Function(int) name;
+
+  /// Prepared names (halo, text) of the people to label.
+  final Map<int, (TextPainter, TextPainter)> labels;
   final Color Function(RelationFamily) edgeColor;
   final Color node, nodeBorder, focusFill;
-  final TextStyle text;
-  final TextDirection textDirection;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -318,9 +489,25 @@ class _NetPainter extends CustomPainter {
         }
       }
     }
+    if (hover case final h? when graph.ids.contains(h)) {
+      // The hovered person's ties, drawn again on top.
+      for (final e in graph.edges) {
+        if (e.a != h && e.b != h) continue;
+        canvas.drawLine(
+          at(e.a),
+          at(e.b),
+          Paint()
+            ..color = edgeColor(e.kind.family)
+            ..strokeWidth = 2.6,
+        );
+      }
+    }
     for (final id in graph.ids) {
       final o = at(id);
       final r = id == focus ? 13.0 : 5.0 + importance(id) * 3;
+      if (id == hover) {
+        canvas.drawCircle(o, r + 5, Paint()..color = nodeBorder.withValues(alpha: 0.35));
+      }
       canvas.drawCircle(o, r, Paint()..color = id == focus ? focusFill : node);
       canvas.drawCircle(
         o,
@@ -332,34 +519,22 @@ class _NetPainter extends CustomPainter {
       );
     }
     // Names last, each on a halo of paper, so ties never strike through them.
-    for (final id in graph.ids) {
-      if (!labelled(id)) continue;
+    for (final MapEntry(key: id, value: (halo, text)) in labels.entries) {
+      if (!graph.ids.contains(id)) continue;
       final o = at(id);
       final r = id == focus ? 13.0 : 5.0 + importance(id) * 3;
-      final style = id == focus ? text.copyWith(fontWeight: FontWeight.bold, fontSize: 13) : text;
-      final at0 = o + Offset(0, r + 2);
-      final halo = TextPainter(
-        text: TextSpan(
-          text: name(id),
-          style: style.copyWith(
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 3
-              ..color = node,
-          ),
-        ),
-        textDirection: textDirection,
-      )..layout(maxWidth: 120);
-      final tp = TextPainter(
-        text: TextSpan(text: name(id), style: style),
-        textDirection: textDirection,
-      )..layout(maxWidth: 120);
-      halo.paint(canvas, at0 - Offset(halo.width / 2, 0));
-      tp.paint(canvas, at0 - Offset(tp.width / 2, 0));
+      final top = o + Offset(0, r + 2);
+      halo.paint(canvas, top - Offset(halo.width / 2, 0));
+      text.paint(canvas, top - Offset(text.width / 2, 0));
     }
   }
 
   @override
-  // Names and colours follow the language and theme, which the graph alone doesn't show.
-  bool shouldRepaint(_NetPainter old) => true;
+  bool shouldRepaint(_NetPainter old) =>
+      old.graph != graph ||
+      old.focus != focus ||
+      old.hover != hover ||
+      old.labels != labels ||
+      old.node != node ||
+      old.focusFill != focusFill;
 }

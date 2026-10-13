@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,8 +12,11 @@ import '../../../widgets/home_button.dart';
 import '../data/models.dart';
 import '../data/shahnameh_providers.dart';
 import '../data/tree_layout.dart';
+import 'legend.dart';
+import 'person_hover.dart';
 import 'person_sheet.dart';
 import 'sh_style.dart';
+import 'zoom_controls.dart';
 
 const _slot = 124.0, _boxW = 108.0, _boxH = 48.0, _row = 100.0, _pad = 24.0;
 
@@ -50,25 +55,49 @@ class FamilyTreeView extends StatefulWidget {
   State<FamilyTreeView> createState() => _FamilyTreeViewState();
 }
 
-class _FamilyTreeViewState extends State<FamilyTreeView> {
-  late TreeLayout _layout = layoutTree(widget.world, widget.root);
+class _FamilyTreeViewState extends State<FamilyTreeView> with SingleTickerProviderStateMixin {
+  // Big trees open compact; branches open and close with the toggle under a person.
+  late Set<int> _collapsed = compactCollapse(widget.world, widget.root);
+  late TreeLayout _layout = layoutTree(widget.world, widget.root, collapsed: _collapsed);
   final _transform = TransformationController();
+  late final _ease = TransformAnimator(this, _transform);
+
+  /// The first placement is immediate; later re-centring (a branch opened) eases.
+  bool _placed = false;
+
+  /// Bumped when branches open or close, so the drawing cross-fades.
+  int _version = 0;
   Size? _centredFor;
+
+  /// Whom to bring to the middle after the next layout: the tree's person, or a toggled branch.
+  late int _centreOn = widget.root;
 
   @override
   void didUpdateWidget(FamilyTreeView old) {
     super.didUpdateWidget(old);
     if (old.root != widget.root || old.world != widget.world) {
-      _layout = layoutTree(widget.world, widget.root);
+      _collapsed = compactCollapse(widget.world, widget.root);
+      _layout = layoutTree(widget.world, widget.root, collapsed: _collapsed);
+      _centreOn = widget.root;
       _centredFor = null;
     }
   }
 
   @override
   void dispose() {
+    _ease.dispose();
     _transform.dispose();
     super.dispose();
   }
+
+  void _toggle(int id) => setState(() {
+    _collapsed = {..._collapsed};
+    _collapsed.contains(id) ? _collapsed.remove(id) : _collapsed.add(id);
+    _layout = layoutTree(widget.world, widget.root, collapsed: _collapsed);
+    _centreOn = id;
+    _centredFor = null;
+    _version++;
+  });
 
   Offset _centre(TreeNode n, bool rtl) {
     final x = rtl ? _layout.width - 1 - n.x : n.x;
@@ -90,66 +119,150 @@ class _FamilyTreeViewState extends State<FamilyTreeView> {
     return LayoutBuilder(
       builder: (context, box) {
         final viewport = box.biggest;
+        final minScale = fitMinScale(viewport, size);
         if (_centredFor != viewport) {
           _centredFor = viewport;
-          final root = _centre(byId[widget.root]!, rtl);
-          _transform.value = Matrix4.translationValues(viewport.width / 2 - root.dx, viewport.height / 3 - root.dy, 0);
+          final scale = _transform.value.getMaxScaleOnAxis().clamp(minScale, 2.5);
+          final spot = _centre(byId[_centreOn] ?? byId[widget.root] ?? _layout.nodes.first, rtl);
+          final target = Matrix4.translationValues(
+            viewport.width / 2 - spot.dx * scale,
+            viewport.height / 3 - spot.dy * scale,
+            0,
+          )..multiply(Matrix4.diagonal3Values(scale, scale, scale));
+          if (_placed) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) _ease.to(target);
+            });
+          } else {
+            _placed = true;
+            _transform.value = target;
+          }
         }
         return Stack(
           children: [
             InteractiveViewer(
               transformationController: _transform,
               constrained: false,
-              boundaryMargin: const EdgeInsets.all(400),
-              minScale: 0.25,
+              boundaryMargin: EdgeInsets.all(math.max(viewport.width, viewport.height)),
+              minScale: minScale,
               maxScale: 2.5,
-              child: SizedBox.fromSize(
-                size: size,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: _LinksPainter(
-                          layout: _layout,
-                          centre: (id) => _centre(byId[id]!, rtl),
-                          ink: c.borderGold,
-                          spouse: c.brandRed.withValues(alpha: 0.7),
-                          label: TextStyle(color: c.muted, fontSize: 11, fontFamily: kBodyFont),
-                          gapText: (n) => l.shGenerations(localDigits(n)),
-                          textDirection: Directionality.of(context),
+              // Panning moves one picture instead of redrawing every box and line.
+              // Opening or folding a branch cross-fades to the new drawing.
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 220),
+                layoutBuilder: (current, previous) =>
+                    Stack(alignment: AlignmentDirectional.topStart, children: [...previous, ?current]),
+                child: RepaintBoundary(
+                  key: ValueKey(_version),
+                  child: SizedBox.fromSize(
+                    key: const ValueKey('tree-canvas'),
+                    size: size,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: CustomPaint(
+                            painter: _LinksPainter(
+                              layout: _layout,
+                              centre: (id) => _centre(byId[id]!, rtl),
+                              ink: c.borderGold,
+                              spouse: c.brandRed.withValues(alpha: 0.7),
+                              paper: c.page,
+                              label: TextStyle(color: c.muted, fontSize: 11, fontFamily: kBodyFont),
+                              gapText: (n) => l.shGenerations(localDigits(n)),
+                              textDirection: Directionality.of(context),
+                            ),
+                          ),
                         ),
-                      ),
+                        for (final n in _layout.nodes) ...[
+                          Positioned(
+                            left: _centre(n, rtl).dx - _boxW / 2,
+                            top: _centre(n, rtl).dy - _boxH / 2,
+                            width: _boxW,
+                            height: _boxH,
+                            child: PersonHover(
+                              world: widget.world,
+                              id: n.id,
+                              child: _PersonBox(
+                                key: ValueKey('tree-node-${n.id}'),
+                                world: widget.world,
+                                id: n.id,
+                                root: n.id == widget.root,
+                              ),
+                            ),
+                          ),
+                          if (_layout.hasChildren(n.id))
+                            Positioned(
+                              left: _centre(n, rtl).dx - 22,
+                              top: _centre(n, rtl).dy + _boxH / 2 - 2,
+                              width: 44,
+                              height: 22,
+                              child: _BranchToggle(
+                                key: ValueKey('tree-toggle-${n.id}'),
+                                hidden: _layout.hiddenBelow[n.id],
+                                onTap: () => _toggle(n.id),
+                              ),
+                            ),
+                        ],
+                      ],
                     ),
-                    for (final n in _layout.nodes)
-                      Positioned(
-                        left: _centre(n, rtl).dx - _boxW / 2,
-                        top: _centre(n, rtl).dy - _boxH / 2,
-                        width: _boxW,
-                        height: _boxH,
-                        child: _PersonBox(
-                          key: ValueKey('tree-node-${n.id}'),
-                          world: widget.world,
-                          id: n.id,
-                          root: n.id == widget.root,
-                        ),
-                      ),
-                  ],
+                  ),
                 ),
               ),
             ),
+            const PositionedDirectional(top: 10, start: 10, child: LegendToggle(legend: TreeLegend())),
             PositionedDirectional(
               end: 12,
               bottom: 12,
-              child: FloatingActionButton.small(
-                heroTag: null,
-                tooltip: personName(context, widget.world, widget.root),
-                onPressed: () => setState(() => _centredFor = null),
-                child: const Icon(Icons.center_focus_strong),
+              child: ZoomControls(
+                onZoomIn: () => _ease.to(zoomedBy(_transform.value, 1.4, viewport, min: minScale, max: 2.5)),
+                onZoomOut: () => _ease.to(zoomedBy(_transform.value, 1 / 1.4, viewport, min: minScale, max: 2.5)),
+                onShowAll: () => _ease.to(fitMatrix(viewport, size)),
+                extra: IconButton(
+                  tooltip: personName(context, widget.world, widget.root),
+                  icon: const Icon(Icons.center_focus_strong),
+                  onPressed: () => setState(() {
+                    _centreOn = widget.root;
+                    _centredFor = null;
+                  }),
+                ),
               ),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+/// Under a person with children: «−» to fold their branch away, «+n» to open it again.
+class _BranchToggle extends StatelessWidget {
+  const _BranchToggle({super.key, required this.hidden, required this.onTap});
+
+  /// How many are folded away; null when the branch is open.
+  final int? hidden;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ganj;
+    final l = context.l10n;
+    final open = hidden == null;
+    return Tooltip(
+      message: open ? l.shCollapse : l.shExpand,
+      child: Material(
+        color: open ? c.paper : c.gold,
+        shape: StadiumBorder(side: BorderSide(color: c.gold)),
+        child: InkWell(
+          customBorder: const StadiumBorder(),
+          onTap: onTap,
+          child: Center(
+            child: Text(
+              open ? '−' : '+${localDigits(hidden!)}',
+              style: TextStyle(color: open ? c.ink : c.paper, fontSize: 12, fontWeight: FontWeight.bold, height: 1),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -211,6 +324,7 @@ class _LinksPainter extends CustomPainter {
     required this.centre,
     required this.ink,
     required this.spouse,
+    required this.paper,
     required this.label,
     required this.gapText,
     required this.textDirection,
@@ -218,7 +332,7 @@ class _LinksPainter extends CustomPainter {
 
   final TreeLayout layout;
   final Offset Function(int id) centre;
-  final Color ink, spouse;
+  final Color ink, spouse, paper;
   final TextStyle label;
   final String Function(int) gapText;
   final TextDirection textDirection;
@@ -246,7 +360,13 @@ class _LinksPainter extends CustomPainter {
               text: TextSpan(text: gapText(l.gap!), style: label),
               textDirection: textDirection,
             )..layout();
-            tp.paint(canvas, Offset(from.dx + 4, (from.dy + bend) / 2 - tp.height / 2));
+            // On a backing, so lines passing by don't run through the words.
+            final at = Offset(from.dx + 4, (from.dy + bend) / 2 - tp.height / 2);
+            canvas.drawRRect(
+              RRect.fromRectAndRadius((at & tp.size).inflate(2), const Radius.circular(4)),
+              Paint()..color = paper.withValues(alpha: 0.9),
+            );
+            tp.paint(canvas, at);
           } else {
             canvas.drawPath(path, line);
           }

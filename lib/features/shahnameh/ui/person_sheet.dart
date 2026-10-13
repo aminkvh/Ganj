@@ -228,7 +228,7 @@ class _SectionTitle extends StatelessWidget {
   );
 }
 
-class _Presence extends StatelessWidget {
+class _Presence extends ConsumerWidget {
   const _Presence({required this.world, required this.person, this.hub});
 
   final HubLink? hub;
@@ -237,9 +237,11 @@ class _Presence extends StatelessWidget {
   final ShPerson person;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = context.ganj;
-    final present = world.presence[person.id] ?? const [];
+    // Ganjoor's current answer when it gives one; the bundled data meanwhile and offline.
+    final live = ref.watch(personPresenceProvider(person.id)).value;
+    final present = (live != null && live.isNotEmpty) ? live : (world.presence[person.id] ?? const <int>[]);
     final ages = {for (final o in present) world.ageOfSection(o).index};
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,6 +251,7 @@ class _Presence extends StatelessWidget {
           world: world,
           person: person.id,
           height: 10,
+          present: present,
           onTapSection: (o) =>
               hub != null ? hub!('timeline', section: o) : context.push('/shahnameh?tab=timeline&section=$o'),
         ),
