@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 
 import '../../../core/net/http_cache.dart';
 
-/// Where the Shahnameh's people data is published every two weeks (by the repository's
+/// Where the Shahnameh's people data is published every month (by the repository's
 /// "Shahnameh data" workflow, from Ganjoor's API), so readers get Ganjoor's fixes without
 /// waiting for an app release.
 const kShahnamehDataUrl = 'https://github.com/aminkvh/Ganj/releases/download/shahnameh-data/shahnameh.json.gz';

@@ -13,7 +13,7 @@ import 'package:ganj/features/shahnameh/data/shahnameh_providers.dart';
 
 import '../../support/fake_adapter.dart';
 
-/// The Shahnameh's people data is published every two weeks on GitHub; the app opens with the
+/// The Shahnameh's people data is published every month on GitHub; the app opens with the
 /// best copy it has and picks up a newer one in the background.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

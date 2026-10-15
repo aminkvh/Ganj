@@ -1,4 +1,4 @@
-# Keeps «جهان شاهنامه» current between app releases: every two weeks (1st and 15th of the month)
+# Keeps «جهان شاهنامه» current between app releases: once a month (the 1st)
 # rebuilds the Shahnameh people data from Ganjoor's API (tool/shahnameh_snapshot.dart), checks it
 # against the curated files, and — when Ganjoor's data changed — publishes it to the
 # "shahnameh-data" pre-release, where the app looks for it about once a week and release builds
@@ -7,11 +7,12 @@ name: shahnameh-data
 
 on:
   schedule:
-    - cron: '23 3 1,15 * *'
+    - cron: '23 3 1 * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: shahnameh-data
@@ -49,10 +50,17 @@ jobs:
           else
             gh release create shahnameh-data --prerelease --target "$GITHUB_SHA" \
               --title "Shahnameh data · داده‌های شاهنامه" \
-              --notes "Data for Ganj's World of the Shahnameh, rebuilt from Ganjoor every two weeks. Not an app release: Ganj downloads it by itself.
+              --notes "Data for Ganj's World of the Shahnameh, rebuilt from Ganjoor every month. Not an app release: Ganj downloads it by itself.
 
-          داده‌های «جهان شاهنامه» در گنج که هر دو هفته از گنجور بازسازی می‌شود. این نسخهٔ برنامه نیست؛ گنج خودش آن را بارگیری می‌کند."
+          داده‌های «جهان شاهنامه» در گنج که هر ماه از گنجور بازسازی می‌شود. این نسخهٔ برنامه نیست؛ گنج خودش آن را بارگیری می‌کند."
           fi
           gzip -9 -n -c "$new" > shahnameh.json.gz
           gh release upload shahnameh-data shahnameh.json.gz --clobber
           echo "Published $(jq -r .builtAt "$new"): $(stat -c %s shahnameh.json.gz) bytes."
+      # GitHub switches scheduled workflows off after 60 days without a commit in the repository.
+      # Re-enabling this one at the end of every run keeps the monthly schedule alive on its own.
+      - name: Keep the schedule alive
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/shahnameh-data.yml/enable"
