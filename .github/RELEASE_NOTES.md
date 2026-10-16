@@ -8,6 +8,23 @@
 
 ## What's new · تازه‌ها
 
+### 1.2.2
+- **Poets' map:** poets born in the same place are now grouped into a numbered bubble (tap to zoom in) instead of one big circle, and there is an **All centuries** stop on the slider. Settings lets you choose whether the map opens on all centuries.
+- **Meanings (معنی ابیات):** the lightbulb in a poem now affects only that poem; the default is set in Settings.
+- **Remove a downloaded poet:** a trash button next to "On device" on the poet's page.
+- **World of the Shahnameh:** hovering a place on the map shows a card about it.
+- **Windows:** the app opens maximized.
+
+<div dir="rtl">
+
+- **نقشهٔ سخنوران:** سخنورانی که در یک جا زاده شده‌اند به‌جای یک دایرهٔ بزرگ، در یک حباب شماره‌دار گرد می‌آیند (با ضربه بزرگ‌نمایی می‌شود)، و روی لغزنده گزینهٔ **همهٔ سده‌ها** هست. در تنظیمات می‌توانید بگویید نقشه روی همهٔ سده‌ها باز شود یا نه.
+- **معنی ابیات:** لامپ بالای هر شعر فقط همان شعر را تغییر می‌دهد؛ پیش‌فرض را در تنظیمات بگذارید.
+- **حذف سخنور دانلودشده:** دکمهٔ سطل زباله کنار «روی دستگاه» در صفحهٔ سخنور.
+- **جهان شاهنامه:** نگه داشتن نشانگر روی هر جا در نقشه، کارت معرفی آن را نشان می‌دهد.
+- **ویندوز:** برنامه تمام‌صفحه (بزرگ‌شده) باز می‌شود.
+
+</div>
+
 ### 1.2.1
 - World of the Shahnameh, easier to explore:
   - **Zoom controls** (+, −, show all) on the people network and the family trees.

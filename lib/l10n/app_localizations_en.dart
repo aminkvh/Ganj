@@ -289,6 +289,15 @@ class L10nEn extends L10n {
   String get onDevice => 'On device';
 
   @override
+  String get removeFromDevice => 'Remove from device';
+
+  @override
+  String get allCenturies => 'All centuries';
+
+  @override
+  String get mapStartsOnAll => 'Open the poets\' map on all centuries';
+
+  @override
   String get updateAvailable => 'Update available';
 
   @override
@@ -296,9 +305,6 @@ class L10nEn extends L10n {
 
   @override
   String get downloadAllRecitations => 'Download all recitations';
-
-  @override
-  String get removeFromDevice => 'Remove from device';
 
   @override
   String get downloadForReading => 'Download to read offline';

@@ -287,6 +287,15 @@ class L10nFa extends L10n {
   String get onDevice => 'روی دستگاه';
 
   @override
+  String get removeFromDevice => 'حذف از دستگاه';
+
+  @override
+  String get allCenturies => 'همهٔ سده‌ها';
+
+  @override
+  String get mapStartsOnAll => 'باز شدن نقشهٔ سخنوران روی همهٔ سده‌ها';
+
+  @override
   String get updateAvailable => 'نسخهٔ تازه موجود است';
 
   @override
@@ -294,9 +303,6 @@ class L10nFa extends L10n {
 
   @override
   String get downloadAllRecitations => 'بارگیری همهٔ خوانش‌ها';
-
-  @override
-  String get removeFromDevice => 'حذف از دستگاه';
 
   @override
   String get downloadForReading => 'بارگیری برای خواندن آفلاین';

@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +12,9 @@ import '../../widgets/error_retry.dart';
 import '../../widgets/external_link.dart';
 import '../../widgets/poet_portrait.dart';
 import '../home/poet_tile.dart';
+import '../shahnameh/ui/cluster_bubble.dart';
+import '../shahnameh/ui/pin_clusters.dart';
+import '../settings/settings_controller.dart';
 import '../../core/text/content_en.dart';
 
 /// OpenStreetMap tiles, as on ganjoor.net/map. The tile policy asks for an identifying
@@ -34,7 +35,8 @@ class PoetsMapScreen extends ConsumerStatefulWidget {
 }
 
 class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
-  int _era = 0;
+  /// 0 is every century; i is the i-th century that has located poets. Null: not chosen yet.
+  int? _era;
   Poet? _selected;
 
   @override
@@ -52,7 +54,16 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
               if (c.id != 0 && c.poets.any(_located)) c,
           ];
           if (eras.isEmpty) return Center(child: Text(context.l10n.nothingHere));
-          final era = eras[_era.clamp(0, eras.length - 1)];
+          // Slider stops: all centuries first, then each century.
+          final stops = eras.length + 1;
+          final at = (_era ?? (ref.read(settingsProvider).mapStartsOnAll ? 0 : 1)).clamp(0, stops - 1);
+          final poets = at == 0
+              ? [
+                  for (final e in eras)
+                    for (final p in e.poets)
+                      if (_located(p)) p,
+                ]
+              : eras[at - 1].poets.where(_located).toList();
           return Column(
             children: [
               Expanded(
@@ -71,10 +82,7 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
                       ),
                       children: [
                         ref.watch(mapTileLayerProvider),
-                        _PoetMarkers(
-                          poets: era.poets.where(_located).toList(),
-                          onSelect: (p) => setState(() => _selected = p),
-                        ),
+                        _PoetMarkers(poets: poets, onSelect: (p) => setState(() => _selected = p)),
                         RichAttributionWidget(
                           attributions: [
                             TextSourceAttribution(
@@ -95,8 +103,8 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
                 ),
               ),
               _EraSlider(
-                eras: [for (final e in eras) localCentury(e.name)],
-                index: _era.clamp(0, eras.length - 1),
+                eras: [context.l10n.allCenturies, for (final e in eras) localCentury(e.name)],
+                index: at,
                 onChanged: (i) => setState(() {
                   _era = i;
                   _selected = null;
@@ -112,9 +120,9 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
   static bool _located(Poet p) => p.birthLatitude != null && p.birthLongitude != null;
 }
 
-/// The era's poets as portrait markers. Portraits that would overlap on screen at the
-/// current zoom are fanned out in a ring around the first, so every one stays tappable;
-/// the layer rebuilds as the map zooms, so the ring keeps its size in pixels.
+/// The poets as portrait markers. Portraits that would overlap on screen at the current zoom
+/// are grouped: a few fan out in a ring so each stays tappable, more become one numbered
+/// bubble (tap to zoom in). The layer rebuilds as the map zooms.
 class _PoetMarkers extends StatelessWidget {
   const _PoetMarkers({required this.poets, required this.onSelect});
 
@@ -126,38 +134,49 @@ class _PoetMarkers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final camera = MapCamera.of(context);
-    final groups = <(Offset, List<Poet>)>[];
-    for (final p in poets) {
-      final px = camera.projectAtZoom(LatLng(p.birthLatitude!, p.birthLongitude!));
-      final i = groups.indexWhere((g) => (g.$1 - px).distance < _w * 1.6);
-      i < 0 ? groups.add((px, [p])) : groups[i].$2.add(p);
-    }
+    final byId = {for (final p in poets) '${p.id}': p};
+    LatLng at(Poet p) => LatLng(p.birthLatitude!, p.birthLongitude!);
+    final groups = clusterPins({for (final p in poets) '${p.id}': camera.projectAtZoom(at(p))}, size: _w * 1.3);
+    // Bubbles last, so they're drawn above the portraits around them.
+    groups.sort((a, b) => (a.isBubble ? 1 : 0).compareTo(b.isBubble ? 1 : 0));
     return MarkerLayer(
       markers: [
-        for (final (anchor, group) in groups)
-          for (var k = 0; k < group.length; k++)
+        for (final g in groups)
+          if (g.isBubble)
             Marker(
-              point: camera.unprojectAtZoom(anchor + _ring(k, group.length)),
-              width: _w,
-              height: _h,
-              child: GestureDetector(
-                key: ValueKey('map-poet-${group[k].id}'),
-                onTap: () => onSelect(group[k]),
-                child: Tooltip(
-                  message: localPoet(group[k].id, group[k].nickname),
-                  child: PoetPortrait(url: group[k].imageAbsoluteUrl, width: 28, height: 36),
+              point: camera.unprojectAtZoom(g.centre),
+              width: 44,
+              height: 44,
+              child: ClusterBubble(
+                key: ValueKey('map-cluster-${g.ids.first}'),
+                count: g.ids.length,
+                onTap: () => MapController.of(context).fitCamera(
+                  CameraFit.bounds(
+                    bounds: LatLngBounds.fromPoints([for (final id in g.ids) at(byId[id]!)]),
+                    padding: const EdgeInsets.all(64),
+                    maxZoom: camera.zoom + 4,
+                    minZoom: camera.zoom + 1,
+                  ),
                 ),
               ),
-            ),
+            )
+          else
+            for (final (k, id) in g.ids.indexed)
+              Marker(
+                point: camera.unprojectAtZoom(camera.projectAtZoom(at(byId[id]!)) + g.offsets[k]),
+                width: _w,
+                height: _h,
+                child: GestureDetector(
+                  key: ValueKey('map-poet-$id'),
+                  onTap: () => onSelect(byId[id]!),
+                  child: Tooltip(
+                    message: localPoet(byId[id]!.id, byId[id]!.nickname),
+                    child: PoetPortrait(url: byId[id]!.imageAbsoluteUrl, width: 28, height: 36),
+                  ),
+                ),
+              ),
       ],
     );
-  }
-
-  static Offset _ring(int k, int n) {
-    if (n == 1) return Offset.zero;
-    final r = math.max(_w * 0.8, n * _w / (2 * math.pi) * 1.15);
-    final a = 2 * math.pi * k / n - math.pi / 2;
-    return Offset(r * math.cos(a), r * math.sin(a));
   }
 }
 

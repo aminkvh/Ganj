@@ -589,6 +589,24 @@ abstract class L10n {
   /// **'روی دستگاه'**
   String get onDevice;
 
+  /// No description provided for @removeFromDevice.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف از دستگاه'**
+  String get removeFromDevice;
+
+  /// No description provided for @allCenturies.
+  ///
+  /// In fa, this message translates to:
+  /// **'همهٔ سده‌ها'**
+  String get allCenturies;
+
+  /// No description provided for @mapStartsOnAll.
+  ///
+  /// In fa, this message translates to:
+  /// **'باز شدن نقشهٔ سخنوران روی همهٔ سده‌ها'**
+  String get mapStartsOnAll;
+
   /// No description provided for @updateAvailable.
   ///
   /// In fa, this message translates to:
@@ -606,12 +624,6 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'بارگیری همهٔ خوانش‌ها'**
   String get downloadAllRecitations;
-
-  /// No description provided for @removeFromDevice.
-  ///
-  /// In fa, this message translates to:
-  /// **'حذف از دستگاه'**
-  String get removeFromDevice;
 
   /// No description provided for @downloadForReading.
   ///

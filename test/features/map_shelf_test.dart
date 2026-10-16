@@ -164,23 +164,37 @@ void main() {
         if (c.id != 0 && c.poets.any((p) => p.birthLatitude != null)) c,
     ];
     final first = eras.first.poets.firstWhere((p) => p.birthLatitude != null);
-    final prefs = await mockPrefs();
+    final prefs = await mockPrefs({'mapStartsOnAll': false});
     await tester.pumpWidget(
       testAppRouted('/map', prefs: prefs, overrides: [mapTileLayerProvider.overrideWithValue(const SizedBox())]),
     );
     await settle(tester);
     expect(find.text(eras.first.name), findsWidgets);
     expect(find.byKey(ValueKey('map-poet-${first.id}')), findsOneWidget);
-    // The slider steps through eras.
-    await tester.drag(find.byType(Slider), const Offset(-2000, 0));
-    await settle(tester);
-    expect(find.text(eras.last.name), findsWidgets);
-    await tester.drag(find.byType(Slider), const Offset(2000, 0));
-    await settle(tester);
     await tester.tap(find.byKey(ValueKey('map-poet-${first.id}')));
     await settle(tester);
     await tester.tap(find.byKey(const ValueKey('map-open-poet')));
     await settle(tester);
     expect(tester.widget<PoetScreen>(find.byType(PoetScreen)).id, first.id);
+  });
+
+  testWidgets('the map opens on every century; the slider steps through the centuries', (tester) async {
+    tall(tester);
+    final eras = [
+      for (final c in await FixtureRepository().centuries())
+        if (c.id != 0 && c.poets.any((p) => p.birthLatitude != null)) c,
+    ];
+    final prefs = await mockPrefs();
+    await tester.pumpWidget(
+      testAppRouted('/map', prefs: prefs, overrides: [mapTileLayerProvider.overrideWithValue(const SizedBox())]),
+    );
+    await settle(tester);
+    expect(find.text('همهٔ سده‌ها'), findsWidgets);
+    await tester.drag(find.byType(Slider), const Offset(-2000, 0));
+    await settle(tester);
+    expect(find.text(eras.last.name), findsWidgets);
+    await tester.drag(find.byType(Slider), const Offset(2000, 0));
+    await settle(tester);
+    expect(find.text('همهٔ سده‌ها'), findsWidgets);
   });
 }

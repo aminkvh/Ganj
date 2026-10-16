@@ -56,6 +56,9 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   List<int> _hits = const []; // vOrders
   int _hit = 0;
   bool _scrollLocked = false;
+
+  /// This visit's choice for the meanings; null follows the default set in Settings.
+  bool? _meaningHere;
   DateTime _userScrolledAt = DateTime(2000);
 
   // Machine translation shown under each beyt (on-device translators only).
@@ -353,10 +356,10 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
           ),
           IconButton(
             tooltip: context.l10n.meanings,
-            isSelected: settings.showMeaning,
+            isSelected: _meaningHere ?? settings.showMeaning,
             icon: const Icon(Icons.lightbulb_outline),
             selectedIcon: const Icon(Icons.lightbulb),
-            onPressed: ctrl.toggleMeaning,
+            onPressed: () => setState(() => _meaningHere = !(_meaningHere ?? settings.showMeaning)),
           ),
           PopupMenuButton<String>(
             tooltip: context.l10n.more,
@@ -542,7 +545,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                               couplet: couplets[i],
                               wide: wide,
                               scale: s.fontScale,
-                              showMeaning: s.showMeaning,
+                              showMeaning: _meaningHere ?? s.showMeaning,
                               highlightVOrders: highlights,
                               hasNote: _notes.containsKey(couplets[i].index),
                               bookmarked: _bookmarkedCouplets.contains(couplets[i].index),

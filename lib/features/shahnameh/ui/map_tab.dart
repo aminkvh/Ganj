@@ -14,6 +14,7 @@ import '../data/models.dart';
 import '../data/place_merge.dart';
 import '../data/shahnameh_providers.dart';
 import 'person_sheet.dart';
+import 'cluster_bubble.dart';
 import 'pin_clusters.dart';
 import 'sh_style.dart';
 
@@ -292,8 +293,10 @@ class _ShahnamehMapTabState extends ConsumerState<ShahnamehMapTab> {
                       ],
                     ),
                   _PlaceMarkers(
+                    world: w,
                     places: shown,
                     tintOf: (p) => _tint(context, tintOf[p.id]),
+                    tintAge: (p) => tintOf[p.id],
                     numberOf: (p) => hasRoute && stops.contains(p.id) ? stops.indexOf(p.id) + 1 : null,
                     onTap: (p) => _openPlace(p.id),
                   ),
@@ -348,11 +351,20 @@ class _ShahnamehMapTabState extends ConsumerState<ShahnamehMapTab> {
 /// Pins, fanned out in a ring where they would overlap at the current zoom so each stays
 /// tappable (Damavand, Amol, Rey and the Alborz sit close together); rebuilt as the map zooms.
 class _PlaceMarkers extends StatelessWidget {
-  const _PlaceMarkers({required this.places, required this.tintOf, required this.numberOf, required this.onTap});
+  const _PlaceMarkers({
+    required this.world,
+    required this.places,
+    required this.tintOf,
+    required this.tintAge,
+    required this.numberOf,
+    required this.onTap,
+  });
 
+  final ShWorld world;
   final List<ShPlace> places;
   final Color Function(ShPlace) tintOf;
   final int? Function(ShPlace) numberOf;
+  final int? Function(ShPlace) tintAge;
   final ValueChanged<ShPlace> onTap;
 
   static const _size = 34.0;
@@ -372,7 +384,7 @@ class _PlaceMarkers extends StatelessWidget {
               point: camera.unprojectAtZoom(g.centre),
               width: 44,
               height: 44,
-              child: _Bubble(
+              child: ClusterBubble(
                 key: ValueKey('cluster-${g.ids.first}'),
                 count: g.ids.length,
                 onTap: () => MapController.of(context).fitCamera(
@@ -398,6 +410,8 @@ class _PlaceMarkers extends StatelessWidget {
                     : Alignment.topCenter,
                 child: _Pin(
                   key: ValueKey('pin-$id'),
+                  world: world,
+                  ageIndex: tintAge(byId[id]!),
                   place: byId[id]!,
                   tint: tintOf(byId[id]!),
                   number: numberOf(byId[id]!),
@@ -409,50 +423,35 @@ class _PlaceMarkers extends StatelessWidget {
   }
 }
 
-/// Places too close to tell apart at this zoom: how many, and a tap to zoom in.
-class _Bubble extends StatelessWidget {
-  const _Bubble({super.key, required this.count, required this.onTap});
+class _Pin extends StatefulWidget {
+  const _Pin({
+    super.key,
+    required this.world,
+    required this.place,
+    required this.tint,
+    required this.onTap,
+    this.ageIndex,
+    this.number,
+  });
 
-  final int count;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.ganj;
-    return Semantics(
-      button: true,
-      label: localDigits(count),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: c.gold,
-            shape: BoxShape.circle,
-            border: Border.all(color: c.paper, width: 3),
-            boxShadow: [BoxShadow(color: c.ink.withValues(alpha: 0.3), blurRadius: 4)],
-          ),
-          child: Text(
-            localDigits(count),
-            style: TextStyle(color: c.paper, fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Pin extends StatelessWidget {
-  const _Pin({super.key, required this.place, required this.tint, required this.onTap, this.number});
-
+  final ShWorld world;
+  final int? ageIndex;
   final ShPlace place;
   final Color tint;
   final VoidCallback onTap;
   final int? number;
 
   @override
+  State<_Pin> createState() => _PinState();
+}
+
+class _PinState extends State<_Pin> {
+  bool _hover = false;
+
+  @override
   Widget build(BuildContext context) {
     final c = context.ganj;
+    final place = widget.place, tint = widget.tint, number = widget.number;
     final name = placeName(context, place);
     final Widget icon;
     if (place.precision == PlacePrecision.mythic) {
@@ -477,7 +476,7 @@ class _Pin extends StatelessWidget {
           border: Border.all(color: c.paper, width: 2),
         ),
         child: Text(
-          localDigits(number!),
+          localDigits(number),
           style: TextStyle(color: c.paper, fontWeight: FontWeight.bold, fontSize: 12),
         ),
       );
@@ -493,10 +492,100 @@ class _Pin extends StatelessWidget {
       button: true,
       label: name,
       child: Tooltip(
-        message: name,
-        child: GestureDetector(
-          onTap: onTap,
-          child: Center(child: icon),
+        richMessage: WidgetSpan(
+          child: _PlaceHoverCard(world: widget.world, place: place, ageIndex: widget.ageIndex),
+        ),
+        decoration: const BoxDecoration(color: Colors.transparent),
+        padding: EdgeInsets.zero,
+        waitDuration: const Duration(milliseconds: 250),
+        triggerMode: TooltipTriggerMode.manual,
+        excludeFromSemantics: true,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => setState(() => _hover = true),
+          onExit: (_) => setState(() => _hover = false),
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: AnimatedScale(
+              scale: _hover ? 1.2 : 1,
+              duration: const Duration(milliseconds: 120),
+              child: Center(child: icon),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// What a place is, at a glance — shown when a mouse rests on its pin.
+class _PlaceHoverCard extends StatelessWidget {
+  const _PlaceHoverCard({required this.world, required this.place, required this.ageIndex});
+
+  final ShWorld world;
+  final ShPlace place;
+  final int? ageIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ganj;
+    final l = context.l10n;
+    final en = isEn(context);
+    final tint = ageIndex == null ? c.borderGold : ageTint(context, ageIndex!);
+    final stories = [for (final id in place.stories) ?world.storyById(id)];
+    final people = <int>{for (final s in stories) ...s.people};
+    final note = en ? (place.noteEn ?? place.noteFa) : (place.noteFa ?? place.noteEn);
+    return Material(
+      color: c.paper,
+      elevation: 6,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: tint, width: 1.5),
+      ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 280),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                placeName(context, place),
+                style: TextStyle(color: c.ink, fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                [
+                  regionName(context, place.region),
+                  if (place.precision == PlacePrecision.mythic) l.shMythic,
+                  if (place.precision == PlacePrecision.approx) l.shApprox,
+                ].join(' · '),
+                style: TextStyle(color: tint, fontSize: 12),
+              ),
+              if (note != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    note,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: c.ink, fontSize: 12.5, height: 1.6),
+                  ),
+                ),
+              if (stories.isNotEmpty || people.isNotEmpty || place.tags.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    [
+                      if (stories.isNotEmpty) '${l.shStoriesHere}: ${localDigits(stories.length)}',
+                      if (people.isNotEmpty) '${l.shPeople}: ${localDigits(people.length)}',
+                      if (place.tags.isNotEmpty) '${l.shTaggedPoems}: ${localDigits(place.tags.length)}',
+                    ].join(' · '),
+                    style: TextStyle(color: c.muted, fontSize: 11.5),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

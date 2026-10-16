@@ -12,6 +12,7 @@ class Settings {
     this.language = 'fa',
     this.translateTo = 'en',
     this.showTajik = false,
+    this.mapStartsOnAll = true,
   });
 
   final ThemeMode themeMode;
@@ -28,6 +29,9 @@ class Settings {
   /// Show the Tajik (Cyrillic) text under each verse, where Ganjoor has it.
   final bool showTajik;
 
+  /// The poets' map opens on every century at once (otherwise on the first century).
+  final bool mapStartsOnAll;
+
   Settings copyWith({
     ThemeMode? themeMode,
     double? fontScale,
@@ -36,6 +40,7 @@ class Settings {
     String? language,
     String? translateTo,
     bool? showTajik,
+    bool? mapStartsOnAll,
   }) => Settings(
     themeMode: themeMode ?? this.themeMode,
     fontScale: fontScale ?? this.fontScale,
@@ -44,6 +49,7 @@ class Settings {
     language: language ?? this.language,
     translateTo: translateTo ?? this.translateTo,
     showTajik: showTajik ?? this.showTajik,
+    mapStartsOnAll: mapStartsOnAll ?? this.mapStartsOnAll,
   );
 }
 
@@ -54,7 +60,8 @@ class SettingsController extends Notifier<Settings> {
       _kIran = 'iranNastaliq',
       _kLanguage = 'language',
       _kTranslateTo = 'translateTo',
-      _kTajik = 'showTajik';
+      _kTajik = 'showTajik',
+      _kMapAll = 'mapStartsOnAll';
 
   @override
   Settings build() {
@@ -67,6 +74,7 @@ class SettingsController extends Notifier<Settings> {
       language: p.getString(_kLanguage) == 'en' ? 'en' : 'fa',
       translateTo: p.getString(_kTranslateTo) ?? 'en',
       showTajik: p.getBool(_kTajik) ?? false,
+      mapStartsOnAll: p.getBool(_kMapAll) ?? true,
     );
   }
 
@@ -107,6 +115,11 @@ class SettingsController extends Notifier<Settings> {
   void setShowTajik(bool on) {
     state = state.copyWith(showTajik: on);
     ref.read(sharedPrefsProvider).setBool(_kTajik, on);
+  }
+
+  void setMapStartsOnAll(bool on) {
+    state = state.copyWith(mapStartsOnAll: on);
+    ref.read(sharedPrefsProvider).setBool(_kMapAll, on);
   }
 
   void toggleMeaning() {

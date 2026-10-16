@@ -138,6 +138,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             onChanged: (_) => ctrl.toggleMeaning(),
           ),
           SwitchListTile(
+            title: Text(context.l10n.mapStartsOnAll),
+            value: s.mapStartsOnAll,
+            onChanged: ctrl.setMapStartsOnAll,
+          ),
+          SwitchListTile(
             title: Text(context.l10n.tajikScript),
             subtitle: Text(context.l10n.tajikScriptNote, style: TextStyle(color: c.muted, fontSize: 12)),
             value: s.showTajik,

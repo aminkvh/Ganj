@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/text/content_en.dart';
 import '../../core/text/persian_normalize.dart';
 import '../../core/theme/ganj_colors.dart';
+import '../../data/packs/pack_catalog.dart';
+import '../../data/packs/pack_importer.dart';
+import '../../data/providers.dart';
 import '../../l10n/l10n.dart';
 import 'library_providers.dart';
 
@@ -48,6 +51,30 @@ class _PoetPackButtonState extends ConsumerState<PoetPackButton> {
     }
   }
 
+  Future<void> _remove(PackInfo pack) async {
+    final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l.packRemoveTitle(pack.name)),
+        content: Text(l.packRemoveBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(l.cancel)),
+          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: Text(l.delete)),
+        ],
+      ),
+    );
+    if (ok != true || !mounted) return;
+    try {
+      await uninstall(ref.read(appDbProvider), pack.poetId);
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(l.packRemoveFailed(pack.name))));
+    } finally {
+      ref.invalidate(installedPacksProvider);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -77,17 +104,41 @@ class _PoetPackButtonState extends ConsumerState<PoetPackButton> {
             Icon(Icons.offline_pin, color: c.gold, size: 18),
             const SizedBox(width: 6),
             Text(l.onDevice, style: TextStyle(color: c.muted)),
+            IconButton(
+              key: const ValueKey('poet-pack-remove'),
+              tooltip: l.removeFromDevice,
+              visualDensity: VisualDensity.compact,
+              onPressed: () => _remove(pack),
+              icon: const Icon(Icons.delete_outline, size: 18),
+            ),
           ],
         ),
       );
     }
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: FilledButton.tonalIcon(
-        key: const ValueKey('poet-pack-get'),
-        onPressed: _install,
-        icon: Icon(installedDate == null ? Icons.download_for_offline_outlined : Icons.update),
-        label: Text(installedDate == null ? '${l.downloadForReading} · ${formatBytes(pack.size)}' : l.updateAvailable),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        children: [
+          FilledButton.tonalIcon(
+            key: const ValueKey('poet-pack-get'),
+            onPressed: _install,
+            icon: Icon(installedDate == null ? Icons.download_for_offline_outlined : Icons.update),
+            label: Text(
+              installedDate == null ? '${l.downloadForReading} · ${formatBytes(pack.size)}' : l.updateAvailable,
+            ),
+          ),
+          if (installedDate != null)
+            IconButton(
+              key: const ValueKey('poet-pack-remove'),
+              tooltip: l.removeFromDevice,
+              visualDensity: VisualDensity.compact,
+              onPressed: () => _remove(pack),
+              icon: const Icon(Icons.delete_outline, size: 18),
+            ),
+        ],
       ),
     );
   }
