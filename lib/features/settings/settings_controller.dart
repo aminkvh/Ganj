@@ -13,6 +13,7 @@ class Settings {
     this.translateTo = 'en',
     this.showTajik = false,
     this.mapStartsOnAll = true,
+    this.excludedPoets = const {},
   });
 
   final ThemeMode themeMode;
@@ -32,6 +33,9 @@ class Settings {
   /// The poets' map opens on every century at once (otherwise on the first century).
   final bool mapStartsOnAll;
 
+  /// Poets whose poems are left out of word search, until the reader brings them back.
+  final Set<int> excludedPoets;
+
   Settings copyWith({
     ThemeMode? themeMode,
     double? fontScale,
@@ -41,6 +45,7 @@ class Settings {
     String? translateTo,
     bool? showTajik,
     bool? mapStartsOnAll,
+    Set<int>? excludedPoets,
   }) => Settings(
     themeMode: themeMode ?? this.themeMode,
     fontScale: fontScale ?? this.fontScale,
@@ -50,6 +55,7 @@ class Settings {
     translateTo: translateTo ?? this.translateTo,
     showTajik: showTajik ?? this.showTajik,
     mapStartsOnAll: mapStartsOnAll ?? this.mapStartsOnAll,
+    excludedPoets: excludedPoets ?? this.excludedPoets,
   );
 }
 
@@ -61,7 +67,8 @@ class SettingsController extends Notifier<Settings> {
       _kLanguage = 'language',
       _kTranslateTo = 'translateTo',
       _kTajik = 'showTajik',
-      _kMapAll = 'mapStartsOnAll';
+      _kMapAll = 'mapStartsOnAll',
+      _kExcluded = 'excludedPoets';
 
   @override
   Settings build() {
@@ -75,7 +82,13 @@ class SettingsController extends Notifier<Settings> {
       translateTo: p.getString(_kTranslateTo) ?? 'en',
       showTajik: p.getBool(_kTajik) ?? false,
       mapStartsOnAll: p.getBool(_kMapAll) ?? true,
+      excludedPoets: {for (final s in p.getStringList(_kExcluded) ?? const []) ?int.tryParse(s)},
     );
+  }
+
+  void setExcludedPoets(Set<int> ids) {
+    state = state.copyWith(excludedPoets: ids);
+    ref.read(sharedPrefsProvider).setStringList(_kExcluded, [for (final id in ids) '$id']);
   }
 
   void setThemeMode(ThemeMode mode) {

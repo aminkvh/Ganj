@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/core/text/content_en.dart';
@@ -68,6 +70,30 @@ void main() {
     await tester.tap(chip);
     await settle(tester);
     expect(inSheet(find.textContaining('غم آمد به سر')), findsWidgets);
+  });
+
+  testWidgets('evidence from another book is left to that book', (tester) async {
+    // Zal's parenthood previewed by a Khamse couplet first, then the Shahnameh's.
+    final r = jsonDecode(shFx('relations_60.json')) as Map<String, dynamic>;
+    final zal = (r['relations'] as List).firstWhere((x) => x['otherPersonId'] == 54) as Map<String, dynamic>;
+    final own = (zal['evidence'] as List).first as Map<String, dynamic>;
+    zal['evidence'] = [
+      {...own, 'coupletText': 'بیتی از خمسهٔ نظامی', 'masterCatId': 111, 'masterCatTitle': 'خمسه'},
+      own,
+    ];
+    final adapter = FakeAdapter({
+      '/api/people/60/relations': jsonEncode(r),
+      '/api/people/60/poems': shFx('poems_60.json'),
+      '/api/ganjoor/cat/39/geotag': shFx('geotag_39.json'),
+      '/api/locations': '[]',
+    });
+    await openRostam(tester, adapter: adapter);
+    final chip = find.descendant(of: find.byKey(const ValueKey('kin-54')), matching: find.text('مستند (۳۱)'));
+    await scrollTo(tester, chip);
+    await tester.tap(chip);
+    await settle(tester);
+    expect(inSheet(find.textContaining('غم آمد به سر')), findsWidgets);
+    expect(inSheet(find.textContaining('خمسهٔ نظامی')), findsNothing);
   });
 
   testWidgets('ties name the role: «قاتلِ» for the person, «قاتل» for the other', (tester) async {

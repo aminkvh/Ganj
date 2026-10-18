@@ -38,13 +38,17 @@ class ShPerson {
 
 /// "a is [kind] of b".
 class ShEdge {
-  const ShEdge(this.a, this.b, this.kind, {this.degree});
+  const ShEdge(this.a, this.b, this.kind, {this.degree, this.books = const []});
 
   final int a, b;
   final RelationKind kind;
 
   /// Generations between ancestor and descendant, when Ganjoor knows it.
   final int? degree;
+
+  /// Ganjoor's books (master category ids) with a couplet attesting the tie; empty when no
+  /// couplet does.
+  final List<int> books;
 
   int other(int id) => id == a ? b : a;
 }

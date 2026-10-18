@@ -285,5 +285,20 @@
   "shLegendBranch": "Folded (+) or open (−) branch; tap to fold or open",
   "shLegendFocus": "The person the network is centred on",
   "shLegendSize": "Bigger circle: a greater figure",
-  "shLegendLines": "Solid: kin and conflict; dashed: service; dotted: alliance"
+  "shLegendLines": "Solid: kin and conflict; dashed: service; dotted: alliance",
+
+  "literaryDevices": "Literary devices",
+  "literaryCorpusNote": "Some of these come from «A Corpus of Persian Literary Text» (MIT); Ganjoor's conversion may contain mistakes.",
+  "literaryUncertain": "uncertain",
+  "wordFrequency": "Word frequency",
+  "wordTotals": "{total} words, {unique} distinct",
+  "findWord": "Find a word",
+  "moreWords": "More",
+  "searchThisWord": "Search the poems for this word",
+  "excludePoet": "Leave this poet out of the results",
+  "excludedPoets": "Without:",
+  "paperSources": "Manuscripts and editions",
+  "manuscript": "Manuscript",
+  "printedEdition": "Printed edition",
+  "textSource": "Source of Ganjoor's text"
 }

@@ -7,6 +7,7 @@ import '../../core/theme/ganj_colors.dart';
 import '../../data/api/dto/poet.dart';
 import '../../data/providers.dart';
 import 'search_service.dart';
+import '../settings/settings_controller.dart';
 import '../../l10n/l10n.dart';
 import '../../core/text/content_en.dart';
 import '../../data/api/dto/semantic.dart';
@@ -89,8 +90,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     });
     final page = more ? _page + 1 : 1;
     final request = ++_request;
+    // Left-out poets only matter when searching all of them.
+    final exclude = _poetId == null ? ref.read(settingsProvider).excludedPoets : const <int>{};
     try {
-      final r = await ref.read(searchServiceProvider).search(term, poetId: _poetId, page: page);
+      final r = await ref.read(searchServiceProvider).search(term, poetId: _poetId, exclude: exclude, page: page);
       if (!mounted || request != _request) return;
       final seen = {for (final h in _hits) h.poemId};
       setState(() {
@@ -104,6 +107,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     } finally {
       if (mounted && request == _request) setState(() => _loading = false);
     }
+  }
+
+  /// «حذف آثار این شاعر از نتایج»: remembered until the reader brings the poet back.
+  void _setExcluded(Set<int> ids) {
+    ref.read(settingsProvider.notifier).setExcludedPoets(ids);
+    if (_term != null) _run();
   }
 
   List<Poet> _poets() {
@@ -120,6 +129,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   Widget build(BuildContext context) {
     final c = context.ganj;
     final poets = _poets();
+    final excluded = ref.watch(settingsProvider.select((s) => s.excludedPoets));
+    String poetName(int id) => localPoet(id, poets.where((p) => p.id == id).firstOrNull?.nickname ?? '$id');
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -187,6 +198,26 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     ],
                   ),
                 ),
+                if (_poetId == null && excluded.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+                    child: Wrap(
+                      spacing: 6,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text(context.l10n.excludedPoets, style: TextStyle(color: c.muted, fontSize: 12)),
+                        for (final id in excluded)
+                          InputChip(
+                            key: ValueKey('excluded-$id'),
+                            visualDensity: VisualDensity.compact,
+                            label: Text(poetName(id), style: const TextStyle(fontSize: 12)),
+                            deleteIcon: const Icon(Icons.close, size: 16),
+                            onDeleted: () => _setExcluded({...excluded}..remove(id)),
+                          ),
+                      ],
+                    ),
+                  ),
                 if (_offline)
                   Container(
                     width: double.infinity,
@@ -228,7 +259,21 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         key: ValueKey('hit-${h.poemId}'),
                         title: Text(h.snippet, maxLines: 2, overflow: TextOverflow.ellipsis),
                         subtitle: Text(localPath('${h.poetName} » ${h.poemTitle}'), style: TextStyle(color: c.muted)),
-                        trailing: h.local ? Icon(Icons.offline_pin, color: c.gold, size: 18) : null,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (h.local) Icon(Icons.offline_pin, color: c.gold, size: 18),
+                            if (_poetId == null)
+                              if (h.poetId case final poet?)
+                                IconButton(
+                                  key: ValueKey('exclude-${h.poemId}'),
+                                  tooltip: context.l10n.excludePoet,
+                                  visualDensity: VisualDensity.compact,
+                                  icon: Icon(Icons.person_off_outlined, color: c.muted, size: 18),
+                                  onPressed: () => _setExcluded({...excluded, poet}),
+                                ),
+                          ],
+                        ),
                         onTap: () => context.push('/poem/${h.poemId}'),
                       );
                     },

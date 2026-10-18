@@ -8,6 +8,23 @@
 
 ## What's new · تازه‌ها
 
+### 1.2.3
+- **Literary devices (آرایه‌های ادبی):** where Ganjoor has tagged a poem (for now, mostly Hafez's ghazals), tap a beyt (or right-click it on a computer) to see its similes, metaphors, puns and more, with the words that make them. A panel under the poem lists them all. New tags on Ganjoor appear without an app update.
+- **Word frequency (بسامد واژگان):** a chart button on every poet's and book's page shows how many words they use, the most frequent ones, and how often any word appears. Tap a word to search for it.
+- **Manuscripts and editions (منابع کاغذی):** a poet's page names the edition Ganjoor's text follows, and lists the manuscripts and printed editions Ganjoor knows.
+- **Leave a poet out of search:** a button on each result hides that poet's poems from the results, until you bring them back.
+- **World of the Shahnameh:** ties that only another book states (e.g. Nizami's *Khosrow and Shirin*) are no longer shown as the Shahnameh's.
+
+<div dir="rtl">
+
+- **آرایه‌های ادبی:** در شعرهایی که گنجور برایشان آرایه ثبت کرده (فعلاً بیشتر غزل‌های حافظ)، روی هر بیت بزنید (یا در رایانه راست‌کلیک کنید) تا تشبیه و استعاره و ایهام و دیگر آرایه‌ها را با واژه‌هایشان ببینید. فهرست همه در کادری زیر شعر است. آرایه‌های تازهٔ گنجور بی‌نیاز از به‌روزرسانی برنامه می‌آیند.
+- **بسامد واژگان:** دکمهٔ نمودار در صفحهٔ هر سخنور و هر کتاب، شمار واژه‌ها، پرکاربردترین‌ها و بسامد هر واژه را نشان می‌دهد؛ با زدن روی واژه، جستجو می‌شود.
+- **منابع کاغذی:** صفحهٔ سخنور نشان می‌دهد متن گنجور از کدام چاپ است و نسخه‌های خطی و چاپی شناخته‌شده را فهرست می‌کند.
+- **حذف آثار یک شاعر از نتایج جستجو:** دکمه‌ای کنار هر نتیجه، شعرهای آن شاعر را تا وقتی برش نگردانید کنار می‌گذارد.
+- **جهان شاهنامه:** پیوندهایی که فقط کتابی دیگر (مثلاً خسرو و شیرین نظامی) از آن‌ها گفته، دیگر از شاهنامه شمرده نمی‌شوند.
+
+</div>
+
 ### 1.2.2
 - **Poets' map:** poets born in the same place are now grouped into a numbered bubble (tap to zoom in) instead of one big circle, and there is an **All centuries** stop on the slider. Settings lets you choose whether the map opens on all centuries.
 - **Meanings (معنی ابیات):** the lightbulb in a poem now affects only that poem; the default is set in Settings.

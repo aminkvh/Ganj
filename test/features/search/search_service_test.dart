@@ -100,4 +100,23 @@ void main() {
     expect(page.offline, isTrue);
     expect(page.hits.map((h) => h.poemId), contains(2130));
   });
+
+  group('poets left out', () {
+    test('local search skips their poems', () async {
+      expect((await service.searchLocal('ساقی', exclude: {2})).hits, isEmpty);
+      expect((await service.searchLocal('ساقی', exclude: {7})).hits.first.poetId, 2);
+    });
+
+    test('online search sends one e per poet, the only form the server honours', () async {
+      await service.searchOnline('ساقی', exclude: {2, 7});
+      final uri = adapter.requests.single;
+      expect(uri.queryParametersAll['e'], ['2', '7']);
+      expect(uri.query, isNot(contains('e%5B%5D')));
+    });
+
+    test('online hits carry the poet, so the reader can leave them out', () async {
+      final page = await service.searchOnline('ساقی');
+      expect(page.hits.first.poetId, 2);
+    });
+  });
 }

@@ -158,3 +158,45 @@ class PoemHit {
         .firstWhere((l) => l.trim().isNotEmpty, orElse: () => ''),
   );
 }
+
+/// A word and how often it occurs in a poet or section («بسامد واژگان»); [rank] counts from 1.
+class WordCount {
+  const WordCount({required this.word, required this.count, required this.rank});
+
+  final String word;
+  final int count;
+  final int rank;
+
+  factory WordCount.fromJson(Map<String, dynamic> j) => WordCount(
+    word: (j['word'] as String?) ?? '',
+    count: (j['count'] as int?) ?? 0,
+    rank: (j['rowNmbrInCat'] as int?) ?? 0,
+  );
+}
+
+/// A manuscript (an item of museum.ganjoor.net) or printed edition (a book on naskban.ir)
+/// Ganjoor lists as a source for a poet's text; [textSource] marks the edition the text follows.
+class PaperSource {
+  const PaperSource({
+    required this.title,
+    required this.url,
+    required this.manuscript,
+    required this.textSource,
+    this.thumb = '',
+  });
+
+  final String title, url, thumb;
+
+  /// Else a printed edition.
+  final bool manuscript;
+  final bool textSource;
+
+  factory PaperSource.fromJson(Map<String, dynamic> j) => PaperSource(
+    title: (j['bookFullTitle'] as String?) ?? '',
+    url: (j['bookFullUrl'] as String?) ?? '',
+    thumb: (j['coverThumbnailImageUrl'] as String?) ?? '',
+    // LinkType 1: a museum item; 4: a naskban book.
+    manuscript: (j['bookType'] as int?) == 1,
+    textSource: (j['isTextOriginalSource'] as bool?) ?? false,
+  );
+}

@@ -127,11 +127,45 @@ Future<void> main() async {
   passing.removeWhere((_, v) => v.isEmpty);
 
   final graph = await _json('/api/ganjoor/cat/$_book/persongraph') as Map;
+  final wanted = <int>{for (final n in graph['nodes'] as List) n['id'] as int, ...presence.keys, ...passing.keys};
+
+  // Ganjoor's people are shared between its books, and a book's graph also carries ties that
+  // only another book states (Khosrow Parviz's ties in Nizami's Khosrow and Shirin, say). Each
+  // edge records the books with a couplet attesting it; the app keeps the ones this book
+  // attests, and unsourced ones, as ganjoor.net's «فقط آنچه این کتاب می‌گوید» does.
+  final attested = <String, Set<int>>{};
+  final ids = wanted.toList();
+  stderr.writeln('ties of ${ids.length} people…');
+  await Future.wait([
+    for (var lane = 0; lane < 4; lane++)
+      () async {
+        for (var i = lane; i < ids.length; i += 4) {
+          final r = await _json('/api/people/${ids[i]}/relations?evidenceLimit=1') as Map;
+          for (final (cat, rows) in [('R', r['relations']), ('A', r['affiliations'])]) {
+            for (final row in (rows as List? ?? const [])) {
+              final other = row['otherPersonId'] as int;
+              final first = row['subjectIsPerson1'] == true;
+              final type = (cat == 'R' ? row['relationType'] : row['affiliationType']) as int;
+              attested.putIfAbsent('${first ? ids[i] : other}-${first ? other : ids[i]}-$cat-$type', () => {}).addAll([
+                for (final b in (row['evidenceBooks'] as List? ?? const [])) (b as Map)['masterCatId'] as int,
+              ]);
+            }
+          }
+        }
+      }(),
+  ]);
   final edges = [
     for (final e in graph['edges'] as List)
-      [e['person1Id'], e['person2Id'], e['category'] == 'Relation' ? 'R' : 'A', e['typeValue'], e['degreeHint']],
+      if (e['category'] == 'Relation' ? 'R' : 'A' case final cat)
+        [
+          e['person1Id'],
+          e['person2Id'],
+          cat,
+          e['typeValue'],
+          e['degreeHint'],
+          (attested['${e['person1Id']}-${e['person2Id']}-$cat-${e['typeValue']}']?.toList() ?? <int>[])..sort(),
+        ],
   ];
-  final wanted = <int>{for (final n in graph['nodes'] as List) n['id'] as int, ...presence.keys, ...passing.keys};
   final treeRoots = [for (final p in await _json('/api/people/familytrees') as List) p['id'] as int];
   final people = [
     for (final p in await _json('/api/people') as List)

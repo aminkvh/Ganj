@@ -14,7 +14,9 @@ import '../../l10n/l10n.dart';
 import '../../widgets/external_link.dart';
 import '../../core/text/content_en.dart';
 import '../../widgets/home_button.dart';
+import '../words/word_frequency.dart';
 import '../library/poet_pack_button.dart';
+import 'paper_sources.dart';
 
 class PoetScreen extends ConsumerWidget {
   const PoetScreen({super.key, required this.id});
@@ -30,6 +32,7 @@ class PoetScreen extends ConsumerWidget {
         title: Text(async.value == null ? '' : localPoet(async.value!.poet.id, async.value!.poet.nickname)),
         actions: [
           const HomeButton(),
+          if (async.value case final pc?) WordFrequencyButton(catId: pc.cat.id, poetId: pc.poet.id),
           if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.poet.fullUrl),
         ],
       ),
@@ -61,6 +64,7 @@ class PoetScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              SliverToBoxAdapter(child: PaperSourcesPanel(rootCatId: pc.cat.id)),
               ...catContentSlivers(pc.cat),
             ],
           );

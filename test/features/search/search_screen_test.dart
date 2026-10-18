@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/features/search/search_screen.dart';
 import 'package:ganj/features/search/search_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../support/fixture_repository.dart';
 import '../../support/test_app.dart';
@@ -17,10 +17,12 @@ class FakeSearch implements SearchService {
   /// Per-term responses held until completed (slow network).
   final slow = <String, Completer<SearchPage>>{};
   final calls = <(String, int?, int)>[];
+  final excludes = <Set<int>>[];
 
   @override
-  Future<SearchPage> search(String term, {int? poetId, int page = 1}) async {
+  Future<SearchPage> search(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
     calls.add((term, poetId, page));
+    excludes.add(exclude);
     final gate = slow[term];
     if (gate != null) return gate.future;
     return result;
@@ -36,6 +38,7 @@ const hit = SearchHit(
   poetName: 'حافظ',
   snippet: 'اَلا یا اَیُّهَا السّاقی',
   local: true,
+  poetId: 2,
 );
 const hit2 = SearchHit(
   poemId: 2073,
@@ -43,6 +46,7 @@ const hit2 = SearchHit(
   poetName: 'حافظ',
   snippet: 'ز ساقی کوثر پرس',
   local: false,
+  poetId: 2,
 );
 
 void main() {
@@ -50,9 +54,11 @@ void main() {
     final fake = FakeSearch(page);
     final prefs = await mockPrefs();
     await tester.pumpWidget(
-      ProviderScope(
+      testApp(
+        const SearchScreen(),
+        prefs: prefs,
+        repo: FixtureRepository(),
         overrides: [searchServiceProvider.overrideWithValue(fake)],
-        child: testApp(const SearchScreen(), prefs: prefs, repo: FixtureRepository()),
       ),
     );
     await tester.pumpAndSettle();
@@ -115,5 +121,24 @@ void main() {
     await pump(tester, const SearchPage([hit], total: 1, hasMore: true, offline: true, totalKnown: false));
     await submit(tester, 'ساقی');
     expect(find.text('۱+ نتیجه'), findsOneWidget);
+  });
+
+  testWidgets('leaving a poet out: a chip appears, the search reruns without them, the chip brings them back', (
+    tester,
+  ) async {
+    final fake = await pump(tester, const SearchPage([hit, hit2], total: 2));
+    await submit(tester, 'ساقی');
+    expect(fake.excludes.last, isEmpty);
+    await tester.tap(find.byKey(const ValueKey('exclude-2130')));
+    await tester.pumpAndSettle();
+    expect(fake.excludes.last, {2});
+    expect(find.byKey(const ValueKey('excluded-2')), findsOneWidget);
+    expect(find.text('حافظ'), findsOneWidget);
+    // Remembered for the next search screen.
+    expect((await SharedPreferences.getInstance()).getStringList('excludedPoets'), ['2']);
+    await tester.tap(find.descendant(of: find.byKey(const ValueKey('excluded-2')), matching: find.byIcon(Icons.close)));
+    await tester.pumpAndSettle();
+    expect(fake.excludes.last, isEmpty);
+    expect(find.byKey(const ValueKey('excluded-2')), findsNothing);
   });
 }

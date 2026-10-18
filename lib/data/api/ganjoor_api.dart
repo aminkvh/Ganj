@@ -10,6 +10,7 @@ import '../../core/net/request_pool.dart';
 import 'dto/book.dart';
 import 'dto/cat.dart';
 import 'dto/extras.dart';
+import 'dto/literary.dart';
 import 'dto/people.dart';
 import 'dto/poem.dart';
 import 'dto/poet.dart';
@@ -79,6 +80,7 @@ class GanjoorApi {
   Future<({List<Map<String, dynamic>> poems, int total, bool hasNext})> searchPoems(
     String term, {
     int? poetId,
+    Set<int> exclude = const {},
     int page = 1,
     int pageSize = 20,
   }) async {
@@ -91,7 +93,10 @@ class GanjoorApi {
           'catId': '0',
           'PageNumber': '$page',
           'PageSize': '$pageSize',
+          // Poets left out of the results: one `e` per poet (the server ignores `e=2,7`).
+          if (exclude.isNotEmpty) 'e': [for (final id in exclude) '$id'],
         },
+        options: Options(listFormat: ListFormat.multi),
       ),
     );
     final list = [for (final p in jsonDecode(r.data!) as List) p as Map<String, dynamic>];
@@ -158,10 +163,46 @@ class GanjoorApi {
       Book.fromJson(b as Map<String, dynamic>),
   ];
 
+  /// «منابع کاغذی» of a poet: the manuscripts and printed editions Ganjoor lists for the
+  /// poet's root category (sub-categories have none).
+  Future<List<PaperSource>> paperSources(int rootCatId) =>
+      _list('/api/ganjoor/cat/$rootCatId/papersources', const {}, _month, PaperSource.fromJson);
+
   Future<List<Rhythm>> rhythms() async => [
     for (final r in jsonDecode(await _get('/api/ganjoor/rhythms', const {}, _week)) as List)
       Rhythm.fromJson(r as Map<String, dynamic>),
   ];
+
+  /// Poets with any literary-device tags; tags are fetched only for their poems.
+  Future<Set<int>> literaryPoets() async => {
+    for (final p
+        in (_map(await _get('/api/ganjoor/literary/stats/overview', const {'includePoets': 'true'}, _day))['poets']
+                as List? ??
+            const []))
+      if (((p as Map)['tagCount'] as int? ?? 0) > 0) p['poetId'] as int,
+  };
+
+  /// The devices and their roles (cached a month); [refresh] asks Ganjoor now, keeping the
+  /// cached list if that fails.
+  Future<List<LiteraryDevice>> literaryDevices({bool refresh = false}) =>
+      _list('/api/ganjoor/literary/devices', const {}, refresh ? Duration.zero : _month, LiteraryDevice.fromJson);
+
+  Future<List<LiteraryTag>> literaryTags(int poemId) =>
+      _list('/api/ganjoor/literary/poem/$poemId/tags', const {}, _week, LiteraryTag.fromJson);
+
+  /// «بسامد واژگان» of a poet or section: all words, and distinct ones.
+  Future<({int total, int unique})> wordSums(int catId) async {
+    final j = _map(await _get('/api/ganjoor/wordsums/$catId', const {}, _month));
+    return (total: (j['totalWordCount'] as int?) ?? 0, unique: (j['uniqueWordCount'] as int?) ?? 0);
+  }
+
+  /// Words by frequency in a poet or section; with [term], the words starting with it.
+  Future<List<WordCount>> wordCounts(int catId, {String term = '', int page = 1, int pageSize = 30}) => _list(
+    '/api/ganjoor/wordcounts/$catId',
+    {if (term.isNotEmpty) 'term': term, 'PageNumber': '$page', 'PageSize': '$pageSize'},
+    _month,
+    WordCount.fromJson,
+  );
 
   Future<List<T>> _list<T>(
     String path,

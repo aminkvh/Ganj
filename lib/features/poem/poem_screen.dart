@@ -15,6 +15,7 @@ import '../../widgets/breadcrumb.dart';
 import '../../widgets/error_retry.dart';
 import '../../widgets/gold_card.dart';
 import '../../widgets/ornament_separator.dart';
+import '../literary/literary_devices.dart';
 import '../player/player_controller.dart';
 import '../player/recitation_list.dart';
 import '../settings/settings_controller.dart';
@@ -569,6 +570,10 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                 );
               },
             ),
+            if (p.category case final pc?)
+              SliverToBoxAdapter(
+                child: PoemDevicesPanel(poemId: p.id, poetId: pc.poet.id, couplets: couplets),
+              ),
             SliverToBoxAdapter(child: PoemExtras(poem: p)),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
           ],
@@ -649,6 +654,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     final l = context.l10n;
     final text = _withSource(p, couplet.text);
     final marked = _bookmarkedCouplets.contains(couplet.index);
+    final devices = _devicesOf(p, couplet);
     final actions = <(IconData, String, VoidCallback)>[
       if (p.recitations.isNotEmpty) (Icons.play_arrow, l.playFromBeyt, () => _playFrom(p, couplet)),
       (
@@ -662,6 +668,10 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       (Icons.share, l.shareBeyt, () => _share(text)),
     ];
     if (at != null) {
+      // Computers: the menu has no room for them, so they open on their own.
+      if (devices.isNotEmpty) {
+        actions.add((Icons.auto_awesome_outlined, l.literaryDevices, () => _showDevices(couplet, devices)));
+      }
       final overlay = Overlay.of(context).context.findRenderObject()! as RenderBox;
       showMenu<VoidCallback>(
         context: context,
@@ -700,12 +710,40 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                   padding: const EdgeInsets.all(16),
                   child: MeaningBox(summary: couplet.summary!),
                 ),
+              if (devices.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(l.literaryDevices, style: TextStyle(color: context.ganj.gold, fontSize: 12)),
+                      BeytDevicesBlock(devices: devices),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),
       ),
     );
   }
+
+  /// What Ganjoor has tagged on this beyt, once the poem's tags have loaded.
+  List<BeytDevice> _devicesOf(Poem p, Couplet couplet) {
+    final pc = p.category;
+    if (pc == null) return const [];
+    final data = ref.read(poemLiteraryProvider((poemId: p.id, poetId: pc.poet.id))).value;
+    return data == null ? const [] : devicesOf(couplet, data.tags, data.catalog);
+  }
+
+  Future<void> _showDevices(Couplet couplet, List<BeytDevice> devices) => showDialog<void>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(couplet.text, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 15)),
+      content: SingleChildScrollView(child: BeytDevicesBlock(devices: devices)),
+      actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: Text(context.l10n.close))],
+    ),
+  );
 
   PopupMenuItem<String> _menuItem(String value, IconData icon, String label) => PopupMenuItem(
     value: value,

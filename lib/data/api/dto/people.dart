@@ -1,16 +1,20 @@
 /// Ganjoor's people («نامبردگان») endpoints: kinship and ties with their evidence couplets,
 /// the poems tagged with a person, and place tags.
 class Evidence {
-  const Evidence({required this.poemId, required this.coupletIndex, required this.text});
+  const Evidence({required this.poemId, required this.coupletIndex, required this.text, this.book});
 
   factory Evidence.fromJson(Map<String, dynamic> j) => Evidence(
     poemId: j['poemId'] as int,
     coupletIndex: (j['coupletIndex'] as int?) ?? 0,
     text: (j['coupletText'] as String?) ?? '',
+    book: j['masterCatId'] as int?,
   );
 
   final int poemId, coupletIndex;
   final String text;
+
+  /// The book (master category id) the couplet is from.
+  final int? book;
 }
 
 /// One kinship edge (`cat` R) or tie (`cat` A) seen from the person asked about.
@@ -26,6 +30,7 @@ class RelationRow {
     this.degree,
     this.note,
     this.evidence = const [],
+    this.books = const [],
   });
 
   factory RelationRow.fromJson(Map<String, dynamic> j, {required String cat}) => RelationRow(
@@ -39,6 +44,7 @@ class RelationRow {
     degree: j['degreeHint'] as int?,
     note: j['note'] as String?,
     evidence: [for (final e in (j['evidence'] as List? ?? const [])) Evidence.fromJson(e as Map<String, dynamic>)],
+    books: [for (final b in (j['evidenceBooks'] as List? ?? const [])) (b as Map)['masterCatId'] as int],
   );
 
   final int id, otherId;
@@ -52,6 +58,9 @@ class RelationRow {
   final int? degree;
   final String? note;
   final List<Evidence> evidence;
+
+  /// Books with a couplet attesting the tie.
+  final List<int> books;
 }
 
 class PersonRelations {

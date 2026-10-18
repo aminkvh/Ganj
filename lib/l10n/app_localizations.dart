@@ -62,8 +62,7 @@ import 'app_localizations_fa.dart';
 /// be consistent with the languages listed in the L10n.supportedLocales
 /// property.
 abstract class L10n {
-  L10n(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -83,19 +82,15 @@ abstract class L10n {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('fa'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('fa')];
 
   /// No description provided for @appName.
   ///
@@ -1734,6 +1729,90 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی'**
   String get shLegendLines;
+
+  /// No description provided for @literaryDevices.
+  ///
+  /// In fa, this message translates to:
+  /// **'آرایه‌های ادبی'**
+  String get literaryDevices;
+
+  /// No description provided for @literaryCorpusNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'بخشی از این آرایه‌ها از «پیکرهٔ متن ادبی فارسی» (MIT) به گنجور آمده و تبدیل آن ممکن است خطا داشته باشد.'**
+  String get literaryCorpusNote;
+
+  /// No description provided for @literaryUncertain.
+  ///
+  /// In fa, this message translates to:
+  /// **'نامطمئن'**
+  String get literaryUncertain;
+
+  /// No description provided for @wordFrequency.
+  ///
+  /// In fa, this message translates to:
+  /// **'بسامد واژگان'**
+  String get wordFrequency;
+
+  /// No description provided for @wordTotals.
+  ///
+  /// In fa, this message translates to:
+  /// **'{total} واژه، {unique} واژهٔ یکتا'**
+  String wordTotals(String total, String unique);
+
+  /// No description provided for @findWord.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی واژه'**
+  String get findWord;
+
+  /// No description provided for @moreWords.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیشتر'**
+  String get moreWords;
+
+  /// No description provided for @searchThisWord.
+  ///
+  /// In fa, this message translates to:
+  /// **'جستجوی این واژه در اشعار'**
+  String get searchThisWord;
+
+  /// No description provided for @excludePoet.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف آثار این شاعر از نتایج'**
+  String get excludePoet;
+
+  /// No description provided for @excludedPoets.
+  ///
+  /// In fa, this message translates to:
+  /// **'بدون:'**
+  String get excludedPoets;
+
+  /// No description provided for @paperSources.
+  ///
+  /// In fa, this message translates to:
+  /// **'منابع کاغذی'**
+  String get paperSources;
+
+  /// No description provided for @manuscript.
+  ///
+  /// In fa, this message translates to:
+  /// **'نسخهٔ خطی'**
+  String get manuscript;
+
+  /// No description provided for @printedEdition.
+  ///
+  /// In fa, this message translates to:
+  /// **'کتاب چاپی'**
+  String get printedEdition;
+
+  /// No description provided for @textSource.
+  ///
+  /// In fa, this message translates to:
+  /// **'منبع متن گنجور'**
+  String get textSource;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
@@ -1745,8 +1824,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'fa'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'fa'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;

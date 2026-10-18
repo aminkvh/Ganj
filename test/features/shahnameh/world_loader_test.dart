@@ -36,6 +36,14 @@ void main() {
     expect(w.edgesOf(2).map((e) => (e.a, e.b)).toSet(), {(1, 2), (2, 4), (40, 2)});
   });
 
+  test('ties another book alone states are left out; Shahnameh and unsourced ties stay', () {
+    // Edge [30, 8, A:14] is attested only in the Khamse (111); [30, 8, A:77] (an unknown kind, shown as A:99) has no source.
+    expect(w.edgesOf(8).map((e) => e.kind.key).toSet(), {'A:5', 'A:99'});
+    expect(w.edgesOf(1).firstWhere((e) => e.b == 2).books, [33]);
+    expect(w.edgesOf(8).firstWhere((e) => e.kind.key == 'A:5').books, [33, 111]);
+    expect(w.edgesOf(8).firstWhere((e) => e.kind.key == 'A:99').books, isEmpty);
+  });
+
   test('relation kinds follow ganjoor.net', () {
     expect(relationKind('A', 14).fa, 'قاتل');
     expect(relationKind('A', 14).family, RelationFamily.conflict);

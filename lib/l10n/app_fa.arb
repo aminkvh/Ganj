@@ -315,5 +315,21 @@
   "shLegendBranch": "شاخهٔ بسته (+) یا باز (−)؛ برای باز و بسته کردن بزنید",
   "shLegendFocus": "کسی که شبکه بر گرد او است",
   "shLegendSize": "گوی بزرگ‌تر: نامدارتر",
-  "shLegendLines": "خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی"
+  "shLegendLines": "خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی",
+
+  "literaryDevices": "آرایه‌های ادبی",
+  "literaryCorpusNote": "بخشی از این آرایه‌ها از «پیکرهٔ متن ادبی فارسی» (MIT) به گنجور آمده و تبدیل آن ممکن است خطا داشته باشد.",
+  "literaryUncertain": "نامطمئن",
+  "wordFrequency": "بسامد واژگان",
+  "wordTotals": "{total} واژه، {unique} واژهٔ یکتا",
+  "@wordTotals": {"placeholders": {"total": {"type": "String"}, "unique": {"type": "String"}}},
+  "findWord": "جستجوی واژه",
+  "moreWords": "بیشتر",
+  "searchThisWord": "جستجوی این واژه در اشعار",
+  "excludePoet": "حذف آثار این شاعر از نتایج",
+  "excludedPoets": "بدون:",
+  "paperSources": "منابع کاغذی",
+  "manuscript": "نسخهٔ خطی",
+  "printedEdition": "کتاب چاپی",
+  "textSource": "منبع متن گنجور"
 }

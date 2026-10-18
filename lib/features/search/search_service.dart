@@ -13,9 +13,11 @@ class SearchHit {
     required this.poetName,
     required this.snippet,
     required this.local,
+    this.poetId,
   });
 
   final int poemId;
+  final int? poetId;
   final String poemTitle;
   final String poetName;
   final String snippet;
@@ -57,7 +59,7 @@ class SearchService {
     return long.isEmpty ? null : long.map((t) => '"$t"').join(' ');
   }
 
-  Future<SearchPage> searchLocal(String term, {int? poetId, int page = 1}) async {
+  Future<SearchPage> searchLocal(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
     final words = tokens(term);
     if (words.isEmpty) return const SearchPage([]);
     final q = ftsQuery(term);
@@ -66,6 +68,7 @@ class SearchService {
       if (q != null) 'verse_fts MATCH ?',
       for (final _ in short) "f.norm LIKE ? ESCAPE '\\'",
       if (poetId != null) 'f.poet_id = ?',
+      if (exclude.isNotEmpty) 'f.poet_id NOT IN (${exclude.map((_) => '?').join(',')})',
     ].join(' AND ');
     final args = [
       if (q != null) Variable<String>(q),
@@ -73,10 +76,11 @@ class SearchService {
       for (final s in short)
         Variable<String>('%${s.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%'),
       if (poetId != null) Variable<int>(poetId),
+      for (final id in exclude) Variable<int>(id),
     ];
     final rows = await _db
         .customSelect(
-          'SELECT m.poem_id, v.text, p.title, pt.name FROM ('
+          'SELECT m.poem_id, v.text, p.title, pt.name, pt.id AS poet_id FROM ('
           '  SELECT f.poem_id AS poem_id, min(f.vorder) AS vorder FROM verse_fts f'
           '  WHERE $where GROUP BY f.poem_id ORDER BY f.poem_id LIMIT ? OFFSET ?) m '
           'JOIN verses v ON v.poem_id = m.poem_id AND v.vorder = m.vorder '
@@ -92,13 +96,14 @@ class SearchService {
           poetName: r.read<String>('name'),
           snippet: r.read<String>('text'),
           local: true,
+          poetId: r.read<int>('poet_id'),
         ),
     ];
     return SearchPage(hits, total: hits.length, hasMore: rows.length > _pageSize, totalKnown: false);
   }
 
-  Future<SearchPage> searchOnline(String term, {int? poetId, int page = 1}) async {
-    final r = await _api.searchPoems(term.trim(), poetId: poetId, page: page, pageSize: _pageSize);
+  Future<SearchPage> searchOnline(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
+    final r = await _api.searchPoems(term.trim(), poetId: poetId, exclude: exclude, page: page, pageSize: _pageSize);
     return SearchPage(
       [
         for (final p in r.poems)
@@ -108,6 +113,7 @@ class SearchService {
             poetName: ((p['fullTitle'] as String?) ?? '').split(' » ').first,
             snippet: _snippet((p['plainText'] as String?) ?? '', term),
             local: false,
+            poetId: ((p['category'] as Map<String, dynamic>?)?['poet'] as Map<String, dynamic>?)?['id'] as int?,
           ),
       ],
       total: r.total,
@@ -115,11 +121,12 @@ class SearchService {
     );
   }
 
-  /// Local hits first, then online ones not already shown; offline → local only.
-  Future<SearchPage> search(String term, {int? poetId, int page = 1}) async {
+  /// Local hits first, then online ones not already shown; offline → local only. [exclude]:
+  /// poets whose poems are left out («حذف آثار یک شاعر از نتایج»).
+  Future<SearchPage> search(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
     // Local and online run together; a slow network never holds back offline hits.
-    final onlineFuture = searchOnline(term, poetId: poetId, page: page).timeout(onlineTimeout);
-    final local = await searchLocal(term, poetId: poetId, page: page);
+    final onlineFuture = searchOnline(term, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout);
+    final local = await searchLocal(term, poetId: poetId, exclude: exclude, page: page);
     try {
       final online = await onlineFuture;
       final seen = {for (final h in local.hits) h.poemId};

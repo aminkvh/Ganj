@@ -31,7 +31,7 @@ void main() {
     }
   }
 
-  Future<void> open(WidgetTester tester, {Map<String, String> extraRoutes = const {}}) async {
+  Future<FakeAdapter> open(WidgetTester tester, {Map<String, String> extraRoutes = const {}}) async {
     final adapter = FakeAdapter({
       '/api/ganjoor/poem/2130/songs': ex('songs_2130.json'),
       '/api/ganjoor/poem/2130/comments': ex('comments_2130.json'),
@@ -58,6 +58,7 @@ void main() {
       ),
     );
     await settle(tester);
+    return adapter;
   }
 
   Future<void> closeAll(WidgetTester tester) async {
@@ -128,6 +129,46 @@ void main() {
     await settle(tester);
     final couplet = await tester.runAsync(() => UserRepository(db).lastCouplet(2130));
     expect(couplet, greaterThan(0));
+    await closeAll(tester);
+  });
+
+  Map<String, String> literaryRoutes({bool tagged = true}) => {
+    '/api/ganjoor/literary/stats/overview': tagged ? ex('literary_overview.json') : '{"poets": []}',
+    '/api/ganjoor/literary/devices': ex('literary_devices.json'),
+    '/api/ganjoor/literary/poem/2130/tags': ex('literary_tags_2130.json'),
+  };
+
+  testWidgets('the beyt sheet lists its literary devices', (tester) async {
+    await open(tester, extraRoutes: literaryRoutes());
+    await bringIntoView(tester, find.text(verse3));
+    await tester.tap(find.text(verse3));
+    await tester.pumpAndSettle();
+    expect(find.text('آرایه‌های ادبی'), findsWidgets);
+    expect(find.textContaining('مستعارٌمنه: نافه‌ای'), findsOneWidget);
+    expect(find.textContaining('معنای دوم: به رنج و محنت افتادن'), findsOneWidget);
+    await closeAll(tester);
+  });
+
+  testWidgets('the literary devices panel lists tagged beyts and credits the corpus', (tester) async {
+    await open(tester, extraRoutes: literaryRoutes());
+    await expand(tester, 'آرایه‌های ادبی');
+    expect(find.textContaining('بیت ۲'), findsOneWidget);
+    expect(find.textContaining('بیت ۳'), findsOneWidget);
+    expect(find.textContaining('پیکرهٔ متن ادبی فارسی'), findsOneWidget);
+    await closeAll(tester);
+  });
+
+  testWidgets('poets Ganjoor has not tagged: no panel, no tags request', (tester) async {
+    final adapter = await open(tester, extraRoutes: literaryRoutes(tagged: false));
+    await bringIntoView(tester, find.text(verse3));
+    await tester.tap(find.text(verse3));
+    await tester.pumpAndSettle();
+    expect(find.text('آرایه‌های ادبی'), findsNothing);
+    await tester.tapAt(const Offset(10, 10)); // close the sheet
+    await tester.pumpAndSettle();
+    await bringIntoView(tester, find.text('آهنگ‌ها'));
+    expect(find.text('آرایه‌های ادبی'), findsNothing);
+    expect(adapter.requests.where((u) => u.path.contains('/literary/poem/')), isEmpty);
     await closeAll(tester);
   });
 }

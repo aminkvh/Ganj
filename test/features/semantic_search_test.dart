@@ -96,7 +96,7 @@ void main() {
     final screen = tester.widget<PoemScreen>(find.byType(PoemScreen));
     expect(screen.id, 2130);
     expect(screen.verse, 1);
-    expect(adapter.requests.last.path, '$path/click');
+    expect(adapter.requests.map((u) => u.path), contains('$path/click'));
     expect(adapter.bodies.last, {'logId': 8050, 'poemId': 2130, 'rank': 2});
   });
 

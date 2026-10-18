@@ -13,6 +13,7 @@ import '../data/relation_kinds.dart';
 import '../data/shahnameh_providers.dart';
 import 'hub_screen.dart' show kShTabs;
 import 'sh_style.dart';
+import 'shahnameh_entry.dart' show kShahnamehCatId;
 
 /// Opens a person: a bottom sheet on phones, a side panel on wide screens, so the page
 /// underneath (the timeline, the map, a poem) stays where it was.
@@ -368,6 +369,12 @@ class _TieRowState extends State<_TieRow> {
     final label = isEn(context) ? noun.en : noun.fa;
     final live = widget.live;
     final count = live?.evidenceCount ?? 0;
+    // The Shahnameh's own couplets; all of them only when none of the preview is from it.
+    final own = [
+      for (final ev in live?.evidence ?? const <Evidence>[])
+        if (ev.book == null || ev.book == kShahnamehCatId) ev,
+    ];
+    final evidence = own.isNotEmpty ? own : live?.evidence ?? const <Evidence>[];
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Column(
@@ -410,8 +417,8 @@ class _TieRowState extends State<_TieRow> {
                 ),
             ],
           ),
-          if (_open && live != null)
-            for (final ev in live.evidence)
+          if (_open)
+            for (final ev in evidence)
               InkWell(
                 onTap: () => context.push('/poem/${ev.poemId}?c=${ev.coupletIndex}'),
                 child: Container(

@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'models.dart';
 import 'relation_kinds.dart';
 
+/// The sixth element of an edge, when the snapshot has it.
+List<int> _books(List e) => e.length > 5 ? [for (final b in e[5] as List) b as int] : const [];
+
 /// Builds the world from the bundled JSON: [generated] by tool/shahnameh_snapshot.dart, the
 /// rest curated by hand (assets/seed/shahnameh/).
 ShWorld loadWorld({required String generated, required String ages, required String places, required String namesEn}) {
@@ -26,10 +29,20 @@ ShWorld loadWorld({required String generated, required String ages, required Str
       ),
   };
 
+  // Ties another book alone states (shared people have ties in Nizami's Khamse too) are not
+  // this book's; ties no couplet attests are kept, as on ganjoor.net.
+  final book = (g['masterCatId'] as int?) ?? 33;
   final edges = [
     for (final e in g['edges'] as List)
       if (people.containsKey((e as List)[0]) && people.containsKey(e[1]))
-        ShEdge(e[0] as int, e[1] as int, relationKind(e[2] as String, e[3] as int), degree: e[4] as int?),
+        if (_books(e) case final books when books.isEmpty || books.contains(book))
+          ShEdge(
+            e[0] as int,
+            e[1] as int,
+            relationKind(e[2] as String, e[3] as int),
+            degree: e[4] as int?,
+            books: books,
+          ),
   ];
 
   final sections = <ShSection>[];

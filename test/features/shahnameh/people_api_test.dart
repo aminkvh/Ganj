@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
@@ -6,9 +8,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/core/net/api_client.dart';
 import 'package:ganj/core/net/http_cache.dart';
 import 'package:ganj/data/api/ganjoor_api.dart';
+import 'package:ganj/data/api/dto/people.dart';
 import 'package:ganj/data/db/app_db.dart';
 
 import '../../support/fake_adapter.dart';
+import 'sh_support.dart';
 
 String shFixture(String name) => File('test/fixtures/shahnameh/$name').readAsStringSync();
 
@@ -81,5 +85,11 @@ void main() {
   test('offline without a cached copy fails, so the UI can offer a retry', () async {
     adapter.offline = true;
     await expectLater(api.personRelations(60), throwsA(anything));
+  });
+
+  test('evidence says which book each couplet is from', () async {
+    final r = PersonRelations.fromJson(jsonDecode(shFx('relations_60.json')) as Map<String, dynamic>);
+    expect(r.rows.first.books, [33]);
+    expect(r.rows.first.evidence.first.book, 33);
   });
 }
