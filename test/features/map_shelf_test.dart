@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/core/net/api_client.dart';
 import 'package:ganj/core/net/http_cache.dart';
+import 'package:ganj/data/api/dto/poet.dart';
 import 'package:ganj/data/api/ganjoor_api.dart';
 import 'package:ganj/data/db/app_db.dart';
 import 'package:ganj/data/providers.dart';
@@ -196,5 +197,44 @@ void main() {
     await tester.drag(find.byType(Slider), const Offset(2000, 0));
     await settle(tester);
     expect(find.text('همهٔ سده‌ها'), findsWidgets);
+  });
+
+  testWidgets('poets born in one city share a point: its bubble lists them instead of zooming', (tester) async {
+    tall(tester);
+    final tabriz = Century(
+      id: 7,
+      name: 'سدهٔ ۷',
+      poets: [
+        for (var i = 1; i <= 8; i++)
+          Poet(
+            id: 900 + i,
+            name: 'شاعر $i',
+            nickname: 'شاعر $i',
+            fullUrl: '/p$i',
+            rootCatId: i,
+            birthLatitude: 38.08,
+            birthLongitude: 46.29,
+            birthYear: 600 + i,
+          ),
+      ],
+    );
+    final prefs = await mockPrefs({'mapStartsOnAll': false});
+    await tester.pumpWidget(
+      testAppRouted(
+        '/map',
+        prefs: prefs,
+        overrides: [
+          mapTileLayerProvider.overrideWithValue(const SizedBox()),
+          centuriesProvider.overrideWith((ref) async => [tabriz]),
+        ],
+      ),
+    );
+    await settle(tester);
+    await tester.tap(find.byKey(const ValueKey('map-cluster-901')));
+    await settle(tester);
+    expect(find.byKey(const ValueKey('map-pick-905')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('map-pick-905')));
+    await settle(tester);
+    expect(find.byKey(const ValueKey('map-open-poet')), findsOneWidget);
   });
 }

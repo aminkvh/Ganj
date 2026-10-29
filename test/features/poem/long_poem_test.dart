@@ -198,10 +198,39 @@ void main() {
       await tester.pumpWidget(testApp(const PoemScreen(id: 999), prefs: prefs, repo: repo, backend: backend));
       await settle(tester);
       final c = ProviderScope.containerOf(tester.element(find.byType(PoemScreen)));
-      await c.read(playerProvider.notifier).play(poem, rec);
+      await c.read(playerProvider.notifier).play(poem, rec, follow: true);
       backend.emitPosition(const Duration(seconds: 2401)); // vOrder 2401 = first line of couplet 1200
       await settle(tester);
       expect(visible(tester, 'مصراع دوم بیت 1200'), isTrue);
+    });
+
+    testWidgets('a recitation started from the list leaves the page where it is', (tester) async {
+      tester.view.physicalSize = const Size(360, 720);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      const rec = Recitation(
+        id: 777,
+        poemId: 999,
+        title: 't',
+        artist: 'a',
+        artistUrl: '',
+        mp3Url: 'https://i.ganjoor.net/a/777.mp3',
+        mp3Size: 1,
+        audioOrder: 1,
+        inSync: true,
+      );
+      final poem = varied(1500).copyWith(recitations: [rec]);
+      final repo = FixtureRepository()..poems[999] = poem;
+      repo.syncs[777] = [for (var v = 1; v <= 3000; v++) SyncPoint(v, v * 1000)];
+      final backend = FakeAudioBackend();
+      final prefs = await mockPrefs();
+      await tester.pumpWidget(testApp(const PoemScreen(id: 999), prefs: prefs, repo: repo, backend: backend));
+      await settle(tester);
+      final c = ProviderScope.containerOf(tester.element(find.byType(PoemScreen)));
+      await c.read(playerProvider.notifier).play(poem, rec, follow: false);
+      backend.emitPosition(const Duration(seconds: 2401));
+      await settle(tester);
+      expect(visible(tester, 'مصراع دوم بیت 1200'), isFalse);
     });
 
     testWidgets('the resume point is not overwritten right after opening', (tester) async {

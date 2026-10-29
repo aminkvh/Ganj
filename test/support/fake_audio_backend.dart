@@ -11,6 +11,9 @@ class FakeAudioBackend implements AudioBackend {
   double speed = 1;
   Object? failLoad;
 
+  /// Holds load() until this completes, to test the loading state.
+  Future<void>? beforeLoad;
+
   /// Mimic just_audio_windows: duration arrives on the stream during load, load() returns null.
   bool durationOnlyViaStream = false;
   final _pos = StreamController<Duration>.broadcast();
@@ -29,6 +32,7 @@ class FakeAudioBackend implements AudioBackend {
 
   @override
   Future<Duration?> load(Uri uri, {required MediaInfo info}) async {
+    await beforeLoad;
     if (failLoad != null) throw failLoad!;
     loaded.add(uri);
     infos.add(info);

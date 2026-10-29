@@ -9,8 +9,24 @@ List<ContextMenuButtonItem> essentialSelectionItems(List<ContextMenuButtonItem> 
     if (_essential.contains(b.type)) b,
 ];
 
-/// The text-selection menu used wherever Ganj lets you select text.
-Widget ganjSelectionMenu(BuildContext context, SelectableRegionState state) => AdaptiveTextSelectionToolbar.buttonItems(
+/// The text-selection menu used wherever Ganj lets you select text. With [onMeaning], a short
+/// selection also offers «معنی» (the word's dictionary entry).
+Widget ganjSelectionMenu(
+  BuildContext context,
+  SelectableRegionState state, {
+  String? meaningLabel,
+  VoidCallback? onMeaning,
+}) => AdaptiveTextSelectionToolbar.buttonItems(
   anchors: state.contextMenuAnchors,
-  buttonItems: essentialSelectionItems(state.contextMenuButtonItems),
+  buttonItems: [
+    ...essentialSelectionItems(state.contextMenuButtonItems),
+    if (onMeaning != null)
+      ContextMenuButtonItem(
+        label: meaningLabel,
+        onPressed: () {
+          state.hideToolbar();
+          onMeaning();
+        },
+      ),
+  ],
 );

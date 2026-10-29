@@ -12,9 +12,11 @@ import '../../data/providers.dart';
 import '../../data/user/user_repository.dart';
 import '../../widgets/ai_badge.dart';
 import '../../widgets/breadcrumb.dart';
+import '../../widgets/edge_swipe_back.dart';
 import '../../widgets/error_retry.dart';
 import '../../widgets/gold_card.dart';
 import '../../widgets/ornament_separator.dart';
+import '../dictionary/dictionary.dart';
 import '../literary/literary_devices.dart';
 import '../player/player_controller.dart';
 import '../player/recitation_list.dart';
@@ -56,7 +58,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   bool _finding = false;
   List<int> _hits = const []; // vOrders
   int _hit = 0;
-  bool _scrollLocked = false;
+
+  String _selectedText = '';
 
   /// This visit's choice for the meanings; null follows the default set in Settings.
   bool? _meaningHere;
@@ -260,7 +263,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   /// Follow the recitation: scroll the playing couplet into view unless the
   /// reader scrolled in the last 4 s or locked auto-scroll.
   void _follow(List<Couplet> couplets, int vOrder) {
-    if (_scrollLocked || DateTime.now().difference(_userScrolledAt) < const Duration(seconds: 4)) return;
+    final recentlyScrolled = DateTime.now().difference(_userScrolledAt) < const Duration(seconds: 4);
+    if (!ref.read(playerProvider).follow || recentlyScrolled) return;
     final i = couplets.indexWhere((c) => c.verses.any((v) => v.vOrder == vOrder));
     if (i < 0) return;
     final ctx = _keyFor(couplets[i].index).currentContext;
@@ -408,7 +412,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
         skipLoadingOnRefresh: false,
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) => ErrorRetry(onRetry: () => ref.invalidate(poemProvider(widget.id))),
-        data: (p) => _body(p, couplets, settings, wide, playingVOrder),
+        data: (p) => EdgeSwipeBack(child: _body(p, couplets, settings, wide, playingVOrder)),
       ),
       bottomNavigationBar: poem == null ? null : _navBar(poem),
     );
@@ -450,8 +454,17 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
       },
       // Verses, meanings and the summary can be selected and copied.
       child: SelectionArea(
-        contextMenuBuilder: ganjSelectionMenu,
-
+        onSelectionChanged: (c) => _selectedText = c?.plainText ?? '',
+        contextMenuBuilder: (context, state) {
+          // A single word offers its dictionary entry.
+          final word = Dictionary.clean(_selectedText);
+          return ganjSelectionMenu(
+            context,
+            state,
+            meaningLabel: context.l10n.wordMeaning,
+            onMeaning: word.isEmpty || word.contains(' ') ? null : () => showWordMeaning(this.context, ref, word),
+          );
+        },
         child: CustomScrollView(
           controller: _scroll,
           slivers: [
@@ -513,12 +526,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                         children: [Text(p.summary!.text, style: TextStyle(height: 1.9, color: c.muted))],
                       ),
                     ),
-                  if (p.recitations.isNotEmpty)
-                    RecitationList(
-                      poem: p,
-                      scrollLocked: _scrollLocked,
-                      onToggleLock: () => setState(() => _scrollLocked = !_scrollLocked),
-                    ),
+                  if (p.recitations.isNotEmpty) RecitationList(poem: p),
                 ],
               ),
             ),

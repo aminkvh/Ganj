@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +25,10 @@ final mapTileLayerProvider = Provider<Widget>(
   (ref) => TileLayer(
     urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     userAgentPackageName: 'io.github.aminkvh.ganj',
+    // A tile that failed (rate limit, dropped connection) is asked for again instead of staying
+    // blank, and a fast zoom doesn't fire a request per frame.
+    evictErrorTileStrategy: EvictErrorTileStrategy.notVisibleRespectMargin,
+    tileUpdateTransformer: TileUpdateTransformers.throttle(const Duration(milliseconds: 120)),
   ),
 );
 
@@ -84,6 +90,7 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
                         ref.watch(mapTileLayerProvider),
                         _PoetMarkers(poets: poets, onSelect: (p) => setState(() => _selected = p)),
                         RichAttributionWidget(
+                          showFlutterMapAttribution: false,
                           attributions: [
                             TextSourceAttribution(
                               'OpenStreetMap contributors',
@@ -131,6 +138,32 @@ class _PoetMarkers extends StatelessWidget {
 
   static const _w = 36.0, _h = 44.0;
 
+  void _pickPoet(BuildContext context, List<Poet> group) => showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    builder: (ctx) => SafeArea(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.6),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            for (final p in group)
+              ListTile(
+                key: ValueKey('map-pick-${p.id}'),
+                leading: PoetPortrait(url: p.imageAbsoluteUrl, width: 32, height: 40),
+                title: Text(localPoetFull(p.id, p.name)),
+                subtitle: Text(poetYears(ctx.l10n, p)),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  onSelect(p);
+                },
+              ),
+          ],
+        ),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     final camera = MapCamera.of(context);
@@ -150,14 +183,24 @@ class _PoetMarkers extends StatelessWidget {
               child: ClusterBubble(
                 key: ValueKey('map-cluster-${g.ids.first}'),
                 count: g.ids.length,
-                onTap: () => MapController.of(context).fitCamera(
-                  CameraFit.bounds(
-                    bounds: LatLngBounds.fromPoints([for (final id in g.ids) at(byId[id]!)]),
-                    padding: const EdgeInsets.all(64),
-                    maxZoom: camera.zoom + 4,
-                    minZoom: camera.zoom + 1,
-                  ),
-                ),
+                onTap: () {
+                  // Poets born in one city share a point: no zoom pulls them apart, so list them.
+                  final deepest = camera.maxZoom ?? 12;
+                  final px = [for (final id in g.ids) camera.projectAtZoom(at(byId[id]!), deepest)];
+                  final spread = px.map((p) => (p - px.first).distance).reduce(math.max);
+                  if (spread < _w * 1.3) {
+                    _pickPoet(context, [for (final id in g.ids) byId[id]!]);
+                    return;
+                  }
+                  MapController.of(context).fitCamera(
+                    CameraFit.bounds(
+                      bounds: LatLngBounds.fromPoints([for (final id in g.ids) at(byId[id]!)]),
+                      padding: const EdgeInsets.all(64),
+                      maxZoom: camera.zoom + 4,
+                      minZoom: camera.zoom + 1,
+                    ),
+                  );
+                },
               ),
             )
           else

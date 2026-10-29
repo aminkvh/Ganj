@@ -62,7 +62,8 @@ import 'app_localizations_fa.dart';
 /// be consistent with the languages listed in the L10n.supportedLocales
 /// property.
 abstract class L10n {
-  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  L10n(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -82,15 +83,19 @@ abstract class L10n {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('fa')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('fa'),
+  ];
 
   /// No description provided for @appName.
   ///
@@ -193,6 +198,30 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'رونوشت شد'**
   String get copied;
+
+  /// No description provided for @wordMeaning.
+  ///
+  /// In fa, this message translates to:
+  /// **'معنی'**
+  String get wordMeaning;
+
+  /// No description provided for @meaningNotFound.
+  ///
+  /// In fa, this message translates to:
+  /// **'این واژه در فرهنگ لغت یافت نشد.'**
+  String get meaningNotFound;
+
+  /// No description provided for @meaningOffline.
+  ///
+  /// In fa, this message translates to:
+  /// **'فرهنگ لغت به اینترنت نیاز دارد.'**
+  String get meaningOffline;
+
+  /// No description provided for @meaningSource.
+  ///
+  /// In fa, this message translates to:
+  /// **'ویکی‌واژهٔ فارسی (CC BY-SA)'**
+  String get meaningSource;
 
   /// No description provided for @notFoundPage.
   ///
@@ -1394,6 +1423,12 @@ abstract class L10n {
   /// **'یادکرد گذرا'**
   String get shPassing;
 
+  /// No description provided for @shTakesPart.
+  ///
+  /// In fa, this message translates to:
+  /// **'در داستان حضور دارد'**
+  String get shTakesPart;
+
   /// No description provided for @shNoTies.
   ///
   /// In fa, this message translates to:
@@ -1824,7 +1859,8 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'fa'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'fa'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;

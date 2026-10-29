@@ -8,6 +8,27 @@
 
 ## What's new · تازه‌ها
 
+### 1.2.5
+- **Recitations (خوانش‌ها):** the poem page follows a recitation only when you start it from a beyt; start it from the list and the page stays where you are (the lock button turns following on or off). The play button shows pause at once, even while the audio is loading, so you can stop it right away.
+- **Word meanings (معنی واژه):** select a word in a poem and choose **Meaning** to see its entry from the Persian Wiktionary.
+- **Poets' map:** poets born in the same city (Tabriz, Shiraz…) can no longer be stuck inside a bubble: tapping it lists them. Failed map tiles are asked for again instead of staying blank.
+- **World of the Shahnameh:** the river timeline shows what the mouse is over and explains its bars and dots (takes part · mentioned in passing); the map's legend folds into a button and the corner is tidier.
+- **Computer:** Esc, Backspace or Alt+← go back; the arrow keys start moving between the controls on a screen.
+- **Android:** on a poem page, a sideways drag from either edge goes back even when it is slanted or starts a little inside the edge, so it no longer scrolls the page or highlights a line instead. The back swipe also shows the preview.
+- **Settings:** icons and text are aligned.
+
+<div dir="rtl">
+
+- **خوانش‌ها:** صفحهٔ شعر فقط وقتی خوانش را از یک بیت آغاز کنید همراه آن می‌لغزد؛ اگر از فهرست آغاز کنید صفحه همان‌جا می‌ماند (دکمهٔ قفل همراهی را روشن و خاموش می‌کند). دکمهٔ پخش همان لحظه «ایست» می‌شود، حتی تا بارگیری صدا، تا بتوانید بی‌درنگ بایستانیدش.
+- **معنی واژه:** واژه‌ای را در شعر برگزینید و **معنی** را بزنید تا مدخل آن را از ویکی‌واژهٔ فارسی ببینید.
+- **نقشهٔ سخنوران:** سخنورانی که در یک شهر (تبریز، شیراز…) زاده شده‌اند دیگر در حباب گیر نمی‌کنند: با زدن روی حباب فهرستشان باز می‌شود. کاشی‌های ناموفق نقشه دوباره خواسته می‌شوند و خالی نمی‌مانند.
+- **جهان شاهنامه:** در گاه‌شمار رودی، نشانگر ماوس چیزی را که روی آن است می‌نمایاند و نوارها و نقطه‌ها (حضور در داستان · یادکرد گذرا) توضیح داده شده‌اند؛ راهنمای نقشه در یک دکمه جمع می‌شود و گوشهٔ نقشه خلوت‌تر است.
+- **رایانه:** Esc یا Backspace یا Alt+← به عقب می‌روند؛ کلیدهای جهت‌دار گشت میان دکمه‌های صفحه را آغاز می‌کنند.
+- **اندروید:** در صفحهٔ شعر، کشیدن افقی از هر دو لبه به عقب می‌برد، حتی اگر کج باشد یا کمی داخل‌تر از لبه آغاز شود؛ دیگر صفحه را نمی‌لغزاند و بیتی را پررنگ نمی‌کند. کشیدن برای بازگشت پیش‌نمایش هم نشان می‌دهد.
+- **تنظیمات:** نمادها و نوشته‌ها هم‌تراز شدند.
+
+</div>
+
 ### 1.2.3
 - **Literary devices (آرایه‌های ادبی):** where Ganjoor has tagged a poem (for now, mostly Hafez's ghazals), tap a beyt (or right-click it on a computer) to see its similes, metaphors, puns and more, with the words that make them. A panel under the poem lists them all. New tags on Ganjoor appear without an app update.
 - **Word frequency (بسامد واژگان):** a chart button on every poet's and book's page shows how many words they use, the most frequent ones, and how often any word appears. Tap a word to search for it.

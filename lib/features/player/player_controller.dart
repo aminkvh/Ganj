@@ -22,6 +22,7 @@ class PlayerState {
     SyncTimeline? timeline,
     this.currentVOrder,
     this.speed = 1,
+    this.follow = false,
   }) : timeline = timeline ?? SyncTimeline(const []);
 
   final Poem? poem;
@@ -34,6 +35,9 @@ class PlayerState {
   final int? currentVOrder;
   final double speed;
 
+  /// Whether the poem page scrolls along with the recitation: on when it was started from a beyt.
+  final bool follow;
+
   PlayerState copyWith({
     PlayerStatus? status,
     bool? playing,
@@ -42,6 +46,7 @@ class PlayerState {
     SyncTimeline? timeline,
     int? Function()? currentVOrder,
     double? speed,
+    bool? follow,
   }) => PlayerState(
     poem: poem,
     recitation: recitation,
@@ -52,6 +57,7 @@ class PlayerState {
     timeline: timeline ?? this.timeline,
     currentVOrder: currentVOrder == null ? this.currentVOrder : currentVOrder(),
     speed: speed ?? this.speed,
+    follow: follow ?? this.follow,
   );
 }
 
@@ -62,6 +68,9 @@ class PlayerController extends Notifier<PlayerState> {
   int _generation = 0;
   bool _completed = false;
 
+  /// What the listener wants while a recitation is still loading (the backend isn't playing yet).
+  bool _wantPlay = true;
+
   AudioBackend get _backend => ref.read(audioBackendProvider);
 
   @override
@@ -69,7 +78,9 @@ class PlayerController extends Notifier<PlayerState> {
     final b = ref.watch(audioBackendProvider);
     final subs = [
       b.position.listen(_onPosition),
-      b.playing.listen((p) => state = state.copyWith(playing: p)),
+      b.playing.listen((p) {
+        if (state.status != PlayerStatus.loading) state = state.copyWith(playing: p);
+      }),
       b.errors.listen((_) {
         if (state.status != PlayerStatus.idle) state = state.copyWith(status: PlayerStatus.error, playing: false);
       }),
@@ -97,11 +108,21 @@ class PlayerController extends Notifier<PlayerState> {
     state = state.copyWith(position: p, currentVOrder: () => v);
   }
 
-  Future<void> play(Poem poem, Recitation r) async {
+  /// [follow]: scroll the poem page along; recitations started from the list leave the page alone.
+  Future<void> play(Poem poem, Recitation r, {bool? follow}) async {
     final gen = ++_generation;
     _completed = false;
+    _wantPlay = true;
     bool stale() => gen != _generation;
-    state = PlayerState(poem: poem, recitation: r, status: PlayerStatus.loading, speed: state.speed);
+    // `playing` is the intent, so the button already shows «pause» while the audio loads.
+    state = PlayerState(
+      poem: poem,
+      recitation: r,
+      status: PlayerStatus.loading,
+      playing: true,
+      speed: state.speed,
+      follow: follow ?? state.follow,
+    );
     final store = ref.read(audioStoreProvider);
     try {
       final local = store != null && store.isDownloaded(r.id) ? store.mp3Uri(r.id) : null;
@@ -116,9 +137,14 @@ class PlayerController extends Notifier<PlayerState> {
       // Windows reports the duration on the stream during load and returns null here.
       state = state.copyWith(status: PlayerStatus.ready, timeline: timeline, duration: duration ?? state.duration);
       await _backend.setSpeed(state.speed);
-      await _backend.play();
+      state = state.copyWith(playing: _wantPlay);
+      if (_wantPlay) {
+        await _backend.play();
+      } else {
+        await _backend.pause();
+      }
     } catch (_) {
-      if (!stale()) state = state.copyWith(status: PlayerStatus.error);
+      if (!stale()) state = state.copyWith(status: PlayerStatus.error, playing: false);
     }
   }
 
@@ -138,7 +164,16 @@ class PlayerController extends Notifier<PlayerState> {
     if (p != null && r != null) await play(p, r);
   }
 
-  Future<void> toggle() => state.playing ? _backend.pause() : _backend.play();
+  Future<void> toggle() {
+    if (state.status == PlayerStatus.loading) {
+      _wantPlay = !_wantPlay;
+      state = state.copyWith(playing: _wantPlay);
+      return _wantPlay ? Future.value() : _backend.pause();
+    }
+    return state.playing ? _backend.pause() : _backend.play();
+  }
+
+  void setFollow(bool on) => state = state.copyWith(follow: on);
 
   Future<void> seek(Duration d) => _backend.seek(d);
 
@@ -146,6 +181,7 @@ class PlayerController extends Notifier<PlayerState> {
   Future<bool> seekToVOrder(int vOrder) async {
     final start = state.timeline.startOf(vOrder);
     if (start == null || !(state.recitation?.inSync ?? false)) return false;
+    state = state.copyWith(follow: true); // asked from a beyt: the page follows along
     await _backend.seek(start);
     if (!state.playing) await _backend.play();
     return true;

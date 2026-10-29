@@ -12,11 +12,9 @@ import '../../l10n/l10n.dart';
 
 /// «خوانش‌ها» panel on the poem page: one row per reciter, play/pause, download, scroll lock.
 class RecitationList extends ConsumerWidget {
-  const RecitationList({super.key, required this.poem, required this.scrollLocked, required this.onToggleLock});
+  const RecitationList({super.key, required this.poem});
 
   final Poem poem;
-  final bool scrollLocked;
-  final VoidCallback onToggleLock;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,9 +31,16 @@ class RecitationList extends ConsumerWidget {
         leading: IconButton(
           key: ValueKey('rec-play-${r.id}'),
           tooltip: playing ? context.l10n.pause : context.l10n.play,
-          icon: Icon(playing ? Icons.pause_circle : Icons.play_circle, color: c.brandRed, size: 32),
+          icon: Stack(
+            alignment: Alignment.center,
+            children: [
+              Icon(playing ? Icons.pause_circle : Icons.play_circle, color: c.brandRed, size: 32),
+              if (current && st.status == PlayerStatus.loading)
+                SizedBox.square(dimension: 36, child: CircularProgressIndicator(strokeWidth: 2, color: c.brandRed)),
+            ],
+          ),
           onPressed: () => !current
-              ? ctrl.play(poem, r)
+              ? ctrl.play(poem, r, follow: false)
               : st.status == PlayerStatus.error
               ? ctrl.retry()
               : ctrl.toggle(),
@@ -58,9 +63,9 @@ class RecitationList extends ConsumerWidget {
         leading: Icon(Icons.headphones, color: c.gold),
         title: Text(context.l10n.recitationsCount(localDigits(poem.recitations.length))),
         trailing: IconButton(
-          tooltip: scrollLocked ? context.l10n.autoScrollOff : context.l10n.autoScrollOn,
-          icon: Icon(scrollLocked ? Icons.lock : Icons.swap_vert, color: c.muted),
-          onPressed: onToggleLock,
+          tooltip: st.follow ? context.l10n.autoScrollOn : context.l10n.autoScrollOff,
+          icon: Icon(st.follow ? Icons.swap_vert : Icons.lock, color: c.muted),
+          onPressed: () => ctrl.setFollow(!st.follow),
         ),
         children: [for (final r in poem.recitations) row(r)],
       ),

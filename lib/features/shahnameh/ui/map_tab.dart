@@ -15,6 +15,7 @@ import '../data/place_merge.dart';
 import '../data/shahnameh_providers.dart';
 import 'person_sheet.dart';
 import 'cluster_bubble.dart';
+import 'legend.dart' show LegendToggle;
 import 'pin_clusters.dart';
 import 'sh_style.dart';
 
@@ -301,6 +302,11 @@ class _ShahnamehMapTabState extends ConsumerState<ShahnamehMapTab> {
                     onTap: (p) => _openPlace(p.id),
                   ),
                   RichAttributionWidget(
+                    // Opposite the legend, and without the flutter_map credit: one quiet corner each.
+                    alignment: Directionality.of(context) == TextDirection.rtl
+                        ? AttributionAlignment.bottomLeft
+                        : AttributionAlignment.bottomRight,
+                    showFlutterMapAttribution: false,
                     attributions: [
                       TextSourceAttribution(
                         'OpenStreetMap contributors',
@@ -317,14 +323,18 @@ class _ShahnamehMapTabState extends ConsumerState<ShahnamehMapTab> {
               if (offline)
                 PositionedDirectional(
                   top: 8,
-                  start: 8,
+                  end: 8,
                   child: Chip(
                     avatar: Icon(Icons.cloud_off, size: 16, color: c.muted),
                     label: Text(l.shTilesNeedInternet, style: TextStyle(fontSize: 12, color: c.muted)),
                     backgroundColor: c.paper.withValues(alpha: 0.9),
                   ),
                 ),
-              PositionedDirectional(bottom: 30, start: 8, child: _Legend(world: w)),
+              PositionedDirectional(
+                top: 8,
+                start: 8,
+                child: LegendToggle(legend: _Legend(world: w)),
+              ),
             ],
           ),
         ),

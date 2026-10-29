@@ -42,7 +42,7 @@ ThemeData buildGanjTheme(Brightness brightness, {bool iranNastaliq = false}) {
     // when opening a screen (most visibly Settings) on Windows.
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
-        TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
         TargetPlatform.macOS: _QuickFadeTransitions(),
         TargetPlatform.windows: _QuickFadeTransitions(),

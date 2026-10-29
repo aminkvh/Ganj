@@ -102,6 +102,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.language),
             title: Text(context.l10n.language),
             trailing: SegmentedButton<String>(
               // Each language is named in its own script, so it can be found from either one.
@@ -114,6 +115,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.format_size),
             title: Text(context.l10n.verseTextSize),
             subtitle: Slider(
               value: s.fontScale,
@@ -133,22 +135,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ),
           SwitchListTile(
+            secondary: const Icon(Icons.lightbulb_outline),
             title: Text(context.l10n.showMeaningsDefault),
             value: s.showMeaning,
             onChanged: (_) => ctrl.toggleMeaning(),
           ),
           SwitchListTile(
+            secondary: const Icon(Icons.map_outlined),
             title: Text(context.l10n.mapStartsOnAll),
             value: s.mapStartsOnAll,
             onChanged: ctrl.setMapStartsOnAll,
           ),
           SwitchListTile(
+            secondary: const Icon(Icons.abc),
             title: Text(context.l10n.tajikScript),
             subtitle: Text(context.l10n.tajikScriptNote, style: TextStyle(color: c.muted, fontSize: 12)),
             value: s.showTajik,
             onChanged: ctrl.setShowTajik,
           ),
           SwitchListTile(
+            secondary: const Icon(Icons.font_download_outlined),
             title: Text(context.l10n.useIranNastaliq),
             subtitle: Text(context.l10n.iranNastaliqNote, style: TextStyle(color: c.muted, fontSize: 12)),
             value: s.iranNastaliq,
@@ -156,6 +162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           header(context.l10n.translate),
           ListTile(
+            leading: const Icon(Icons.translate),
             title: Text(context.l10n.translateTo),
             subtitle: translator.inApp
                 ? null
@@ -177,6 +184,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           header(context.l10n.storage),
           ListTile(
+            leading: const Icon(Icons.storage_outlined),
             title: Text(context.l10n.cacheSize),
             subtitle: Text(_cacheBytes == null ? '…' : formatBytes(_cacheBytes!), style: TextStyle(color: c.muted)),
           ),
@@ -188,7 +196,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           header(context.l10n.about),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
             child: Text(context.l10n.aboutText, textAlign: TextAlign.justify, style: const TextStyle(height: 1.9)),
           ),
           ListTile(
@@ -217,14 +225,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             },
           ),
           if (kAppVersion.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                context.l10n.versionN(localDigits(kAppVersion)),
-                textAlign: TextAlign.center,
-                style: TextStyle(color: c.muted),
-              ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: Text(context.l10n.versionN(localDigits(kAppVersion))),
             ),
+          const SizedBox(height: 16),
         ],
       ),
     );

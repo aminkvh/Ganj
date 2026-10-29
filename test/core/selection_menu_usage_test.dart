@@ -9,8 +9,8 @@ void main() {
       if (!f.path.endsWith('.dart') || f.path.endsWith('startup_error.dart')) continue;
       final src = f.readAsStringSync();
       for (final m in RegExp(r'SelectionArea\(').allMatches(src)) {
-        final call = src.substring(m.start, (m.start + 160).clamp(0, src.length));
-        if (!call.contains('contextMenuBuilder: ganjSelectionMenu')) missing.add('${f.path}@${m.start}');
+        final call = src.substring(m.start, (m.start + 400).clamp(0, src.length));
+        if (!call.contains('ganjSelectionMenu')) missing.add('${f.path}@${m.start}');
       }
     }
     expect(missing, isEmpty);

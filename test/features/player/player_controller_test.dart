@@ -38,6 +38,33 @@ void main() {
     expect(c.read(playerProvider).status, PlayerStatus.ready);
   });
 
+  test('the button already shows pause while the audio loads, and pausing then sticks', () async {
+    final poem = poem2130();
+    final load = Completer<void>();
+    backend.beforeLoad = load.future;
+    final started = ctrl().play(poem, poem.recitations.first);
+    await flush();
+    expect(c.read(playerProvider).status, PlayerStatus.loading);
+    expect(c.read(playerProvider).playing, isTrue);
+    await ctrl().toggle(); // pause while still loading
+    expect(c.read(playerProvider).playing, isFalse);
+    load.complete();
+    await started;
+    expect(backend.isPlaying, isFalse);
+    expect(c.read(playerProvider).status, PlayerStatus.ready);
+    expect(c.read(playerProvider).playing, isFalse);
+  });
+
+  test('syncing with the page: off from the list, on once a beyt is asked for', () async {
+    final poem = poem2130();
+    await ctrl().play(poem, poem.recitations.first, follow: false);
+    expect(c.read(playerProvider).follow, isFalse);
+    await ctrl().seekToVOrder(3);
+    expect(c.read(playerProvider).follow, isTrue);
+    await ctrl().play(poem, poem.recitations.first, follow: false);
+    expect(c.read(playerProvider).follow, isFalse);
+  });
+
   test('position drives the current verse', () async {
     final poem = poem2130();
     await ctrl().play(poem, poem.recitations.first);

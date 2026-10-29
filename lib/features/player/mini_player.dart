@@ -29,10 +29,18 @@ class MiniPlayer extends ConsumerWidget {
     final progress = total <= 0 ? 0.0 : (s.position.inMilliseconds / total).clamp(0.0, 1.0);
 
     final Widget lead = switch (s.status) {
-      PlayerStatus.loading => const SizedBox(
-        width: 48,
-        height: 48,
-        child: Padding(padding: EdgeInsets.all(14), child: CircularProgressIndicator(strokeWidth: 2)),
+      PlayerStatus.loading => Stack(
+        alignment: Alignment.center,
+        children: [
+          IconButton(
+            tooltip: s.playing ? context.l10n.pause : context.l10n.play,
+            icon: Icon(s.playing ? Icons.pause_circle_filled : Icons.play_circle_filled, color: c.brandRed, size: 36),
+            onPressed: ctrl.toggle,
+          ),
+          IgnorePointer(
+            child: SizedBox.square(dimension: 40, child: CircularProgressIndicator(strokeWidth: 2, color: c.gold)),
+          ),
+        ],
       ),
       PlayerStatus.error => Icon(Icons.error_outline, color: c.brandRed),
       _ => IconButton(

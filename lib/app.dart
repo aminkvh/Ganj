@@ -5,6 +5,7 @@ import 'core/text/content_en.dart';
 import 'core/text/persian_normalize.dart';
 import 'data/providers.dart';
 import 'core/theme/ganj_theme.dart';
+import 'core/ui/keyboard_nav.dart';
 import 'features/settings/settings_controller.dart';
 import 'l10n/l10n.dart';
 import 'router.dart';
@@ -17,7 +18,9 @@ class GanjApp extends ConsumerWidget {
     final s = ref.watch(settingsProvider);
     latinNumbers = s.language == 'en';
     englishContent = s.language == 'en' ? ref.watch(englishContentProvider) : null;
+    final router = ref.watch(routerProvider);
     return MaterialApp.router(
+      builder: (context, child) => KeyboardNav(router: router, child: child ?? const SizedBox.shrink()),
       onGenerateTitle: (context) => context.l10n.appName,
       debugShowCheckedModeBanner: false,
       theme: buildGanjTheme(Brightness.light, iranNastaliq: s.iranNastaliq),
@@ -26,7 +29,7 @@ class GanjApp extends ConsumerWidget {
       locale: Locale(s.language),
       supportedLocales: L10n.supportedLocales,
       localizationsDelegates: L10n.localizationsDelegates,
-      routerConfig: ref.watch(routerProvider),
+      routerConfig: router,
     );
   }
 }

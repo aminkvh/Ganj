@@ -60,6 +60,33 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
   late final List<int> _people = _defaults();
   int? _selected;
 
+  /// Under the mouse: a story order, and the lifeline's person when over one.
+  int? _hoverSection, _hoverPerson;
+
+  void _hover(int? section, [int? person]) {
+    if (section == _hoverSection && person == _hoverPerson) return;
+    setState(() {
+      _hoverSection = section;
+      _hoverPerson = person;
+    });
+  }
+
+  /// What the mouse rests on, in words: the story order's title and what the person does there.
+  String? _hoverText(BuildContext context) {
+    final o = _hoverSection;
+    if (o == null) return null;
+    final l = context.l10n;
+    final title = w.sections[o].title;
+    final id = _hoverPerson;
+    if (id == null) return title;
+    final role = (w.presence[id] ?? const []).contains(o)
+        ? l.shTakesPart
+        : (w.passing[id] ?? const []).contains(o)
+        ? l.shPassing
+        : null;
+    return [personName(context, w, id), ?role, title].join(' · ');
+  }
+
   ShWorld get w => widget.world;
 
   /// The stories' protagonists, up to 18, in order of first appearance.
@@ -145,10 +172,10 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
-                  l.shStoryOrder,
+                  _hoverText(context) ?? l.shStoryOrder,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: c.muted, fontSize: 12),
+                  style: TextStyle(color: _hoverSection == null ? c.muted : c.ink, fontSize: 12),
                 ),
               ),
               IconButton(
@@ -235,42 +262,52 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTapUp: (d) {
-                              final o = sectionAt(d.localPosition.dx);
-                              d.localPosition.dy < _ageH + _reignH ? _openReignAt(o) : _openStoryAt(o);
-                            },
-                            child: CustomPaint(
-                              size: Size(width, _bandsH),
-                              painter: _BandsPainter(
-                                world: w,
-                                xOf: xOf,
-                                col: _col,
-                                tints: tints,
-                                english: isEn(context),
-                                ink: c.ink,
-                                muted: c.muted,
-                                paper: c.paper,
-                                line: c.borderGold,
-                                textDirection: Directionality.of(context),
+                          MouseRegion(
+                            onHover: (e) => _hover(sectionAt(e.localPosition.dx)),
+                            onExit: (_) => _hover(null),
+                            child: GestureDetector(
+                              onTapUp: (d) {
+                                final o = sectionAt(d.localPosition.dx);
+                                d.localPosition.dy < _ageH + _reignH ? _openReignAt(o) : _openStoryAt(o);
+                              },
+                              child: CustomPaint(
+                                size: Size(width, _bandsH),
+                                painter: _BandsPainter(
+                                  world: w,
+                                  xOf: xOf,
+                                  col: _col,
+                                  tints: tints,
+                                  english: isEn(context),
+                                  ink: c.ink,
+                                  muted: c.muted,
+                                  paper: c.paper,
+                                  line: c.borderGold,
+                                  textDirection: Directionality.of(context),
+                                ),
                               ),
                             ),
                           ),
                           for (final id in _people)
-                            GestureDetector(
-                              onTap: () => openPerson(context, id),
-                              child: CustomPaint(
-                                size: Size(width, _rowH),
-                                painter: _LifelinePainter(
-                                  segments: lifelineSegments(w.presence[id] ?? const []),
-                                  passing: w.passing[id] ?? const [],
-                                  xOf: xOf,
-                                  col: _col,
-                                  tintOf: (o) => tints[w.ageOfSection(o).index],
-                                  dim: lit.isNotEmpty && !lit.contains(id),
-                                  grid: c.goldLight.withValues(alpha: 0.35),
-                                  ageStarts: [for (final a in w.ages.skip(1)) a.from],
-                                  rtl: rtl,
+                            MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              onHover: (e) => _hover(sectionAt(e.localPosition.dx), id),
+                              onExit: (_) => _hover(null),
+                              child: GestureDetector(
+                                onTap: () => openPerson(context, id),
+                                child: CustomPaint(
+                                  size: Size(width, _rowH),
+                                  painter: _LifelinePainter(
+                                    hover: _hoverPerson == id ? _hoverSection : null,
+                                    segments: lifelineSegments(w.presence[id] ?? const []),
+                                    passing: w.passing[id] ?? const [],
+                                    xOf: xOf,
+                                    col: _col,
+                                    tintOf: (o) => tints[w.ageOfSection(o).index],
+                                    dim: lit.isNotEmpty && !lit.contains(id),
+                                    grid: c.goldLight.withValues(alpha: 0.35),
+                                    ageStarts: [for (final a in w.ages.skip(1)) a.from],
+                                    rtl: rtl,
+                                  ),
                                 ),
                               ),
                             ),
@@ -281,6 +318,35 @@ class _TimelineRiverState extends ConsumerState<TimelineRiver> {
                 ),
               ],
             ),
+          ),
+        ),
+        // What the marks on a lifeline are.
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 2, 12, 6),
+          child: Wrap(
+            spacing: 16,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              for (final (bar, text) in [(true, l.shTakesPart), (false, l.shPassing)])
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    bar
+                        ? Container(
+                            width: 18,
+                            height: 8,
+                            decoration: BoxDecoration(color: c.muted, borderRadius: BorderRadius.circular(4)),
+                          )
+                        : Container(
+                            width: 6,
+                            height: 6,
+                            decoration: BoxDecoration(color: c.muted.withValues(alpha: 0.5), shape: BoxShape.circle),
+                          ),
+                    const SizedBox(width: 6),
+                    Text(text, style: TextStyle(color: c.muted, fontSize: 11.5)),
+                  ],
+                ),
+            ],
           ),
         ),
       ],
@@ -386,6 +452,7 @@ class _BandsPainter extends CustomPainter {
 
 class _LifelinePainter extends CustomPainter {
   _LifelinePainter({
+    required this.hover,
     required this.segments,
     required this.passing,
     required this.xOf,
@@ -397,6 +464,8 @@ class _LifelinePainter extends CustomPainter {
     required this.rtl,
   });
 
+  /// The story order under the mouse on this row, if any.
+  final int? hover;
   final List<(int, int)> segments;
   final List<int> passing;
   final double Function(int) xOf;
@@ -411,6 +480,9 @@ class _LifelinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final mid = size.height / 2;
     canvas.drawLine(Offset(0, mid), Offset(size.width, mid), Paint()..color = grid);
+    if (hover case final o?) {
+      canvas.drawRect(Rect.fromLTWH(xOf(o), 0, col, size.height), Paint()..color = tintOf(o).withValues(alpha: 0.16));
+    }
     for (final s in ageStarts) {
       final x = rtl ? xOf(s) + col : xOf(s);
       canvas.drawLine(Offset(x, 0), Offset(x, size.height), Paint()..color = grid);
@@ -441,5 +513,6 @@ class _LifelinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_LifelinePainter old) => old.col != col || old.dim != dim || old.segments != segments;
+  bool shouldRepaint(_LifelinePainter old) =>
+      old.col != col || old.dim != dim || old.segments != segments || old.hover != hover;
 }
