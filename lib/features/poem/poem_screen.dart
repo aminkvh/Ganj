@@ -461,6 +461,8 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
           return ganjSelectionMenu(
             context,
             state,
+            // Selecting the whole poem is rarely wanted; a beyt is copied from its own menu.
+            selectAll: false,
             meaningLabel: context.l10n.wordMeaning,
             onMeaning: word.isEmpty || word.contains(' ') ? null : () => showWordMeaning(this.context, ref, word),
           );
@@ -663,7 +665,12 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     final text = _withSource(p, couplet.text);
     final marked = _bookmarkedCouplets.contains(couplet.index);
     final devices = _devicesOf(p, couplet);
+    // A word selected in the poem: its meaning is offered here too, since a right-click on a beyt
+    // opens this menu rather than the selection's.
+    final word = Dictionary.clean(_selectedText);
     final actions = <(IconData, String, VoidCallback)>[
+      if (word.isNotEmpty && !word.contains(' '))
+        (Icons.menu_book_outlined, l.wordMeaning, () => showWordMeaning(context, ref, word)),
       if (p.recitations.isNotEmpty) (Icons.play_arrow, l.playFromBeyt, () => _playFrom(p, couplet)),
       (
         marked ? Icons.bookmark_remove : Icons.bookmark_add,

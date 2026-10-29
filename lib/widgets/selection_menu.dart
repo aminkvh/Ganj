@@ -16,10 +16,12 @@ Widget ganjSelectionMenu(
   SelectableRegionState state, {
   String? meaningLabel,
   VoidCallback? onMeaning,
+  bool selectAll = true,
 }) => AdaptiveTextSelectionToolbar.buttonItems(
   anchors: state.contextMenuAnchors,
   buttonItems: [
-    ...essentialSelectionItems(state.contextMenuButtonItems),
+    for (final b in essentialSelectionItems(state.contextMenuButtonItems))
+      if (selectAll || b.type != ContextMenuButtonType.selectAll) b,
     if (onMeaning != null)
       ContextMenuButtonItem(
         label: meaningLabel,
