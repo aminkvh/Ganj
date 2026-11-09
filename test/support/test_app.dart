@@ -17,6 +17,7 @@ import 'package:ganj/data/providers.dart';
 import 'package:ganj/data/repo/poetry_repository.dart';
 import 'package:ganj/features/player/audio_backend.dart';
 import 'package:ganj/features/player/player_controller.dart';
+import 'package:ganj/features/update/update_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fake_audio_backend.dart';
@@ -53,6 +54,7 @@ Widget testApp(
       sharedPrefsProvider.overrideWithValue(prefs),
       if (repo != null) poetryRepositoryProvider.overrideWithValue(repo),
       audioBackendProvider.overrideWithValue(backend ?? FakeAudioBackend()),
+      updateCheckerProvider.overrideWithValue(null),
       ...overrides,
     ],
     child: MaterialApp(
@@ -91,6 +93,7 @@ Widget testAppRouted(
       sharedPrefsProvider.overrideWithValue(prefs),
       poetryRepositoryProvider.overrideWithValue(repo ?? FixtureRepository()),
       audioBackendProvider.overrideWithValue(backend ?? FakeAudioBackend()),
+      updateCheckerProvider.overrideWithValue(null),
       initialLocationProvider.overrideWithValue(location),
       englishContentProvider.overrideWithValue(testEnglishContent),
       ...overrides,

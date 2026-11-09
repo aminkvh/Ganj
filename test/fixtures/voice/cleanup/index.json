@@ -1,0 +1,104 @@
+{
+ "after": {
+  "gain": 0.6571,
+  "clamp": 1.0,
+  "highpass_hz": 70,
+  "highpass_order": 8,
+  "highpass": "Butterworth, forward and backward",
+  "deess_db": 6,
+  "pause_cap_s": 0.3,
+  "order": [
+   "gain",
+   "clamp",
+   "highpass",
+   "deess",
+   "pause trim"
+  ]
+ },
+ "lines": [
+  {
+   "key": "984-30",
+   "n_breaks": 0,
+   "cuts": 2,
+   "in_samples": 225280,
+   "out_samples": 216640
+  },
+  {
+   "key": "22672-3",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 225280,
+   "out_samples": 225280
+  },
+  {
+   "key": "14881-1",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 197632,
+   "out_samples": 197632
+  },
+  {
+   "key": "5817-24",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 154880,
+   "out_samples": 154880
+  },
+  {
+   "key": "18347-7",
+   "n_breaks": 1,
+   "cuts": 2,
+   "in_samples": 169984,
+   "out_samples": 163984
+  },
+  {
+   "key": "18347-45",
+   "n_breaks": 1,
+   "cuts": 1,
+   "in_samples": 185088,
+   "out_samples": 180768
+  },
+  {
+   "key": "16941-7",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 180224,
+   "out_samples": 180224
+  },
+  {
+   "key": "32358-0",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 165120,
+   "out_samples": 165120
+  },
+  {
+   "key": "9466-0",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 207872,
+   "out_samples": 207872
+  },
+  {
+   "key": "2114-0",
+   "n_breaks": 1,
+   "cuts": 0,
+   "in_samples": 192768,
+   "out_samples": 192768
+  },
+  {
+   "key": "edge_exact_cap",
+   "n_breaks": 0,
+   "cuts": 1,
+   "in_samples": 46320,
+   "out_samples": 43920
+  },
+  {
+   "key": "edge_tie_break",
+   "n_breaks": 1,
+   "cuts": 1,
+   "in_samples": 74400,
+   "out_samples": 67200
+  }
+ ]
+}

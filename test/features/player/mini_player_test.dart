@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ganj/features/player/audio_backend.dart';
 import 'package:ganj/features/player/mini_player.dart';
 import 'package:ganj/features/player/player_controller.dart';
 
@@ -85,5 +86,48 @@ void main() {
     await tester.tap(find.byTooltip('بستن'));
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('mini-player')), findsNothing);
+  });
+
+  testWidgets('a voice stream waiting for its next beyt shows the loading ring', (tester) async {
+    final c = await pump(tester);
+    final ctrl = c.read(playerProvider.notifier);
+    await ctrl
+        .startVoiceStream(
+          poem2130(),
+          artist: 'v',
+          first: PlaylistItem(uri: Uri.parse('file:///b0.wav'), duration: const Duration(seconds: 1)),
+          firstVOrder: 1,
+        )
+        .started;
+    await tester.pump();
+    final mini = find.byKey(const ValueKey('mini-player'));
+    expect(find.descendant(of: mini, matching: find.byType(CircularProgressIndicator)), findsNothing);
+    backend.emitItemPosition(0, const Duration(milliseconds: 900));
+    await tester.pump(); // delivers the position event
+    await tester.pump(); // rebuilds
+    expect(c.read(playerProvider).waiting, isTrue);
+    expect(find.descendant(of: mini, matching: find.byType(CircularProgressIndicator)), findsOneWidget);
+    expect(find.byTooltip('توقف'), findsOneWidget, reason: 'the button still offers pause while waiting');
+  });
+
+  testWidgets('a live voice stream shows an empty track; after its end the bar shows progress', (tester) async {
+    final c = await pump(tester);
+    final ctrl = c.read(playerProvider.notifier);
+    PlaylistItem item(int n) => PlaylistItem(uri: Uri.parse('file:///b$n.wav'), duration: const Duration(seconds: 1));
+    final token = ctrl.startVoiceStream(poem2130(), artist: 'v', first: item(0), firstVOrder: 1);
+    await token.started;
+    backend.emitItemPosition(0, const Duration(milliseconds: 500));
+    await tester.pump();
+    await tester.pump();
+    Slider slider() => tester.widget<Slider>(find.byType(Slider));
+    expect(slider().value, 0, reason: 'no fraction while the total still grows');
+    expect(slider().onChanged, isNull);
+    await ctrl.addVoiceBeyt(token, item(1), 2);
+    await tester.pump();
+    expect(slider().value, 0, reason: 'the bar never jumps backwards as beyts arrive');
+    ctrl.endVoiceStream(token);
+    await tester.pump();
+    expect(slider().value, closeTo(0.25, 1e-9));
+    expect(slider().onChanged, isNotNull);
   });
 }

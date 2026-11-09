@@ -25,10 +25,14 @@ class MiniPlayer extends ConsumerWidget {
     if (s.status == PlayerStatus.idle || poem == null || rec == null) return const SizedBox.shrink();
     final c = context.ganj;
     final ctrl = ref.read(playerProvider.notifier);
-    final total = s.duration.inMilliseconds;
+    // A live voice stream's total grows with each beyt, so a fraction of it would slide backwards: until its end
+    // marker the bar is an empty track.
+    final live = ctrl.streaming && s.timeline.end == null;
+    final total = live ? 0 : s.duration.inMilliseconds;
     final progress = total <= 0 ? 0.0 : (s.position.inMilliseconds / total).clamp(0.0, 1.0);
 
-    final Widget lead = switch (s.status) {
+    // A voice stream waiting for its next beyt looks like loading.
+    final Widget lead = switch (s.waiting ? PlayerStatus.loading : s.status) {
       PlayerStatus.loading => Stack(
         alignment: Alignment.center,
         children: [
@@ -63,10 +67,11 @@ class MiniPlayer extends ConsumerWidget {
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   trackHeight: 2,
-                  thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 5),
+                  thumbShape: live ? SliderComponentShape.noThumb : const RoundSliderThumbShape(enabledThumbRadius: 5),
                   overlayShape: SliderComponentShape.noOverlay,
                   activeTrackColor: c.gold,
                   inactiveTrackColor: c.goldLight,
+                  disabledInactiveTrackColor: c.goldLight,
                   thumbColor: c.gold,
                 ),
                 child: Slider(

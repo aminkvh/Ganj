@@ -57,3 +57,12 @@ android/key.properties
 *.jks
 *.keystore
 store/.portraits/
+
+# Local beta experiments (never pushed)
+beta/
+
+# Ganj voice phone folders from the voice side (local only)
+/phone20k/
+/phone20k_b8/
+/litert20k.zip
+/litert20k/

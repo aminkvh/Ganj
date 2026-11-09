@@ -53,6 +53,14 @@ class UnavailableAudioBackend implements AudioBackend {
   const UnavailableAudioBackend();
 
   @override
+  bool get supportsPlaylist => false;
+  @override
+  Future<void> loadPlaylist(List<PlaylistItem> items, {required MediaInfo info}) async => throw const AudioUnavailable();
+  @override
+  Future<void> appendItem(PlaylistItem item, {bool resume = false}) async => throw const AudioUnavailable();
+  @override
+  Stream<int?> get currentItem => const Stream.empty();
+  @override
   Future<Duration?> load(Uri uri, {required MediaInfo info}) async => throw const AudioUnavailable();
   @override
   Future<void> play() async => throw const AudioUnavailable();

@@ -12,6 +12,7 @@ import '../extras/random_poem.dart';
 import 'book_shelf.dart';
 import '../shahnameh/ui/shahnameh_entry.dart';
 import 'poet_tile.dart';
+import '../update/update_notice.dart';
 import '../../l10n/l10n.dart';
 import '../../core/text/content_en.dart';
 
@@ -104,6 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
             icon: const Icon(Icons.refresh, size: 18),
             label: Text(context.l10n.seedRefresh),
           ),
+        const UpdateNotice(),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           child: TextField(

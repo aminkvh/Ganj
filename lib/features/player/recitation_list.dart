@@ -6,6 +6,7 @@ import '../../core/theme/ganj_colors.dart';
 import '../../data/api/dto/poem.dart';
 import '../../data/api/dto/recitation.dart';
 import '../../widgets/gold_card.dart';
+import '../voice/app/voice_row.dart';
 import 'download_button.dart';
 import 'player_controller.dart';
 import '../../l10n/l10n.dart';
@@ -22,6 +23,7 @@ class RecitationList extends ConsumerWidget {
     final st = ref.watch(playerProvider);
     final ctrl = ref.read(playerProvider.notifier);
     final mine = st.poem?.id == poem.id;
+    final voice = voiceRowVisible(ref, poem);
 
     Widget row(Recitation r) {
       final current = mine && st.recitation?.id == r.id;
@@ -61,13 +63,16 @@ class RecitationList extends ConsumerWidget {
         shape: const Border(),
         collapsedShape: const Border(),
         leading: Icon(Icons.headphones, color: c.gold),
-        title: Text(context.l10n.recitationsCount(localDigits(poem.recitations.length))),
+        title: Text(context.l10n.recitationsCount(localDigits(poem.recitations.length + (voice ? 1 : 0)))),
         trailing: IconButton(
           tooltip: st.follow ? context.l10n.autoScrollOn : context.l10n.autoScrollOff,
           icon: Icon(st.follow ? Icons.swap_vert : Icons.lock, color: c.muted),
           onPressed: () => ctrl.setFollow(!st.follow),
         ),
-        children: [for (final r in poem.recitations) row(r)],
+        children: [
+          for (final r in poem.recitations) row(r),
+          if (voice) VoiceRow(poem: poem),
+        ],
       ),
     );
   }

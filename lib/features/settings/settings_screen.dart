@@ -7,12 +7,17 @@ import '../../core/theme/ganj_colors.dart';
 import '../../core/theme/ganj_theme.dart';
 import '../../data/providers.dart';
 import '../library/library_providers.dart';
+import '../voice/app/voice_cache.dart' show VoiceCache;
+import '../voice/app/voice_manifest.dart' show kFastVariant;
+import '../voice/app/voice_providers.dart';
 import '../translate/translator.dart';
 import 'licenses.dart';
 import 'settings_controller.dart';
 import '../../l10n/l10n.dart';
 import '../../core/net/disk_image.dart';
 import '../../version.dart';
+import '../update/update_check.dart';
+import '../update/update_notice.dart';
 
 /// Public source repository; set once the project is published (the link is hidden while empty).
 const kSourceUrl = 'https://github.com/aminkvh/Ganj';
@@ -28,10 +33,26 @@ class SettingsScreen extends ConsumerStatefulWidget {
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int? _cacheBytes;
 
+  /// Bytes on disk under the voice root (installed voice or a partial download); the remove row shows when > 0.
+  int _voiceBytes = 0;
+
   @override
   void initState() {
     super.initState();
     _loadCacheSize();
+    _loadVoiceBytes();
+  }
+
+  /// True where the voice is set up (its providers are wired: every platform in main.dart; null in tests).
+  bool get _hasVoice => ref.read(voiceCacheBaseProvider) != null;
+
+  /// The machine-reading cache; null where the voice is not set up.
+  VoiceCache? get _voiceCache => _hasVoice ? ref.read(voiceCacheProvider) : null;
+
+  void _loadVoiceBytes() {
+    if (!_hasVoice) return;
+    final n = voiceRootBytes(ref.read(voiceRootProvider));
+    if (mounted && n != _voiceBytes) setState(() => _voiceBytes = n);
   }
 
   Future<void> _loadCacheSize() async {
@@ -39,7 +60,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         .read(appDbProvider)
         .customSelect('SELECT coalesce(sum(length(body)), 0) AS b FROM api_cache')
         .getSingle();
-    if (mounted) setState(() => _cacheBytes = r.read<int>('b'));
+    final voiceBytes = await _voiceCache?.sizeBytes() ?? 0;
+    if (mounted) setState(() => _cacheBytes = r.read<int>('b') + voiceBytes);
   }
 
   /// Only the API response cache: installed packs, downloaded audio and user data stay.
@@ -49,6 +71,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       await db.customStatement('DELETE FROM api_cache');
       await db.customStatement('VACUUM'); // give the space back to the disk
       await DiskImage.clear();
+      // Finished machine readings; the voice itself stays, and so do the parts of a prepare still running and
+      // the beyt items of a reading still being streamed.
+      await _voiceCache?.clear(keep: _hasVoice ? ref.read(voicePreparesProvider).keepParts : const {});
     } catch (_) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.clearFailed)));
       return;
@@ -67,6 +92,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
+  /// Deletes the on-device voice (and its readings) after a confirmation.
+  Future<void> _removeVoice() async {
+    final l = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l.voiceRowTitle),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(l.cancel)),
+          TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(l.delete)),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    try {
+      await ref.read(voiceProvider.notifier).remove();
+    } catch (_) {
+      _say(l.clearFailed);
+      _loadVoiceBytes();
+      return;
+    }
+    _loadVoiceBytes();
+    await _loadCacheSize();
+  }
+
   void _say(String text) {
     if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
@@ -77,6 +127,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final s = ref.watch(settingsProvider);
     final ctrl = ref.read(settingsProvider.notifier);
     final translator = ref.watch(translatorProvider);
+    // The voice's folders exist only where the app sets them up (main.dart, every platform).
+    final voice = ref.watch(voiceCacheBaseProvider) == null ? null : ref.watch(voiceProvider);
+    // A download that ends (installed, failed, cancelled) while this page is open changes what is on disk.
+    if (voice != null) ref.listen(voiceProvider, (_, s) => _loadVoiceBytes());
     Widget header(String t) => Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
       child: Text(
@@ -194,6 +248,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             subtitle: Text(context.l10n.clearCacheNote, style: TextStyle(color: c.muted, fontSize: 12)),
             onTap: _clearCache,
           ),
+          // Any bytes under the voice root: an installed voice, or a partial download to give back.
+          if (voice != null && _voiceBytes > 0)
+            ListTile(
+              key: const ValueKey('voice-remove'),
+              leading: const Icon(Icons.delete_outline),
+              title: Text(switch (voice) {
+                // Only the (dormant) fast variant is named; the single quality voice has the plain label.
+                VoiceReady(:final variant) when variant == kFastVariant => context.l10n.voiceRemoveVariant(
+                  context.l10n.voiceFast,
+                  formatBytes(_voiceBytes),
+                ),
+                _ => context.l10n.voiceRemove(formatBytes(_voiceBytes)),
+              }),
+              onTap: _removeVoice,
+            ),
           header(context.l10n.about),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
@@ -228,6 +297,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ListTile(
               leading: const Icon(Icons.info_outline),
               title: Text(context.l10n.versionN(localDigits(kAppVersion))),
+            ),
+          if (ref.watch(updateProvider).value case final u?)
+            ListTile(
+              key: const ValueKey('update-row'),
+              leading: const Icon(Icons.system_update_alt),
+              title: Text(context.l10n.appUpdateInSettings(localDigits(u.version))),
+              subtitle: Text(context.l10n.download),
+              onTap: () => openUpdatePage(u),
             ),
           const SizedBox(height: 16),
         ],

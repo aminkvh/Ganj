@@ -25,6 +25,7 @@ import 'features/player/audio_store.dart';
 import 'features/player/player_controller.dart';
 import 'features/player/unavailable_audio.dart';
 import 'features/settings/licenses.dart';
+import 'features/voice/app/voice_providers.dart';
 import 'core/net/disk_image.dart';
 
 /// `--route=/poem/2130` (desktop) opens the app on that page — handy for screenshots and checks.
@@ -68,6 +69,9 @@ Future<void> _start(List<String> args) async {
     directory: Directory('${(await getApplicationCacheDirectory()).path}${Platform.pathSeparator}images'),
   );
   final audioDir = Directory('${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}audio');
+  // The on-device voice (machine reading): its files, and its finished readings (per voice version).
+  final voiceDir = Directory('${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}voice');
+  final voiceCacheDir = Directory('${(await getApplicationCacheDirectory()).path}${Platform.pathSeparator}voice-cache');
   // Windows "N" editions lack Media Foundation until the Media Feature Pack is installed:
   // don't touch Windows' media code there, explain instead when play is pressed.
   // Linux without libmpv: same idea, and media_kit is never initialised there.
@@ -111,10 +115,11 @@ Future<void> _start(List<String> args) async {
       audioStoreProvider.overrideWith(
         (ref) => FileAudioStore(audioDir, createDio(), ref.watch(poetryRepositoryProvider)),
       ),
+      voiceRootProvider.overrideWithValue(voiceDir),
+      voiceCacheBaseProvider.overrideWithValue(voiceCacheDir),
     ],
   );
-  handler?.onSkip = (delta) =>
-      delta > 0 ? container.read(playerProvider.notifier).next() : container.read(playerProvider.notifier).previous();
+  if (handler != null) wireAudioHandler(handler, container);
 
   _startup.step('runApp');
   WidgetsBinding.instance.addPostFrameCallback((_) => _startup.step('first frame built'));

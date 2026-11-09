@@ -30,8 +30,61 @@ class FakeAudioBackend implements AudioBackend {
 
   void emitCompleted() => _completed.add(true);
 
+  // Playlist mode: a global timeline over per-item durations, like the real backend.
+  PlaylistTimeline? timeline;
+  final playlists = <List<PlaylistItem>>[];
+  final appended = <PlaylistItem>[];
+
+  /// How many appends asked to resume.
+  int resumed = 0;
+
+  /// Holds appendItem() until this completes, to test an append in flight.
+  Future<void>? beforeAppend;
+  final itemSeeks = <({int index, Duration offset})>[];
+  final _item = StreamController<int?>.broadcast();
+
+  @override
+  bool get supportsPlaylist => playlistSupported;
+
+  /// Set false to mimic a platform without playlists.
+  bool playlistSupported = true;
+
+  @override
+  Stream<int?> get currentItem => _item.stream;
+
+  @override
+  Future<void> loadPlaylist(List<PlaylistItem> items, {required MediaInfo info}) async {
+    await beforeLoad;
+    if (failLoad != null) throw failLoad!;
+    playlists.add(items);
+    infos.add(info);
+    timeline = PlaylistTimeline(items.map((i) => i.duration));
+    _duration.add(timeline!.total);
+  }
+
+  @override
+  Future<void> appendItem(PlaylistItem item, {bool resume = false}) async {
+    if (resume) resumed++;
+    await beforeAppend;
+    appended.add(item);
+    timeline!.add(item.duration);
+    _duration.add(timeline!.total);
+  }
+
+  /// The playlist plays [offset] into item [index]: emits the item and the global position.
+  void emitItemPosition(int index, Duration offset) {
+    _item.add(index);
+    _pos.add(timeline!.global(index, offset));
+  }
+
+  /// Item [index] ends; the backend reports completion only for the last one.
+  void emitItemCompleted(int index) {
+    if (index == timeline!.length - 1) _completed.add(true);
+  }
+
   @override
   Future<Duration?> load(Uri uri, {required MediaInfo info}) async {
+    timeline = null;
     await beforeLoad;
     if (failLoad != null) throw failLoad!;
     loaded.add(uri);
@@ -59,6 +112,12 @@ class FakeAudioBackend implements AudioBackend {
   @override
   Future<void> seek(Duration d) async {
     seeks.add(d);
+    final t = timeline;
+    if (t != null) {
+      final at = t.locate(d);
+      itemSeeks.add(at);
+      _item.add(at.index);
+    }
     _pos.add(d);
   }
 

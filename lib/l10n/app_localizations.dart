@@ -1183,6 +1183,18 @@ abstract class L10n {
   /// **'نسخهٔ {version}'**
   String versionN(String version);
 
+  /// No description provided for @appUpdateAvailable.
+  ///
+  /// In fa, this message translates to:
+  /// **'نسخهٔ تازهٔ گنج آمده است: {version}'**
+  String appUpdateAvailable(String version);
+
+  /// No description provided for @appUpdateInSettings.
+  ///
+  /// In fa, this message translates to:
+  /// **'نسخهٔ تازه: {version}'**
+  String appUpdateInSettings(String version);
+
   /// No description provided for @backupCopied.
   ///
   /// In fa, this message translates to:
@@ -1848,6 +1860,126 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'منبع متن گنجور'**
   String get textSource;
+
+  /// No description provided for @voiceRowTitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'خوانش ماشینی'**
+  String get voiceRowTitle;
+
+  /// No description provided for @voiceGetOnce.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت یک‌بارهٔ صدا'**
+  String get voiceGetOnce;
+
+  /// No description provided for @voiceWasCorrupt.
+  ///
+  /// In fa, this message translates to:
+  /// **'صدا خراب بود؛ دوباره دریافت کنید'**
+  String get voiceWasCorrupt;
+
+  /// No description provided for @voiceChecking.
+  ///
+  /// In fa, this message translates to:
+  /// **'…'**
+  String get voiceChecking;
+
+  /// No description provided for @voiceDownloading.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت صدا… ٪{p}'**
+  String voiceDownloading(String p);
+
+  /// No description provided for @voiceFailedOffline.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت نشد؛ اینترنت را بررسی کنید'**
+  String get voiceFailedOffline;
+
+  /// No description provided for @voiceFailedSpace.
+  ///
+  /// In fa, this message translates to:
+  /// **'جای کافی روی دستگاه نیست'**
+  String get voiceFailedSpace;
+
+  /// No description provided for @voiceFailedChecksum.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل صدا سالم نرسید'**
+  String get voiceFailedChecksum;
+
+  /// No description provided for @voiceOnDevice.
+  ///
+  /// In fa, this message translates to:
+  /// **'صدای گنج، روی همین دستگاه'**
+  String get voiceOnDevice;
+
+  /// No description provided for @voicePreparing.
+  ///
+  /// In fa, this message translates to:
+  /// **'آماده‌سازی… {done} از {total} بیت'**
+  String voicePreparing(String done, String total);
+
+  /// No description provided for @voicePrepareFailed.
+  ///
+  /// In fa, this message translates to:
+  /// **'خواندن ممکن نشد'**
+  String get voicePrepareFailed;
+
+  /// No description provided for @voiceConsentBody.
+  ///
+  /// In fa, this message translates to:
+  /// **'این صدا شعر را روی همین دستگاه می‌خواند. یک بار دریافت می‌شود ({size}) و از تنظیمات پاک‌شدنی است.'**
+  String voiceConsentBody(String size);
+
+  /// No description provided for @voiceConsentBodyChoice.
+  ///
+  /// In fa, this message translates to:
+  /// **'این صدا شعر را روی همین دستگاه می‌خواند. یک بار دریافت می‌شود و از تنظیمات پاک‌شدنی است.'**
+  String get voiceConsentBodyChoice;
+
+  /// No description provided for @voiceGet.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت'**
+  String get voiceGet;
+
+  /// No description provided for @voiceRemove.
+  ///
+  /// In fa, this message translates to:
+  /// **'پاک کردن صدای گنج ({size})'**
+  String voiceRemove(String size);
+
+  /// No description provided for @voiceFast.
+  ///
+  /// In fa, this message translates to:
+  /// **'سریع'**
+  String get voiceFast;
+
+  /// No description provided for @voiceQuality.
+  ///
+  /// In fa, this message translates to:
+  /// **'باکیفیت'**
+  String get voiceQuality;
+
+  /// No description provided for @voiceFastNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'سریع‌تر روی بیشتر گوشی‌ها'**
+  String get voiceFastNote;
+
+  /// No description provided for @voiceQualityNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'صدای روشن‌تر؛ گوشی‌های کندتر بیشتر آماده می‌کنند'**
+  String get voiceQualityNote;
+
+  /// No description provided for @voiceRemoveVariant.
+  ///
+  /// In fa, this message translates to:
+  /// **'پاک کردن صدای گنج — {variant} ({size})'**
+  String voiceRemoveVariant(String variant, String size);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -66,8 +66,9 @@ jobs:
           echo "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/ganj-release.jks"
           printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=%s\n' \
             "$PASSWORD" "$PASSWORD" "$ALIAS" "$RUNNER_TEMP/ganj-release.jks" > android/key.properties
-      - run: flutter build apk --release
-      - run: flutter build apk --release --split-per-abi
+      - run: flutter build apk --release --dart-define=GANJ_UPDATE_CHECK=true
+      - run: flutter build apk --release --split-per-abi --dart-define=GANJ_UPDATE_CHECK=true
+      # The .aab goes to Google Play and Cafe Bazaar, which update the app themselves: built without the update check.
       - run: flutter build appbundle --release
       - name: Name the files
         run: |
@@ -103,7 +104,7 @@ jobs:
           rm -f data.json.gz data.json
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
-      - run: flutter build windows --release
+      - run: flutter build windows --release --dart-define=GANJ_UPDATE_CHECK=true
       - name: Zip
         shell: pwsh
         run: |
@@ -143,7 +144,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libmpv-dev
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
-      - run: flutter build linux --release
+      - run: flutter build linux --release --dart-define=GANJ_UPDATE_CHECK=true
       - name: Pack
         run: |
           V="${TAG#v}"; mkdir out
@@ -173,7 +174,7 @@ jobs:
           rm -f data.json.gz data.json
       - uses: subosito/flutter-action@v2
         with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
-      - run: flutter build macos --release
+      - run: flutter build macos --release --dart-define=GANJ_UPDATE_CHECK=true
       - name: Zip
         run: |
           V="${TAG#v}"; mkdir out

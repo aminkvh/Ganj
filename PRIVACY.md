@@ -1,6 +1,6 @@
 # Privacy policy · سیاست حریم خصوصی
 
-*Ganj (گنج) — last updated 7 November 2026*
+*Ganj (گنج) — last updated 9 November 2026*
 
 ## English
 
@@ -22,7 +22,11 @@ request, these services can see your device's IP address:
 - **Ganjoor's Tajik text** (via the jsDelivr CDN, `cdn.jsdelivr.net`): only when the Tajik script option is on.
 - **OpenStreetMap** (`tile.openstreetmap.org`): map tiles, only when you open the poets' birthplace map.
 - **Wiktionary** (`fa.wiktionary.org`): word meanings, only when you look up a word. It receives that word.
-- **GitHub** (`github.com`): updates to the World of the Shahnameh data, checked at most once a week.
+- **GitHub** (`github.com`, `api.github.com`): updates to the World of the Shahnameh data, checked at most once a
+  week; in the versions downloaded from GitHub (not from Google Play or Cafe Bazaar), whether a newer Ganj is out,
+  checked at most once a day.
+- **Hugging Face** (`huggingface.co`), or GitHub if it cannot be reached: the machine reading voice, downloaded
+  once, only after you agree. The reading itself is made **on your device**; the poem's text is not sent anywhere.
 - **Google ML Kit** (Android, iOS): translation runs **on your device**. The language model is downloaded from
   Google once, after you agree; the text you translate stays on your device. ML Kit also sends Google diagnostics and
   usage data: device model and OS version, the app's name and version, performance figures, error codes, the size of
@@ -62,7 +66,10 @@ you to these requests.
 - **متن تاجیکی گنجور** (از راه `cdn.jsdelivr.net`): فقط وقتی گزینهٔ خط تاجیکی روشن است.
 - **اوپن‌استریت‌مپ** (`tile.openstreetmap.org`): کاشی‌های نقشه، فقط هنگام باز کردن نقشهٔ خاستگاه سخنوران.
 - **ویکی‌واژه** (`fa.wiktionary.org`): معنی واژه‌ها، فقط هنگام جستجوی یک واژه، و همان واژه را دریافت می‌کند.
-- **گیت‌هاب** (`github.com`): به‌روزرسانی داده‌های جهان شاهنامه، که دست‌بالا هفته‌ای یک بار بررسی می‌شود.
+- **گیت‌هاب** (`github.com`، `api.github.com`): به‌روزرسانی داده‌های جهان شاهنامه، که دست‌بالا هفته‌ای یک بار بررسی
+  می‌شود؛ و در نسخه‌هایی که از گیت‌هاب دریافت شده‌اند (نه از گوگل‌پلی یا کافه‌بازار)، آمدن نسخهٔ تازهٔ گنج، دست‌بالا روزی یک بار.
+- **هاگینگ‌فیس** (`huggingface.co`)، یا اگر در دسترس نباشد گیت‌هاب: صدای خوانش ماشینی، یک بار و فقط پس از موافقت شما
+  بارگیری می‌شود. خود خوانش **روی دستگاه شما** ساخته می‌شود و متن شعر به جایی فرستاده نمی‌شود.
 - **Google ML Kit** (اندروید، آی‌اواس): ترجمه **روی خود دستگاه** انجام می‌شود. مدل زبان یک بار، پس از موافقت
   شما، از گوگل بارگیری می‌شود و متن ترجمه‌شده از دستگاه بیرون نمی‌رود. ML Kit داده‌های عیب‌یابی و کاربرد را نیز برای گوگل
   می‌فرستد: مدل دستگاه و نسخهٔ سیستم‌عامل، نام و نسخهٔ برنامه، آمار کارایی، کدهای خطا، حجم متن و زبان‌های ترجمه، همراه با

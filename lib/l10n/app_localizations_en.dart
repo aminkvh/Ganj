@@ -612,6 +612,16 @@ class L10nEn extends L10n {
   }
 
   @override
+  String appUpdateAvailable(String version) {
+    return 'Ganj $version is available';
+  }
+
+  @override
+  String appUpdateInSettings(String version) {
+    return 'Update available: $version';
+  }
+
+  @override
   String get backupCopied => 'Backup copied to the clipboard';
 
   @override
@@ -966,4 +976,76 @@ class L10nEn extends L10n {
 
   @override
   String get textSource => 'Source of Ganjoor\'s text';
+
+  @override
+  String get voiceRowTitle => 'Machine reading';
+
+  @override
+  String get voiceGetOnce => 'Get the voice, once';
+
+  @override
+  String get voiceWasCorrupt => 'The voice was damaged; get it again';
+
+  @override
+  String get voiceChecking => '…';
+
+  @override
+  String voiceDownloading(String p) {
+    return 'Getting the voice… $p%';
+  }
+
+  @override
+  String get voiceFailedOffline => 'Could not get it; check your internet';
+
+  @override
+  String get voiceFailedSpace => 'Not enough space on the device';
+
+  @override
+  String get voiceFailedChecksum => 'The voice file arrived damaged';
+
+  @override
+  String get voiceOnDevice => 'Ganj voice, on this device';
+
+  @override
+  String voicePreparing(String done, String total) {
+    return 'Preparing… $done of $total beyts';
+  }
+
+  @override
+  String get voicePrepareFailed => 'Could not read this poem';
+
+  @override
+  String voiceConsentBody(String size) {
+    return 'This voice reads poems on this device. It downloads once ($size) and can be removed in Settings.';
+  }
+
+  @override
+  String get voiceConsentBodyChoice =>
+      'This voice reads poems on this device. It downloads once and can be removed in Settings.';
+
+  @override
+  String get voiceGet => 'Get';
+
+  @override
+  String voiceRemove(String size) {
+    return 'Remove the Ganj voice ($size)';
+  }
+
+  @override
+  String get voiceFast => 'Fast';
+
+  @override
+  String get voiceQuality => 'Quality';
+
+  @override
+  String get voiceFastNote => 'Faster on most phones';
+
+  @override
+  String get voiceQualityNote =>
+      'The clearer voice; slower phones prepare longer';
+
+  @override
+  String voiceRemoveVariant(String variant, String size) {
+    return 'Remove the Ganj voice — $variant ($size)';
+  }
 }

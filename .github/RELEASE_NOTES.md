@@ -8,6 +8,19 @@
 
 ## What's new · تازه‌ها
 
+### 1.6.0
+- **Machine reading (خوانش ماشینی):** poems without a recitation can now be read aloud by Ganj's own voice, made **on your device**. Tap **Machine reading** under Recitations; the voice is downloaded once (about 585 MB, only after you agree) and then works offline. Reading starts within seconds while the rest of the poem is prepared, and the beyt being read is highlighted. Lines that are not Persian (Arabic hemistichs, for example) are skipped. A poem read once plays again at once. The voice can be removed in Settings. On Android, Windows, macOS and Linux (not yet on iPhone or iPad); macOS and Linux are new to it, so please report any problem.
+- **New versions:** the copies downloaded from GitHub (Android APK, Windows, macOS, Linux) say quietly on the home screen when a newer Ganj is out, with a link to download it; Settings keeps the link. Copies from Google Play or Cafe Bazaar are updated by the store and never ask.
+- **Poem menu:** **Meaning** is in the beyt menu, and the text-selection menu no longer offers Select all.
+
+<div dir="rtl">
+
+- **خوانش ماشینی:** شعرهایی که خوانش ندارند اکنون با صدای خود گنج خوانده می‌شوند، و این خوانش **روی دستگاه شما** ساخته می‌شود. زیر «خوانش‌ها» **خوانش ماشینی** را بزنید؛ صدا یک بار (حدود ۵۸۵ مگابایت، فقط پس از موافقت شما) بارگیری می‌شود و از آن پس بی‌اینترنت کار می‌کند. خوانش پس از چند ثانیه آغاز می‌شود و بقیهٔ شعر در همان حال آماده می‌شود؛ بیتی که خوانده می‌شود پررنگ است. مصراع‌هایی که پارسی نیستند (مانند مصراع‌های عربی) خوانده نمی‌شوند. شعری که یک بار خوانده شده، بار دیگر بی‌درنگ پخش می‌شود. صدا را می‌توانید در تنظیمات پاک کنید. در اندروید، ویندوز، مک و لینوکس (هنوز نه در آیفون و آیپد)؛ مک و لینوکس تازه‌اند، پس اگر مشکلی دیدید خبر دهید.
+- **نسخه‌های تازه:** نسخه‌هایی که از گیت‌هاب دریافت شده‌اند (اندروید APK، ویندوز، مک، لینوکس) آمدن نسخهٔ تازهٔ گنج را آرام در صفحهٔ خانه می‌گویند و پیوند دریافتش را می‌دهند؛ این پیوند در تنظیمات هم می‌ماند. نسخه‌های گوگل‌پلی و کافه‌بازار را خود فروشگاه به‌روز می‌کند و چیزی نمی‌پرسند.
+- **منوی شعر:** **معنی** در منوی بیت است و منوی گزینش متن دیگر «انتخاب همه» ندارد.
+
+</div>
+
 ### 1.2.5
 - **Recitations (خوانش‌ها):** the poem page follows a recitation only when you start it from a beyt; start it from the list and the page stays where you are (the lock button turns following on or off). The play button shows pause at once, even while the audio is loading, so you can stop it right away.
 - **Word meanings (معنی واژه):** select a word in a poem and choose **Meaning** to see its entry from the Persian Wiktionary.

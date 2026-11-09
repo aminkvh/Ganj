@@ -1,0 +1,4007 @@
+{
+"units": [
+{
+"key": "100389-0",
+"lines": [
+"فحشی ز لبت تو وقف ما کن",
+"درد دل بی‌دوا دوا کن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "فحشی ز لبت تو وقف ما کن",
+"out": [
+"foh$i ze l/b/t to v/qfe1 ma kon"
+]
+},
+{
+"call": "top1",
+"input": "درد دل بی‌دوا دوا کن",
+"out": [
+"d/rde1 dele1 bid/va d/va kon"
+]
+}
+],
+"label": "fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
+"error": null,
+"reading": "fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
+"target": " fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon"
+},
+{
+"key": "100389-1",
+"lines": [
+"گفتی شب وصل ریزمت خون",
+"باز آی به عهد خود وفا کن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گفتی شب وصل ریزمت خون",
+"out": [
+"gofti $/be1 v/sle1 rizm/t xun"
+]
+},
+{
+"call": "top1",
+"input": "باز آی به عهد خود وفا کن",
+"out": [
+"baz @ay be @/hde1 xod v/fa kon"
+]
+}
+],
+"label": "gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
+"error": null,
+"reading": "gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
+"target": " gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon"
+},
+{
+"key": "100997-0",
+"lines": [
+"از سایه ی تو سبز سر خاک من بس است",
+"لوح مزار فاخته، سرو چمن بس است"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "از سایه ی تو سبز سر خاک من بس است",
+"out": [
+"@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/st"
+]
+},
+{
+"call": "nbest",
+"input": "از سایه ی تو سبز سر خاک من بس است",
+"n": 8,
+"out": [
+"@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bze1 s/re1 xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bz serre1 xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bze1 s/r xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bze1 serre1 xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bz s/r xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bz sore1 xake1 m/n b/s @/st",
+"@/z sayeye1 to s/bz sere1 xake1 m/n b/s @/st"
+]
+},
+{
+"call": "top1",
+"input": "لوح مزار فاخته سرو چمن بس است",
+"out": [
+"lohe1 m/zar faxte s/rve1 c/m/n b/s @/st"
+]
+}
+],
+"label": "@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st",
+"error": null,
+"reading": "@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st",
+"target": " @/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st"
+},
+{
+"key": "100997-1",
+"lines": [
+"شیرین! ز غیرت شکر این پیچ و تاب چیست",
+"پرویز گو مباش، ترا کوهکن بس است"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "شیرین ز غیرت شکر این پیچ و تاب چیست",
+"out": [
+"$irin ze qeyr/te1 $okre1 @in pic o tab cist"
+]
+},
+{
+"call": "top1",
+"input": "پرویز گو مباش ترا کوهکن بس است",
+"out": [
+"p/rviz gu m/ba$ tora kuhk/n b/s @/st"
+]
+}
+],
+"label": "širin ze qeyr/te1 šokre1 @in pic o tab cistp/rviz gu m/baš tora kuhk/n b/s @/st",
+"error": null,
+"reading": "širin  ze qeyr/te1 šokre1 @in pic o tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st",
+"target": " širin  ze qeyr/te1 šokre1 @in pico tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st"
+},
+{
+"key": "102857-0",
+"lines": [
+"از آن دو لب چه گل کام می توان چیدن",
+"که بوسه ای به صد ابرام می توان چیدن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "از آن دو لب چه گل کام می توان چیدن",
+"out": [
+"@/z @an do l/b ce gol kame1 mey t/van cid/n"
+]
+},
+{
+"call": "top1",
+"input": "که بوسه ای به صد ابرام می توان چیدن",
+"out": [
+"ke buse @ey be s/d @ebrame1 mey t/van cid/n"
+]
+}
+],
+"label": "@/z @an do l/b ce gol kame1 mey t/van cid/nke buse @ey be s/d @ebrame1 mey t/van cid/n",
+"error": null,
+"reading": "@/z @an do l/b ce gol kame1 mey t/van cid/nke buse @ey be s/d @ebrame1 mey t/van cid/n",
+"target": " @/z @an do l/b ce gol kame1 mey t/van cid/nke buse @ey be s/d @ebrame1 mey t/van cid/n"
+},
+{
+"key": "102857-1",
+"lines": [
+"به دامنی که بگسترده پرتو خورشید",
+"عرق از آن رخ گلفام می توان چیدن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "به دامنی که بگسترده پرتو خورشید",
+"out": [
+"be dam/ni ke begost/rde p/rtoye1 xor$id"
+]
+},
+{
+"call": "top1",
+"input": "عرق از آن رخ گلفام می توان چیدن",
+"out": [
+"@/r/q @/z @an roxe1 golfame1 mey t/van cid/n"
+]
+}
+],
+"label": "be dam/ni ke begost/rde p/rtoye1 xoršid@/r/q @/z @an roxe1 golfame1 mey t/van cid/n",
+"error": null,
+"reading": "be dam/ni ke begost/rde p/rtoye1 xoršid@/r/q @/z @an roxe1 golfame1 mey t/van cid/n",
+"target": " be dam/ni ke begost/rde p/rtoye1 xoršid@/r/q @/z @an roxe1 golfame1 mey t/van cid/n"
+},
+{
+"key": "10571-0",
+"lines": [
+"بزن که قوت بازوی سلطنت داری",
+"که دست همت مردانت می‌دهد یاری"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بزن که قوت بازوی سلطنت داری",
+"out": [
+"bez/n ke qovv/te1 bazuye1 s/lt/n/t dari"
+]
+},
+{
+"call": "top1",
+"input": "که دست همت مردانت می‌دهد یاری",
+"out": [
+"ke d/ste1 hemm/te1 m/rdan/t mid/h/d yari"
+]
+}
+],
+"label": "bez/n ke qovv/te1 bazuye1 s/lt/n/t darike d/ste1 hemm/te1 m/rdan/t mid/h/d yari",
+"error": null,
+"reading": "bez/n ke qovv/te1 bazuye1 s/lt/n/t darike d/ste1 hemm/te1 m/rdan/t mid/h/d yari",
+"target": " bez/n ke qovv/te1 bazuye1 s/lt/n/t darike d/ste1 hemm/te1 m/rdan/t mid/h/d yari"
+},
+{
+"key": "10571-1",
+"lines": [
+"جهان‌گشای و عدو بند و ملک‌بخش و ستان",
+"که در حمایت صاحبدلان بسیاری"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "جهان‌گشای و عدو بند و ملک‌بخش و ستان",
+"out": [
+"j/hango$ay o @/du b/nd o m/l/kb/x$ o setan"
+]
+},
+{
+"call": "top1",
+"input": "که در حمایت صاحبدلان بسیاری",
+"out": [
+"ke d/r hemay/te1 sahebdelan besyari"
+]
+}
+],
+"label": "j/hangošay o @/du b/nd o m/l/kb/xš o setanke d/r hemay/te1 sahebdelan besyari",
+"error": null,
+"reading": "j/hangošay o @/du b/nd o m/l/kb/xš o setanke d/r hemay/te1 sahebdelan besyari",
+"target": " j/hangošayo @/du b/ndo m/l/kb/xšo setanke d/r hemay/te1 sahebdelan besyari"
+},
+{
+"key": "10602-0",
+"lines": [
+"آن کس که خطای خویش بیند که رواست",
+"تقریر مکن صواب نزدش که خطاست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آن کس که خطای خویش بیند که رواست",
+"out": [
+"@an k/s ke x/taye1 xi$ bin/d ke r/vast"
+]
+},
+{
+"call": "top1",
+"input": "تقریر مکن صواب نزدش که خطاست",
+"out": [
+"t/qrir m/kon s/vab n/z/d/$ ke x/tast"
+]
+}
+],
+"label": "@an k/s ke x/taye1 xiš bin/d ke r/vastt/qrir m/kon s/vab n/z/d/š ke x/tast",
+"error": null,
+"reading": "@an k/s ke x/taye1 xiš bin/d ke r/vastt/qrir m/kon s/vab n/z/d/š ke x/tast",
+"target": " @an k/s ke x/taye1 xiš bin/d ke r/vastt/qrir m/kon s/vab n/z/d/š ke x/tast"
+},
+{
+"key": "10602-1",
+"lines": [
+"آن روی نمایدش که در طینت اوست",
+"آیینهٔ کج جمال ننماید راست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آن روی نمایدش که در طینت اوست",
+"out": [
+"@an ruy n/may/d/$ ke d/r tin/te1 @ust"
+]
+},
+{
+"call": "nbest",
+"input": "آیینه کج جمال ننماید راست",
+"n": 8,
+"out": [
+"@ayineye1 k/j j/mal n/n/may/d rast",
+"@ayineye1 k/j j/mal n/nmay/d rast",
+"@ayine k/j j/mal n/n/may/d rast",
+"@ayineye1 k/j j/mal n/nomay/d rast",
+"@ayine k/j j/mal n/nmay/d rast",
+"@ayineye1 k/je1 j/mal n/n/may/d rast",
+"@ayineye1 k/j j/mal n/namay/d rast",
+"@ayineye1 k/je1 j/mal n/nmay/d rast"
+]
+}
+],
+"label": "@an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
+"error": null,
+"reading": "@an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
+"target": " @an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast"
+},
+{
+"key": "10608-0",
+"lines": [
+"دادار که بر ما در قسمت بگشاد",
+"بنیاد جهان چنانکه بایست نهاد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "دادار که بر ما در قسمت بگشاد",
+"out": [
+"dadar ke b/r ma d/r qesm/t bog$ad"
+]
+},
+{
+"call": "top1",
+"input": "بنیاد جهان چنانکه بایست نهاد",
+"out": [
+"bonyade1 j/han cenanke bayest n/had"
+]
+}
+],
+"label": "dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had",
+"error": null,
+"reading": "dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had",
+"target": " dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had"
+},
+{
+"key": "10608-1",
+"lines": [
+"آن را که نداد از سببی خالی نیست",
+"دانست سرو به خر نمی‌باید داد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آن را که نداد از سببی خالی نیست",
+"out": [
+"@an ra ke n/dad @/z s/b/bi xali nist"
+]
+},
+{
+"call": "top1",
+"input": "دانست سرو به خر نمی‌باید داد",
+"out": [
+"danest s/rv be x/r nemi-bay/d dad"
+]
+}
+],
+"label": "@an ra ke n/dad @/z s/b/bi xali nistdanest s/rv be x/r nemi-bay/d dad",
+"error": null,
+"reading": "@an ra ke n/dad @/z s/b/bi xali nistdanest s/rv be x/r nemi-bay/d dad",
+"target": " @an ra ke n/dad @/z s/b/bi xali nistdanest s/rv be x/r nemi-bay/d dad"
+},
+{
+"key": "10655-0",
+"lines": [
+"تا دل به غرور نفس شیطان ندهی",
+"کز شاخ بدی کس نخورد بار بهی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "تا دل به غرور نفس شیطان ندهی",
+"out": [
+"ta del be qorure1 n/fse1 $eytan n/d/hi"
+]
+},
+{
+"call": "top1",
+"input": "کز شاخ بدی کس نخورد بار بهی",
+"out": [
+"k/z $axe1 b/di k/s n/xor/d bar behi"
+]
+}
+],
+"label": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi",
+"error": null,
+"reading": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi",
+"target": " ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi"
+},
+{
+"key": "10655-1",
+"lines": [
+"الا که ذخیرهٔ قیامت بنهی",
+"ور نه نشود اسه پر از دیگ تهی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "الا که ذخیره قیامت بنهی",
+"n": 8,
+"out": [
+"@ella ke z/xireye1 qiyam/t benehi",
+"@ella ke z/xireye1 qiyam/t ben/hi",
+"@/la ke z/xireye1 qiyam/t benehi",
+"@ella ke z/xire qiyam/t benehi",
+"@/la ke z/xireye1 qiyam/t ben/hi",
+"@/lla ke z/xireye1 qiyam/t benehi",
+"@ella ke z/xire qiyam/t ben/hi",
+"@/la ke z/xire qiyam/t benehi"
+]
+},
+{
+"call": "top1",
+"input": "ور نه نشود اسه پر از دیگ تهی",
+"out": [
+"v/r n/ n/$/v/d @/st por @/z deyge1 tohi"
+]
+}
+],
+"label": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi",
+"error": null,
+"reading": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi",
+"target": " @ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi"
+},
+{
+"key": "108512-0",
+"lines": [
+"سرم سبزست و لب خندان و عیش جاودان دارم",
+"مکانم را چه می‌پرسی؟ مکان در لامکان دارم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "سرم سبزست و لب خندان و عیش جاودان دارم",
+"out": [
+"s/r/m s/bz/st o l/be1 x/ndan o @ey$e1 javedan dar/m"
+]
+},
+{
+"call": "top1",
+"input": "مکانم را چه می‌پرسی مکان در لامکان دارم",
+"out": [
+"m/kan/m ra ce miporsi m/kan d/r lam/kan dar/m"
+]
+}
+],
+"label": "s/r/m s/bz/st o l/be1 x/ndan o @eyše1 javedan dar/mm/kan/m ra ce miporsi m/kan d/r lam/kan dar/m",
+"error": null,
+"reading": "s/r/m s/bz/st o l/be1 x/ndan o @eyše1 javedan dar/mm/kan/m ra ce miporsi  m/kan d/r lam/kan dar/m",
+"target": " s/r/m s/bz/sto l/be1 x/ndano @eyše1 javedan dar/mm/kan/m ra ce miporsi  m/kan d/r lam/kan dar/m"
+},
+{
+"key": "108512-1",
+"lines": [
+"اگر بالای هر دونی نشینم طعنه کمتر زن",
+"که من بالای هفت اختر مکان و آشیان دارم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "اگر بالای هر دونی نشینم طعنه کمتر زن",
+"out": [
+"@/g/r balaye1 h/r duni ne$in/m t/@ne k/mt/r z/n"
+]
+},
+{
+"call": "top1",
+"input": "که من بالای هفت اختر مکان و آشیان دارم",
+"out": [
+"ke m/n balaye1 h/ft @/xt/r m/kan o @a$iyan dar/m"
+]
+}
+],
+"label": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kan o @ašiyan dar/m",
+"error": null,
+"reading": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kan o @ašiyan dar/m",
+"target": " @/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kano @ašiyan dar/m"
+},
+{
+"key": "112235-0",
+"lines": [
+"چند خونش رود از دیدهٔ نمناک برون؟",
+"کاش از سینه رود این دل صد چاک برون"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "چند خونش رود از دیده نمناک برون",
+"n": 8,
+"out": [
+"c/nd xun/$ r/v/d @/z dideye1 n/mnak borun",
+"c/nd xun/$ r/v/d @/z dide n/mnak borun",
+"c/nd xune$ r/v/d @/z dideye1 n/mnak borun",
+"c/nd xun/$ r/v/d @/z dideye1 n/mnak berun",
+"c/nd xune$ r/v/d @/z dide n/mnak borun",
+"c/nd xun/$ r/v/d @/z dide n/mnak berun",
+"c/nd xun/$ rud @/z dideye1 n/mnak borun",
+"c/nd xun/$ r/v/d @/z dide n/mnake1 borun"
+]
+},
+{
+"call": "top1",
+"input": "کاش از سینه رود این دل صد چاک برون",
+"out": [
+"ka$ @/z sine r/v/d @in del s/d cak borun"
+]
+}
+],
+"label": "c/nd xun/š r/v/d @/z dideye1 n/mnak borunkaš @/z sine r/v/d @in del s/d cak borun",
+"error": null,
+"reading": "c/nd xun/š r/v/d @/z dideye1 n/mnak borunkaš @/z sine r/v/d @in del s/d cak borun",
+"target": " c/nd xun/š r/v/d @/z dideye1 n/mnak borunkaš @/z sine r/v/d @in del s/d cak borun"
+},
+{
+"key": "112235-1",
+"lines": [
+"تو در اندیشه ی خون من و غافل که به حشر",
+"بر نیاید تن صد پاره ام از خاک برون"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "تو در اندیشه ی خون من و غافل که به حشر",
+"out": [
+"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r"
+]
+},
+{
+"call": "nbest",
+"input": "تو در اندیشه ی خون من و غافل که به حشر",
+"n": 8,
+"out": [
+"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
+"to d/r @/ndi$eye1 xun m/n o qafel ke be h/$r",
+"to d/re1 @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
+"to dor @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
+"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$/r",
+"tu d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
+"to d/r @/ndi$e ye xune1 m/n o qafel ke be h/$r",
+"to d/r @/ndisheye1 xune1 m/n o qafel ke be h/$r"
+]
+},
+{
+"call": "top1",
+"input": "بر نیاید تن صد پاره ام از خاک برون",
+"out": [
+"b/r n/yay/d t/ne1 s/d pare @/m @/z xak borun"
+]
+}
+],
+"label": "to d/r @/ndiše ye xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
+"error": null,
+"reading": "to d/r @/ndiše ye xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
+"target": " to d/r @/ndiše ye xune1 m/no qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun"
+},
+{
+"key": "114291-0",
+"lines": [
+"رفتم و برگشتنم دیگر بکوی یار نیست",
+"رفتنم از کوی او این بار چون هر بار نیست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "رفتم و برگشتنم دیگر بکوی یار نیست",
+"out": [
+"r/ft/m o b/rg/$t/n/m dig/r bekuye1 yar nist"
+]
+},
+{
+"call": "top1",
+"input": "رفتنم از کوی او این بار چون هر بار نیست",
+"out": [
+"r/ft/n/m @/z kuye1 @u @in bar con h/r bar nist"
+]
+}
+],
+"label": "r/ft/m o b/rg/št/n/m dig/r bekuye1 yar nistr/ft/n/m @/z kuye1 @u @in bar con h/r bar nist",
+"error": null,
+"reading": "r/ft/m o b/rg/št/n/m dig/r bekuye1 yar nistr/ft/n/m @/z kuye1 @u @in bar con h/r bar nist",
+"target": " r/ft/mo b/rg/št/n/m dig/r bekuye1 yar nistr/ft/n/m @/z kuye1 @u @in bar con h/r bar nist"
+},
+{
+"key": "114291-1",
+"lines": [
+"گر روم کمتر بکویش به که در کویش مرا",
+"باعث خواری بجز آمد شد بسیار نیست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گر روم کمتر بکویش به که در کویش مرا",
+"out": [
+"g/r r/v/m k/mt/r bekuy/$ beh ke d/r kuye$ m/ra"
+]
+},
+{
+"call": "top1",
+"input": "باعث خواری بجز آمد شد بسیار نیست",
+"out": [
+"ba@ese1 xari bejoz @am/d $od besyar nist"
+]
+}
+],
+"label": "g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
+"error": null,
+"reading": "g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
+"target": " g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist"
+},
+{
+"key": "114331-0",
+"lines": [
+"مائیم و فراق دیده ای چند",
+"بار غم دل کشیده ای چند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "مائیم و فراق دیده ای چند",
+"out": [
+"ma@im o feraq dide @ey c/nd"
+]
+},
+{
+"call": "top1",
+"input": "بار غم دل کشیده ای چند",
+"out": [
+"bare1 q/me1 del ke$ide @ey c/nd"
+]
+}
+],
+"label": "ma@im o feraq dide @ey c/ndbare1 q/me1 del kešide @ey c/nd",
+"error": null,
+"reading": "ma@im o feraq dide @ey c/ndbare1 q/me1 del kešide @ey c/nd",
+"target": " ma@imo feraq dide @ey c/ndbare1 q/me1 del kešide @ey c/nd"
+},
+{
+"key": "114331-1",
+"lines": [
+"وارسته زنام و فارغ از ننگ",
+"از دام بلا رمیده ای چند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "وارسته زنام و فارغ از ننگ",
+"out": [
+"var/ste z/nam o fareq @/z n/ng"
+]
+},
+{
+"call": "top1",
+"input": "از دام بلا رمیده ای چند",
+"out": [
+"@/z dame1 b/la r/mide @ey c/nd"
+]
+}
+],
+"label": "var/ste z/nam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
+"error": null,
+"reading": "var/ste z/nam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
+"target": " var/ste z/namo fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd"
+},
+{
+"key": "115048-0",
+"lines": [
+"مگذار که سودم به زیان در برود",
+"و آوازه جورت به جهان در برود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "مگذار که سودم به زیان در برود",
+"out": [
+"m/gzar ke sud/m be ziyan d/r ber/v/d"
+]
+},
+{
+"call": "top1",
+"input": "و آوازه جورت به جهان در برود",
+"out": [
+"o @avazeye1 jor/t be j/han d/r ber/v/d"
+]
+}
+],
+"label": "m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d",
+"error": null,
+"reading": "m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d",
+"target": " m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d"
+},
+{
+"key": "115048-1",
+"lines": [
+"جانا ز پی بوس و کناری که نبود",
+"شاید که دل من به میان در برود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "جانا ز پی بوس و کناری که نبود",
+"out": [
+"jana ze pey bus o kenari ke n/bov/d"
+]
+},
+{
+"call": "top1",
+"input": "شاید که دل من به میان در برود",
+"out": [
+"$ay/d ke dele1 m/n be miyan d/r ber/v/d"
+]
+}
+],
+"label": "jana ze pey bus o kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d",
+"error": null,
+"reading": "jana ze pey bus o kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d",
+"target": " jana ze pey buso kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d"
+},
+{
+"key": "115164-0",
+"lines": [
+"جانا به جز غم تو دلم را هوس مباد",
+"جز تو کسم ز جور تو فریادرس مباد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "جانا به جز غم تو دلم را هوس مباد",
+"out": [
+"jana be joz q/me1 to del/m ra h/v/s m/bad"
+]
+},
+{
+"call": "top1",
+"input": "جز تو کسم ز جور تو فریادرس مباد",
+"out": [
+"joz to k/s/m ze jore1 to f/ryadr/s m/bad"
+]
+}
+],
+"label": "jana be joz q/me1 to del/m ra h/v/s m/badjoz to k/s/m ze jore1 to f/ryadr/s m/bad",
+"error": null,
+"reading": "jana be joz q/me1 to del/m ra h/v/s m/badjoz to k/s/m ze jore1 to f/ryadr/s m/bad",
+"target": " jana be joz q/me1 to del/m ra h/v/s m/badjoz to k/s/m ze jore1 to f/ryadr/s m/bad"
+},
+{
+"key": "115164-1",
+"lines": [
+"هر جا که آیم و روم از ناز ساز وصل",
+"جز لشکر فراق توام پیش و پس مباد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "هر جا که آیم و روم از ناز ساز وصل",
+"out": [
+"h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sl"
+]
+},
+{
+"call": "top1",
+"input": "جز لشکر فراق توام پیش و پس مباد",
+"out": [
+"joz l/$k/re1 feraq to@/m pi$ o p/s m/bad"
+]
+}
+],
+"label": "h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m piš o p/s m/bad",
+"error": null,
+"reading": "h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m piš o p/s m/bad",
+"target": " h/r ja ke @ay/mo r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m pišo p/s m/bad"
+},
+{
+"key": "116931-0",
+"lines": [
+"زهی جفای تو بر من دلیل رحمت خاص",
+"مرا وفای تو نقش صحیفه اخلاص"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "زهی جفای تو بر من دلیل رحمت خاص",
+"out": [
+"zehi j/faye1 to b/r m/n d/lile1 r/hm/te1 xas"
+]
+},
+{
+"call": "top1",
+"input": "مرا وفای تو نقش صحیفه اخلاص",
+"out": [
+"m/ra v/faye1 to n/q$e1 s/hife @exlas"
+]
+}
+],
+"label": "zehi j/faye1 to b/r m/n d/lile1 r/hm/te1 xasm/ra v/faye1 to n/qše1 s/hife @exlas",
+"error": null,
+"reading": "zehi j/faye1 to b/r m/n d/lile1 r/hm/te1 xasm/ra v/faye1 to n/qše1 s/hife @exlas",
+"target": " zehi j/faye1 to b/r m/n d/lile1 r/hm/te1 xasm/ra v/faye1 to n/qše1 s/hife @exlas"
+},
+{
+"key": "116931-1",
+"lines": [
+"مدام مطرب بزم غم توام من مست",
+"سرود ناله من کرده چرخ را رقاص"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "مدام مطرب بزم غم توام من مست",
+"out": [
+"modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/st"
+]
+},
+{
+"call": "top1",
+"input": "سرود ناله من کرده چرخ را رقاص",
+"out": [
+"sorude1 naleye1 m/n k/rde c/rx ra r/qqas"
+]
+}
+],
+"label": "modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
+"error": null,
+"reading": "modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
+"target": " modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas"
+},
+{
+"key": "117410-0",
+"lines": [
+"کیست که از ره کرم حاجت ما روا کند",
+"واقف حال ما شود، چاره کار ما کند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "کیست که از ره کرم حاجت ما روا کند",
+"out": [
+"kist ke @/z r/he1 k/r/m haj/te1 ma r/va kon/d"
+]
+},
+{
+"call": "top1",
+"input": "واقف حال ما شود چاره کار ما کند",
+"out": [
+"vaqefe1 hale1 ma $/v/d careye1 kare1 ma kon/d"
+]
+}
+],
+"label": "kist ke @/z r/he1 k/r/m haj/te1 ma r/va kon/dvaqefe1 hale1 ma š/v/d careye1 kare1 ma kon/d",
+"error": null,
+"reading": "kist ke @/z r/he1 k/r/m haj/te1 ma r/va kon/dvaqefe1 hale1 ma š/v/d  careye1 kare1 ma kon/d",
+"target": " kist ke @/z r/he1 k/r/m haj/te1 ma r/va kon/dvaqefe1 hale1 ma š/v/d  careye1 kare1 ma kon/d"
+},
+{
+"key": "117410-1",
+"lines": [
+"آن که دو عالم از پی اش غرقه بحر حیرتند",
+"جان به لب رسیده را با غمش آشنا کند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آن که دو عالم از پی اش غرقه بحر حیرتند",
+"out": [
+"@an ke do @al/m @/z peye1 @/$ q/rqeye1 b/hre1 heyr/t/nd"
+]
+},
+{
+"call": "top1",
+"input": "جان به لب رسیده را با غمش آشنا کند",
+"out": [
+"jan be l/b reside ra ba q/m/$ @a$na kon/d"
+]
+}
+],
+"label": "@an ke do @al/m @/z peye1 @/š q/rqeye1 b/hre1 heyr/t/ndjan be l/b reside ra ba q/m/š @ašna kon/d",
+"error": null,
+"reading": "@an ke do @al/m @/z peye1 @/š q/rqeye1 b/hre1 heyr/t/ndjan be l/b reside ra ba q/m/š @ašna kon/d",
+"target": " @an ke do @al/m @/z peye1 @/š q/rqeye1 b/hre1 heyr/t/ndjan be l/b reside ra ba q/m/š @ašna kon/d"
+},
+{
+"key": "119098-0",
+"lines": [
+"وقت است ز هر سو شکفد روی گلی",
+"هر بلبل مست رو نهد سوی گلی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "وقت است ز هر سو شکفد روی گلی",
+"out": [
+"v/qt @/st ze h/r su $ekof/d ruye1 goli"
+]
+},
+{
+"call": "top1",
+"input": "هر بلبل مست رو نهد سوی گلی",
+"out": [
+"h/r bolbole1 m/st ro n/h/d suye1 goli"
+]
+}
+],
+"label": "v/qt @/st ze h/r su šekof/d ruye1 golih/r bolbole1 m/st ro n/h/d suye1 goli",
+"error": null,
+"reading": "v/qt @/st ze h/r su šekof/d ruye1 golih/r bolbole1 m/st ro n/h/d suye1 goli",
+"target": " v/qt @/st ze h/r su šekof/d ruye1 golih/r bolbole1 m/st ro n/h/d suye1 goli"
+},
+{
+"key": "119098-1",
+"lines": [
+"راز من و یار، گل کند، چون شنویم",
+"آن ناله ی بلبلی و، من بوی گلی!"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "راز من و یار گل کند چون شنویم",
+"out": [
+"raze1 m/n o yare1 gol kon/d con $en/vim"
+]
+},
+{
+"call": "top1",
+"input": "آن ناله ی بلبلی و من بوی گلی",
+"out": [
+"@an naleye1 bolboli o m/n buye1 goli"
+]
+},
+{
+"call": "nbest",
+"input": "آن ناله ی بلبلی و من بوی گلی",
+"n": 8,
+"out": [
+"@an naleye1 bolboli o m/n buye1 goli",
+"@an nale ye bolboli o m/n buye1 goli",
+"@an naleye1 bolboli o men buye1 goli",
+"@an naleye1 bolboli o m/n buye1 geli",
+"@an naleye1 bolboli o m/ne1 buye1 goli",
+"@an naleye1 bolboli o mon buye1 goli",
+"@an nale y bolboli o m/n buye1 goli",
+"@an nale bolboli o m/n buye1 goli"
+]
+}
+],
+"label": "raze1 m/n o yare1 gol kon/d con šen/vim@an nale ye bolboli o m/n buye1 goli",
+"error": null,
+"reading": "raze1 m/n o yare1  gol kon/d  con šen/vim@an nale ye bolboli o  m/n buye1 goli",
+"target": " raze1 m/no yare1  gol kon/d  con šen/vim@an nale ye bolboli o  m/n buye1 goli"
+},
+{
+"key": "1221-0",
+"lines": [
+"ای دل همه اسباب جهان خواسته گیر",
+"باغ طربت به سبزه آراسته گیر"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای دل همه اسباب جهان خواسته گیر",
+"out": [
+"@ey del h/me @/sbabe1 j/han xaste gir"
+]
+},
+{
+"call": "top1",
+"input": "باغ طربت به سبزه آراسته گیر",
+"out": [
+"baqe1 torb/t be s/bze @araste gir"
+]
+}
+],
+"label": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir",
+"error": null,
+"reading": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir",
+"target": " @ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir"
+},
+{
+"key": "1221-1",
+"lines": [
+"و‌آنگاه بر آن سبزه شبی چون شبنم",
+"بنشسته و بامداد برخاسته گیر"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "و‌آنگاه بر آن سبزه شبی چون شبنم",
+"out": [
+"vangah b/r @an s/bze $/bi con $/bn/m"
+]
+},
+{
+"call": "top1",
+"input": "بنشسته و بامداد برخاسته گیر",
+"out": [
+"bene$/ste o bamdad b/rxaste gir"
+]
+}
+],
+"label": "vangah b/r @an s/bze š/bi con š/bn/mbeneš/ste o bamdad b/rxaste gir",
+"error": null,
+"reading": "vangah b/r @an s/bze š/bi con š/bn/mbeneš/ste o bamdad b/rxaste gir",
+"target": " vangah b/r @an s/bze š/bi con š/bn/mbeneš/ste o bamdad b/rxaste gir"
+},
+{
+"key": "122632-0",
+"lines": [
+"آورد به ما بلبل عاشق خبر گل",
+"جز بلبل گل دوست که داند خطر گل"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آورد به ما بلبل عاشق خبر گل",
+"out": [
+"@av/rd be ma bolbole1 @a$eq x/b/re1 gol"
+]
+},
+{
+"call": "top1",
+"input": "جز بلبل گل دوست که داند خطر گل",
+"out": [
+"joz bolbole1 gole1 dust ke dan/d x/t/re1 gol"
+]
+}
+],
+"label": "@av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
+"error": null,
+"reading": "@av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
+"target": " @av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol"
+},
+{
+"key": "122632-1",
+"lines": [
+"هر چند که در گل همه خوبی و خوشی هست",
+"بی مل نه همانا که خوش آید خبر گل"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "هر چند که در گل همه خوبی و خوشی هست",
+"out": [
+"h/r c/nd ke d/r gol h/me xubi o xo$i h/st"
+]
+},
+{
+"call": "top1",
+"input": "بی مل نه همانا که خوش آید خبر گل",
+"out": [
+"bi mol n/ h/mana ke xo$ @ay/d x/b/re1 gol"
+]
+}
+],
+"label": "h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
+"error": null,
+"reading": "h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
+"target": " h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol"
+},
+{
+"key": "127230-0",
+"lines": [
+"آخر از سوز دل شبهای من یاد آورید",
+"همچو شمعم در میان انجمن یاد آورید"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آخر از سوز دل شبهای من یاد آورید",
+"out": [
+"@ax/r @/z suze1 dele1 $/bhaye1 m/n yad @av/rid"
+]
+},
+{
+"call": "top1",
+"input": "همچو شمعم در میان انجمن یاد آورید",
+"out": [
+"h/mco $/m@/m d/r miyane1 @/njom/n yad @av/rid"
+]
+}
+],
+"label": "@ax/r @/z suze1 dele1 š/bhaye1 m/n yad @av/ridh/mco š/m@/m d/r miyane1 @/njom/n yad @av/rid",
+"error": null,
+"reading": "@ax/r @/z suze1 dele1 š/bhaye1 m/n yad @av/ridh/mco š/m@/m d/r miyane1 @/njom/n yad @av/rid",
+"target": " @ax/r @/z suze1 dele1 š/bhaye1 m/n yad @av/ridh/mco š/m@/m d/r miyane1 @/njom/n yad @av/rid"
+},
+{
+"key": "127230-1",
+"lines": [
+"صبحدم در پای گل چون با حریفان می خورید",
+"بلبلان را بر فراز نارون یاد آورید"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "صبحدم در پای گل چون با حریفان می خورید",
+"out": [
+"sobh/d/m d/r paye1 gol con ba h/rifan mey xorid"
+]
+},
+{
+"call": "top1",
+"input": "بلبلان را بر فراز نارون یاد آورید",
+"out": [
+"bolbolan ra b/r f/raze1 narun yad @av/rid"
+]
+}
+],
+"label": "sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid",
+"error": null,
+"reading": "sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid",
+"target": " sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid"
+},
+{
+"key": "130009-0",
+"lines": [
+"با گیوه تنک رفتن راه چه سود",
+"بیرخت نفیس جستن جاه چه سود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "با گیوه تنک رفتن راه چه سود",
+"out": [
+"ba giveye1 t/n/k r/ft/n rah ce sud"
+]
+},
+{
+"call": "top1",
+"input": "بیرخت نفیس جستن جاه چه سود",
+"out": [
+"bir/xt n/fis jost/ne1 jah ce sud"
+]
+}
+],
+"label": "ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud",
+"error": null,
+"reading": "ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud",
+"target": " ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud"
+},
+{
+"key": "130009-1",
+"lines": [
+"دستار طلب کردم از و فوطه رسید",
+"(امید دراز و عمر کوتاه چه سود)"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "دستار طلب کردم از و فوطه رسید",
+"out": [
+"d/star t/l/b k/rd/m @/z o fute resid"
+]
+},
+{
+"call": "top1",
+"input": "امید دراز و عمر کوتاه چه سود",
+"out": [
+"@omide1 deraz o @omre1 kutah ce sud"
+]
+}
+],
+"label": "d/star t/l/b k/rd/m @/z o fute resid@omide1 deraz o @omre1 kutah ce sud",
+"error": null,
+"reading": "d/star t/l/b k/rd/m @/z o fute resid@omide1 deraz o @omre1 kutah ce sud",
+"target": " d/star t/l/b k/rd/m @/zo fute resid@omide1 derazo @omre1 kutah ce sud"
+},
+{
+"key": "131711-0",
+"lines": [
+"یک عمر به سر بردیم، با ناله و افغان‌ها",
+"ما در سر کوی دوست، بلبل به گلستان‌ها"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "یک عمر به سر بردیم با ناله و افغان‌ها",
+"out": [
+"yek @omr be s/r bordim ba nale o @/fqanha"
+]
+},
+{
+"call": "top1",
+"input": "ما در سر کوی دوست بلبل به گلستان‌ها",
+"out": [
+"ma d/r s/re1 kuye1 dust bolbol be golestanha"
+]
+}
+],
+"label": "yek @omr be s/r bordim ba nale o @/fqanhama d/r s/re1 kuye1 dust bolbol be golestanha",
+"error": null,
+"reading": "yek @omr be s/r bordim  ba nale o @/fqanhama d/r s/re1 kuye1 dust  bolbol be golestanha",
+"target": " yek @omr be s/r bordim  ba nale o @/fqanhama d/r s/re1 kuye1 dust  bolbol be golestanha"
+},
+{
+"key": "131711-1",
+"lines": [
+"حسنی که بود در عشق، بی‌طعنه و بهتان نیست",
+"خوش آنکه نیندیشد از طعنه و بهتان‌ها"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "حسنی که بود در عشق بی‌طعنه و بهتان نیست",
+"out": [
+"hosni ke bov/d d/r @e$q bit/@ne o bohtan nist"
+]
+},
+{
+"call": "top1",
+"input": "خوش آنکه نیندیشد از طعنه و بهتان‌ها",
+"out": [
+"xo$ @anke n/y/ndi$/d @/z t/@ne o bohtanha"
+]
+}
+],
+"label": "hosni ke bov/d d/r @ešq bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
+"error": null,
+"reading": "hosni ke bov/d d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
+"target": " hosni ke bov/d d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha"
+},
+{
+"key": "134499-0",
+"lines": [
+"همرهان رفتند و من پا در وطن دارم هنوز",
+"تکیه چون صورت به دیوار بدن دارم هنوز"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "همرهان رفتند و من پا در وطن دارم هنوز",
+"out": [
+"h/mr/han r/ft/nd o m/n pa d/r v/t/n dar/m h/nuz"
+]
+},
+{
+"call": "top1",
+"input": "تکیه چون صورت به دیوار بدن دارم هنوز",
+"out": [
+"tekye con sur/t be divare1 b/d/n dar/m h/nuz"
+]
+}
+],
+"label": "h/mr/han r/ft/nd o m/n pa d/r v/t/n dar/m h/nuztekye con sur/t be divare1 b/d/n dar/m h/nuz",
+"error": null,
+"reading": "h/mr/han r/ft/nd o m/n pa d/r v/t/n dar/m h/nuztekye con sur/t be divare1 b/d/n dar/m h/nuz",
+"target": " h/mr/han r/ft/ndo m/n pa d/r v/t/n dar/m h/nuztekye con sur/t be divare1 b/d/n dar/m h/nuz"
+},
+{
+"key": "134499-1",
+"lines": [
+"غنچه گل را نسیم صبح عریان کرد و رفت",
+"ساده لوحی بین که فکر پیرهن دارم هنوز"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "غنچه گل را نسیم صبح عریان کرد و رفت",
+"out": [
+"qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ft"
+]
+},
+{
+"call": "top1",
+"input": "ساده لوحی بین که فکر پیرهن دارم هنوز",
+"out": [
+"sadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz"
+]
+}
+],
+"label": "qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz",
+"error": null,
+"reading": "qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz",
+"target": " qonceye1 gol ra n/sime1 sobhe1 @oryan k/rdo r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz"
+},
+{
+"key": "136268-0",
+"lines": [
+"بر یاد قدّ او چو می تاب می‌دهند",
+"در دل هزار نخل بلا آب می‌دهند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "بر یاد قد او چو می تاب می‌دهند",
+"n": 8,
+"out": [
+"b/r yade1 q/de1 @u co mey tab mid/h/nd",
+"b/r yade1 q/dde1 @u co mey tab mid/h/nd",
+"b/r yade1 q/de1 @u co meye1 tab mid/h/nd",
+"b/r yade1 q/dde1 @u co meye1 tab mid/h/nd",
+"b/r yade1 q/de1 @u co mi tab mid/h/nd",
+"b/r yade1 q/d @u co mey tab mid/h/nd",
+"b/r yade1 q/dde1 @u co mi tab mid/h/nd",
+"b/r yade1 q/de1 @u co mitab mid/h/nd"
+]
+},
+{
+"call": "top1",
+"input": "در دل هزار نخل بلا آب می‌دهند",
+"out": [
+"d/r dele1 hezar n/xle1 b/la @ab mid/h/nd"
+]
+}
+],
+"label": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd",
+"error": null,
+"reading": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd",
+"target": " b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd"
+},
+{
+"key": "136268-1",
+"lines": [
+"هر شب هزار دیده به نوفان عشق تو",
+"از گریه رخت خواب به سیلاب می‌دهند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "هر شب هزار دیده به نوفان عشق تو",
+"out": [
+"h/r $/b hezar dide be nofane1 @e$qe1 to"
+]
+},
+{
+"call": "top1",
+"input": "از گریه رخت خواب به سیلاب می‌دهند",
+"out": [
+"@/z gerye rox/te1 xab be seylab mid/h/nd"
+]
+}
+],
+"label": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd",
+"error": null,
+"reading": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd",
+"target": " h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd"
+},
+{
+"key": "13698-0",
+"lines": [
+"می‌خواست فلک که تلخ کامم بکشد",
+"ناکرده میِ طرب به جامم، بکشد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "می‌خواست فلک که تلخ کامم بکشد",
+"out": [
+"mixast f/l/k ke t/lxe1 kam/m beko$/d"
+]
+},
+{
+"call": "nbest",
+"input": "ناکرده می طرب به جامم بکشد",
+"n": 8,
+"out": [
+"nak/rde meye1 t/r/b be jam/m beko$/d",
+"nak/rdeye1 mey t/r/b be jam/m beko$/d",
+"nak/rde meye1 t/r/b be jam/m beke$/d",
+"nak/rdeye1 mey t/r/b be jam/m beke$/d",
+"nak/rde mey t/r/b be jam/m beko$/d",
+"nak/rdeye1 meye1 t/r/b be jam/m beko$/d",
+"nak/rde meye1 t/r/b be jamem beko$/d",
+"nak/rdeye1 mey t/r/b be jamem beko$/d"
+]
+}
+],
+"label": "mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m bekoš/d",
+"error": null,
+"reading": "mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d",
+"target": " mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d"
+},
+{
+"key": "13698-1",
+"lines": [
+"بسپرد به شحنهٔ فراقِ تو مرا",
+"تا او به عقوبتِ تمامم بکشد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "بسپرد به شحنه فراق تو مرا",
+"n": 8,
+"out": [
+"bespor/d be $/hneye1 feraqe1 to m/ra",
+"bespor/d be $/hneye1 f/raqe1 to m/ra",
+"bespor/d be $/hne feraqe1 to m/ra",
+"bespor/d be $ehneye1 feraqe1 to m/ra",
+"bespor/d be $/hne f/raqe1 to m/ra",
+"besepor/d be $/hneye1 feraqe1 to m/ra",
+"bespor/d be $ehne feraqe1 to m/ra",
+"bespor/d be $ehneye1 f/raqe1 to m/ra"
+]
+},
+{
+"call": "nbest",
+"input": "تا او به عقوبت تمامم بکشد",
+"n": 8,
+"out": [
+"ta @u be @oqub/t t/mam/m beko$/d",
+"ta @u be @oqub/t t/mam/m beke$/d",
+"ta @u be @oqub/te1 t/mam/m beko$/d",
+"ta @u be @oqub/te1 t/mam/m beke$/d",
+"ta @u be @oqub/t t/mamom beko$/d",
+"ta @u be @oqub/te1 t/mamom beko$/d",
+"ta @u be @oqub/t t/mamom beke$/d",
+"ta @u be @oqub/t t/mam/m boko$/d"
+]
+}
+],
+"label": "bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
+"error": null,
+"reading": "bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
+"target": " bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d"
+},
+{
+"key": "138614-0",
+"lines": [
+"در کوی تو یک لحظه اقامت نتوان کرد",
+"و اندیشه رفتن بسلامت نتوان کرد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "در کوی تو یک لحظه اقامت نتوان کرد",
+"out": [
+"d/r kuye1 to yek l/hze @eqam/t n/t/van k/rd"
+]
+},
+{
+"call": "top1",
+"input": "و اندیشه رفتن بسلامت نتوان کرد",
+"out": [
+"v/ @/ndi$eye1 r/ft/n bes/lam/t n/t/van k/rd"
+]
+}
+],
+"label": "d/r kuye1 to yek l/hze @eqam/t n/t/van k/rdo @/ndišeye1 r/ft/n bes/lam/t n/t/van k/rd",
+"error": null,
+"reading": "d/r kuye1 to yek l/hze @eqam/t n/t/van k/rdo @/ndišeye1 r/ft/n bes/lam/t n/t/van k/rd",
+"target": " d/r kuye1 to yek l/hze @eqam/t n/t/van k/rdo @/ndišeye1 r/ft/n bes/lam/t n/t/van k/rd"
+},
+{
+"key": "138614-1",
+"lines": [
+"نسبت بمه آن طلعت نیکو نتوان داد",
+"تشبیه بسرو آن قد و قامت نتوان کرد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "نسبت بمه آن طلعت نیکو نتوان داد",
+"out": [
+"nesb/t beme @an t/l@/te1 niku n/t/van dad"
+]
+},
+{
+"call": "top1",
+"input": "تشبیه بسرو آن قد و قامت نتوان کرد",
+"out": [
+"t/$bih bes/rv @an q/d o qam/t n/t/van k/rd"
+]
+}
+],
+"label": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/t/van k/rd",
+"error": null,
+"reading": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/t/van k/rd",
+"target": " nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/do qam/t n/t/van k/rd"
+},
+{
+"key": "140150-0",
+"lines": [
+"نسیم صبح توئی جبرئیل نام از من",
+"به طاق ابروی مردان رسان سلام از من"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "نسیم صبح توئی جبرئیل نام از من",
+"out": [
+"n/sime1 sobhe1 to@i j/br/@il nam @/z m/n"
+]
+},
+{
+"call": "top1",
+"input": "به طاق ابروی مردان رسان سلام از من",
+"out": [
+"be taqe1 @/bruye1 m/rdan resan s/lam @/z m/n"
+]
+}
+],
+"label": "n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
+"error": null,
+"reading": "n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
+"target": " n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n"
+},
+{
+"key": "140150-1",
+"lines": [
+"اگر که از من گمنام نام پرسد یار",
+"ز بعد سجده شکرانه بر تو، نام از من"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "اگر که از من گمنام نام پرسد یار",
+"out": [
+"@/g/r ke @/z m/n gomnam nam pors/d yar"
+]
+},
+{
+"call": "top1",
+"input": "ز بعد سجده شکرانه بر تو نام از من",
+"out": [
+"ze bo@de1 s/jdeye1 $okrane b/r to nam @/z m/n"
+]
+}
+],
+"label": "@/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to nam @/z m/n",
+"error": null,
+"reading": "@/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to  nam @/z m/n",
+"target": " @/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to  nam @/z m/n"
+},
+{
+"key": "142054-0",
+"lines": [
+"شهری همه بنده و رهیگان داری",
+"عالم همه پر ز آشنایان داری"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "شهری همه بنده و رهیگان داری",
+"out": [
+"$/hri h/me b/nde o r/higan dari"
+]
+},
+{
+"call": "top1",
+"input": "عالم همه پر ز آشنایان داری",
+"out": [
+"@al/m h/me por ze @a$enayan dari"
+]
+}
+],
+"label": "š/hri h/me b/nde o r/higan dari@al/m h/me por ze @ašenayan dari",
+"error": null,
+"reading": "š/hri h/me b/nde o r/higan dari@al/m h/me por ze @ašenayan dari",
+"target": " š/hri h/me b/nde o r/higan dari@al/m h/me por ze @ašenayan dari"
+},
+{
+"key": "142054-1",
+"lines": [
+"من خود چه کسم چه آید از خدمت من",
+"تو سوخته در جهان فراوان داری"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "من خود چه کسم چه آید از خدمت من",
+"out": [
+"m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/n"
+]
+},
+{
+"call": "top1",
+"input": "تو سوخته در جهان فراوان داری",
+"out": [
+"to suxte d/r j/hane1 f/ravan dari"
+]
+}
+],
+"label": "m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari",
+"error": null,
+"reading": "m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari",
+"target": " m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari"
+},
+{
+"key": "144620-0",
+"lines": [
+"رند و قلندر شدم از سر دیوانگی",
+"کمترم از خاک ره بر در دیوانگی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "رند و قلندر شدم از سر دیوانگی",
+"out": [
+"rend o q/l/nd/r $od/m @/z s/re1 divanegi"
+]
+},
+{
+"call": "top1",
+"input": "کمترم از خاک ره بر در دیوانگی",
+"out": [
+"k/mt/r/m @/z xake1 r/h b/r d/re1 divanegi"
+]
+}
+],
+"label": "rend o q/l/nd/r šod/m @/z s/re1 divanegik/mt/r/m @/z xake1 r/h b/r d/re1 divanegi",
+"error": null,
+"reading": "rend o q/l/nd/r šod/m @/z s/re1 divanegik/mt/r/m @/z xake1 r/h b/r d/re1 divanegi",
+"target": " rendo q/l/nd/r šod/m @/z s/re1 divanegik/mt/r/m @/z xake1 r/h b/r d/re1 divanegi"
+},
+{
+"key": "144620-1",
+"lines": [
+"جامهٔ صاحبدلان جمله بپوشید دل",
+"هیچ لباسی نیافت در خور دیوانگی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "جامه صاحبدلان جمله بپوشید دل",
+"n": 8,
+"out": [
+"jameye1 sahebdelan jomle bepu$id del",
+"jameye1 sahebdelane1 jomle bepu$id del",
+"jameye1 saheb/d/lan jomle bepu$id del",
+"jameye1 $ahebdelan jomle bepu$id del",
+"jameye1 saheb/delan jomle bepu$id del",
+"jameye1 sahebd/lan jomle bepu$id del",
+"jameye1 sahebdolan jomle bepu$id del",
+"jameye1 saheb/dlan jomle bepu$id del"
+]
+},
+{
+"call": "top1",
+"input": "هیچ لباسی نیافت در خور دیوانگی",
+"out": [
+"hic lebasi n/yaft d/r xore1 divanegi"
+]
+}
+],
+"label": "jameye1 sahebdelan jomle bepušid delhic lebasi n/yaft d/r xore1 divanegi",
+"error": null,
+"reading": "jameye1 sahebdelan jomle bepušid delhic lebasi n/yaft d/r xore1 divanegi",
+"target": " jameye1 sahebdelan jomle bepušid delhic lebasi n/yaft d/r xore1 divanegi"
+},
+{
+"key": "145666-0",
+"lines": [
+"بردار پیاله و سبویْ ای دلجوی",
+"فارغ بنشین تو بر لبِ سبزه و جوی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "بردار پیاله و سبوی ای دلجوی",
+"n": 8,
+"out": [
+"b/rdar piyale o s/buy @ey deljuy",
+"b/rdar piyale o s/buye1 @ey deljuy",
+"b/rdare1 piyale o s/buy @ey deljuy",
+"b/rdar piyale o s/bvi @ey deljuy",
+"b/rdare1 piyale o s/buye1 @ey deljuy",
+"b/rdare1 piyale o s/bvi @ey deljuy",
+"bordare1 piyale o s/buy @ey deljuy",
+"bordare1 piyale o s/buye1 @ey deljuy"
+]
+},
+{
+"call": "nbest",
+"input": "فارغ بنشین تو بر لب سبزه و جوی",
+"n": 8,
+"out": [
+"fareq ben$in to b/r l/be1 s/bze o juy",
+"fareq bene$in to b/r l/be1 s/bze o juy",
+"fareq ben$ine1 to b/r l/be1 s/bze o juy",
+"fareq ben$in to b/r l/be1 s/bze o jovi",
+"fareq ben$in to b/r l/be1 s/bzeh o juy",
+"fareq bene$in to b/r l/be1 s/bze o jovi",
+"fareq bene$in to b/r l/be1 s/bzeh o juy",
+"fareq beni$in to b/r l/be1 s/bze o juy"
+]
+}
+],
+"label": "b/rdar piyale o s/buy @ey deljuyfareq benšin to b/r l/be1 s/bze o juy",
+"error": null,
+"reading": "b/rdar piyale o s/buy @ey deljuyfareq benšin to b/r l/be1 s/bze o juy",
+"target": " b/rdar piyale o s/buy @ey deljuyfareq benšin to b/r l/be1 s/bze o juy"
+},
+{
+"key": "145666-1",
+"lines": [
+"بس شخصِ عزیز را که چرخِ بدخوی",
+"صد بار پیاله کرد و صد بار سبوی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "بس شخص عزیز را که چرخ بدخوی",
+"n": 8,
+"out": [
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxoy",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxuy",
+"b/s $/xs @/ziz ra ke c/rxe1 b/dxoy",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxi",
+"b/s $/xs @/ziz ra ke c/rxe1 b/dxuy",
+"b/s $/xse1 @/ziz ra ke c/rx b/dxuy",
+"b/s $/xse1 @/ziz ra ke c/rx b/dxoy",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxovi"
+]
+},
+{
+"call": "top1",
+"input": "صد بار پیاله کرد و صد بار سبوی",
+"out": [
+"s/d bar piyale k/rd o s/d bar s/bvi"
+]
+}
+],
+"label": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rd o s/d bar s/bvi",
+"error": null,
+"reading": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rd o s/d bar s/bvi",
+"target": " b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rdo s/d bar s/bvi"
+},
+{
+"key": "149134-0",
+"lines": [
+"الا ای ترک عیسی‌دم تو ماه عالم‌آرایی",
+"هزارت یوسف مصری سزد یوسف به زیبایی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "الا ای ترک عیسی‌دم تو ماه عالم‌آرایی",
+"out": [
+"@/la @ey t/rke1 @isad/m to mahe1 @al/marayi"
+]
+},
+{
+"call": "nbest",
+"input": "الا ای ترک عیسی‌دم تو ماه عالم‌آرایی",
+"n": 8,
+"out": [
+"@/la @ey t/rke1 @isad/m to mahe1 @al/marayi",
+"@ella @ey t/rke1 @isad/m to mahe1 @al/marayi",
+"@/la @ey torke1 @isad/m to mahe1 @al/marayi",
+"@ella @ey torke1 @isad/m to mahe1 @al/marayi",
+"@/lla @ey t/rke1 @isad/m to mahe1 @al/marayi",
+"@/lla @ey torke1 @isad/m to mahe1 @al/marayi",
+"@ella @ey t/rke1 @isad/m to mahe1 @alemarayi",
+"@/la @ey t/rke1 @isad/m to mahe1 @alemarayi"
+]
+},
+{
+"call": "top1",
+"input": "هزارت یوسف مصری سزد یوسف به زیبایی",
+"out": [
+"hezar/t yusefe1 mesri sez/d yusefe1 be zibayi"
+]
+}
+],
+"label": "@/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi",
+"error": null,
+"reading": "@/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi",
+"target": " @/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi"
+},
+{
+"key": "149134-1",
+"lines": [
+"تو زیب و زینت دهری تو شاه کشور چینی",
+"تو شمع مجلس انسی تو نور دیده مایی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "تو زیب و زینت دهری تو شاه کشور چینی",
+"out": [
+"to zib o zin/t d/hri to $ahe1 ke$v/re1 cini"
+]
+},
+{
+"call": "top1",
+"input": "تو شمع مجلس انسی تو نور دیده مایی",
+"out": [
+"to $/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi"
+]
+}
+],
+"label": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi",
+"error": null,
+"reading": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi",
+"target": " to zibo zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi"
+},
+{
+"key": "151765-0",
+"lines": [
+"ببودند یک ماه نزدیک شاه",
+"به ایوان بزم و به نخچیرگاه"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ببودند یک ماه نزدیک شاه",
+"out": [
+"bebud/nd yek mah n/zdike1 $ah"
+]
+},
+{
+"call": "top1",
+"input": "به ایوان بزم و به نخچیرگاه",
+"out": [
+"be @eyvan b/zm o be n/xcirgah"
+]
+}
+],
+"label": "bebud/nd yek mah n/zdike1 šahbe @eyvan b/zm o be n/xcirgah",
+"error": null,
+"reading": "bebud/nd yek mah n/zdike1 šahbe @eyvan b/zm o be n/xcirgah",
+"target": " bebud/nd yek mah n/zdike1 šahbe @eyvan b/zmo be n/xcirgah"
+},
+{
+"key": "151765-1",
+"lines": [
+"یکی بارگه ساخت روزی به دشت",
+"ز گردسواران هوا تیره گشت"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "یکی بارگه ساخت روزی به دشت",
+"out": [
+"yeki barg/h saxt ruzi be d/$t"
+]
+},
+{
+"call": "top1",
+"input": "ز گردسواران هوا تیره گشت",
+"out": [
+"ze g/rds/varane1 h/va tire g/$t"
+]
+}
+],
+"label": "yeki barg/h saxt ruzi be d/štze g/rds/varane1 h/va tire g/št",
+"error": null,
+"reading": "yeki barg/h saxt ruzi be d/štze g/rds/varane1 h/va tire g/št",
+"target": " yeki barg/h saxt ruzi be d/štze g/rds/varane1 h/va tire g/št"
+},
+{
+"key": "154852-0",
+"lines": [
+"بر حرف نهاد دوش یار انگشتم",
+"برجست و کشید از سر مستی مشتم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بر حرف نهاد دوش یار انگشتم",
+"out": [
+"b/r h/rfe1 n/hade1 du$e1 yar @/ngo$t/m"
+]
+},
+{
+"call": "top1",
+"input": "برجست و کشید از سر مستی مشتم",
+"out": [
+"b/rj/st o ke$id @/z s/re1 m/sti mo$t/m"
+]
+}
+],
+"label": "b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
+"error": null,
+"reading": "b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
+"target": " b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/sto kešid @/z s/re1 m/sti mošt/m"
+},
+{
+"key": "154852-1",
+"lines": [
+"دشنام همی خواست که آغاز کند",
+"دشنام به بوسه در دهانش کشتم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "دشنام همی خواست که آغاز کند",
+"out": [
+"do$nam h/mi xast ke @aqaz kon/d"
+]
+},
+{
+"call": "top1",
+"input": "دشنام به بوسه در دهانش کشتم",
+"out": [
+"do$nam be buse d/r d/han/$ ko$t/m"
+]
+}
+],
+"label": "došnam h/mi xast ke @aqaz kon/ddošnam be buse d/r d/han/š košt/m",
+"error": null,
+"reading": "došnam h/mi xast ke @aqaz kon/ddošnam be buse d/r d/han/š košt/m",
+"target": " došnam h/mi xast ke @aqaz kon/ddošnam be buse d/r d/han/š košt/m"
+},
+{
+"key": "155190-0",
+"lines": [
+"آن دل که ز دیده در غمت خون پالود",
+"واندر همه عمر از تو دمی شاد نبود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آن دل که ز دیده در غمت خون پالود",
+"out": [
+"@an del ke ze dide d/r q/m/t xune1 palud"
+]
+},
+{
+"call": "top1",
+"input": "واندر همه عمر از تو دمی شاد نبود",
+"out": [
+"vand/r h/me @omr @/z to d/mi $ad n/bud"
+]
+}
+],
+"label": "@an del ke ze dide d/r q/m/t xune1 paludvand/r h/me @omr @/z to d/mi šad n/bud",
+"error": null,
+"reading": "@an del ke ze dide d/r q/m/t xune1 paludvand/r h/me @omr @/z to d/mi šad n/bud",
+"target": " @an del ke ze dide d/r q/m/t xune1 paludvand/r h/me @omr @/z to d/mi šad n/bud"
+},
+{
+"key": "155190-1",
+"lines": [
+"جانش چو به لب رسید از دست غمت",
+"شرمت بادا اگر نخواهی بخشود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "جانش چو به لب رسید از دست غمت",
+"out": [
+"jan/$ co be l/b resid @/z d/ste1 q/m/t"
+]
+},
+{
+"call": "top1",
+"input": "شرمت بادا اگر نخواهی بخشود",
+"out": [
+"$/rm/t bada @/g/r n/xahi b/x$ud"
+]
+}
+],
+"label": "jan/š co be l/b resid @/z d/ste1 q/m/tš/rm/t bada @/g/r n/xahi b/xšud",
+"error": null,
+"reading": "jan/š co be l/b resid @/z d/ste1 q/m/tš/rm/t bada @/g/r n/xahi b/xšud",
+"target": " jan/š co be l/b resid @/z d/ste1 q/m/tš/rm/t bada @/g/r n/xahi b/xšud"
+},
+{
+"key": "1589-0",
+"lines": [
+"چنین گفت با رستم اسفندیار",
+"که ای نیک دل مهتر نامدار"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "چنین گفت با رستم اسفندیار",
+"out": [
+"cenin goft ba rost/me1 @esf/ndyar"
+]
+},
+{
+"call": "top1",
+"input": "که ای نیک دل مهتر نامدار",
+"out": [
+"ke @ey nik del moht/re1 namdar"
+]
+}
+],
+"label": "cenin goft ba rost/me1 @esf/ndyarke @ey nik del meht/re1 namdar",
+"error": null,
+"reading": "cenin goft ba rost/me1 @esf/ndyarke @ey nik del meht/re1 namdar",
+"target": " cenin goft ba rost/me1 @esf/ndyarke @ey nik del meht/re1 namdar"
+},
+{
+"key": "1589-1",
+"lines": [
+"من ایدون شنیدستم از بخردان",
+"بزرگان و بیداردل موبدان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "من ایدون شنیدستم از بخردان",
+"out": [
+"m/n @idun $enid/st/m @/z bex/rdan"
+]
+},
+{
+"call": "top1",
+"input": "بزرگان و بیداردل موبدان",
+"out": [
+"bozorgan o bidardel mobedan"
+]
+}
+],
+"label": "m/n @idun šenid/st/m @/z bex/rdanbozorgan o bidardel mobedan",
+"error": null,
+"reading": "m/n @idun šenid/st/m @/z bex/rdanbozorgan o bidardel mobedan",
+"target": " m/n @idun šenid/st/m @/z bex/rdanbozorgano bidardel mobedan"
+},
+{
+"key": "1644-0",
+"lines": [
+"چنین گفت گویندهٔ پهلوی",
+"شگفت آیدت کاین سخن بشنوی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "چنین گفت گوینده پهلوی",
+"n": 8,
+"out": [
+"cenin goft guy/ndeye1 p/hluy",
+"cenin goft guy/ndeye1 p/hl/vi",
+"cenin goft guy/nde p/hluy",
+"conin goft guy/ndeye1 p/hluy",
+"conin goft guy/ndeye1 p/hl/vi",
+"conin goft guy/nde p/hluy",
+"cenin goft guy/nde p/hl/vi",
+"conin goft guy/nde p/hl/vi"
+]
+},
+{
+"call": "top1",
+"input": "شگفت آیدت کاین سخن بشنوی",
+"out": [
+"$egeft @ay/d/t kin sox/n be$n/vi"
+]
+}
+],
+"label": "cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi",
+"error": null,
+"reading": "cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi",
+"target": " cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi"
+},
+{
+"key": "1644-1",
+"lines": [
+"یکی شاه بد هند را نام کید",
+"نکردی جز از دانش و رای صید"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "یکی شاه بد هند را نام کید",
+"out": [
+"yeki $ahe1 b/de1 hend ra name1 keyd"
+]
+},
+{
+"call": "top1",
+"input": "نکردی جز از دانش و رای صید",
+"out": [
+"n/k/rdi joz @/z dane$ o raye1 seyd"
+]
+}
+],
+"label": "yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
+"error": null,
+"reading": "yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
+"target": " yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z danešo raye1 seyd"
+},
+{
+"key": "1868-0",
+"lines": [
+"هم آنگه ز کوه اندر آمد سپاه",
+"جهان شد ز گرد سواران سیاه"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "هم آنگه ز کوه اندر آمد سپاه",
+"out": [
+"h/m @ang/h ze kuh @/nd/r @am/d sepah"
+]
+},
+{
+"call": "top1",
+"input": "جهان شد ز گرد سواران سیاه",
+"out": [
+"j/han $od ze gerde1 s/varane1 siyah"
+]
+}
+],
+"label": "h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah",
+"error": null,
+"reading": "h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah",
+"target": " h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah"
+},
+{
+"key": "1868-1",
+"lines": [
+"وزان روی بهرام لشکر براند",
+"به روز اندرون روشنایی نماند"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "وزان روی بهرام لشکر براند",
+"out": [
+"v/zan ruye1 b/hrame1 l/$k/r beran/d"
+]
+},
+{
+"call": "top1",
+"input": "به روز اندرون روشنایی نماند",
+"out": [
+"be ruze1 @/nd/rune1 ro$/nayi n/mand"
+]
+}
+],
+"label": "v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand",
+"error": null,
+"reading": "v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand",
+"target": " v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand"
+},
+{
+"key": "22733-0",
+"lines": [
+"ای برده به چین زلف، تاب دل من",
+"وی کشته به سحر غمزه، خواب دل من"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای برده به چین زلف تاب دل من",
+"out": [
+"@ey borde be cine1 zolfe1 tabe1 dele1 m/n"
+]
+},
+{
+"call": "top1",
+"input": "وی کشته به سحر غمزه خواب دل من",
+"out": [
+"vey ko$te be s/h/r q/mzeye1 xabe1 dele1 m/n"
+]
+}
+],
+"label": "@ey borde be cine1 zolfe1 tabe1 dele1 m/nvey košte be s/h/r q/mzeye1 xabe1 dele1 m/n",
+"error": null,
+"reading": "@ey borde be cine1 zolfe1  tabe1 dele1 m/nvey košte be s/h/r q/mzeye1  xabe1 dele1 m/n",
+"target": " @ey borde be cine1 zolfe1  tabe1 dele1 m/nvey košte be s/h/r q/mzeye1  xabe1 dele1 m/n"
+},
+{
+"key": "22733-1",
+"lines": [
+"در خواب، مده رهم به خاطر که مباد",
+"بیدار شوی ز اضطراب دل من"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "در خواب مده رهم به خاطر که مباد",
+"out": [
+"d/r xab m/deh r/h/m be xater ke m/bad"
+]
+},
+{
+"call": "top1",
+"input": "بیدار شوی ز اضطراب دل من",
+"out": [
+"bidar $/vi ze @ezterabe1 dele1 m/n"
+]
+}
+],
+"label": "d/r xab m/deh r/h/m be xater ke m/badbidar š/vi ze @ezterabe1 dele1 m/n",
+"error": null,
+"reading": "d/r xab  m/deh r/h/m be xater ke m/badbidar š/vi ze @ezterabe1 dele1 m/n",
+"target": " d/r xab  m/deh r/h/m be xater ke m/badbidar š/vi ze @ezterabe1 dele1 m/n"
+},
+{
+"key": "2492-0",
+"lines": [
+"دَردَم از یار است و درمان نیز هم",
+"دل فدایِ او شد و جان نیز هم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "دردم از یار است و درمان نیز هم",
+"n": 8,
+"out": [
+"d/rd/m @/z yar @/st o d/rman niz h/m",
+"dord/m @/z yar @/st o d/rman niz h/m",
+"d/rd/m @/z yar @/st o dorman niz h/m",
+"derd/m @/z yar @/st o d/rman niz h/m",
+"d/rd/m @/z yar @/st o d/rmane1 niz h/m",
+"d/rd/m @/z yar @/st o derman niz h/m",
+"d/rd/m @/z yar @/st o darman niz h/m",
+"d/rd/m @/z yar @/st o d/rman neyz h/m"
+]
+},
+{
+"call": "nbest",
+"input": "دل فدای او شد و جان نیز هم",
+"n": 8,
+"out": [
+"del f/daye1 @u $od o jan niz h/m",
+"del fedaye1 @u $od o jan niz h/m",
+"dele1 f/daye1 @u $od o jan niz h/m",
+"dele1 fedaye1 @u $od o jan niz h/m",
+"del fodaye1 @u $od o jan niz h/m",
+"del f/daye1 @u $od o jane1 niz h/m",
+"delf/daye1 @u $od o jan niz h/m",
+"del f/day/ye1 @u $od o jan niz h/m"
+]
+}
+],
+"label": "d/rd/m @/z yar @/st o d/rman niz h/mdel f/daye1 @u šod o jan niz h/m",
+"error": null,
+"reading": "d/rd/m @/z yar @/st o d/rman niz h/mdel f/daye1 @u šod o jan niz h/m",
+"target": " d/rd/m @/z yar @/sto d/rman niz h/mdel f/daye1 @u šodo jan niz h/m"
+},
+{
+"key": "2492-1",
+"lines": [
+"این که می‌گویند آن خوشتر ز حسن",
+"یار ما این دارد و آن نیز هم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "این که می‌گویند آن خوشتر ز حسن",
+"out": [
+"@in ke miguy/nd @an xo$t/r ze hosn"
+]
+},
+{
+"call": "top1",
+"input": "یار ما این دارد و آن نیز هم",
+"out": [
+"yare1 ma @in dar/d o @an niz h/m"
+]
+}
+],
+"label": "@in ke miguy/nd @an xošt/r ze hosnyare1 ma @in dar/d o @an niz h/m",
+"error": null,
+"reading": "@in ke miguy/nd @an xošt/r ze hosnyare1 ma @in dar/d o @an niz h/m",
+"target": " @in ke miguy/nd @an xošt/r ze hosnyare1 ma @in dar/do @an niz h/m"
+},
+{
+"key": "2516-0",
+"lines": [
+"شاه شمشادقدان، خسرو شیرین‌دهنان",
+"که به مژگان شکند قلب همه صف‌شکنان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "شاه شمشادقدان خسرو شیرین‌دهنان",
+"out": [
+"$ahe1 $emo$adeqdane1 xosrove1 $irind/h/nan"
+]
+},
+{
+"call": "top1",
+"input": "که به مژگان شکند قلب همه صف‌شکنان",
+"out": [
+"ke be mo;gan $ek/n/d q/lbe1 h/me s/f$ek/nan"
+]
+}
+],
+"label": "šahe1 šemošadeqdane1 xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
+"error": null,
+"reading": "šahe1 šemošadeqdane1  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
+"target": " šahe1 šemošadeqdane1  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan"
+},
+{
+"key": "2516-1",
+"lines": [
+"مست بگذشت و نظر بر من درویش انداخت",
+"گفت: ای چشم و چراغ همه شیرین‌سخنان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "مست بگذشت و نظر بر من درویش انداخت",
+"out": [
+"m/st bogz/$t o n/z/r b/r m/ne1 d/rvi$ @/ndaxt"
+]
+},
+{
+"call": "top1",
+"input": "گفت ای چشم و چراغ همه شیرین‌سخنان",
+"out": [
+"goft @ey c/$m o ceraqe1 h/me $irinsox/nan"
+]
+}
+],
+"label": "m/st bogz/št o n/z/r b/r m/ne1 d/rviš @/ndaxtgoft @ey c/šm o ceraqe1 h/me širinsox/nan",
+"error": null,
+"reading": "m/st bogz/št o n/z/r b/r m/ne1 d/rviš @/ndaxtgoft  @ey c/šm o ceraqe1 h/me širinsox/nan",
+"target": " m/st bogz/što n/z/r b/r m/ne1 d/rviš @/ndaxtgoft  @ey c/šmo ceraqe1 h/me širinsox/nan"
+},
+{
+"key": "2562-0",
+"lines": [
+"ای که بر ماه از خط مشکین نقاب انداختی",
+"لطف کردی سایه‌ای بر آفتاب انداختی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای که بر ماه از خط مشکین نقاب انداختی",
+"out": [
+"@ey ke b/r mah @/z x/te1 mo$kin neqab @/ndaxti"
+]
+},
+{
+"call": "top1",
+"input": "لطف کردی سایه‌ای بر آفتاب انداختی",
+"out": [
+"lotf k/rdi saye@i b/r @aftab @/ndaxti"
+]
+}
+],
+"label": "@ey ke b/r mah @/z x/te1 moškin neqab @/ndaxtilotf k/rdi saye@i b/r @aftab @/ndaxti",
+"error": null,
+"reading": "@ey ke b/r mah @/z x/te1 moškin neqab @/ndaxtilotf k/rdi saye@i b/r @aftab @/ndaxti",
+"target": " @ey ke b/r mah @/z x/te1 moškin neqab @/ndaxtilotf k/rdi saye@i b/r @aftab @/ndaxti"
+},
+{
+"key": "2562-1",
+"lines": [
+"تا چه خواهد کرد با ما آب و رنگ عارضت",
+"حالیا نیرنگ نقشی خوش بر آب انداختی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "تا چه خواهد کرد با ما آب و رنگ عارضت",
+"out": [
+"ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/t"
+]
+},
+{
+"call": "top1",
+"input": "حالیا نیرنگ نقشی خوش بر آب انداختی",
+"out": [
+"haliya neyr/nge1 n/q$iye1 xo$ b/r @ab @/ndaxti"
+]
+}
+],
+"label": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti",
+"error": null,
+"reading": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti",
+"target": " ta ce xah/d k/rd ba ma @abo r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti"
+},
+{
+"key": "39511-0",
+"lines": [
+"آب بقا کجا و لب نوش او کجا؟",
+"آتش کجا و گرمی آغوش او کجا؟"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "آب بقا کجا و لب نوش او کجا",
+"out": [
+"@abe1 b/qa koja o l/be1 nu$e1 @u koja"
+]
+},
+{
+"call": "top1",
+"input": "آتش کجا و گرمی آغوش او کجا",
+"out": [
+"@at/$ koja o g/rmi @aqu$e1 @u koja"
+]
+}
+],
+"label": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja",
+"error": null,
+"reading": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja",
+"target": " @abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja"
+},
+{
+"key": "39511-1",
+"lines": [
+"سیمین و تابناک بود روی مه ولی",
+"سیمینه مه کجا و بناگوش او کجا؟"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "سیمین و تابناک بود روی مه ولی",
+"out": [
+"simin o tabnak bov/d ruye1 m/h v/li"
+]
+},
+{
+"call": "top1",
+"input": "سیمینه مه کجا و بناگوش او کجا",
+"out": [
+"simineye1 m/h koja o b/nagu$e1 @u koja"
+]
+}
+],
+"label": "simin o tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
+"error": null,
+"reading": "simin o tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
+"target": " simino tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja"
+},
+{
+"key": "39548-0",
+"lines": [
+"بنفشه زلف من ای سرو قد نسرین تن",
+"که نیست چون سر زلفت بنفشه و سوسن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بنفشه زلف من ای سرو قد نسرین تن",
+"out": [
+"b/n/f$eye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/n"
+]
+},
+{
+"call": "top1",
+"input": "که نیست چون سر زلفت بنفشه و سوسن",
+"out": [
+"ke nist con s/re1 zolf/t b/n/f$e o sus/n"
+]
+}
+],
+"label": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
+"error": null,
+"reading": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
+"target": " b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n"
+},
+{
+"key": "39548-1",
+"lines": [
+"بنفشه زی تو فرستادم و خجل ماندم",
+"که گل کسی نفرستد به هدیه زی گلشن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بنفشه زی تو فرستادم و خجل ماندم",
+"out": [
+"b/n/f$e zi to ferestad/m o xejel mand/m"
+]
+},
+{
+"call": "top1",
+"input": "که گل کسی نفرستد به هدیه زی گلشن",
+"out": [
+"ke gole1 k/si n/ferest/d be hedye zi gol$/n"
+]
+}
+],
+"label": "b/n/fše zi to ferestad/m o xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n",
+"error": null,
+"reading": "b/n/fše zi to ferestad/m o xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n",
+"target": " b/n/fše zi to ferestad/mo xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n"
+},
+{
+"key": "4489-0",
+"lines": [
+"ای سرو و گل بستان بنگر به تهی دستان",
+"نانی ده و صد بستان‌هاده چه به درویشان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای سرو و گل بستان بنگر به تهی دستان",
+"out": [
+"@ey s/rv o gole1 bostan beng/r be tohi d/stan"
+]
+},
+{
+"call": "top1",
+"input": "نانی ده و صد بستان‌هاده چه به درویشان",
+"out": [
+"nani deh o s/d bostanhade ce be d/rvi$an"
+]
+}
+],
+"label": "@ey s/rv o gole1 bostan beng/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
+"error": null,
+"reading": "@ey s/rv o gole1 bostan beng/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
+"target": " @ey s/rvo gole1 bostan beng/r be tohi d/stannani deho s/d bostanhade ce be d/rvišan"
+},
+{
+"key": "4489-1",
+"lines": [
+"بشنو تو ز پیغامبر فرمود که سیم و زر",
+"از صدقه نشد کمتر هاده چه به درویشان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بشنو تو ز پیغامبر فرمود که سیم و زر",
+"out": [
+"be$no to ze peyqamb/r f/rmud ke sim o z/r"
+]
+},
+{
+"call": "top1",
+"input": "از صدقه نشد کمتر هاده چه به درویشان",
+"out": [
+"@/z s/d/qe n/$od k/mt/r hade ce be d/rvi$an"
+]
+}
+],
+"label": "bešno to ze peyqamb/r f/rmud ke sim o z/r@/z s/d/qe n/šod k/mt/r hade ce be d/rvišan",
+"error": null,
+"reading": "bešno to ze peyqamb/r f/rmud ke sim o z/r@/z s/d/qe n/šod k/mt/r hade ce be d/rvišan",
+"target": " bešno to ze peyqamb/r f/rmud ke simo z/r@/z s/d/qe n/šod k/mt/r hade ce be d/rvišan"
+},
+{
+"key": "4620-0",
+"lines": [
+"چون خیال تو درآید به دلم رقص کنان",
+"چه خیالات دگر مست درآید به میان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "چون خیال تو درآید به دلم رقص کنان",
+"out": [
+"con xiyale1 to d/ray/d be del/m r/qs konan"
+]
+},
+{
+"call": "top1",
+"input": "چه خیالات دگر مست درآید به میان",
+"out": [
+"ce xiyalate1 deg/r m/st d/ray/d be miyan"
+]
+}
+],
+"label": "con xiyale1 to d/ray/d be del/m r/qs konance xiyalate1 deg/r m/st d/ray/d be miyan",
+"error": null,
+"reading": "con xiyale1 to d/ray/d be del/m r/qs konance xiyalate1 deg/r m/st d/ray/d be miyan",
+"target": " con xiyale1 to d/ray/d be del/m r/qs konance xiyalate1 deg/r m/st d/ray/d be miyan"
+},
+{
+"key": "4620-1",
+"lines": [
+"گرد بر گرد خیالش همه در رقص شوند",
+"وان خیال چو مه تو به میان چرخ زنان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گرد بر گرد خیالش همه در رقص شوند",
+"out": [
+"gerd b/r g/rde1 xiyal/$ h/me d/r r/qs $/v/nd"
+]
+},
+{
+"call": "top1",
+"input": "وان خیال چو مه تو به میان چرخ زنان",
+"out": [
+"van xiyal co m/h to be miyane1 c/rxe1 z/nan"
+]
+}
+],
+"label": "gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan",
+"error": null,
+"reading": "gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan",
+"target": " gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan"
+},
+{
+"key": "50271-0",
+"lines": [
+"امروز که نوبت جوانی من است",
+"مِی نوشم از آن که کامرانی من است"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "امروز که نوبت جوانی من است",
+"out": [
+"@emruz ke nob/te1 j/vaniye1 m/n @/st"
+]
+},
+{
+"call": "nbest",
+"input": "می نوشم از آن که کامرانی من است",
+"n": 8,
+"out": [
+"mey nu$/m @/z @an ke kamraniye1 m/n @/st",
+"meye1 nu$/m @/z @an ke kamraniye1 m/n @/st",
+"mey nu$/m @/z @an ke kamrani m/n @/st",
+"meye1 nu$/m @/z @an ke kamrani m/n @/st",
+"meyye1 nu$/m @/z @an ke kamraniye1 m/n @/st",
+"mey nu$/m @/z @an ke kam/raniye1 m/n @/st",
+"meye1 nu$/m @/z @an ke kam/raniye1 m/n @/st",
+"mi nu$/m @/z @an ke kamraniye1 m/n @/st"
+]
+}
+],
+"label": "@emruz ke nob/te1 j/vaniye1 m/n @/stmey nuš/m @/z @an ke kamraniye1 m/n @/st",
+"error": null,
+"reading": "@emruz ke nob/te1 j/vaniye1 m/n @/stmey nuš/m @/z @an ke kamraniye1 m/n @/st",
+"target": " @emruz ke nob/te1 j/vaniye1 m/n @/stmey nuš/m @/z @an ke kamraniye1 m/n @/st"
+},
+{
+"key": "50271-1",
+"lines": [
+"عیبم مکنید، گرچه تلخ است، خوش است",
+"تلخ است، از آن که زندگانی من است‌!"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "عیبم مکنید گرچه تلخ است خوش است",
+"out": [
+"@eyb/m m/konid g/rce t/lx @/st xo$ @/st"
+]
+},
+{
+"call": "top1",
+"input": "تلخ است از آن که زندگانی من است",
+"out": [
+"t/lx @/st @/z @an ke zendeganiye1 m/n @/st"
+]
+}
+],
+"label": "@eyb/m m/konid g/rce t/lx @/st xoš @/stt/lx @/st @/z @an ke zendeganiye1 m/n @/st",
+"error": null,
+"reading": "@eyb/m m/konid  g/rce t/lx @/st  xoš @/stt/lx @/st  @/z @an ke zendeganiye1 m/n @/st",
+"target": " @eyb/m m/konid  g/rce t/lx @/st  xoš @/stt/lx @/st  @/z @an ke zendeganiye1 m/n @/st"
+},
+{
+"key": "50390-0",
+"lines": [
+"امروز تو را دسترس فردا نیست",
+"و اندیشهٔ فردات به جز سودا نیست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "امروز تو را دسترس فردا نیست",
+"out": [
+"@emruz to ra d/strese1 f/rda nist"
+]
+},
+{
+"call": "nbest",
+"input": "و اندیشه فردات به جز سودا نیست",
+"n": 8,
+"out": [
+"v/ @/ndi$eye1 f/rdat be joz soda nist",
+"o @/ndi$eye1 f/rdat be joz soda nist",
+"v/ @/ndi$eye1 f/rdat be joz suda nist",
+"o @/ndi$eye1 f/rdat be joz suda nist",
+"@o @/ndi$eye1 f/rdat be joz soda nist",
+"v/ @/ndi$e f/rdat be joz soda nist",
+"o @/ndisheye1 f/rdat be joz soda nist",
+"o @/ndi$e f/rdat be joz soda nist"
+]
+}
+],
+"label": "@emruz to ra d/strese1 f/rda nisto @/ndišeye1 f/rdat be joz soda nist",
+"error": null,
+"reading": "@emruz to ra d/strese1 f/rda nisto @/ndišeye1 f/rdat be joz soda nist",
+"target": " @emruz to ra d/strese1 f/rda nisto @/ndišeye1 f/rdat be joz soda nist"
+},
+{
+"key": "50390-1",
+"lines": [
+"ضایع مکن این دم اَر دلت بیدار است",
+"کاین باقیِ عمر را بقا پیدا نیست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "ضایع مکن این دم ار دلت بیدار است",
+"n": 8,
+"out": [
+"zaye@ m/kon @in d/m @/r del/t bidar @/st",
+"zaye@ m/kon @in d/m @/r delet bidar @/st",
+"zaye@ m/kon @in d/m @/r del/te1 bidar @/st",
+"zaye@ m/kon @in d/m @/r delete1 bidar @/st",
+"zaye@ m/kon @in d/me1 @/r del/t bidar @/st",
+"zaye@ m/kon @in dom @/r del/t bidar @/st",
+"zaye@ m/k/n @in d/m @/r del/t bidar @/st",
+"zaye@ m/kon @in dem @/r del/t bidar @/st"
+]
+},
+{
+"call": "nbest",
+"input": "کاین باقی عمر را بقا پیدا نیست",
+"n": 8,
+"out": [
+"kin baqiye1 @omr ra b/qa peyda nist",
+"kin baqi @omr ra b/qa peyda nist",
+"kin baqiye1 @omr ra beqa peyda nist",
+"kin baqi @omr ra beqa peyda nist",
+"kin baqiye1 @omr ra boqa peyda nist",
+"kain baqiye1 @omr ra b/qa peyda nist",
+"kin baqiye1 @omr ra b/ga peyda nist",
+"kin baqi @omr ra boqa peyda nist"
+]
+}
+],
+"label": "zaye@ m/kon @in d/m @/r del/t bidar @/stkin baqiye1 @omr ra b/qa peyda nist",
+"error": null,
+"reading": "zaye@ m/kon @in d/m @/r del/t bidar @/stkin baqiye1 @omr ra b/qa peyda nist",
+"target": " zaye@ m/kon @in d/m @/r del/t bidar @/stkin baqiye1 @omr ra b/qa peyda nist"
+},
+{
+"key": "5494-0",
+"lines": [
+"ای دریغا در این خانه دمی بگشودی",
+"مونس خویش بدیدی دل هر موجودی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای دریغا در این خانه دمی بگشودی",
+"out": [
+"@ey d/riqa d/r @in xane d/mi bog$udi"
+]
+},
+{
+"call": "top1",
+"input": "مونس خویش بدیدی دل هر موجودی",
+"out": [
+"munese1 xi$ bedidi dele1 h/r mojudi"
+]
+}
+],
+"label": "@ey d/riqa d/r @in xane d/mi bogšudimunese1 xiš bedidi dele1 h/r mojudi",
+"error": null,
+"reading": "@ey d/riqa d/r @in xane d/mi bogšudimunese1 xiš bedidi dele1 h/r mojudi",
+"target": " @ey d/riqa d/r @in xane d/mi bogšudimunese1 xiš bedidi dele1 h/r mojudi"
+},
+{
+"key": "5494-1",
+"lines": [
+"چشم یعقوب به دیدار پسر شاد شدی",
+"ساقی وصل شراب صمدی پیمودی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "چشم یعقوب به دیدار پسر شاد شدی",
+"out": [
+"c/$me1 y/@qub be didare1 pes/re1 $ad $odi"
+]
+},
+{
+"call": "top1",
+"input": "ساقی وصل شراب صمدی پیمودی",
+"out": [
+"saqiye1 v/sle1 $/rab s/m/di peymudi"
+]
+}
+],
+"label": "c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi",
+"error": null,
+"reading": "c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi",
+"target": " c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi"
+},
+{
+"key": "64738-0",
+"lines": [
+"ترا که گفت که بر برگ گل کلاله فکن",
+"بنفشه تاب ده و بر رخ چو لاله فکن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ترا که گفت که بر برگ گل کلاله فکن",
+"out": [
+"t/ra ke goft ke b/r b/rge1 gol kolale fek/n"
+]
+},
+{
+"call": "top1",
+"input": "بنفشه تاب ده و بر رخ چو لاله فکن",
+"out": [
+"b/n/f$e tab deh o b/r roxe1 co lale fek/n"
+]
+}
+],
+"label": "tora ke goft ke b/r b/rge1 gol kolale fek/nb/n/fše tab deh o b/r roxe1 co lale fek/n",
+"error": null,
+"reading": "tora ke goft ke b/r b/rge1 gol kolale fek/nb/n/fše tab deh o b/r roxe1 co lale fek/n",
+"target": " tora ke goft ke b/r b/rge1 gol kolale fek/nb/n/fše tab deho b/r roxe1 co lale fek/n"
+},
+{
+"key": "64738-1",
+"lines": [
+"به غمزه صید دل عاشقان کن و آنگه",
+"بهانه بر نظر نرگس غزاله فکن"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "به غمزه صید دل عاشقان کن و آنگه",
+"out": [
+"be q/mze seyde1 dele1 @a$eqan kon o @ang/h"
+]
+},
+{
+"call": "top1",
+"input": "بهانه بر نظر نرگس غزاله فکن",
+"out": [
+"b/hane b/r n/z/re1 n/rgese1 q/zale fek/n"
+]
+}
+],
+"label": "be q/mze seyde1 dele1 @ašeqan kon o @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
+"error": null,
+"reading": "be q/mze seyde1 dele1 @ašeqan kon o @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
+"target": " be q/mze seyde1 dele1 @ašeqan kono @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n"
+},
+{
+"key": "68597-0",
+"lines": [
+"خواهم که: بزیر قدمت زار بمیرم",
+"هر چند کنی زنده، دگر بار بمیرم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "خواهم که بزیر قدمت زار بمیرم",
+"out": [
+"xah/m ke bezir qedm/te1 zar bemir/m"
+]
+},
+{
+"call": "top1",
+"input": "هر چند کنی زنده دگر بار بمیرم",
+"out": [
+"h/r c/nd koni zende deg/r bar bemir/m"
+]
+}
+],
+"label": "xah/m ke bezir qedm/te1 zar bemir/mh/r c/nd koni zende deg/r bar bemir/m",
+"error": null,
+"reading": "xah/m ke  bezir qedm/te1 zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m",
+"target": " xah/m ke  bezir qedm/te1 zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m"
+},
+{
+"key": "68597-1",
+"lines": [
+"دانم که: چرا خون مرا زود نریزی",
+"خواهی که بجان کندن بسیار بمیرم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "دانم که چرا خون مرا زود نریزی",
+"out": [
+"dan/m ke cera xune1 m/ra zud n/rizi"
+]
+},
+{
+"call": "top1",
+"input": "خواهی که بجان کندن بسیار بمیرم",
+"out": [
+"xahi ke bejan k/nd/n besyar bemir/m"
+]
+}
+],
+"label": "dan/m ke cera xune1 m/ra zud n/rizixahi ke bejan k/nd/n besyar bemir/m",
+"error": null,
+"reading": "dan/m ke  cera xune1 m/ra zud n/rizixahi ke bejan k/nd/n besyar bemir/m",
+"target": " dan/m ke  cera xune1 m/ra zud n/rizixahi ke bejan k/nd/n besyar bemir/m"
+},
+{
+"key": "73686-0",
+"lines": [
+"در ده می لعل لاله گون صافی",
+"بگشای ز حلق شیشه خون صافی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "در ده می لعل لاله گون صافی",
+"out": [
+"d/r dehe1 meye1 l/@le1 lale gun safi"
+]
+},
+{
+"call": "top1",
+"input": "بگشای ز حلق شیشه خون صافی",
+"out": [
+"bog$ay ze h/lqe1 $i$eye1 xune1 safi"
+]
+}
+],
+"label": "d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi",
+"error": null,
+"reading": "d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi",
+"target": " d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi"
+},
+{
+"key": "73686-1",
+"lines": [
+"کامروز برون ز جام می نیست مرا",
+"یک دوست که دارد اندرون صافی"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "کامروز برون ز جام می نیست مرا",
+"out": [
+"kamruz borun ze jame1 mey nist m/ra"
+]
+},
+{
+"call": "top1",
+"input": "یک دوست که دارد اندرون صافی",
+"out": [
+"yek dust ke dar/d @/nd/rune1 safi"
+]
+}
+],
+"label": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi",
+"error": null,
+"reading": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi",
+"target": " kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi"
+},
+{
+"key": "74177-0",
+"lines": [
+"لب عاشق به حرف شکوه بیداد نگشاید",
+"زبان بیدلان چون غنچه از هر باد نگشاید"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "لب عاشق به حرف شکوه بیداد نگشاید",
+"out": [
+"l/be1 @a$eq be h/rfe1 $okuh bidad n/go$ay/d"
+]
+},
+{
+"call": "top1",
+"input": "زبان بیدلان چون غنچه از هر باد نگشاید",
+"out": [
+"z/bane1 bidelan con qonce @/z h/r bad n/go$ay/d"
+]
+}
+],
+"label": "l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
+"error": null,
+"reading": "l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
+"target": " l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d"
+},
+{
+"key": "74177-1",
+"lines": [
+"چنین کز شش جهت راه امیدم بسته شد ترسم",
+"که بر من آسمان هم ناوک بیداد نگشاید"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "چنین کز شش جهت راه امیدم بسته شد ترسم",
+"out": [
+"cenin k/z $e$ j/h/t rahe1 @omid/m b/ste $od t/rs/m"
+]
+},
+{
+"call": "top1",
+"input": "که بر من آسمان هم ناوک بیداد نگشاید",
+"out": [
+"ke b/r m/ne1 @aseman h/m nav/k bidad n/go$ay/d"
+]
+}
+],
+"label": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d",
+"error": null,
+"reading": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d",
+"target": " cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d"
+},
+{
+"key": "77215-0",
+"lines": [
+"بسی درد از غم عشقت کشیدم",
+"ز بی دردی بتر دردی ندیدم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بسی درد از غم عشقت کشیدم",
+"out": [
+"b/si d/rd @/z q/me1 @e$q/t ke$id/m"
+]
+},
+{
+"call": "top1",
+"input": "ز بی دردی بتر دردی ندیدم",
+"out": [
+"ze bi dordi bet/r dordi n/did/m"
+]
+}
+],
+"label": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m",
+"error": null,
+"reading": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m",
+"target": " b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m"
+},
+{
+"key": "77215-1",
+"lines": [
+"یکایک درد من درمان پذیرفت",
+"از آن دم کز تواین شربت چشیدم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "یکایک درد من درمان پذیرفت",
+"out": [
+"yekayeke1 d/rde1 m/n d/rman p/ziroft"
+]
+},
+{
+"call": "top1",
+"input": "از آن دم کز تواین شربت چشیدم",
+"out": [
+"@/z @an d/m k/z tovayn $/rb/t ce$id/m"
+]
+}
+],
+"label": "yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m",
+"error": null,
+"reading": "yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m",
+"target": " yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m"
+},
+{
+"key": "78309-0",
+"lines": [
+"ای باد نسیم یار داری",
+"زآن نفحهٔ مشکبار داری"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ای باد نسیم یار داری",
+"out": [
+"@ey bad n/sime1 yar dari"
+]
+},
+{
+"call": "nbest",
+"input": "زآن نفحه مشکبار داری",
+"n": 8,
+"out": [
+"zan n/fheye1 mo$kbar dari",
+"zan n/fhe mo$kbar dari",
+"zan n/fheye1 m/$kbar dari",
+"zan n/fheye1 mo$kebar dari",
+"zan n/fhe m/$kbar dari",
+"zan n/fhe mo$kebar dari",
+"zan n/fheye1 mo$k/bar dari",
+"zan n/fhe mo$k/bar dari"
+]
+}
+],
+"label": "@ey bad n/sime1 yar darizan n/fheye1 moškbar dari",
+"error": null,
+"reading": "@ey bad n/sime1 yar darizan n/fheye1 moškbar dari",
+"target": " @ey bad n/sime1 yar darizan n/fheye1 moškbar dari"
+},
+{
+"key": "78309-1",
+"lines": [
+"زنهار! مکن درازدستی",
+"با طرهٔ او چه کار داری؟"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "زنهار مکن درازدستی",
+"out": [
+"zenhar m/kon derazd/sti"
+]
+},
+{
+"call": "nbest",
+"input": "با طره او چه کار داری",
+"n": 8,
+"out": [
+"ba torreye1 @u ce kar dari",
+"ba torre @u ce kar dari",
+"ba t/rreye1 @u ce kar dari",
+"ba torhe1 @u ce kar dari",
+"ba torfeye1 @u ce kar dari",
+"ba toreye1 @u ce kar dari",
+"ba tor$eye1 @u ce kar dari",
+"ba torfe @u ce kar dari"
+]
+}
+],
+"label": "zenhar m/kon derazd/stiba torreye1 @u ce kar dari",
+"error": null,
+"reading": "zenhar  m/kon derazd/stiba torreye1 @u ce kar dari",
+"target": " zenhar  m/kon derazd/stiba torreye1 @u ce kar dari"
+},
+{
+"key": "8139-0",
+"lines": [
+"پس عزازیلش بگفت ای میر راد",
+"مکر خود اندر میان باید نهاد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "پس عزازیلش بگفت ای میر راد",
+"out": [
+"p/s @/zazil/$ begoft @ey mire1 rad"
+]
+},
+{
+"call": "top1",
+"input": "مکر خود اندر میان باید نهاد",
+"out": [
+"m/kre1 xod @/nd/r miyan bay/d n/had"
+]
+}
+],
+"label": "p/s @/zazil/š begoft @ey mire1 radm/kre1 xod @/nd/r miyan bay/d n/had",
+"error": null,
+"reading": "p/s @/zazil/š begoft @ey mire1 radm/kre1 xod @/nd/r miyan bay/d n/had",
+"target": " p/s @/zazil/š begoft @ey mire1 radm/kre1 xod @/nd/r miyan bay/d n/had"
+},
+{
+"key": "8139-1",
+"lines": [
+"گر نمازت فوت می‌شد آن زمان",
+"می‌زدی از درد دل آه و فغان"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گر نمازت فوت می‌شد آن زمان",
+"out": [
+"g/r n/maz/te1 fot mi$od @an z/man"
+]
+},
+{
+"call": "top1",
+"input": "می‌زدی از درد دل آه و فغان",
+"out": [
+"miz/di @/z d/rde1 del @ah o f/qan"
+]
+}
+],
+"label": "g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
+"error": null,
+"reading": "g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
+"target": " g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @aho f/qan"
+},
+{
+"key": "85106-0",
+"lines": [
+"تا خیال قامتت بگذاشت ما را در ضمیر",
+"با علو همت قد تو طوبی در قصیر"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "تا خیال قامتت بگذاشت ما را در ضمیر",
+"out": [
+"ta xiyale1 qam/t/t begoza$t ma ra d/r z/mir"
+]
+},
+{
+"call": "top1",
+"input": "با علو همت قد تو طوبی در قصیر",
+"out": [
+"ba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir"
+]
+}
+],
+"label": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir",
+"error": null,
+"reading": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir",
+"target": " ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir"
+},
+{
+"key": "85106-1",
+"lines": [
+"من نه تنها بسته زنجیر زلفین توام",
+"بسته ای بر هر سر مویی چو من چندین اسیر"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "من نه تنها بسته زنجیر زلفین توام",
+"out": [
+"m/n n/ t/nha b/steye1 z/njire1 zolfine1 to@/m"
+]
+},
+{
+"call": "top1",
+"input": "بسته ای بر هر سر مویی چو من چندین اسیر",
+"out": [
+"b/stei b/r h/r s/re1 muyi co m/n c/ndin @/sir"
+]
+},
+{
+"call": "nbest",
+"input": "بسته ای بر هر سر مویی چو من چندین اسیر",
+"n": 8,
+"out": [
+"b/stei b/r h/r s/re1 muyi co m/n c/ndin @/sir",
+"b/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir",
+"b/ste@i b/r h/r s/re1 muyi co m/n c/ndin @/sir",
+"b/stei b/r h/r s/r muyi co m/n c/ndin @/sir",
+"b/ste @ey b/r h/r s/r muyi co m/n c/ndin @/sir",
+"b/stei b/r h/r s/re1 muyi co m/ne1 c/ndin @/sir",
+"b/stei b/r h/r serre1 muyi co m/n c/ndin @/sir",
+"b/ste@i b/r h/r s/r muyi co m/n c/ndin @/sir"
+]
+}
+],
+"label": "m/n n/ t/nha b/steye1 z/njire1 zolfine1 to@/mb/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir",
+"error": null,
+"reading": "m/n n/ t/nha b/steye1 z/njire1 zolfine1 to@/mb/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir",
+"target": " m/n n/ t/nha b/steye1 z/njire1 zolfine1 to@/mb/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir"
+},
+{
+"key": "86970-0",
+"lines": [
+"دل اگر جا به سرِ طُرّهٔ جانان گیرد",
+"به پریشان وطنی سازد و سامان گیرد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "دل اگر جا به سر طره جانان گیرد",
+"n": 8,
+"out": [
+"del @/g/r ja be s/re1 torreye1 janan gir/d",
+"del @/g/r ja be s/re1 torre janan gir/d",
+"del @/g/r ja be s/r torreye1 janan gir/d",
+"del @/g/r ja be serre1 torreye1 janan gir/d",
+"del @/g/r ja be s/re1 t/rreye1 janan gir/d",
+"del @/g/r ja be s/re1 terreye1 janan gir/d",
+"del @/g/r ja be s/re1 torreye janan gir/d",
+"del @/g/r ja be s/r torre janan gir/d"
+]
+},
+{
+"call": "top1",
+"input": "به پریشان وطنی سازد و سامان گیرد",
+"out": [
+"be p/ri$ane1 v/t/ni saz/d o saman gir/d"
+]
+}
+],
+"label": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/d o saman gir/d",
+"error": null,
+"reading": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/d o saman gir/d",
+"target": " del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/do saman gir/d"
+},
+{
+"key": "86970-1",
+"lines": [
+"دل شود رام در آن زلف دل آرام اگر",
+"گوی آرام ز کج‌تابیِ چوگان گیرد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "دل شود رام در آن زلف دل آرام اگر",
+"out": [
+"del $/v/d ram d/r @an zolfe1 del @aram @/g/r"
+]
+},
+{
+"call": "nbest",
+"input": "گوی آرام ز کج‌تابی چوگان گیرد",
+"n": 8,
+"out": [
+"guy @aram ze k/jtabi cugan gir/d",
+"guye1 @aram ze k/jtabi cugan gir/d",
+"guy @aram ze k/jtabi cogan gir/d",
+"guye1 @aram ze k/jtabi cogan gir/d",
+"guy @aram ze k/jtabiye1 cugan gir/d",
+"guye1 @aram ze k/jtabiye1 cugan gir/d",
+"guy @aram ze k/jtabiye1 cogan gir/d",
+"guye1 @aram ze k/jtabiye1 cogan gir/d"
+]
+}
+],
+"label": "del š/v/d ram d/r @an zolfe1 del @aram @/g/rguy @aram ze k/jtabiye1 cugan gir/d",
+"error": null,
+"reading": "del š/v/d ram d/r @an zolfe1 del @aram @/g/rguy @aram ze k/jtabiye1 cugan gir/d",
+"target": " del š/v/d ram d/r @an zolfe1 del @aram @/g/rguy @aram ze k/jtabiye1 cugan gir/d"
+},
+{
+"key": "90491-0",
+"lines": [
+"بوی کین هرگز کسی نشنیده از آب و گلم",
+"گر به خس آتش فتد از مهر می‌سوزد دلم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بوی کین هرگز کسی نشنیده از آب و گلم",
+"out": [
+"buye1 kin h/rgez k/si n/$enide @/z @ab o gol/m"
+]
+},
+{
+"call": "top1",
+"input": "گر به خس آتش فتد از مهر می‌سوزد دلم",
+"out": [
+"g/r be x/s @at/$ fet/d @/z mehr misuz/d del/m"
+]
+}
+],
+"label": "buye1 kin h/rgez k/si n/šenide @/z @ab o gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
+"error": null,
+"reading": "buye1 kin h/rgez k/si n/šenide @/z @ab o gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
+"target": " buye1 kin h/rgez k/si n/šenide @/z @abo gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m"
+},
+{
+"key": "90491-1",
+"lines": [
+"چون قلم دارم سر تسلیم را در زیر تیغ",
+"هرکسم سر می‌زند گویی که خط باطلم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "چون قلم دارم سر تسلیم را در زیر تیغ",
+"out": [
+"con q/l/m dar/m s/re1 t/slim ra d/r zire1 tiq"
+]
+},
+{
+"call": "top1",
+"input": "هرکسم سر می‌زند گویی که خط باطلم",
+"out": [
+"h/rk/s/m s/r miz/n/d guyi ke x/te1 batel/m"
+]
+}
+],
+"label": "con q/l/m dar/m s/re1 t/slim ra d/r zire1 tiqh/rk/s/m s/r miz/n/d guyi ke x/te1 batel/m",
+"error": null,
+"reading": "con q/l/m dar/m s/re1 t/slim ra d/r zire1 tiqh/rk/s/m s/r miz/n/d guyi ke x/te1 batel/m",
+"target": " con q/l/m dar/m s/re1 t/slim ra d/r zire1 tiqh/rk/s/m s/r miz/n/d guyi ke x/te1 batel/m"
+},
+{
+"key": "9207-0",
+"lines": [
+"بیا ساقی آن آب آتش خیال",
+"درافکن بدان کهرباگون سفال"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بیا ساقی آن آب آتش خیال",
+"out": [
+"biya saqi @an @abe1 @at/$e1 xiyal"
+]
+},
+{
+"call": "top1",
+"input": "درافکن بدان کهرباگون سفال",
+"out": [
+"d/r/fk/n bedan k/hrobagune1 sofal"
+]
+}
+],
+"label": "biya saqi @an @abe1 @at/še1 xiyald/r/fk/n bedan k/hrobagune1 sofal",
+"error": null,
+"reading": "biya saqi @an @abe1 @at/še1 xiyald/r/fk/n bedan k/hrobagune1 sofal",
+"target": " biya saqi @an @abe1 @at/še1 xiyald/r/fk/n bedan k/hrobagune1 sofal"
+},
+{
+"key": "9207-1",
+"lines": [
+"گوارنده آبی کزین تیره خاک",
+"بدو شاید اندوه را شست پاک"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گوارنده آبی کزین تیره خاک",
+"out": [
+"govar/nde @abi k/zin tireye1 xak"
+]
+},
+{
+"call": "top1",
+"input": "بدو شاید اندوه را شست پاک",
+"out": [
+"bedu $ay/d @/nduh ra $ost pak"
+]
+}
+],
+"label": "govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak",
+"error": null,
+"reading": "govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak",
+"target": " govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak"
+},
+{
+"key": "9210-0",
+"lines": [
+"بیا ساقی آن می‌که او دلکشست",
+"به من ده که می در جوانی خوشست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بیا ساقی آن می‌که او دلکشست",
+"out": [
+"biya saqi @an mike @u delke$/st"
+]
+},
+{
+"call": "top1",
+"input": "به من ده که می در جوانی خوشست",
+"out": [
+"be m/n deh ke mey d/r j/vani xo$/st"
+]
+}
+],
+"label": "biya saqi @an mike @u delkeš/stbe m/n deh ke mey d/r j/vani xoš/st",
+"error": null,
+"reading": "biya saqi @an mike @u delkeš/stbe m/n deh ke mey d/r j/vani xoš/st",
+"target": " biya saqi @an mike @u delkeš/stbe m/n deh ke mey d/r j/vani xoš/st"
+},
+{
+"key": "9210-1",
+"lines": [
+"مگر چون بدان می دهان تر کنم",
+"بدو بخت خود را جوان‌تر کنم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "مگر چون بدان می دهان تر کنم",
+"out": [
+"m/g/r con bedan mey d/han t/r kon/m"
+]
+},
+{
+"call": "top1",
+"input": "بدو بخت خود را جوان‌تر کنم",
+"out": [
+"bedu b/xte1 xod ra j/vant/r kon/m"
+]
+}
+],
+"label": "m/g/r con bedan mey d/han t/r kon/mbedu b/xte1 xod ra j/vant/r kon/m",
+"error": null,
+"reading": "m/g/r con bedan mey d/han t/r kon/mbedu b/xte1 xod ra j/vant/r kon/m",
+"target": " m/g/r con bedan mey d/han t/r kon/mbedu b/xte1 xod ra j/vant/r kon/m"
+},
+{
+"key": "92196-0",
+"lines": [
+"نشتر فولاد یا مژگان دلدار است این",
+"نشات می یا نگاه چشم بیمار است این"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "نشتر فولاد یا مژگان دلدار است این",
+"out": [
+"ne$t/re1 fulad ya mo;gane1 deldar @/st @in"
+]
+},
+{
+"call": "top1",
+"input": "نشات می یا نگاه چشم بیمار است این",
+"out": [
+"ne$ate1 mey ya negahe1 c/$me1 bimar @/st @in"
+]
+}
+],
+"label": "nešt/re1 fulad ya mo;gane1 deldar @/st @innešate1 mey ya negahe1 c/šme1 bimar @/st @in",
+"error": null,
+"reading": "nešt/re1 fulad ya mo;gane1 deldar @/st @innešate1 mey ya negahe1 c/šme1 bimar @/st @in",
+"target": " nešt/re1 fulad ya mo;gane1 deldar @/st @innešate1 mey ya negahe1 c/šme1 bimar @/st @in"
+},
+{
+"key": "92196-1",
+"lines": [
+"ژاله بر گل یا خوی خجلت ز شرم روی دوست",
+"یا عرق بر جبهه شوخ ستمکار است این"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "ژاله بر گل یا خوی خجلت ز شرم روی دوست",
+"out": [
+";ale b/r gol ya xoye1 xejl/t ze $/rm ruye1 dust"
+]
+},
+{
+"call": "top1",
+"input": "یا عرق بر جبهه شوخ ستمکار است این",
+"out": [
+"ya @/r/q b/r jebheye1 $ux set/mkar @/st @in"
+]
+}
+],
+"label": ";ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
+"error": null,
+"reading": ";ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
+"target": " ;ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in"
+},
+{
+"key": "9255-0",
+"lines": [
+"مغنی بدان جرهٔ جان‌نواز",
+"بر آهنگ ما نالهٔ نو بساز"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "مغنی بدان جره جان‌نواز",
+"n": 8,
+"out": [
+"moq/nni bedan jorreye1 jann/vaz",
+"moq/nni bedan j/rreye1 jann/vaz",
+"moq/nniye1 bedan jorreye1 jann/vaz",
+"moq/nniye1 bedan j/rreye1 jann/vaz",
+"moq/nni bedan jerreye1 jann/vaz",
+"moq/nni bedan jorre jann/vaz",
+"moqnni bedan jorreye1 jann/vaz",
+"moq/nni bedan j/rre jann/vaz"
+]
+},
+{
+"call": "nbest",
+"input": "بر آهنگ ما ناله نو بساز",
+"n": 8,
+"out": [
+"b/r @ah/nge1 ma naleye1 no besaz",
+"b/r @ah/nge1 ma nale no besaz",
+"b/re1 @ah/nge1 ma naleye1 no besaz",
+"b/r @ah/nge1 ma naleye1 noye1 besaz",
+"b/re1 @ah/nge1 ma nale no besaz",
+"b/r @ahenge1 ma naleye1 no besaz",
+"b/r @ah/nge1 ma naleye1 noh besaz",
+"b/r @ah/ng ma naleye1 no besaz"
+]
+}
+],
+"label": "moq/nni bedan jorreye1 jann/vazb/r @ah/nge1 ma naleye1 no besaz",
+"error": null,
+"reading": "moq/nni bedan jorreye1 jann/vazb/r @ah/nge1 ma naleye1 no besaz",
+"target": " moq/nni bedan jorreye1 jann/vazb/r @ah/nge1 ma naleye1 no besaz"
+},
+{
+"key": "9255-1",
+"lines": [
+"که گشتیم چون بلبل از ناله مست",
+"بدان ناله زین ناله دانیم رست"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "که گشتیم چون بلبل از ناله مست",
+"out": [
+"ke g/$tim con bolbol @/z naleye1 m/st"
+]
+},
+{
+"call": "top1",
+"input": "بدان ناله زین ناله دانیم رست",
+"out": [
+"bedan nale zin nale danim r/st"
+]
+}
+],
+"label": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st",
+"error": null,
+"reading": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st",
+"target": " ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st"
+},
+{
+"key": "9282-0",
+"lines": [
+"اوّل کاین عشق‌پرستی نبود",
+"در عدم آوازه هستی نبود"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "اول کاین عشق‌پرستی نبود",
+"n": 8,
+"out": [
+"@/vv/l kin @e$qp/r/sti n/bov/d",
+"@/vv/l kin @e$qp/r/sti n/bud",
+"@/vv/l kin @e$qp/r/sti n/bv/d",
+"@/vv/le1 kin @e$qp/r/sti n/bov/d",
+"@/vv/l kin @e$qp/r/sti n/b/v/d",
+"@/vv/le1 kin @e$qp/r/sti n/bud",
+"@/vv/l kaine1 @e$qp/r/sti n/bov/d",
+"@/vv/l kain @e$qp/r/sti n/bov/d"
+]
+},
+{
+"call": "top1",
+"input": "در عدم آوازه هستی نبود",
+"out": [
+"d/r @/d/me1 @avazeye1 h/sti n/bov/d"
+]
+}
+],
+"label": "@/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d",
+"error": null,
+"reading": "@/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d",
+"target": " @/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d"
+},
+{
+"key": "9282-1",
+"lines": [
+"مُقبلی از کِتم عدم ساز کرد",
+"سوی وجود آمد و در باز کرد"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "nbest",
+"input": "مقبلی از کتم عدم ساز کرد",
+"n": 8,
+"out": [
+"moq/bb/li @/z k/tme1 @/d/m saz k/rd",
+"moq/bb/li @/z kotome1 @/d/m saz k/rd",
+"moqb/li @/z k/tme1 @/d/m saz k/rd",
+"moqbeli @/z k/tme1 @/d/m saz k/rd",
+"moq/bb/li @/z k/t/me1 @/d/m saz k/rd",
+"moq/bb/li @/z k/tm @/d/m saz k/rd",
+"moq/bb/li @/z k/tme1 @/d/me1 saz k/rd",
+"moq/bb/li @/z k/t/m @/d/m saz k/rd"
+]
+},
+{
+"call": "top1",
+"input": "سوی وجود آمد و در باز کرد",
+"out": [
+"suye1 vojud @am/d o d/r baz k/rd"
+]
+}
+],
+"label": "moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
+"error": null,
+"reading": "moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
+"target": " moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/do d/r baz k/rd"
+},
+{
+"key": "95105-0",
+"lines": [
+"جانا تو چنین بجنگ با من زچه",
+"گر دوست نئی رواست، دشمن زچه"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "جانا تو چنین بجنگ با من زچه",
+"out": [
+"jana to cenin bej/ng ba m/n z/ce"
+]
+},
+{
+"call": "top1",
+"input": "گر دوست نئی رواست دشمن زچه",
+"out": [
+"g/r dust n/@i r/vast do$m/n z/ce"
+]
+}
+],
+"label": "jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast došm/n z/ce",
+"error": null,
+"reading": "jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast  došm/n z/ce",
+"target": " jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast  došm/n z/ce"
+},
+{
+"key": "95105-1",
+"lines": [
+"بی هیچ سبب کشیده دامن را",
+"در خون من سوخته خرمن زچه"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "بی هیچ سبب کشیده دامن را",
+"out": [
+"bi hic s/b/b ke$ide dam/n ra"
+]
+},
+{
+"call": "top1",
+"input": "در خون من سوخته خرمن زچه",
+"out": [
+"d/r xune1 m/ne1 suxteye1 x/rm/n z/ce"
+]
+}
+],
+"label": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce",
+"error": null,
+"reading": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce",
+"target": " bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce"
+},
+{
+"key": "99380-0",
+"lines": [
+"از آن ز دیده و دل اشک و آه می‌خواهم",
+"که شرمسارم و عذر گناه می‌خواهم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "از آن ز دیده و دل اشک و آه می‌خواهم",
+"out": [
+"@/z @an ze dide o dele1 @/$k o @ah mixah/m"
+]
+},
+{
+"call": "top1",
+"input": "که شرمسارم و عذر گناه می‌خواهم",
+"out": [
+"ke $/rmsar/m o @ozre1 gonah mixah/m"
+]
+}
+],
+"label": "@/z @an ze dide o dele1 @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
+"error": null,
+"reading": "@/z @an ze dide o dele1 @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
+"target": " @/z @an ze dide o dele1 @/ško @ah mixah/mke š/rmsar/mo @ozre1 gonah mixah/m"
+},
+{
+"key": "99380-1",
+"lines": [
+"گناه بار گران است و راه عشق",
+"مدد ز همّت مردان راه می‌خواهم"
+],
+"kind": "verse",
+"metre": null,
+"calls": [
+{
+"call": "top1",
+"input": "گناه بار گران است و راه عشق",
+"out": [
+"gonah bare1 geran @/st o rahe1 @e$q"
+]
+},
+{
+"call": "nbest",
+"input": "مدد ز همت مردان راه می‌خواهم",
+"n": 8,
+"out": [
+"m/d/d ze hemm/te1 m/rdan rah mixah/m",
+"m/d/d ze hemm/te1 m/rdane1 rah mixah/m",
+"m/d/d ze hemm/te1 m/rdan rah mikhah/m",
+"m/d/d ze hemm/te1 m/rdane1 rah mikhah/m",
+"m/d/d ze hemm/t m/rdane1 rah mixah/m",
+"mod/d ze hemm/te1 m/rdan rah mixah/m",
+"mod/d ze hemm/te1 m/rdane1 rah mixah/m",
+"m/d/d ze hemm/t m/rdan rah mixah/m"
+]
+}
+],
+"label": "gonah bare1 geran @/st o rahe1 @ešqm/d/d ze hemm/te1 m/rdan rah mixah/m",
+"error": null,
+"reading": "gonah bare1 geran @/st o rahe1 @ešqm/d/d ze hemm/te1 m/rdan rah mixah/m",
+"target": " gonah bare1 geran @/sto rahe1 @ešqm/d/d ze hemm/te1 m/rdan rah mixah/m"
+}
+]
+}

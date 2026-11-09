@@ -1,0 +1,35 @@
+{
+ "student": "distill_s2/iter-2000-avg-1.pt",
+ "sherpa": {
+  "num_steps": 8,
+  "guidance_scale": 2.0,
+  "t_shift": 0.5,
+  "feat_scale": 0.1,
+  "target_rms": 0.1,
+  "speed": 1.004,
+  "silence_scale": 1.0,
+  "reference_text": "prompt_phonemes.txt",
+  "extra": {
+   "min_words_in_sentence": "100000"
+  },
+  "tokens": "one per character, as named in tokens.txt; first the prompt's, then the line's"
+ },
+ "after": {
+  "gain": 0.6482,
+  "clamp": 1.0,
+  "highpass_hz": 70,
+  "highpass_order": 8,
+  "highpass": "Butterworth, forward and backward",
+  "deess_db": 6,
+  "pause_cap_s": 0.3,
+  "order": [
+   "gain",
+   "clamp",
+   "highpass",
+   "deess",
+   "pause trim",
+   "clamp"
+  ]
+ },
+ "prompt_rms": 0.0648
+}

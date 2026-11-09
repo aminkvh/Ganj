@@ -609,6 +609,16 @@ class L10nFa extends L10n {
   }
 
   @override
+  String appUpdateAvailable(String version) {
+    return 'نسخهٔ تازهٔ گنج آمده است: $version';
+  }
+
+  @override
+  String appUpdateInSettings(String version) {
+    return 'نسخهٔ تازه: $version';
+  }
+
+  @override
   String get backupCopied => 'پشتیبان در حافظهٔ موقت رونوشت شد';
 
   @override
@@ -963,4 +973,76 @@ class L10nFa extends L10n {
 
   @override
   String get textSource => 'منبع متن گنجور';
+
+  @override
+  String get voiceRowTitle => 'خوانش ماشینی';
+
+  @override
+  String get voiceGetOnce => 'دریافت یک‌بارهٔ صدا';
+
+  @override
+  String get voiceWasCorrupt => 'صدا خراب بود؛ دوباره دریافت کنید';
+
+  @override
+  String get voiceChecking => '…';
+
+  @override
+  String voiceDownloading(String p) {
+    return 'دریافت صدا… ٪$p';
+  }
+
+  @override
+  String get voiceFailedOffline => 'دریافت نشد؛ اینترنت را بررسی کنید';
+
+  @override
+  String get voiceFailedSpace => 'جای کافی روی دستگاه نیست';
+
+  @override
+  String get voiceFailedChecksum => 'فایل صدا سالم نرسید';
+
+  @override
+  String get voiceOnDevice => 'صدای گنج، روی همین دستگاه';
+
+  @override
+  String voicePreparing(String done, String total) {
+    return 'آماده‌سازی… $done از $total بیت';
+  }
+
+  @override
+  String get voicePrepareFailed => 'خواندن ممکن نشد';
+
+  @override
+  String voiceConsentBody(String size) {
+    return 'این صدا شعر را روی همین دستگاه می‌خواند. یک بار دریافت می‌شود ($size) و از تنظیمات پاک‌شدنی است.';
+  }
+
+  @override
+  String get voiceConsentBodyChoice =>
+      'این صدا شعر را روی همین دستگاه می‌خواند. یک بار دریافت می‌شود و از تنظیمات پاک‌شدنی است.';
+
+  @override
+  String get voiceGet => 'دریافت';
+
+  @override
+  String voiceRemove(String size) {
+    return 'پاک کردن صدای گنج ($size)';
+  }
+
+  @override
+  String get voiceFast => 'سریع';
+
+  @override
+  String get voiceQuality => 'باکیفیت';
+
+  @override
+  String get voiceFastNote => 'سریع‌تر روی بیشتر گوشی‌ها';
+
+  @override
+  String get voiceQualityNote =>
+      'صدای روشن‌تر؛ گوشی‌های کندتر بیشتر آماده می‌کنند';
+
+  @override
+  String voiceRemoveVariant(String variant, String size) {
+    return 'پاک کردن صدای گنج — $variant ($size)';
+  }
 }

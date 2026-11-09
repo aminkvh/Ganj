@@ -20,6 +20,8 @@ import '../dictionary/dictionary.dart';
 import '../literary/literary_devices.dart';
 import '../player/player_controller.dart';
 import '../player/recitation_list.dart';
+import '../voice/app/voice_providers.dart' show voicePrepareProvider, voicePreparesProvider;
+import '../voice/app/voice_row.dart' show voiceRowVisible;
 import '../settings/settings_controller.dart';
 import 'couplets.dart';
 import 'widgets/beyt_view.dart';
@@ -73,6 +75,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   // Device-only reader data for this poem.
   final _scroll = ScrollController();
   late final UserRepository _user;
+  late final ProviderContainer _container;
   Poem? _poem;
   List<Couplet> _couplets = const [];
 
@@ -89,6 +92,9 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   void initState() {
     super.initState();
     _user = ref.read(userRepositoryProvider);
+    _container = ProviderScope.containerOf(context, listen: false); // ref is unusable in dispose
+    // Opened over another poem (which stays mounted): its machine reading may finish, but must not start playing.
+    ref.read(voicePreparesProvider).quietExcept(widget.id);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -131,6 +137,12 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _saveVisit();
+    // A machine reading still being prepared finishes in the background, but must not start playing now.
+    try {
+      _container.read(voicePrepareProvider(widget.id).notifier).quiet();
+    } catch (_) {
+      // The container is going away too.
+    }
     _findCtrl.dispose();
     _scroll.dispose();
     super.dispose();
@@ -288,8 +300,14 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
     } else if (st.status == PlayerStatus.error) {
       await player.retry();
     }
-    final ok = await player.seekToVOrder(couplet.verses.first.vOrder);
-    if (!ok && mounted) {
+    // The couplet's first line the reading has: the machine reading keys a beyt on its first Persian hemistich.
+    final timeline = ref.read(playerProvider).timeline;
+    final vOrder = couplet.verses
+        .map((v) => v.vOrder)
+        .firstWhere((o) => timeline.startOf(o) != null, orElse: () => couplet.verses.first.vOrder);
+    final ok = await player.seekToVOrder(vOrder);
+    // A live voice stream (or its first load) lacks only beyts not made yet: nothing to tell the reader.
+    if (!ok && mounted && !(player.streaming && ref.read(playerProvider).timeline.end == null)) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.lineNotRead)));
     }
   }
@@ -528,7 +546,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                         children: [Text(p.summary!.text, style: TextStyle(height: 1.9, color: c.muted))],
                       ),
                     ),
-                  if (p.recitations.isNotEmpty) RecitationList(poem: p),
+                  if (p.recitations.isNotEmpty || voiceRowVisible(ref, p)) RecitationList(poem: p),
                 ],
               ),
             ),
