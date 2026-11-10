@@ -19,11 +19,15 @@ class BeytRequest {
 
 /// One beyt read aloud: 16-bit mono PCM.
 class BeytAudio {
-  const BeytAudio(this.index, this.pcm, this.sampleRate);
+  const BeytAudio(this.index, this.pcm, this.sampleRate, {this.onsetsMs = const []});
 
   final int index;
   final Int16List pcm;
   final int sampleRate;
+
+  /// Where each read line after the first starts in [pcm], in ms; empty when not known (one line, or the breaks
+  /// were not found): the beyt is then synced as one.
+  final List<int> onsetsMs;
 }
 
 /// `VoiceEngine.load` failed (files missing, incomplete or damaged): reading cannot work until they are fixed.
@@ -163,7 +167,7 @@ class IsolateVoiceWorker implements VoiceWorker {
     switch (m[1] as String) {
       case 'audio':
         final pcm = (m[3] as TransferableTypedData).materialize().asInt16List();
-        c.add(BeytAudio(m[2] as int, pcm, m[4] as int));
+        c.add(BeytAudio(m[2] as int, pcm, m[4] as int, onsetsMs: List<int>.from(m[5] as List)));
       case 'readError':
         c.addError(VoiceReadError(m[2] as int, m[3] as String));
       case 'loadError':
@@ -355,6 +359,7 @@ Future<void> _entry(_Init init) async {
           index,
           TransferableTypedData.fromList([_toPcm(line.samples)]),
           line.sampleRate,
+          line.onsetsMs,
         ]);
       } catch (err) {
         init.main.send([gen, 'readError', index, '$err']);

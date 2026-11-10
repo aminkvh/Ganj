@@ -132,7 +132,12 @@ class _VoiceStream {
     final points = <SyncPoint>[];
     var at = Duration.zero;
     for (var i = 0; i < items.length; i++) {
-      if (i < sent) points.add(SyncPoint(vOrders[i], at.inMilliseconds));
+      if (i < sent) {
+        points.add(SyncPoint(vOrders[i], at.inMilliseconds));
+        for (final m in items[i].marks) {
+          points.add(SyncPoint(m.vOrder, (at + m.offset).inMilliseconds));
+        }
+      }
       at += items[i].duration;
     }
     if (ended) points.add(SyncPoint(-2, at.inMilliseconds));

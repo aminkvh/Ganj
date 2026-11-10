@@ -54,6 +54,31 @@ void main() {
     expect(stops.last.frames * 0.01, lessThan(0.32));
   });
 
+  group('hemistichOnsetsMs', () {
+    test('finds where the second hemistich starts in the trimmed audio', () {
+      // sound 1.0, stop 0.6 (cut to 0.3), sound 1.0, break 1.0 (kept), sound 1.0, stop 0.2, sound 1.0
+      final out = trimPauses(_clip([1.0, 0.6, 1.0, 1.0, 1.0, 0.2, 1.0]), 24000, nBreaks: 1);
+      final on = hemistichOnsetsMs(out, 24000, hemistichs: 2);
+      expect(on, hasLength(1));
+      expect(on.single, closeTo(1000 + 300 + 1000 + 1000, 20));
+    });
+
+    test('three lines: two onsets in order', () {
+      final out = trimPauses(_clip([1.0, 0.9, 1.0, 0.5, 1.0, 0.8, 1.0]), 24000, nBreaks: 2);
+      final on = hemistichOnsetsMs(out, 24000, hemistichs: 3);
+      expect(on, hasLength(2));
+      expect(on[0], closeTo(1900, 20));
+      expect(on[1], closeTo(1900 + 1000 + 300 + 1000 + 800, 20));
+    });
+
+    test('none for one hemistich, or when the breaks cannot all be found', () {
+      final out = trimPauses(_clip([1.0, 0.8, 1.0]), 24000, nBreaks: 1);
+      expect(hemistichOnsetsMs(out, 24000, hemistichs: 1), isEmpty);
+      expect(hemistichOnsetsMs(out, 24000, hemistichs: 3), isEmpty, reason: 'one stop for two breaks');
+      expect(hemistichOnsetsMs(_clip([2.0]), 24000, hemistichs: 2), isEmpty, reason: 'no stop at all');
+    });
+  });
+
   test('percentile matches numpy linear interpolation', () {
     expect(percentile([1, 2, 3, 4], 50), 2.5);
     expect(percentile([10, 0, 5], 95), closeTo(9.5, 1e-12));

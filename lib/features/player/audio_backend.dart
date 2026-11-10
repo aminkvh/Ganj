@@ -18,10 +18,13 @@ class MediaInfo {
 
 /// One entry of a playlist (one beyt of the machine reading) with its known length.
 class PlaylistItem {
-  const PlaylistItem({required this.uri, required this.duration});
+  const PlaylistItem({required this.uri, required this.duration, this.marks = const []});
 
   final Uri uri;
   final Duration duration;
+
+  /// The beyt's later hemistichs: where each starts within this item, so the reading is followed line by line.
+  final List<({int vOrder, Duration offset})> marks;
 }
 
 /// Maps between the global timeline of a playlist and (item, offset-in-item) pairs.

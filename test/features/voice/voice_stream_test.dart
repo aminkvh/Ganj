@@ -93,10 +93,10 @@ class _ManualWorker implements VoiceWorker {
 
   /// [wallS] seconds pass, then the next asked beyt arrives with [audioS] seconds of audio. The stream closes
   /// after the last one. Completes once the prepare has had the beyt (so each arrival sees its own time).
-  Future<void> emit({required double wallS, double audioS = 1}) async {
+  Future<void> emit({required double wallS, double audioS = 1, List<int> onsetsMs = const []}) async {
     clock.advance(wallS);
     final out = _out!;
-    out.add(BeytAudio(_asked[_next++].index, FakeVoiceWorker.tone(seconds: audioS), 24000));
+    out.add(BeytAudio(_asked[_next++].index, FakeVoiceWorker.tone(seconds: audioS), 24000, onsetsMs: onsetsMs));
     if (_next == _asked.length) unawaited(out.close());
     await Future<void>.delayed(Duration.zero);
   }
@@ -169,9 +169,16 @@ class _GatedCache extends VoiceCache {
   }
 
   @override
-  Future<File> join(int poemId, String key, List<int> vOrders, {int sampleRate = 24000, bool keepItems = false}) {
+  Future<File> join(
+    int poemId,
+    String key,
+    List<int> vOrders, {
+    List<List<int>> later = const [],
+    int sampleRate = 24000,
+    bool keepItems = false,
+  }) {
     if (failJoin) return Future.error(const FileSystemException('disk full'));
-    return super.join(poemId, key, vOrders, sampleRate: sampleRate, keepItems: keepItems);
+    return super.join(poemId, key, vOrders, later: later, sampleRate: sampleRate, keepItems: keepItems);
   }
 
   @override
@@ -306,6 +313,27 @@ void main() {
       expect(c.read(voicePrepareProvider(1)), isA<Prepared>());
       expect(backend.loaded, isEmpty); // never swapped to the joined file mid-play
       expect(c.read(playerProvider.notifier).streaming, isTrue);
+    });
+
+    test('highlights per hemistich: stream and joined sync carry each beyt\'s second line', () async {
+      await prefs.setDouble(_t8Key, 0.5);
+      final c = container();
+      final f = c.read(voicePrepareProvider(1).notifier).start(_poem(1, n: 3), playWhenDone: true, artist: _artist);
+      await _until(() => worker.open, what: 'the read');
+      await worker.emit(wallS: 3, onsetsMs: [400]);
+      await _until(() => backend.playlists.isNotEmpty, what: 'the stream');
+      expect(c.read(playerProvider).timeline.startOf(2), const Duration(milliseconds: 400));
+      await worker.emit(wallS: 0.5, onsetsMs: [500]);
+      await worker.emit(wallS: 0.5); // no onsets found: per beyt only
+      await f;
+      final tl = c.read(playerProvider).timeline;
+      expect(tl.startOf(3), gapped);
+      expect(tl.startOf(4), gapped + const Duration(milliseconds: 500));
+      expect(tl.startOf(6), isNull);
+      expect(tl.vOrderAt(const Duration(milliseconds: 300)), 1);
+      expect(tl.vOrderAt(const Duration(milliseconds: 600)), 2);
+      final sync = (c.read(voicePrepareProvider(1)) as Prepared).sync;
+      expect([for (final s in sync) (s.vOrder, s.ms)], [(1, 0), (2, 400), (3, 1250), (4, 1750), (5, 2500), (-2, 3500)]);
     });
 
     test('without a remembered speed it waits for beyt 1, then streams and remembers', () async {

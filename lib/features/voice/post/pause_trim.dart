@@ -106,6 +106,19 @@ Float32List trimPauses(Float32List y, int sr, {required int nBreaks, double capS
   return clamped;
 }
 
+/// Where each hemistich after the first starts in a finished (trimmed) line [y], in ms: the end of each hemistich
+/// break, in time order. The trim left the breaks at full length and capped every other stop, so they are still the
+/// longest stops. Empty for one hemistich, or when fewer stops than breaks are found (the caller then syncs the
+/// line as one).
+List<int> hemistichOnsetsMs(Float32List y, int sr, {required int hemistichs, double capS = 0.30}) {
+  final nBreaks = hemistichs - 1;
+  if (nBreaks <= 0) return const [];
+  final plan = planTrim(y, sr, nBreaks: nBreaks, capS: capS);
+  if (plan.breaks.length != nBreaks) return const [];
+  final ends = [for (final i in plan.breaks) plan.stops[i].to]..sort();
+  return [for (final f in ends) (f * _frameS * 1000).round()];
+}
+
 /// [y] with each (start s, end s) silent run longer than [cap] cut to [cap] from its middle, crossfaded over [fade]
 /// s. Exactly ganj_voice.pausetrim.shorten_runs (the crossfade is computed in float64 and rounded to float32 once).
 Float32List shortenRuns(

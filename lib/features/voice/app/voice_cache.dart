@@ -25,14 +25,19 @@ bool _readable(Verse v) {
 }
 
 /// The couplets the voice reads: beyts, bands and single lines; empty and non-Persian hemistichs are dropped
-/// and a couplet left with no lines is skipped. `vOrder` is the first kept verse's vOrder.
-List<({BeytRequest req, int vOrder})> beytsOf(Poem p) {
-  final out = <({BeytRequest req, int vOrder})>[];
+/// and a couplet left with no lines is skipped. `vOrder` is the first kept verse's vOrder, `later` those of the
+/// kept verses after it (each synced at its own onset when the audio's breaks are found).
+List<({BeytRequest req, int vOrder, List<int> later})> beytsOf(Poem p) {
+  final out = <({BeytRequest req, int vOrder, List<int> later})>[];
   for (final c in groupCouplets(p.verses)) {
     if (c.kind != CoupletKind.beyt && c.kind != CoupletKind.band && c.kind != CoupletKind.single) continue;
     final kept = c.verses.where(_readable).toList();
     if (kept.isEmpty) continue;
-    out.add((req: BeytRequest(out.length, [for (final v in kept) v.text]), vOrder: kept.first.vOrder));
+    out.add((
+      req: BeytRequest(out.length, [for (final v in kept) v.text]),
+      vOrder: kept.first.vOrder,
+      later: [for (final v in kept.skip(1)) v.vOrder],
+    ));
   }
   return out;
 }
@@ -103,6 +108,15 @@ class VoiceCache {
   Future<void> putBeyt(int poemId, String key, BeytAudio a) async {
     final dir = _parts(poemId, key);
     await dir.create(recursive: true);
+    // Onsets first: a part counts once its PCM is there, and an earlier take's onsets must not outlive it.
+    final on = _onsets(poemId, key, a.index);
+    if (a.onsetsMs.isEmpty) {
+      if (on.existsSync()) await _tryDelete(on);
+    } else {
+      final t = File('${on.path}.tmp');
+      await t.writeAsString(jsonEncode(a.onsetsMs), flush: true);
+      await t.rename(on.path);
+    }
     final f = File('${dir.path}$_sep${a.index}.pcm');
     final tmp = File('${f.path}.tmp');
     await tmp.writeAsBytes(a.pcm.buffer.asUint8List(a.pcm.offsetInBytes, a.pcm.lengthInBytes), flush: true);
@@ -110,6 +124,17 @@ class VoiceCache {
     // A stream item made from an earlier take of this beyt must never play again.
     final item = File('${dir.path}$_sep${a.index}.wav');
     if (item.existsSync()) await _tryDelete(item);
+  }
+
+  File _onsets(int poemId, String key, int index) => File('${_parts(poemId, key).path}$_sep$index.onsets.json');
+
+  /// Where each read line after the first starts in beyt [index]'s part, in ms (empty when not known).
+  List<int> partOnsetsMs(int poemId, String key, int index) {
+    try {
+      return List<int>.from(jsonDecode(_onsets(poemId, key, index).readAsStringSync()) as List);
+    } catch (_) {
+      return const []; // none, or damaged: the beyt is synced as one
+    }
   }
 
   File _stepsFile(int poemId, String key) => File('${_parts(poemId, key).path}${_sep}steps');
@@ -190,10 +215,18 @@ class VoiceCache {
   static int _tmpSeq = 0;
 
   /// Joins the parts (index order, [kBeytGap] between) into one WAV and writes the sync file.
-  /// [vOrders] holds one vOrder per beyt, by index. Deletes the parts afterwards and evicts old readings. With
-  /// [keepItems] (a streamed reading still playing), only the PCM parts go: the [beytItem] WAVs stay for the
-  /// player, and eviction removes the folder later.
-  Future<File> join(int poemId, String key, List<int> vOrders, {int sampleRate = 24000, bool keepItems = false}) async {
+  /// [vOrders] holds one vOrder per beyt, by index; [later] (when given) the vOrders of each beyt's later read lines,
+  /// placed at the part's onsets when there is one per line (else the beyt is synced as one). Deletes the parts
+  /// afterwards and evicts old readings. With [keepItems] (a streamed reading still playing), only the PCM parts
+  /// go: the [beytItem] WAVs stay for the player, and eviction removes the folder later.
+  Future<File> join(
+    int poemId,
+    String key,
+    List<int> vOrders, {
+    List<List<int>> later = const [],
+    int sampleRate = 24000,
+    bool keepItems = false,
+  }) async {
     final dir = _parts(poemId, key);
     final gap = (sampleRate * kBeytGap.inMilliseconds / 1000).round();
     // Sizes first (from the parts' lengths), so the header can be written before any sample: the audio is
@@ -204,7 +237,15 @@ class VoiceCache {
     for (var i = 0; i < parts.length; i++) {
       final samples = await parts[i].length() ~/ 2;
       if (i > 0) total += gap;
-      sync.add(SyncPoint(vOrders[i], (total * 1000 / sampleRate).round()));
+      final startMs = (total * 1000 / sampleRate).round();
+      sync.add(SyncPoint(vOrders[i], startMs));
+      final more = i < later.length ? later[i] : const <int>[];
+      final onsets = more.isEmpty ? const <int>[] : partOnsetsMs(poemId, key, i);
+      if (onsets.length == more.length) {
+        for (var j = 0; j < more.length; j++) {
+          sync.add(SyncPoint(more[j], startMs + onsets[j]));
+        }
+      }
       total += samples;
     }
     sync.add(SyncPoint(-2, (total * 1000 / sampleRate).round()));
@@ -233,8 +274,10 @@ class VoiceCache {
     await tmpWav.rename(wav.path);
     if (keepItems) {
       // The steps file stays with the beyt items; with no parts left it is never taken as a resume's steps.
-      for (final p in parts) {
-        await _tryDelete(p);
+      for (var i = 0; i < parts.length; i++) {
+        await _tryDelete(parts[i]);
+        final on = _onsets(poemId, key, i);
+        if (on.existsSync()) await _tryDelete(on);
       }
     } else if (dir.existsSync()) {
       await dir.delete(recursive: true);

@@ -724,9 +724,14 @@ class PrepareController extends Notifier<PrepareStatus> {
     Future<PlaylistItem> itemOf(int i) async {
       final f = await cache.beytItem(p.id, key, i, last: i == n - 1);
       final samples = (await f.length() - 44) ~/ 2;
+      final later = beyts[i].later, onsets = cache.partOnsetsMs(p.id, key, i);
       return PlaylistItem(
         uri: Uri.file(f.path),
         duration: Duration(microseconds: (samples * 1e6 / 24000).round()),
+        // One onset per later line, or the beyt is followed as one (as in [VoiceCache.join]).
+        marks: onsets.length == later.length && later.isNotEmpty
+            ? [for (var j = 0; j < later.length; j++) (vOrder: later[j], offset: Duration(milliseconds: onsets[j]))]
+            : const [],
       );
     }
 
@@ -851,7 +856,13 @@ class PrepareController extends Notifier<PrepareStatus> {
     final File wav;
     try {
       // A stream may still be playing the beyt items: they stay until eviction.
-      final joining = cache.join(p.id, key, [for (final b in beyts) b.vOrder], keepItems: token != null);
+      final joining = cache.join(
+        p.id,
+        key,
+        [for (final b in beyts) b.vOrder],
+        later: [for (final b in beyts) b.later],
+        keepItems: token != null,
+      );
       run.track(joining);
       wav = await joining;
     } catch (_) {

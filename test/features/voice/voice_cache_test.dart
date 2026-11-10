@@ -35,6 +35,66 @@ void main() {
   });
   tearDown(() => dir.deleteSync(recursive: true));
 
+  group('per hemistich', () {
+    test('beytsOf lists the vOrders of each beyt\'s later read lines', () {
+      final r = beytsOf(_mixed());
+      expect(
+        [for (final e in r) e.later],
+        [
+          [2],
+          [4],
+          <int>[],
+        ],
+      );
+      // An Arabic first hemistich is not read: the beyt is keyed on its second and has no later line.
+      final molamma = beytsOf(
+        _poem([
+          Verse(vOrder: 1, position: VersePosition.right, text: 'a', coupletIndex: 0, languageId: 2),
+          Verse(vOrder: 2, position: VersePosition.left, text: 'b', coupletIndex: 0, languageId: 1),
+        ]),
+      );
+      expect(molamma.single.vOrder, 2);
+      expect(molamma.single.later, isEmpty);
+    });
+
+    test('join puts each later hemistich at its onset; a part without onsets stays per beyt', () async {
+      await cache.putBeyt(1, 'k', BeytAudio(0, Int16List(12000), 24000, onsetsMs: const [200]));
+      await cache.putBeyt(1, 'k', _audio(1));
+      await cache.putBeyt(1, 'k', BeytAudio(2, Int16List(12000), 24000, onsetsMs: const [300]));
+      expect(cache.partOnsetsMs(1, 'k', 0), [200]);
+      expect(cache.partOnsetsMs(1, 'k', 1), isEmpty);
+      await cache.join(
+        1,
+        'k',
+        [1, 3, 5],
+        later: const [
+          [2],
+          [4],
+          [6],
+        ],
+      );
+      final sync = cache.syncOf(1, 'k');
+      expect([for (final s in sync) (s.vOrder, s.ms)], [(1, 0), (2, 200), (3, 750), (5, 1500), (6, 1800), (-2, 2000)]);
+    });
+
+    test('onsets that do not match the later lines are dropped; a re-read part loses its old onsets', () async {
+      await cache.putBeyt(1, 'k', BeytAudio(0, Int16List(12000), 24000, onsetsMs: const [100, 200]));
+      await cache.putBeyt(1, 'k', BeytAudio(1, Int16List(12000), 24000, onsetsMs: const [100]));
+      await cache.putBeyt(1, 'k', _audio(1)); // re-read without onsets
+      expect(cache.partOnsetsMs(1, 'k', 1), isEmpty);
+      await cache.join(
+        1,
+        'k',
+        [1, 3],
+        later: const [
+          [2],
+          [4],
+        ],
+      );
+      expect([for (final s in cache.syncOf(1, 'k')) s.vOrder], [1, 3, -2]);
+    });
+  });
+
   test('beytsOf skips prose and empty lines', () {
     final p = _mixed();
     final r = beytsOf(p);
@@ -121,11 +181,14 @@ void main() {
       ],
     ]);
     expect(voiceCanRead(molamma), isTrue);
-    expect([for (final x in beytsOf(molamma)) x.req.lines], [
-      ['fa0'],
-      ['fa1'],
-      ['fa2'],
-    ]);
+    expect(
+      [for (final x in beytsOf(molamma)) x.req.lines],
+      [
+        ['fa0'],
+        ['fa1'],
+        ['fa2'],
+      ],
+    );
     final a = _poem([
       lv(1, VersePosition.right, 'a', 0, 1),
       lv(2, VersePosition.left, 'b', 0, 1),

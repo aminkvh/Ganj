@@ -94,6 +94,33 @@ void main() {
     expect(st().currentVOrder, 2);
   });
 
+  test('an item\'s hemistich marks put its later lines on the timeline', () async {
+    tok = ctrl().startVoiceStream(
+      _poem(),
+      artist: _artist,
+      first: PlaylistItem(
+        uri: Uri.parse('file:///b0.wav'),
+        duration: _ms(1000),
+        marks: [(vOrder: 2, offset: _ms(400))],
+      ),
+      firstVOrder: 1,
+    );
+    await tok.started;
+    expect(st().timeline.vOrderAt(_ms(300)), 1);
+    expect(st().timeline.vOrderAt(_ms(500)), 2);
+    await add(
+      PlaylistItem(uri: Uri.parse('file:///b1.wav'), duration: _ms(1000), marks: [(vOrder: 4, offset: _ms(600))]),
+      3,
+    );
+    expect(st().timeline.startOf(3), _ms(1000));
+    expect(st().timeline.startOf(4), _ms(1600));
+    expect(st().timeline.vOrderAt(_ms(1500)), 3);
+    expect(st().timeline.vOrderAt(_ms(1700)), 4);
+    backend.emitItemPosition(0, _ms(450));
+    await _tick();
+    expect(st().currentVOrder, 2);
+  });
+
   test('canStream follows the backend', () {
     backend.playlistSupported = false;
     expect(ctrl().canStream, isFalse);

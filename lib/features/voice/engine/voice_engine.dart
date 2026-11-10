@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
 
 import '../post/clean.dart';
+import '../post/pause_trim.dart';
 import '../reading/reading.dart';
 import 'g2p_onnx.dart';
 import 'ort.dart';
@@ -47,11 +48,15 @@ class VoiceFiles {
 
 /// One beyt (or prose sentence) read aloud: 24 kHz mono samples and the phonemes the voice read.
 class VoiceLine {
-  const VoiceLine(this.samples, this.sampleRate, this.target);
+  const VoiceLine(this.samples, this.sampleRate, this.target, {this.onsetsMs = const []});
 
   final Float32List samples;
   final int sampleRate;
   final String target;
+
+  /// Where each hemistich after the first starts in [samples], in ms (see [hemistichOnsetsMs]); empty when the
+  /// line is one hemistich or its breaks were not found.
+  final List<int> onsetsMs;
 
   Duration get duration => Duration(microseconds: samples.length * 1000000 ~/ sampleRate);
 }
@@ -125,10 +130,14 @@ class VoiceEngine {
       ),
     );
     if (audio.samples.isEmpty) throw StateError('the voice produced no audio for "$t"');
+    final hemistichs = lines.where((l) => l.trim().isNotEmpty).length;
+    final out = finish(audio.samples, audio.sampleRate, hemistichs: hemistichs);
     return VoiceLine(
-      finish(audio.samples, audio.sampleRate, hemistichs: lines.where((l) => l.trim().isNotEmpty).length),
+      out,
       audio.sampleRate,
       t,
+      // Found again in the trimmed audio, so the times are those the listener hears.
+      onsetsMs: hemistichOnsetsMs(out, audio.sampleRate, hemistichs: hemistichs, capS: settings.pauseCapS),
     );
   }
 
