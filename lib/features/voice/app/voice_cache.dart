@@ -8,6 +8,7 @@ import '../../../data/api/dto/poem.dart';
 import '../../../data/api/dto/recitation.dart';
 import '../../poem/couplets.dart';
 import 'language_guess.dart';
+import '../reading/g2p.dart' show kReadingRulesVersion;
 import 'voice_worker.dart';
 import 'wav.dart';
 
@@ -73,6 +74,8 @@ class VoiceCache {
 
   String keyOf(Poem p, String voiceVersion) {
     final b = StringBuffer()
+      ..write(kReadingRulesVersion)
+      ..write('\u0000')
       ..write(voiceVersion)
       ..write('\u0000')
       ..write(p.metre ?? '');

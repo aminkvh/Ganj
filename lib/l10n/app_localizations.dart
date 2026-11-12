@@ -1915,6 +1915,12 @@ abstract class L10n {
   /// **'صدای گنج، روی همین دستگاه'**
   String get voiceOnDevice;
 
+  /// No description provided for @voiceImproved.
+  ///
+  /// In fa, this message translates to:
+  /// **'خوانش ماشینی بهتر شد'**
+  String get voiceImproved;
+
   /// No description provided for @voicePreparing.
   ///
   /// In fa, this message translates to:

@@ -487,6 +487,249 @@ void main() {
     });
   });
 
+  group('stage and swap', () {
+    late Map<String, Uint8List> next;
+    late VoiceManifest v2;
+    late _Source src;
+    late Directory old;
+
+    VoiceFile vf(Map<String, Uint8List> m, String n) =>
+        VoiceFile(name: n, size: m[n]!.length, sha256: sha256.convert(m[n]!).toString());
+
+    Directory dirOf(String name) => Directory('${root.path}/$name');
+    String last(Directory d) => d.uri.pathSegments.where((s) => s.isNotEmpty).last;
+
+    setUp(() async {
+      // v1 is installed as v1-quality (written by hand, as install leaves it).
+      old = dirOf('v1-quality')..createSync(recursive: true);
+      for (final e in files.entries) {
+        File('${old.path}/${e.key}').writeAsBytesSync(e.value);
+      }
+      File('${old.path}/installed.json').writeAsStringSync(
+        jsonEncode({
+          'version': 'v1',
+          'variant': 'quality',
+          'installedAt': '2026-11-01T10:00:00.000Z',
+          'files': [for (final f in manifest.files) f.toJson()],
+        }),
+      );
+      // v2 differs only in c.bin.
+      next = {...files, 'c.bin': _bytes(9, 2600)};
+      v2 = VoiceManifest(version: 'v2', files: [for (final n in next.keys) vf(next, n)]);
+      src = _Source(next, jsonEncode(v2.toJson()));
+      await src.start();
+    });
+
+    tearDown(() => src.server.close(force: true));
+
+    VoiceDownloader one() => VoiceDownloader(dio: Dio(), root: root, sources: {'x': src.base});
+
+    test('stage downloads only files whose sha256 changed', () async {
+      final d = one();
+      expect(await d.stage(v2, variant: 'quality', from: old), 'x');
+      expect(src.hits, {'c.bin': 1});
+      final dir = dirOf('v2-quality');
+      expect(File('${dir.path}/c.bin').readAsBytesSync(), next['c.bin']);
+      expect(File('${dir.path}/a.bin').existsSync(), isFalse);
+      expect(File('${dir.path}/installed.json').existsSync(), isFalse);
+      expect(d.staged(v2, variant: 'quality', from: old), isTrue);
+    });
+
+    test('a staged folder is not an installed voice', () async {
+      final d = one();
+      expect(d.staged(v2, variant: 'quality', from: old), isFalse);
+      await d.stage(v2, variant: 'quality', from: old);
+      expect(last(installedDir(root)!), 'v1-quality');
+    });
+
+    test('staged is false when a staged file is gone or an unchanged file is missing everywhere', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      File('${old.path}/a.bin').deleteSync();
+      expect(d.staged(v2, variant: 'quality', from: old), isFalse);
+      File('${old.path}/a.bin').writeAsBytesSync(files['a.bin']!);
+      expect(d.staged(v2, variant: 'quality', from: old), isTrue);
+      File('${dirOf('v2-quality').path}/c.bin').deleteSync();
+      expect(d.staged(v2, variant: 'quality', from: old), isFalse);
+    });
+
+    test('finishSwap moves unchanged files and installs', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      for (final e in next.entries) {
+        expect(File('${dir.path}/${e.key}').readAsBytesSync(), e.value, reason: e.key);
+      }
+      expect(File('${old.path}/a.bin').existsSync(), isFalse);
+      expect(File('${old.path}/b.bin').existsSync(), isFalse);
+      // The changed file of the old voice is left for the cleanup that deletes the old folder.
+      expect(File('${old.path}/c.bin').existsSync(), isTrue);
+      final j = jsonDecode(File('${dir.path}/installed.json').readAsStringSync()) as Map<String, dynamic>;
+      expect(j['version'], 'v2');
+      expect(j['variant'], 'quality');
+      expect(DateTime.tryParse(j['installedAt'] as String), isNotNull);
+      expect(j['files'], [for (final f in v2.files) f.toJson()]);
+      expect(File('${dir.path}/installed.json.tmp').existsSync(), isFalse);
+      expect(File('${dir.path}/swapping.json').existsSync(), isFalse);
+      expect(File('${dir.path}/staged.json').existsSync(), isFalse);
+      expect(File('${old.path}/installed.json').existsSync(), isFalse);
+      expect(File('${old.path}/installed.json.old').existsSync(), isTrue);
+      expect(last(installedDir(root)!), 'v2-quality');
+      expect(src.hits, {'c.bin': 1});
+      // A rerun reads the retired record and still succeeds.
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      expect(last(installedDir(root)!), 'v2-quality');
+    });
+
+    test('finishSwap wins over an old installedAt in the future (clock behind)', () async {
+      final rec = File('${old.path}/installed.json');
+      final j = jsonDecode(rec.readAsStringSync()) as Map<String, dynamic>;
+      rec.writeAsStringSync(jsonEncode({...j, 'installedAt': '2099-01-01T00:00:00.000Z'}));
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      final n = jsonDecode(File('${dir.path}/installed.json').readAsStringSync()) as Map<String, dynamic>;
+      expect(DateTime.parse(n['installedAt'] as String).isAfter(DateTime.utc(2099)), isTrue);
+      expect(last(installedDir(root)!), 'v2-quality');
+    });
+
+    test('finishSwap resumes from a leftover .swap copy', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      File('${dir.path}/b.bin.swap').writeAsBytesSync(files['b.bin']!.sublist(0, 100));
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      expect(File('${dir.path}/b.bin').readAsBytesSync(), files['b.bin']);
+      expect(File('${dir.path}/b.bin.swap').existsSync(), isFalse);
+      expect(last(installedDir(root)!), 'v2-quality');
+    });
+
+    void markSwapping() {
+      File('${dirOf('v2-quality').path}/swapping.json').writeAsStringSync(
+        jsonEncode({
+          'from': 'v1-quality',
+          'version': 'v2',
+          'variant': 'quality',
+          'files': [for (final f in v2.files) f.toJson()],
+          'move': ['a.bin', 'b.bin'],
+        }),
+      );
+    }
+
+    test('resumeInterruptedSwap finishes a swap killed half way', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      markSwapping();
+      File('${old.path}/a.bin').renameSync('${dir.path}/a.bin');
+      // As killed: the old folder is still installed, but missing a.bin.
+      expect(last(installedDir(root)!), 'v1-quality');
+      resumeInterruptedSwap(root);
+      expect(last(installedDir(root)!), 'v2-quality');
+      for (final e in next.entries) {
+        expect(File('${dir.path}/${e.key}').readAsBytesSync(), e.value, reason: e.key);
+      }
+      final j = jsonDecode(File('${dir.path}/installed.json').readAsStringSync()) as Map<String, dynamic>;
+      expect(j['version'], 'v2');
+      expect(j['variant'], 'quality');
+      expect(j['files'], [for (final f in v2.files) f.toJson()]);
+      expect(File('${dir.path}/swapping.json').existsSync(), isFalse);
+      expect(File('${old.path}/installed.json.old').existsSync(), isTrue);
+    });
+
+    test('resumeInterruptedSwap leaves things as they are when a file is missing', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      markSwapping();
+      File('${old.path}/b.bin').deleteSync();
+      resumeInterruptedSwap(root);
+      expect(File('${dir.path}/installed.json').existsSync(), isFalse);
+      expect(File('${dir.path}/swapping.json').existsSync(), isTrue);
+      expect(File('${old.path}/installed.json').existsSync(), isTrue);
+      expect(File('${old.path}/a.bin').existsSync(), isTrue);
+      expect(File('${dir.path}/a.bin').existsSync(), isFalse);
+      expect(last(installedDir(root)!), 'v1-quality');
+    });
+
+    test('finishSwap resumes after a partial move', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      File('${old.path}/a.bin').renameSync('${dir.path}/a.bin');
+      // A copy killed half way: wrong size in the new folder, the original still in the old one.
+      File('${dir.path}/b.bin').writeAsBytesSync(files['b.bin']!.sublist(0, 100));
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      for (final e in next.entries) {
+        expect(File('${dir.path}/${e.key}').readAsBytesSync(), e.value, reason: e.key);
+      }
+      expect(last(installedDir(root)!), 'v2-quality');
+    });
+
+    test('finishSwap fails cleanly when a file is missing everywhere', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      File('${old.path}/b.bin').deleteSync();
+      await expectLater(
+        d.finishSwap(v2, variant: 'quality', from: old),
+        throwsA(isA<VoiceDownloadError>().having((e) => e.kind, 'kind', VoiceDownloadFailure.checksum)),
+      );
+      final dir = dirOf('v2-quality');
+      expect(File('${dir.path}/installed.json').existsSync(), isFalse);
+      // Nothing was moved out of the old voice, which stays installed.
+      expect(File('${old.path}/a.bin').existsSync(), isTrue);
+      expect(last(installedDir(root)!), 'v1-quality');
+    });
+
+    test('finishSwap that fails half way puts the moved files back: the old voice stays whole and installed', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      final dir = dirOf('v2-quality');
+      // A folder in b.bin's place: a.bin moves, then b.bin can be neither renamed nor copied in.
+      final block = Directory('${dir.path}/b.bin')..createSync();
+      await expectLater(d.finishSwap(v2, variant: 'quality', from: old), throwsA(isA<FileSystemException>()));
+      for (final e in files.entries) {
+        expect(File('${old.path}/${e.key}').readAsBytesSync(), e.value, reason: e.key);
+      }
+      expect(File('${dir.path}/a.bin').existsSync(), isFalse);
+      expect(File('${dir.path}/b.bin.swap').existsSync(), isFalse);
+      expect(File('${dir.path}/swapping.json').existsSync(), isFalse, reason: 'nothing finishes it at the next start');
+      expect(File('${dir.path}/installed.json').existsSync(), isFalse);
+      expect(File('${old.path}/installed.json').existsSync(), isTrue);
+      expect(last(installedDir(root)!), 'v1-quality');
+      resumeInterruptedSwap(root);
+      expect(File('${old.path}/a.bin').existsSync(), isTrue);
+      expect(d.staged(v2, variant: 'quality', from: old), isTrue);
+      // Once the obstacle is gone, a later swap succeeds.
+      block.deleteSync();
+      await d.finishSwap(v2, variant: 'quality', from: old);
+      for (final e in next.entries) {
+        expect(File('${dir.path}/${e.key}').readAsBytesSync(), e.value, reason: e.key);
+      }
+      expect(last(installedDir(root)!), 'v2-quality');
+    });
+
+    test('changedBytes counts the bytes a stage would download', () {
+      final d = one();
+      expect(d.changedBytes(v2, variant: 'quality', from: old), next['c.bin']!.length);
+      expect(d.changedBytes(manifest, variant: 'quality', from: old), 0);
+    });
+
+    test('finishSwap fails when a staged file is gone', () async {
+      final d = one();
+      await d.stage(v2, variant: 'quality', from: old);
+      File('${dirOf('v2-quality').path}/c.bin').deleteSync();
+      await expectLater(
+        d.finishSwap(v2, variant: 'quality', from: old),
+        throwsA(isA<VoiceDownloadError>().having((e) => e.kind, 'kind', VoiceDownloadFailure.checksum)),
+      );
+      expect(File('${old.path}/a.bin').existsSync(), isTrue);
+      expect(last(installedDir(root)!), 'v1-quality');
+    });
+  });
+
   test('all sources offline throws offline', () async {
     final d = VoiceDownloader(
       dio: Dio(),

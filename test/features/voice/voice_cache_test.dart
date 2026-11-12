@@ -212,6 +212,12 @@ void main() {
     expect(cache.keyOf(changed, 'v1'), isNot(base));
   });
 
+  test('keyOf changes with the reading rules version', () {
+    final p = _poem([_v(1, VersePosition.right, 'a1', 0), _v(2, VersePosition.left, 'a2', 0)]);
+    // The key the 1.6.0 code (before the rules version was mixed in) made for this poem.
+    expect(cache.keyOf(p, 'v1'), isNot('e09fd968722fc406'));
+  });
+
   test('join makes one wav with gaps and sync', () async {
     for (var i = 0; i < 3; i++) {
       await cache.putBeyt(1, 'k', _audio(i));

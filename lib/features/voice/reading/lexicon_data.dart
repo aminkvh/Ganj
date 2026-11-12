@@ -54,6 +54,10 @@ const Map<String, String> ganjLexicon = {
   'ور': 'v/r',
   'گرت': 'g/r/t',
   'بر': 'b/r',
+  'زقبول': 'zeq/bul',
+  'بدروی': 'bedr/vi',
+  'ببد': 'bebod',
+  'مُحدَث': 'mohd/s',
 };
 
 /// The fixed list of metres (metres.json); the index is the metre's token (U+E010 + index).

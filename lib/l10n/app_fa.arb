@@ -351,6 +351,7 @@
   "voiceFailedSpace": "جای کافی روی دستگاه نیست",
   "voiceFailedChecksum": "فایل صدا سالم نرسید",
   "voiceOnDevice": "صدای گنج، روی همین دستگاه",
+  "voiceImproved": "خوانش ماشینی بهتر شد",
   "voicePreparing": "آماده‌سازی… {done} از {total} بیت",
   "@voicePreparing": {"placeholders": {"done": {"type": "String"}, "total": {"type": "String"}}},
   "voicePrepareFailed": "خواندن ممکن نشد",

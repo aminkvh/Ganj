@@ -66,3 +66,5 @@ beta/
 /phone20k_b8/
 /litert20k.zip
 /litert20k/
+.env
+__pycache__/

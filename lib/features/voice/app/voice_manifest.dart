@@ -92,11 +92,23 @@ class VoiceManifest {
   };
 }
 
-/// Base URLs (ending in '/'); `voice.json` and every file sit under a base.
-/// Placeholders until the voice is published.
+/// Negative, zero or positive as version [a] is older than, the same as, or newer than [b]: numeric per dot part,
+/// so 1.10.0 is newer than 1.9.0. A missing part, or one that is not a number, counts as 0.
+int compareVersions(String a, String b) {
+  final x = a.split('.'), y = b.split('.');
+  for (var i = 0; i < x.length || i < y.length; i++) {
+    final p = i < x.length ? int.tryParse(x[i]) ?? 0 : 0;
+    final q = i < y.length ? int.tryParse(y[i]) ?? 0 : 0;
+    if (p != q) return p.compareTo(q);
+  }
+  return 0;
+}
+
+/// Base URLs (ending in '/'); `voice.json` and every file sit under a base. Named by the voice version; the
+/// first published ones (`ganj-zip-distill/`, `phone-v1`, voice 1.1.0) stay as they are for Ganj 1.6.0.
 const kVoiceSources = <String, String>{
-  'hf': 'https://huggingface.co/aminkvh/Ganj_voice/resolve/main/ganj-zip-distill/',
-  'github': 'https://github.com/aminkvh/Ganj_voice/releases/download/phone-v1/',
+  'hf': 'https://huggingface.co/aminkvh/Ganj_voice/resolve/main/ganj-zip-distill-1.2.0/',
+  'github': 'https://github.com/aminkvh/Ganj_voice/releases/download/phone-1.2.0/',
 };
 
 const String _devBase = String.fromEnvironment('GANJ_VOICE_BASE');

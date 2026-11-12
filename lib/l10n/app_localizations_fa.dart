@@ -1004,6 +1004,9 @@ class L10nFa extends L10n {
   String get voiceOnDevice => 'صدای گنج، روی همین دستگاه';
 
   @override
+  String get voiceImproved => 'خوانش ماشینی بهتر شد';
+
+  @override
   String voicePreparing(String done, String total) {
     return 'آماده‌سازی… $done از $total بیت';
   }

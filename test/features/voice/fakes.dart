@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math' as math;
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
+import 'package:ganj/features/voice/app/voice_downloader.dart';
+import 'package:ganj/features/voice/app/voice_manifest.dart';
 import 'package:ganj/features/voice/app/voice_worker.dart';
 
 /// A [VoiceWorker] for tests: no isolate, no model. Each beyt becomes 0.5 s of a 440 Hz tone at 24 kHz.
@@ -79,4 +83,37 @@ class FakeVoiceWorker implements VoiceWorker {
     disposed = true;
     _generation++;
   }
+}
+
+/// A [VoiceDownloader] that never reaches a source: every fetch fails as offline. Containers that start readings use
+/// it, so the background upgrade check never goes to the network.
+class OfflineVoiceDownloader implements VoiceDownloader {
+  @override
+  Future<VoiceManifest> fetchManifest() async => throw const VoiceDownloadError(VoiceDownloadFailure.offline);
+
+  @override
+  Future<String> install(
+    VoiceManifest m, {
+    required String variant,
+    void Function(int got, int total)? onProgress,
+    CancelToken? cancel,
+  }) async => throw const VoiceDownloadError(VoiceDownloadFailure.offline);
+
+  @override
+  Future<String> stage(
+    VoiceManifest m, {
+    required String variant,
+    required Directory from,
+    CancelToken? cancel,
+  }) async => throw const VoiceDownloadError(VoiceDownloadFailure.offline);
+
+  @override
+  bool staged(VoiceManifest m, {required String variant, required Directory from}) => false;
+
+  @override
+  int changedBytes(VoiceManifest m, {required String variant, required Directory from}) => 0;
+
+  @override
+  Future<void> finishSwap(VoiceManifest m, {required String variant, required Directory from}) async =>
+      throw const VoiceDownloadError(VoiceDownloadFailure.checksum);
 }

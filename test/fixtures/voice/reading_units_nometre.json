@@ -13,7 +13,7 @@
 "call": "top1",
 "input": "فحشی ز لبت تو وقف ما کن",
 "out": [
-"foh$i ze l/b/t to v/qfe1 ma kon"
+"f/h$i ze l/b/t to v/qfe1 ma kon"
 ]
 },
 {
@@ -24,10 +24,10 @@
 ]
 }
 ],
-"label": "fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
+"label": "f/hši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
 "error": null,
-"reading": "fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
-"target": " fohši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon"
+"reading": "f/hši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon",
+"target": " f/hši ze l/b/t to v/qfe1 ma kond/rde1 dele1 bid/va d/va kon"
 },
 {
 "key": "100389-1",
@@ -42,7 +42,7 @@
 "call": "top1",
 "input": "گفتی شب وصل ریزمت خون",
 "out": [
-"gofti $/be1 v/sle1 rizm/t xun"
+"gofti $/be1 v/sl rizm/t xun"
 ]
 },
 {
@@ -53,10 +53,10 @@
 ]
 }
 ],
-"label": "gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
+"label": "gofti š/be1 v/sl rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
 "error": null,
-"reading": "gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
-"target": " gofti š/be1 v/sle1 rizm/t xunbaz @ay be @/hde1 xod v/fa kon"
+"reading": "gofti š/be1 v/sl rizm/t xunbaz @ay be @/hde1 xod v/fa kon",
+"target": " gofti š/be1 v/sl rizm/t xunbaz @ay be @/hde1 xod v/fa kon"
 },
 {
 "key": "100997-0",
@@ -80,13 +80,13 @@
 "n": 8,
 "out": [
 "@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/st",
+"@/z saye ye1 to s/bz s/re1 xake1 m/n b/s @/st",
+"@/z sayeye1 ye1 to s/bz s/re1 xake1 m/n b/s @/st",
 "@/z sayeye1 to s/bze1 s/re1 xake1 m/n b/s @/st",
-"@/z sayeye1 to s/bz serre1 xake1 m/n b/s @/st",
-"@/z sayeye1 to s/bze1 s/r xake1 m/n b/s @/st",
-"@/z sayeye1 to s/bze1 serre1 xake1 m/n b/s @/st",
 "@/z sayeye1 to s/bz s/r xake1 m/n b/s @/st",
-"@/z sayeye1 to s/bz sore1 xake1 m/n b/s @/st",
-"@/z sayeye1 to s/bz sere1 xake1 m/n b/s @/st"
+"@/z sayeye1 ye to s/bz s/re1 xake1 m/n b/s @/st",
+"@/z saye ye1 to s/bz s/r xake1 m/n b/s @/st",
+"@/z saye ye1 to s/bze1 s/re1 xake1 m/n b/s @/st"
 ]
 },
 {
@@ -97,10 +97,10 @@
 ]
 }
 ],
-"label": "@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st",
+"label": "@/z saye ye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st",
 "error": null,
-"reading": "@/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st",
-"target": " @/z sayeye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte s/rve1 c/m/n b/s @/st"
+"reading": "@/z saye ye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte  s/rve1 c/m/n b/s @/st",
+"target": " @/z saye ye1 to s/bz s/re1 xake1 m/n b/s @/stlohe1 m/zar faxte  s/rve1 c/m/n b/s @/st"
 },
 {
 "key": "100997-1",
@@ -115,7 +115,7 @@
 "call": "top1",
 "input": "شیرین ز غیرت شکر این پیچ و تاب چیست",
 "out": [
-"$irin ze qeyr/te1 $okre1 @in pic o tab cist"
+"$irin ze qeyr/t $okre1 @in pic o tab cist"
 ]
 },
 {
@@ -126,10 +126,10 @@
 ]
 }
 ],
-"label": "širin ze qeyr/te1 šokre1 @in pic o tab cistp/rviz gu m/baš tora kuhk/n b/s @/st",
+"label": "širin ze qeyr/t šokre1 @in pic o tab cistp/rviz gu m/baš tora kuhk/n b/s @/st",
 "error": null,
-"reading": "širin  ze qeyr/te1 šokre1 @in pic o tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st",
-"target": " širin  ze qeyr/te1 šokre1 @in pico tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st"
+"reading": "širin  ze qeyr/t šokre1 @in pic o tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st",
+"target": " širin  ze qeyr/t šokre1 @in pico tab cistp/rviz gu m/baš  tora kuhk/n b/s @/st"
 },
 {
 "key": "102857-0",
@@ -231,7 +231,7 @@
 "call": "top1",
 "input": "جهان‌گشای و عدو بند و ملک‌بخش و ستان",
 "out": [
-"j/hango$ay o @/du b/nd o m/l/kb/x$ o setan"
+"j/hango$ay o @/du b/nd o molkb/x$ o setan"
 ]
 },
 {
@@ -242,10 +242,10 @@
 ]
 }
 ],
-"label": "j/hangošay o @/du b/nd o m/l/kb/xš o setanke d/r hemay/te1 sahebdelan besyari",
+"label": "j/hangošay o @/du b/nd o molkb/xš o setanke d/r hemay/te1 sahebdelan besyari",
 "error": null,
-"reading": "j/hangošay o @/du b/nd o m/l/kb/xš o setanke d/r hemay/te1 sahebdelan besyari",
-"target": " j/hangošayo @/du b/ndo m/l/kb/xšo setanke d/r hemay/te1 sahebdelan besyari"
+"reading": "j/hangošay o @/du b/nd o molkb/xš o setanke d/r hemay/te1 sahebdelan besyari",
+"target": " j/hangošayo @/du b/ndo molkb/xšo setanke d/r hemay/te1 sahebdelan besyari"
 },
 {
 "key": "10602-0",
@@ -289,7 +289,7 @@
 "call": "top1",
 "input": "آن روی نمایدش که در طینت اوست",
 "out": [
-"@an ruy n/may/d/$ ke d/r tin/te1 @ust"
+"@an ruy n/may/de$ ke d/r tin/te1 @ust"
 ]
 },
 {
@@ -299,19 +299,19 @@
 "out": [
 "@ayineye1 k/j j/mal n/n/may/d rast",
 "@ayineye1 k/j j/mal n/nmay/d rast",
-"@ayine k/j j/mal n/n/may/d rast",
-"@ayineye1 k/j j/mal n/nomay/d rast",
-"@ayine k/j j/mal n/nmay/d rast",
 "@ayineye1 k/je1 j/mal n/n/may/d rast",
-"@ayineye1 k/j j/mal n/namay/d rast",
-"@ayineye1 k/je1 j/mal n/nmay/d rast"
+"@ayineye1 k/j j/mal n/nomay/d rast",
+"@ayine k/j j/mal n/n/may/d rast",
+"@ayineye1 k/j j/mal n/nemay/d rast",
+"@ayineye1 k/j jemal n/n/may/d rast",
+"@a@ineye1 k/j j/mal n/n/may/d rast"
 ]
 }
 ],
-"label": "@an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
+"label": "@an ruy n/may/deš ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
 "error": null,
-"reading": "@an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
-"target": " @an ruy n/may/d/š ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast"
+"reading": "@an ruy n/may/deš ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast",
+"target": " @an ruy n/may/deš ke d/r tin/te1 @ust@ayineye1 k/j j/mal n/n/may/d rast"
 },
 {
 "key": "10608-0",
@@ -326,7 +326,7 @@
 "call": "top1",
 "input": "دادار که بر ما در قسمت بگشاد",
 "out": [
-"dadar ke b/r ma d/r qesm/t bog$ad"
+"dadar ke b/r ma d/re1 qesm/t bego$ad"
 ]
 },
 {
@@ -337,10 +337,10 @@
 ]
 }
 ],
-"label": "dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had",
+"label": "dadar ke b/r ma d/re1 qesm/t begošadbonyade1 j/han cenanke bayest n/had",
 "error": null,
-"reading": "dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had",
-"target": " dadar ke b/r ma d/r qesm/t bogšadbonyade1 j/han cenanke bayest n/had"
+"reading": "dadar ke b/r ma d/re1 qesm/t begošadbonyade1 j/han cenanke bayest n/had",
+"target": " dadar ke b/r ma d/re1 qesm/t begošadbonyade1 j/han cenanke bayest n/had"
 },
 {
 "key": "10608-1",
@@ -391,14 +391,14 @@
 "call": "top1",
 "input": "کز شاخ بدی کس نخورد بار بهی",
 "out": [
-"k/z $axe1 b/di k/s n/xor/d bar behi"
+"k/z $axe1 b/di k/s n/xor/d bare1 behi"
 ]
 }
 ],
-"label": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi",
+"label": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bare1 behi",
 "error": null,
-"reading": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi",
-"target": " ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bar behi"
+"reading": "ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bare1 behi",
+"target": " ta del be qorure1 n/fse1 šeytan n/d/hik/z šaxe1 b/di k/s n/xor/d bare1 behi"
 },
 {
 "key": "10655-1",
@@ -418,24 +418,24 @@
 "@ella ke z/xireye1 qiyam/t ben/hi",
 "@/la ke z/xireye1 qiyam/t benehi",
 "@ella ke z/xire qiyam/t benehi",
+"@ella ke z/xireye1 qiyam/t benhi",
 "@/la ke z/xireye1 qiyam/t ben/hi",
-"@/lla ke z/xireye1 qiyam/t benehi",
 "@ella ke z/xire qiyam/t ben/hi",
-"@/la ke z/xire qiyam/t benehi"
+"@ella ke z/xireye1 qiyam/t bonhi"
 ]
 },
 {
 "call": "top1",
 "input": "ور نه نشود اسه پر از دیگ تهی",
 "out": [
-"v/r n/ n/$/v/d @/st por @/z deyge1 tohi"
+"v/r n/ n/$/v/d @/se por @/z dig tohi"
 ]
 }
 ],
-"label": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi",
+"label": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/se por @/z dig tohi",
 "error": null,
-"reading": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi",
-"target": " @ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/st por @/z deyge1 tohi"
+"reading": "@ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/se por @/z dig tohi",
+"target": " @ella ke z/xireye1 qiyam/t benehiv/r n/ n/š/v/d @/se por @/z dig tohi"
 },
 {
 "key": "108512-0",
@@ -486,14 +486,14 @@
 "call": "top1",
 "input": "که من بالای هفت اختر مکان و آشیان دارم",
 "out": [
-"ke m/n balaye1 h/ft @/xt/r m/kan o @a$iyan dar/m"
+"ke m/n balaye1 h/ft @/xt/re1 m/kan o @a$iyan dar/m"
 ]
 }
 ],
-"label": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kan o @ašiyan dar/m",
+"label": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/re1 m/kan o @ašiyan dar/m",
 "error": null,
-"reading": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kan o @ašiyan dar/m",
-"target": " @/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/r m/kano @ašiyan dar/m"
+"reading": "@/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/re1 m/kan o @ašiyan dar/m",
+"target": " @/g/r balaye1 h/r duni nešin/m t/@ne k/mt/r z/nke m/n balaye1 h/ft @/xt/re1 m/kano @ašiyan dar/m"
 },
 {
 "key": "112235-0",
@@ -512,11 +512,11 @@
 "c/nd xun/$ r/v/d @/z dideye1 n/mnak borun",
 "c/nd xun/$ r/v/d @/z dide n/mnak borun",
 "c/nd xune$ r/v/d @/z dideye1 n/mnak borun",
-"c/nd xun/$ r/v/d @/z dideye1 n/mnak berun",
 "c/nd xune$ r/v/d @/z dide n/mnak borun",
-"c/nd xun/$ r/v/d @/z dide n/mnak berun",
-"c/nd xun/$ rud @/z dideye1 n/mnak borun",
-"c/nd xun/$ r/v/d @/z dide n/mnake1 borun"
+"c/nd xun/$ r/v/d @/z dideye1 n/mnake1 borun",
+"c/nd xun/$ r/v/d @/z dide n/mnake1 borun",
+"c/nd xun/$ r/v/d @/z dide n/menak borun",
+"c/nd xun/$ rud @/z dideye1 n/mnak borun"
 ]
 },
 {
@@ -545,22 +545,7 @@
 "call": "top1",
 "input": "تو در اندیشه ی خون من و غافل که به حشر",
 "out": [
-"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r"
-]
-},
-{
-"call": "nbest",
-"input": "تو در اندیشه ی خون من و غافل که به حشر",
-"n": 8,
-"out": [
-"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
-"to d/r @/ndi$eye1 xun m/n o qafel ke be h/$r",
-"to d/re1 @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
-"to dor @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
-"to d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$/r",
-"tu d/r @/ndi$eye1 xune1 m/n o qafel ke be h/$r",
-"to d/r @/ndi$e ye xune1 m/n o qafel ke be h/$r",
-"to d/r @/ndisheye1 xune1 m/n o qafel ke be h/$r"
+"to d/r @/ndi$e ye1 xune1 m/n o qafel ke be h/$r"
 ]
 },
 {
@@ -571,10 +556,10 @@
 ]
 }
 ],
-"label": "to d/r @/ndiše ye xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
+"label": "to d/r @/ndiše ye1 xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
 "error": null,
-"reading": "to d/r @/ndiše ye xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
-"target": " to d/r @/ndiše ye xune1 m/no qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun"
+"reading": "to d/r @/ndiše ye1 xune1 m/n o qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun",
+"target": " to d/r @/ndiše ye1 xune1 m/no qafel ke be h/šrb/r n/yay/d t/ne1 s/d pare @/m @/z xak borun"
 },
 {
 "key": "114291-0",
@@ -618,7 +603,7 @@
 "call": "top1",
 "input": "گر روم کمتر بکویش به که در کویش مرا",
 "out": [
-"g/r r/v/m k/mt/r bekuy/$ beh ke d/r kuye$ m/ra"
+"g/r r/v/m k/mt/r bekuye$ beh ke d/r kuye$ m/ra"
 ]
 },
 {
@@ -629,10 +614,10 @@
 ]
 }
 ],
-"label": "g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
+"label": "g/r r/v/m k/mt/r bekuyeš beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
 "error": null,
-"reading": "g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
-"target": " g/r r/v/m k/mt/r bekuy/š beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist"
+"reading": "g/r r/v/m k/mt/r bekuyeš beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist",
+"target": " g/r r/v/m k/mt/r bekuyeš beh ke d/r kuyeš m/raba@ese1 xari bejoz @am/d šod besyar nist"
 },
 {
 "key": "114331-0",
@@ -676,7 +661,7 @@
 "call": "top1",
 "input": "وارسته زنام و فارغ از ننگ",
 "out": [
-"var/ste z/nam o fareq @/z n/ng"
+"var/ste zenam o fareq @/z n/ng"
 ]
 },
 {
@@ -687,10 +672,10 @@
 ]
 }
 ],
-"label": "var/ste z/nam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
+"label": "var/ste zenam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
 "error": null,
-"reading": "var/ste z/nam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
-"target": " var/ste z/namo fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd"
+"reading": "var/ste zenam o fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd",
+"target": " var/ste zenamo fareq @/z n/ng@/z dame1 b/la r/mide @ey c/nd"
 },
 {
 "key": "115048-0",
@@ -712,14 +697,14 @@
 "call": "top1",
 "input": "و آوازه جورت به جهان در برود",
 "out": [
-"o @avazeye1 jor/t be j/han d/r ber/v/d"
+"o @avaze jor/t be j/han d/r ber/v/d"
 ]
 }
 ],
-"label": "m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d",
+"label": "m/gzar ke sud/m be ziyan d/r ber/v/do @avaze jor/t be j/han d/r ber/v/d",
 "error": null,
-"reading": "m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d",
-"target": " m/gzar ke sud/m be ziyan d/r ber/v/do @avazeye1 jor/t be j/han d/r ber/v/d"
+"reading": "m/gzar ke sud/m be ziyan d/r ber/v/do @avaze jor/t be j/han d/r ber/v/d",
+"target": " m/gzar ke sud/m be ziyan d/r ber/v/do @avaze jor/t be j/han d/r ber/v/d"
 },
 {
 "key": "115048-1",
@@ -734,7 +719,7 @@
 "call": "top1",
 "input": "جانا ز پی بوس و کناری که نبود",
 "out": [
-"jana ze pey bus o kenari ke n/bov/d"
+"jana ze peye1 bus o kenari ke n/bud"
 ]
 },
 {
@@ -745,10 +730,10 @@
 ]
 }
 ],
-"label": "jana ze pey bus o kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d",
+"label": "jana ze peye1 bus o kenari ke n/budšay/d ke dele1 m/n be miyan d/r ber/v/d",
 "error": null,
-"reading": "jana ze pey bus o kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d",
-"target": " jana ze pey buso kenari ke n/bov/dšay/d ke dele1 m/n be miyan d/r ber/v/d"
+"reading": "jana ze peye1 bus o kenari ke n/budšay/d ke dele1 m/n be miyan d/r ber/v/d",
+"target": " jana ze peye1 buso kenari ke n/budšay/d ke dele1 m/n be miyan d/r ber/v/d"
 },
 {
 "key": "115164-0",
@@ -792,21 +777,21 @@
 "call": "top1",
 "input": "هر جا که آیم و روم از ناز ساز وصل",
 "out": [
-"h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sl"
+"h/r ja ke @ay/m o rum @/z naz saze1 v/sl"
 ]
 },
 {
 "call": "top1",
 "input": "جز لشکر فراق توام پیش و پس مباد",
 "out": [
-"joz l/$k/re1 feraq to@/m pi$ o p/s m/bad"
+"joz l/$k/re1 feraqe1 to@/m pi$ o p/s m/bad"
 ]
 }
 ],
-"label": "h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m piš o p/s m/bad",
+"label": "h/r ja ke @ay/m o rum @/z naz saze1 v/sljoz l/šk/re1 feraqe1 to@/m piš o p/s m/bad",
 "error": null,
-"reading": "h/r ja ke @ay/m o r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m piš o p/s m/bad",
-"target": " h/r ja ke @ay/mo r/v/m @/z naze1 saze1 v/sljoz l/šk/re1 feraq to@/m pišo p/s m/bad"
+"reading": "h/r ja ke @ay/m o rum @/z naz saze1 v/sljoz l/šk/re1 feraqe1 to@/m piš o p/s m/bad",
+"target": " h/r ja ke @ay/mo rum @/z naz saze1 v/sljoz l/šk/re1 feraqe1 to@/m pišo p/s m/bad"
 },
 {
 "key": "116931-0",
@@ -850,7 +835,7 @@
 "call": "top1",
 "input": "مدام مطرب بزم غم توام من مست",
 "out": [
-"modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/st"
+"modam motrebe1 b/zme1 q/me1 to@/m m/n m/st"
 ]
 },
 {
@@ -861,10 +846,10 @@
 ]
 }
 ],
-"label": "modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
+"label": "modam motrebe1 b/zme1 q/me1 to@/m m/n m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
 "error": null,
-"reading": "modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
-"target": " modam motrebe1 b/zme1 q/me1 to@/m m/ne1 m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas"
+"reading": "modam motrebe1 b/zme1 q/me1 to@/m m/n m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas",
+"target": " modam motrebe1 b/zme1 q/me1 to@/m m/n m/stsorude1 naleye1 m/n k/rde c/rx ra r/qqas"
 },
 {
 "key": "117410-0",
@@ -973,29 +958,14 @@
 "call": "top1",
 "input": "آن ناله ی بلبلی و من بوی گلی",
 "out": [
-"@an naleye1 bolboli o m/n buye1 goli"
-]
-},
-{
-"call": "nbest",
-"input": "آن ناله ی بلبلی و من بوی گلی",
-"n": 8,
-"out": [
-"@an naleye1 bolboli o m/n buye1 goli",
-"@an nale ye bolboli o m/n buye1 goli",
-"@an naleye1 bolboli o men buye1 goli",
-"@an naleye1 bolboli o m/n buye1 geli",
-"@an naleye1 bolboli o m/ne1 buye1 goli",
-"@an naleye1 bolboli o mon buye1 goli",
-"@an nale y bolboli o m/n buye1 goli",
-"@an nale bolboli o m/n buye1 goli"
+"@an nale ye1 bolboli o m/n buye1 goli"
 ]
 }
 ],
-"label": "raze1 m/n o yare1 gol kon/d con šen/vim@an nale ye bolboli o m/n buye1 goli",
+"label": "raze1 m/n o yar gol kon/d con šen/vim@an nale ye1 bolboli o m/n buye1 goli",
 "error": null,
-"reading": "raze1 m/n o yare1  gol kon/d  con šen/vim@an nale ye bolboli o  m/n buye1 goli",
-"target": " raze1 m/no yare1  gol kon/d  con šen/vim@an nale ye bolboli o  m/n buye1 goli"
+"reading": "raze1 m/n o yar  gol kon/d  con šen/vim@an nale ye1 bolboli o  m/n buye1 goli",
+"target": " raze1 m/no yar  gol kon/d  con šen/vim@an nale ye1 bolboli o  m/n buye1 goli"
 },
 {
 "key": "1221-0",
@@ -1017,14 +987,14 @@
 "call": "top1",
 "input": "باغ طربت به سبزه آراسته گیر",
 "out": [
-"baqe1 torb/t be s/bze @araste gir"
+"baqe1 t/r/b/t be s/bze @araste gir"
 ]
 }
 ],
-"label": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir",
+"label": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 t/r/b/t be s/bze @araste gir",
 "error": null,
-"reading": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir",
-"target": " @ey del h/me @/sbabe1 j/han xaste girbaqe1 torb/t be s/bze @araste gir"
+"reading": "@ey del h/me @/sbabe1 j/han xaste girbaqe1 t/r/b/t be s/bze @araste gir",
+"target": " @ey del h/me @/sbabe1 j/han xaste girbaqe1 t/r/b/t be s/bze @araste gir"
 },
 {
 "key": "1221-1",
@@ -1068,7 +1038,7 @@
 "call": "top1",
 "input": "آورد به ما بلبل عاشق خبر گل",
 "out": [
-"@av/rd be ma bolbole1 @a$eq x/b/re1 gol"
+"@av/rd be ma bolbole1 @a$eq x/b/r gol"
 ]
 },
 {
@@ -1079,10 +1049,10 @@
 ]
 }
 ],
-"label": "@av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
+"label": "@av/rd be ma bolbole1 @ašeq x/b/r goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
 "error": null,
-"reading": "@av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
-"target": " @av/rd be ma bolbole1 @ašeq x/b/re1 goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol"
+"reading": "@av/rd be ma bolbole1 @ašeq x/b/r goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol",
+"target": " @av/rd be ma bolbole1 @ašeq x/b/r goljoz bolbole1 gole1 dust ke dan/d x/t/re1 gol"
 },
 {
 "key": "122632-1",
@@ -1097,7 +1067,7 @@
 "call": "top1",
 "input": "هر چند که در گل همه خوبی و خوشی هست",
 "out": [
-"h/r c/nd ke d/r gol h/me xubi o xo$i h/st"
+"h/r c/nd ke d/r gel h/me xubi o xo$i h/st"
 ]
 },
 {
@@ -1108,10 +1078,10 @@
 ]
 }
 ],
-"label": "h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
+"label": "h/r c/nd ke d/r gel h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
 "error": null,
-"reading": "h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
-"target": " h/r c/nd ke d/r gol h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol"
+"reading": "h/r c/nd ke d/r gel h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol",
+"target": " h/r c/nd ke d/r gel h/me xubi o xoši h/stbi mol n/ h/mana ke xoš @ay/d x/b/re1 gol"
 },
 {
 "key": "127230-0",
@@ -1155,21 +1125,21 @@
 "call": "top1",
 "input": "صبحدم در پای گل چون با حریفان می خورید",
 "out": [
-"sobh/d/m d/r paye1 gol con ba h/rifan mey xorid"
+"sobh/d/m d/r paye1 gol con ba h/rifan mi xorid"
 ]
 },
 {
 "call": "top1",
 "input": "بلبلان را بر فراز نارون یاد آورید",
 "out": [
-"bolbolan ra b/r f/raze1 narun yad @av/rid"
+"bolbolan ra b/r f/raze1 narv/n yad @av/rid"
 ]
 }
 ],
-"label": "sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid",
+"label": "sobh/d/m d/r paye1 gol con ba h/rifan mi xoridbolbolan ra b/r f/raze1 narv/n yad @av/rid",
 "error": null,
-"reading": "sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid",
-"target": " sobh/d/m d/r paye1 gol con ba h/rifan mey xoridbolbolan ra b/r f/raze1 narun yad @av/rid"
+"reading": "sobh/d/m d/r paye1 gol con ba h/rifan mi xoridbolbolan ra b/r f/raze1 narv/n yad @av/rid",
+"target": " sobh/d/m d/r paye1 gol con ba h/rifan mi xoridbolbolan ra b/r f/raze1 narv/n yad @av/rid"
 },
 {
 "key": "130009-0",
@@ -1184,21 +1154,21 @@
 "call": "top1",
 "input": "با گیوه تنک رفتن راه چه سود",
 "out": [
-"ba giveye1 t/n/k r/ft/n rah ce sud"
+"ba giveye1 tonok r/ft/n rah ce sud"
 ]
 },
 {
 "call": "top1",
 "input": "بیرخت نفیس جستن جاه چه سود",
 "out": [
-"bir/xt n/fis jost/ne1 jah ce sud"
+"bir/xt n/fis jost/n jah ce sud"
 ]
 }
 ],
-"label": "ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud",
+"label": "ba giveye1 tonok r/ft/n rah ce sudbir/xt n/fis jost/n jah ce sud",
 "error": null,
-"reading": "ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud",
-"target": " ba giveye1 t/n/k r/ft/n rah ce sudbir/xt n/fis jost/ne1 jah ce sud"
+"reading": "ba giveye1 tonok r/ft/n rah ce sudbir/xt n/fis jost/n jah ce sud",
+"target": " ba giveye1 tonok r/ft/n rah ce sudbir/xt n/fis jost/n jah ce sud"
 },
 {
 "key": "130009-1",
@@ -1271,7 +1241,7 @@
 "call": "top1",
 "input": "حسنی که بود در عشق بی‌طعنه و بهتان نیست",
 "out": [
-"hosni ke bov/d d/r @e$q bit/@ne o bohtan nist"
+"hosni ke bud d/r @e$q bit/@ne o bohtan nist"
 ]
 },
 {
@@ -1282,10 +1252,10 @@
 ]
 }
 ],
-"label": "hosni ke bov/d d/r @ešq bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
+"label": "hosni ke bud d/r @ešq bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
 "error": null,
-"reading": "hosni ke bov/d d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
-"target": " hosni ke bov/d d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha"
+"reading": "hosni ke bud d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha",
+"target": " hosni ke bud d/r @ešq  bit/@ne o bohtan nistxoš @anke n/y/ndiš/d @/z t/@ne o bohtanha"
 },
 {
 "key": "134499-0",
@@ -1329,21 +1299,21 @@
 "call": "top1",
 "input": "غنچه گل را نسیم صبح عریان کرد و رفت",
 "out": [
-"qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ft"
+"qonceye1 gol ra n/sime1 sobh @oryan k/rd o r/ft"
 ]
 },
 {
 "call": "top1",
 "input": "ساده لوحی بین که فکر پیرهن دارم هنوز",
 "out": [
-"sadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz"
+"sade lohi bin ke fekre1 pirh/n dar/m h/nuz"
 ]
 }
 ],
-"label": "qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz",
+"label": "qonceye1 gol ra n/sime1 sobh @oryan k/rd o r/ftsade lohi bin ke fekre1 pirh/n dar/m h/nuz",
 "error": null,
-"reading": "qonceye1 gol ra n/sime1 sobhe1 @oryan k/rd o r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz",
-"target": " qonceye1 gol ra n/sime1 sobhe1 @oryan k/rdo r/ftsadeye1 lohi bin ke fekre1 pirh/n dar/m h/nuz"
+"reading": "qonceye1 gol ra n/sime1 sobh @oryan k/rd o r/ftsade lohi bin ke fekre1 pirh/n dar/m h/nuz",
+"target": " qonceye1 gol ra n/sime1 sobh @oryan k/rdo r/ftsade lohi bin ke fekre1 pirh/n dar/m h/nuz"
 },
 {
 "key": "136268-0",
@@ -1360,27 +1330,27 @@
 "n": 8,
 "out": [
 "b/r yade1 q/de1 @u co mey tab mid/h/nd",
+"b/r yade1 q/de1 @u co mi tab mid/h/nd",
 "b/r yade1 q/dde1 @u co mey tab mid/h/nd",
+"b/r yade1 q/dde1 @u co mi tab mid/h/nd",
 "b/r yade1 q/de1 @u co meye1 tab mid/h/nd",
 "b/r yade1 q/dde1 @u co meye1 tab mid/h/nd",
-"b/r yade1 q/de1 @u co mi tab mid/h/nd",
-"b/r yade1 q/d @u co mey tab mid/h/nd",
-"b/r yade1 q/dde1 @u co mi tab mid/h/nd",
-"b/r yade1 q/de1 @u co mitab mid/h/nd"
+"b/r yade1 q/de1 @u co mey tab mideh/nd",
+"b/r yad q/de1 @u co mey tab mid/h/nd"
 ]
 },
 {
 "call": "top1",
 "input": "در دل هزار نخل بلا آب می‌دهند",
 "out": [
-"d/r dele1 hezar n/xle1 b/la @ab mid/h/nd"
+"d/r del hezar n/xle1 b/la @ab mid/h/nd"
 ]
 }
 ],
-"label": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd",
+"label": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r del hezar n/xle1 b/la @ab mid/h/nd",
 "error": null,
-"reading": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd",
-"target": " b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r dele1 hezar n/xle1 b/la @ab mid/h/nd"
+"reading": "b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r del hezar n/xle1 b/la @ab mid/h/nd",
+"target": " b/r yade1 q/dde1 @u co mey tab mid/h/ndd/r del hezar n/xle1 b/la @ab mid/h/nd"
 },
 {
 "key": "136268-1",
@@ -1402,14 +1372,14 @@
 "call": "top1",
 "input": "از گریه رخت خواب به سیلاب می‌دهند",
 "out": [
-"@/z gerye rox/te1 xab be seylab mid/h/nd"
+"@/z gerye rox/t xab be seylab mid/h/nd"
 ]
 }
 ],
-"label": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd",
+"label": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/t xab be seylab mid/h/nd",
 "error": null,
-"reading": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd",
-"target": " h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/te1 xab be seylab mid/h/nd"
+"reading": "h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/t xab be seylab mid/h/nd",
+"target": " h/r š/b hezar dide be nofane1 @ešqe1 to@/z gerye rox/t xab be seylab mid/h/nd"
 },
 {
 "key": "13698-0",
@@ -1424,7 +1394,7 @@
 "call": "top1",
 "input": "می‌خواست فلک که تلخ کامم بکشد",
 "out": [
-"mixast f/l/k ke t/lxe1 kam/m beko$/d"
+"mixast f/l/k ke t/lx kam/m beko$/d"
 ]
 },
 {
@@ -1433,20 +1403,20 @@
 "n": 8,
 "out": [
 "nak/rde meye1 t/r/b be jam/m beko$/d",
-"nak/rdeye1 mey t/r/b be jam/m beko$/d",
 "nak/rde meye1 t/r/b be jam/m beke$/d",
-"nak/rdeye1 mey t/r/b be jam/m beke$/d",
 "nak/rde mey t/r/b be jam/m beko$/d",
-"nak/rdeye1 meye1 t/r/b be jam/m beko$/d",
+"nak/rde mey t/r/b be jam/m beke$/d",
+"nak/rde mi t/r/b be jam/m beko$/d",
 "nak/rde meye1 t/r/b be jamem beko$/d",
-"nak/rdeye1 mey t/r/b be jamem beko$/d"
+"nak/rdeye1 mey t/r/b be jam/m beko$/d",
+"nak/rde mi t/r/b be jam/m beke$/d"
 ]
 }
 ],
-"label": "mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m bekoš/d",
+"label": "mixast f/l/k ke t/lx kam/m bekoš/dnak/rde meye1 t/r/b be jam/m bekoš/d",
 "error": null,
-"reading": "mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d",
-"target": " mixast f/l/k ke t/lxe1 kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d"
+"reading": "mixast f/l/k ke t/lx kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d",
+"target": " mixast f/l/k ke t/lx kam/m bekoš/dnak/rde meye1 t/r/b be jam/m  bekoš/d"
 },
 {
 "key": "13698-1",
@@ -1462,14 +1432,14 @@
 "input": "بسپرد به شحنه فراق تو مرا",
 "n": 8,
 "out": [
-"bespor/d be $/hneye1 feraqe1 to m/ra",
-"bespor/d be $/hneye1 f/raqe1 to m/ra",
+"bespord be $/hne feraqe1 to m/ra",
 "bespor/d be $/hne feraqe1 to m/ra",
-"bespor/d be $ehneye1 feraqe1 to m/ra",
+"bespord be $/hne f/raqe1 to m/ra",
 "bespor/d be $/hne f/raqe1 to m/ra",
-"besepor/d be $/hneye1 feraqe1 to m/ra",
-"bespor/d be $ehne feraqe1 to m/ra",
-"bespor/d be $ehneye1 f/raqe1 to m/ra"
+"bespord be $/hne feraq to m/ra",
+"bespor/d be $/hne feraq to m/ra",
+"bespor/d be $/hneye1 feraq to m/ra",
+"bespord be $/hneye1 feraq to m/ra"
 ]
 },
 {
@@ -1479,19 +1449,19 @@
 "out": [
 "ta @u be @oqub/t t/mam/m beko$/d",
 "ta @u be @oqub/t t/mam/m beke$/d",
-"ta @u be @oqub/te1 t/mam/m beko$/d",
-"ta @u be @oqub/te1 t/mam/m beke$/d",
+"ta @u be @oqub/t t/mam/m boko$/d",
+"ta @u be @oqub/t t/mam/m bok$/d",
 "ta @u be @oqub/t t/mamom beko$/d",
-"ta @u be @oqub/te1 t/mamom beko$/d",
+"ta @u be @oqub/te1 t/mam/m beko$/d",
 "ta @u be @oqub/t t/mamom beke$/d",
-"ta @u be @oqub/t t/mam/m boko$/d"
+"ta @u be @oqub/t t/mamom boko$/d"
 ]
 }
 ],
-"label": "bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
+"label": "bespord be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
 "error": null,
-"reading": "bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
-"target": " bespor/d be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d"
+"reading": "bespord be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d",
+"target": " bespord be š/hneye1 feraqe1 to m/rata @u be @oqub/te1 t/mam/m bekoš/d"
 },
 {
 "key": "138614-0",
@@ -1513,7 +1483,7 @@
 "call": "top1",
 "input": "و اندیشه رفتن بسلامت نتوان کرد",
 "out": [
-"v/ @/ndi$eye1 r/ft/n bes/lam/t n/t/van k/rd"
+"o @/ndi$eye1 r/ft/n bes/lam/t n/t/van k/rd"
 ]
 }
 ],
@@ -1542,14 +1512,14 @@
 "call": "top1",
 "input": "تشبیه بسرو آن قد و قامت نتوان کرد",
 "out": [
-"t/$bih bes/rv @an q/d o qam/t n/t/van k/rd"
+"t/$bih bes/rv @an q/d o qam/t n/tvan k/rd"
 ]
 }
 ],
-"label": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/t/van k/rd",
+"label": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/tvan k/rd",
 "error": null,
-"reading": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/t/van k/rd",
-"target": " nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/do qam/t n/t/van k/rd"
+"reading": "nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/d o qam/t n/tvan k/rd",
+"target": " nesb/t beme @an t/l@/te1 niku n/t/van dadt/šbih bes/rv @an q/do qam/t n/tvan k/rd"
 },
 {
 "key": "140150-0",
@@ -1564,7 +1534,7 @@
 "call": "top1",
 "input": "نسیم صبح توئی جبرئیل نام از من",
 "out": [
-"n/sime1 sobhe1 to@i j/br/@il nam @/z m/n"
+"n/sime1 sobh to@i jebre@il nam @/z m/n"
 ]
 },
 {
@@ -1575,10 +1545,10 @@
 ]
 }
 ],
-"label": "n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
+"label": "n/sime1 sobh to@i jebre@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
 "error": null,
-"reading": "n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
-"target": " n/sime1 sobhe1 to@i j/br/@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n"
+"reading": "n/sime1 sobh to@i jebre@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n",
+"target": " n/sime1 sobh to@i jebre@il nam @/z m/nbe taqe1 @/bruye1 m/rdan resan s/lam @/z m/n"
 },
 {
 "key": "140150-1",
@@ -1600,14 +1570,14 @@
 "call": "top1",
 "input": "ز بعد سجده شکرانه بر تو نام از من",
 "out": [
-"ze bo@de1 s/jdeye1 $okrane b/r to nam @/z m/n"
+"ze b/@de1 s/jdeye1 $okrane b/r to nam @/z m/n"
 ]
 }
 ],
-"label": "@/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to nam @/z m/n",
+"label": "@/g/r ke @/z m/n gomnam nam pors/d yarze b/@de1 s/jdeye1 šokrane b/r to nam @/z m/n",
 "error": null,
-"reading": "@/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to  nam @/z m/n",
-"target": " @/g/r ke @/z m/n gomnam nam pors/d yarze bo@de1 s/jdeye1 šokrane b/r to  nam @/z m/n"
+"reading": "@/g/r ke @/z m/n gomnam nam pors/d yarze b/@de1 s/jdeye1 šokrane b/r to  nam @/z m/n",
+"target": " @/g/r ke @/z m/n gomnam nam pors/d yarze b/@de1 s/jdeye1 šokrane b/r to  nam @/z m/n"
 },
 {
 "key": "142054-0",
@@ -1651,21 +1621,21 @@
 "call": "top1",
 "input": "من خود چه کسم چه آید از خدمت من",
 "out": [
-"m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/n"
+"m/n xod ce k/s/m ce @ay/d @/z xedm/te1 m/n"
 ]
 },
 {
 "call": "top1",
 "input": "تو سوخته در جهان فراوان داری",
 "out": [
-"to suxte d/r j/hane1 f/ravan dari"
+"to suxte d/r j/han f/ravan dari"
 ]
 }
 ],
-"label": "m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari",
+"label": "m/n xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/han f/ravan dari",
 "error": null,
-"reading": "m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari",
-"target": " m/ne1 xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/hane1 f/ravan dari"
+"reading": "m/n xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/han f/ravan dari",
+"target": " m/n xod ce k/s/m ce @ay/d @/z xedm/te1 m/nto suxte d/r j/han f/ravan dari"
 },
 {
 "key": "144620-0",
@@ -1711,13 +1681,13 @@
 "n": 8,
 "out": [
 "jameye1 sahebdelan jomle bepu$id del",
-"jameye1 sahebdelane1 jomle bepu$id del",
-"jameye1 saheb/d/lan jomle bepu$id del",
 "jameye1 $ahebdelan jomle bepu$id del",
-"jameye1 saheb/delan jomle bepu$id del",
+"jameye1 sahebdelane1 jomle bepu$id del",
+"jame sahebdelan jomle bepu$id del",
+"jameye1 sahebdelan jomleye1 bepu$id del",
 "jameye1 sahebd/lan jomle bepu$id del",
-"jameye1 sahebdolan jomle bepu$id del",
-"jameye1 saheb/dlan jomle bepu$id del"
+"jame $ahebdelan jomle bepu$id del",
+"jameye1 sah/bdelan jomle bepu$id del"
 ]
 },
 {
@@ -1748,13 +1718,13 @@
 "n": 8,
 "out": [
 "b/rdar piyale o s/buy @ey deljuy",
-"b/rdar piyale o s/buye1 @ey deljuy",
 "b/rdare1 piyale o s/buy @ey deljuy",
-"b/rdar piyale o s/bvi @ey deljuy",
-"b/rdare1 piyale o s/buye1 @ey deljuy",
-"b/rdare1 piyale o s/bvi @ey deljuy",
+"b/rdar piyale o s/buye1 @ey deljuy",
 "bordare1 piyale o s/buy @ey deljuy",
-"bordare1 piyale o s/buye1 @ey deljuy"
+"b/rdar piyale o s/buy @ey delju",
+"b/rdar piyale o s/bu @ey deljuy",
+"bordar piyale o s/buy @ey deljuy",
+"b/rdar piyale o s/bu@i @ey deljuy"
 ]
 },
 {
@@ -1764,12 +1734,12 @@
 "out": [
 "fareq ben$in to b/r l/be1 s/bze o juy",
 "fareq bene$in to b/r l/be1 s/bze o juy",
+"fareq ben$in to b/r l/b s/bze o juy",
+"fareq bene$in to b/r l/b s/bze o juy",
 "fareq ben$ine1 to b/r l/be1 s/bze o juy",
-"fareq ben$in to b/r l/be1 s/bze o jovi",
-"fareq ben$in to b/r l/be1 s/bzeh o juy",
-"fareq bene$in to b/r l/be1 s/bze o jovi",
-"fareq bene$in to b/r l/be1 s/bzeh o juy",
-"fareq beni$in to b/r l/be1 s/bze o juy"
+"fareq bene$ine1 to b/r l/be1 s/bze o juy",
+"fareq ben$in to b/r l/be1 s/bze o joy",
+"fareq ben$in to b/r l/be1 s/bze o jovi"
 ]
 }
 ],
@@ -1792,28 +1762,28 @@
 "input": "بس شخص عزیز را که چرخ بدخوی",
 "n": 8,
 "out": [
-"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxoy",
 "b/s $/xse1 @/ziz ra ke c/rxe1 b/dxuy",
-"b/s $/xs @/ziz ra ke c/rxe1 b/dxoy",
-"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxi",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxoy",
 "b/s $/xs @/ziz ra ke c/rxe1 b/dxuy",
 "b/s $/xse1 @/ziz ra ke c/rx b/dxuy",
-"b/s $/xse1 @/ziz ra ke c/rx b/dxoy",
-"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxovi"
+"b/s $/xs @/ziz ra ke c/rxe1 b/dxoy",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxoyi",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dxu",
+"b/s $/xse1 @/ziz ra ke c/rxe1 b/dx/y"
 ]
 },
 {
 "call": "top1",
 "input": "صد بار پیاله کرد و صد بار سبوی",
 "out": [
-"s/d bar piyale k/rd o s/d bar s/bvi"
+"s/d bar piyale k/rd o s/d bar s/buy"
 ]
 }
 ],
-"label": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rd o s/d bar s/bvi",
+"label": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxuys/d bar piyale k/rd o s/d bar s/buy",
 "error": null,
-"reading": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rd o s/d bar s/bvi",
-"target": " b/s š/xse1 @/ziz ra ke c/rxe1 b/dxoys/d bar piyale k/rdo s/d bar s/bvi"
+"reading": "b/s š/xse1 @/ziz ra ke c/rxe1 b/dxuys/d bar piyale k/rd o s/d bar s/buy",
+"target": " b/s š/xse1 @/ziz ra ke c/rxe1 b/dxuys/d bar piyale k/rdo s/d bar s/buy"
 },
 {
 "key": "149134-0",
@@ -1828,7 +1798,7 @@
 "call": "top1",
 "input": "الا ای ترک عیسی‌دم تو ماه عالم‌آرایی",
 "out": [
-"@/la @ey t/rke1 @isad/m to mahe1 @al/marayi"
+"@/la @ey torke1 @isad/m to mahe1 @al/marayi"
 ]
 },
 {
@@ -1836,28 +1806,28 @@
 "input": "الا ای ترک عیسی‌دم تو ماه عالم‌آرایی",
 "n": 8,
 "out": [
-"@/la @ey t/rke1 @isad/m to mahe1 @al/marayi",
-"@ella @ey t/rke1 @isad/m to mahe1 @al/marayi",
 "@/la @ey torke1 @isad/m to mahe1 @al/marayi",
+"@/la @ey t/rke1 @isad/m to mahe1 @al/marayi",
+"@/la @ey torke1 @isad/m to mahe1 @alemarayi",
+"@/la @ey tork @isad/m to mahe1 @al/marayi",
+"@/la @ey torke1 @isid/m to mahe1 @al/marayi",
 "@ella @ey torke1 @isad/m to mahe1 @al/marayi",
-"@/lla @ey t/rke1 @isad/m to mahe1 @al/marayi",
-"@/lla @ey torke1 @isad/m to mahe1 @al/marayi",
-"@ella @ey t/rke1 @isad/m to mahe1 @alemarayi",
-"@/la @ey t/rke1 @isad/m to mahe1 @alemarayi"
+"@/la @ey t/rke1 @isad/m to mahe1 @alemarayi",
+"@/la @ey torke1 @isad/m to mah @al/marayi"
 ]
 },
 {
 "call": "top1",
 "input": "هزارت یوسف مصری سزد یوسف به زیبایی",
 "out": [
-"hezar/t yusefe1 mesri sez/d yusefe1 be zibayi"
+"hezar/te1 yusefe1 mesri sez/d yusef be zibayi"
 ]
 }
 ],
-"label": "@/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi",
+"label": "@/la @ey torke1 @isid/m to mahe1 @al/marayihezar/te1 yusefe1 mesri sez/d yusef be zibayi",
 "error": null,
-"reading": "@/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi",
-"target": " @/la @ey t/rke1 @isad/m to mahe1 @al/marayihezar/t yusefe1 mesri sez/d yusefe1 be zibayi"
+"reading": "@/la @ey torke1 @isid/m to mahe1 @al/marayihezar/te1 yusefe1 mesri sez/d yusef be zibayi",
+"target": " @/la @ey torke1 @isid/m to mahe1 @al/marayihezar/te1 yusefe1 mesri sez/d yusef be zibayi"
 },
 {
 "key": "149134-1",
@@ -1879,14 +1849,14 @@
 "call": "top1",
 "input": "تو شمع مجلس انسی تو نور دیده مایی",
 "out": [
-"to $/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi"
+"to $/m@e1 m/jlese1 @onsi to nure1 dideye1 mayi"
 ]
 }
 ],
-"label": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi",
+"label": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsi to nure1 dideye1 mayi",
 "error": null,
-"reading": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi",
-"target": " to zibo zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsiye1 to nure1 dideye1 mayi"
+"reading": "to zib o zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsi to nure1 dideye1 mayi",
+"target": " to zibo zin/t d/hri to šahe1 kešv/re1 cinito š/m@e1 m/jlese1 @onsi to nure1 dideye1 mayi"
 },
 {
 "key": "151765-0",
@@ -1908,14 +1878,14 @@
 "call": "top1",
 "input": "به ایوان بزم و به نخچیرگاه",
 "out": [
-"be @eyvan b/zm o be n/xcirgah"
+"be @eyvane1 b/zm o be n/xcirgah"
 ]
 }
 ],
-"label": "bebud/nd yek mah n/zdike1 šahbe @eyvan b/zm o be n/xcirgah",
+"label": "bebud/nd yek mah n/zdike1 šahbe @eyvane1 b/zm o be n/xcirgah",
 "error": null,
-"reading": "bebud/nd yek mah n/zdike1 šahbe @eyvan b/zm o be n/xcirgah",
-"target": " bebud/nd yek mah n/zdike1 šahbe @eyvan b/zmo be n/xcirgah"
+"reading": "bebud/nd yek mah n/zdike1 šahbe @eyvane1 b/zm o be n/xcirgah",
+"target": " bebud/nd yek mah n/zdike1 šahbe @eyvane1 b/zmo be n/xcirgah"
 },
 {
 "key": "151765-1",
@@ -1959,7 +1929,7 @@
 "call": "top1",
 "input": "بر حرف نهاد دوش یار انگشتم",
 "out": [
-"b/r h/rfe1 n/hade1 du$e1 yar @/ngo$t/m"
+"b/r h/rf n/had du$ yar @/ngo$t/m"
 ]
 },
 {
@@ -1970,10 +1940,10 @@
 ]
 }
 ],
-"label": "b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
+"label": "b/r h/rf n/had duš yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
 "error": null,
-"reading": "b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
-"target": " b/r h/rfe1 n/hade1 duše1 yar @/ngošt/mb/rj/sto kešid @/z s/re1 m/sti mošt/m"
+"reading": "b/r h/rf n/had duš yar @/ngošt/mb/rj/st o kešid @/z s/re1 m/sti mošt/m",
+"target": " b/r h/rf n/had duš yar @/ngošt/mb/rj/sto kešid @/z s/re1 m/sti mošt/m"
 },
 {
 "key": "154852-1",
@@ -2082,7 +2052,7 @@
 "call": "top1",
 "input": "که ای نیک دل مهتر نامدار",
 "out": [
-"ke @ey nik del moht/re1 namdar"
+"ke @ey nik del meht/re1 namdar"
 ]
 }
 ],
@@ -2104,7 +2074,7 @@
 "call": "top1",
 "input": "من ایدون شنیدستم از بخردان",
 "out": [
-"m/n @idun $enid/st/m @/z bex/rdan"
+"m/n @idun $enid/st/m @/z bexr/dan"
 ]
 },
 {
@@ -2115,10 +2085,10 @@
 ]
 }
 ],
-"label": "m/n @idun šenid/st/m @/z bex/rdanbozorgan o bidardel mobedan",
+"label": "m/n @idun šenid/st/m @/z bexr/danbozorgan o bidardel mobedan",
 "error": null,
-"reading": "m/n @idun šenid/st/m @/z bex/rdanbozorgan o bidardel mobedan",
-"target": " m/n @idun šenid/st/m @/z bex/rdanbozorgano bidardel mobedan"
+"reading": "m/n @idun šenid/st/m @/z bexr/danbozorgan o bidardel mobedan",
+"target": " m/n @idun šenid/st/m @/z bexr/danbozorgano bidardel mobedan"
 },
 {
 "key": "1644-0",
@@ -2134,14 +2104,14 @@
 "input": "چنین گفت گوینده پهلوی",
 "n": 8,
 "out": [
-"cenin goft guy/ndeye1 p/hluy",
+"cenin goft guy/nde p/hl/vi",
 "cenin goft guy/ndeye1 p/hl/vi",
 "cenin goft guy/nde p/hluy",
-"conin goft guy/ndeye1 p/hluy",
+"cenin goft guy/ndeye1 p/hluy",
 "conin goft guy/ndeye1 p/hl/vi",
-"conin goft guy/nde p/hluy",
-"cenin goft guy/nde p/hl/vi",
-"conin goft guy/nde p/hl/vi"
+"conin goft guy/nde p/hl/vi",
+"cenin goft guy/nde p/hlovi",
+"cenin goft guy/ndeye1 p/hlovi"
 ]
 },
 {
@@ -2152,10 +2122,10 @@
 ]
 }
 ],
-"label": "cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi",
+"label": "cenin goft guy/ndeye1 p/hl/višegeft @ay/d/t kin sox/n bešn/vi",
 "error": null,
-"reading": "cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi",
-"target": " cenin goft guy/ndeye1 p/hluyšegeft @ay/d/t kin sox/n bešn/vi"
+"reading": "cenin goft guy/ndeye1 p/hl/višegeft @ay/d/t kin sox/n bešn/vi",
+"target": " cenin goft guy/ndeye1 p/hl/višegeft @ay/d/t kin sox/n bešn/vi"
 },
 {
 "key": "1644-1",
@@ -2170,7 +2140,7 @@
 "call": "top1",
 "input": "یکی شاه بد هند را نام کید",
 "out": [
-"yeki $ahe1 b/de1 hend ra name1 keyd"
+"yeki $ahe1 b/d hend ra name1 keyd"
 ]
 },
 {
@@ -2181,10 +2151,10 @@
 ]
 }
 ],
-"label": "yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
+"label": "yeki šahe1 b/d hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
 "error": null,
-"reading": "yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
-"target": " yeki šahe1 b/de1 hend ra name1 keydn/k/rdi joz @/z danešo raye1 seyd"
+"reading": "yeki šahe1 b/d hend ra name1 keydn/k/rdi joz @/z daneš o raye1 seyd",
+"target": " yeki šahe1 b/d hend ra name1 keydn/k/rdi joz @/z danešo raye1 seyd"
 },
 {
 "key": "1868-0",
@@ -2199,21 +2169,21 @@
 "call": "top1",
 "input": "هم آنگه ز کوه اندر آمد سپاه",
 "out": [
-"h/m @ang/h ze kuh @/nd/r @am/d sepah"
+"h/m @ange ze kuh @/nd/r @am/d sepah"
 ]
 },
 {
 "call": "top1",
 "input": "جهان شد ز گرد سواران سیاه",
 "out": [
-"j/han $od ze gerde1 s/varane1 siyah"
+"j/han $od ze g/rde1 s/varane1 siyah"
 ]
 }
 ],
-"label": "h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah",
+"label": "h/m @ange ze kuh @/nd/r @am/d sepahj/han šod ze g/rde1 s/varane1 siyah",
 "error": null,
-"reading": "h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah",
-"target": " h/m @ang/h ze kuh @/nd/r @am/d sepahj/han šod ze gerde1 s/varane1 siyah"
+"reading": "h/m @ange ze kuh @/nd/r @am/d sepahj/han šod ze g/rde1 s/varane1 siyah",
+"target": " h/m @ange ze kuh @/nd/r @am/d sepahj/han šod ze g/rde1 s/varane1 siyah"
 },
 {
 "key": "1868-1",
@@ -2228,21 +2198,21 @@
 "call": "top1",
 "input": "وزان روی بهرام لشکر براند",
 "out": [
-"v/zan ruye1 b/hrame1 l/$k/r beran/d"
+"v/zan ruye1 b/hrame1 l/$k/r berand"
 ]
 },
 {
 "call": "top1",
 "input": "به روز اندرون روشنایی نماند",
 "out": [
-"be ruze1 @/nd/rune1 ro$/nayi n/mand"
+"be ruz @/nd/run ro$/nayi n/mand"
 ]
 }
 ],
-"label": "v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand",
+"label": "v/zan ruye1 b/hrame1 l/šk/r berandbe ruz @/nd/run roš/nayi n/mand",
 "error": null,
-"reading": "v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand",
-"target": " v/zan ruye1 b/hrame1 l/šk/r beran/dbe ruze1 @/nd/rune1 roš/nayi n/mand"
+"reading": "v/zan ruye1 b/hrame1 l/šk/r berandbe ruz @/nd/run roš/nayi n/mand",
+"target": " v/zan ruye1 b/hrame1 l/šk/r berandbe ruz @/nd/run roš/nayi n/mand"
 },
 {
 "key": "22733-0",
@@ -2268,10 +2238,10 @@
 ]
 }
 ],
-"label": "@ey borde be cine1 zolfe1 tabe1 dele1 m/nvey košte be s/h/r q/mzeye1 xabe1 dele1 m/n",
+"label": "@ey borde be cine1 zolf tabe1 dele1 m/nvey košte be s/h/r q/mze xabe1 dele1 m/n",
 "error": null,
-"reading": "@ey borde be cine1 zolfe1  tabe1 dele1 m/nvey košte be s/h/r q/mzeye1  xabe1 dele1 m/n",
-"target": " @ey borde be cine1 zolfe1  tabe1 dele1 m/nvey košte be s/h/r q/mzeye1  xabe1 dele1 m/n"
+"reading": "@ey borde be cine1 zolf  tabe1 dele1 m/nvey košte be s/h/r q/mze  xabe1 dele1 m/n",
+"target": " @ey borde be cine1 zolf  tabe1 dele1 m/nvey košte be s/h/r q/mze  xabe1 dele1 m/n"
 },
 {
 "key": "22733-1",
@@ -2318,12 +2288,12 @@
 "out": [
 "d/rd/m @/z yar @/st o d/rman niz h/m",
 "dord/m @/z yar @/st o d/rman niz h/m",
+"d/rd/m @/z yar @/st o d/rmane1 niz h/m",
 "d/rd/m @/z yar @/st o dorman niz h/m",
 "derd/m @/z yar @/st o d/rman niz h/m",
-"d/rd/m @/z yar @/st o d/rmane1 niz h/m",
-"d/rd/m @/z yar @/st o derman niz h/m",
-"d/rd/m @/z yar @/st o darman niz h/m",
-"d/rd/m @/z yar @/st o d/rman neyz h/m"
+"d/rd/me1 @/z yar @/st o d/rman niz h/m",
+"d/rdom @/z yar @/st o d/rman niz h/m",
+"d/rd/m @/z yar @/st o derman niz h/m"
 ]
 },
 {
@@ -2335,10 +2305,10 @@
 "del fedaye1 @u $od o jan niz h/m",
 "dele1 f/daye1 @u $od o jan niz h/m",
 "dele1 fedaye1 @u $od o jan niz h/m",
-"del fodaye1 @u $od o jan niz h/m",
 "del f/daye1 @u $od o jane1 niz h/m",
-"delf/daye1 @u $od o jan niz h/m",
-"del f/day/ye1 @u $od o jan niz h/m"
+"del fodaye1 @u $od o jan niz h/m",
+"del fedaye1 @u $od o jane1 niz h/m",
+"del f/day @u $od o jan niz h/m"
 ]
 }
 ],
@@ -2389,7 +2359,7 @@
 "call": "top1",
 "input": "شاه شمشادقدان خسرو شیرین‌دهنان",
 "out": [
-"$ahe1 $emo$adeqdane1 xosrove1 $irind/h/nan"
+"$ahe1 $em$adeqdane1 xosrove1 $irind/h/nan"
 ]
 },
 {
@@ -2400,10 +2370,10 @@
 ]
 }
 ],
-"label": "šahe1 šemošadeqdane1 xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
+"label": "šahe1 šemšadeqdan xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
 "error": null,
-"reading": "šahe1 šemošadeqdane1  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
-"target": " šahe1 šemošadeqdane1  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan"
+"reading": "šahe1 šemšadeqdan  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan",
+"target": " šahe1 šemšadeqdan  xosrove1 širind/h/nanke be mo;gan šek/n/d q/lbe1 h/me s/fšek/nan"
 },
 {
 "key": "2516-1",
@@ -2418,7 +2388,7 @@
 "call": "top1",
 "input": "مست بگذشت و نظر بر من درویش انداخت",
 "out": [
-"m/st bogz/$t o n/z/r b/r m/ne1 d/rvi$ @/ndaxt"
+"m/st bogz/$t o n/z/r b/r m/n d/rvi$ @/ndaxt"
 ]
 },
 {
@@ -2429,10 +2399,10 @@
 ]
 }
 ],
-"label": "m/st bogz/št o n/z/r b/r m/ne1 d/rviš @/ndaxtgoft @ey c/šm o ceraqe1 h/me širinsox/nan",
+"label": "m/st bogz/št o n/z/r b/r m/n d/rviš @/ndaxtgoft @ey c/šm o ceraqe1 h/me širinsox/nan",
 "error": null,
-"reading": "m/st bogz/št o n/z/r b/r m/ne1 d/rviš @/ndaxtgoft  @ey c/šm o ceraqe1 h/me širinsox/nan",
-"target": " m/st bogz/što n/z/r b/r m/ne1 d/rviš @/ndaxtgoft  @ey c/šmo ceraqe1 h/me širinsox/nan"
+"reading": "m/st bogz/št o n/z/r b/r m/n d/rviš @/ndaxtgoft  @ey c/šm o ceraqe1 h/me širinsox/nan",
+"target": " m/st bogz/što n/z/r b/r m/n d/rviš @/ndaxtgoft  @ey c/šmo ceraqe1 h/me širinsox/nan"
 },
 {
 "key": "2562-0",
@@ -2483,14 +2453,14 @@
 "call": "top1",
 "input": "حالیا نیرنگ نقشی خوش بر آب انداختی",
 "out": [
-"haliya neyr/nge1 n/q$iye1 xo$ b/r @ab @/ndaxti"
+"haliya neyr/nge1 n/q$i xo$ b/r @ab @/ndaxti"
 ]
 }
 ],
-"label": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti",
+"label": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qši xoš b/r @ab @/ndaxti",
 "error": null,
-"reading": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti",
-"target": " ta ce xah/d k/rd ba ma @abo r/nge1 @arez/thaliya neyr/nge1 n/qšiye1 xoš b/r @ab @/ndaxti"
+"reading": "ta ce xah/d k/rd ba ma @ab o r/nge1 @arez/thaliya neyr/nge1 n/qši xoš b/r @ab @/ndaxti",
+"target": " ta ce xah/d k/rd ba ma @abo r/nge1 @arez/thaliya neyr/nge1 n/qši xoš b/r @ab @/ndaxti"
 },
 {
 "key": "39511-0",
@@ -2512,14 +2482,14 @@
 "call": "top1",
 "input": "آتش کجا و گرمی آغوش او کجا",
 "out": [
-"@at/$ koja o g/rmi @aqu$e1 @u koja"
+"@at/$ koja o g/rmiye1 @aqu$e1 @u koja"
 ]
 }
 ],
-"label": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja",
+"label": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmiye1 @aquše1 @u koja",
 "error": null,
-"reading": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja",
-"target": " @abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmi @aquše1 @u koja"
+"reading": "@abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmiye1 @aquše1 @u koja",
+"target": " @abe1 b/qa koja o l/be1 nuše1 @u koja@at/š koja o g/rmiye1 @aquše1 @u koja"
 },
 {
 "key": "39511-1",
@@ -2534,7 +2504,7 @@
 "call": "top1",
 "input": "سیمین و تابناک بود روی مه ولی",
 "out": [
-"simin o tabnak bov/d ruye1 m/h v/li"
+"simin o tabnak bud ruye1 m/h v/li"
 ]
 },
 {
@@ -2545,10 +2515,10 @@
 ]
 }
 ],
-"label": "simin o tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
+"label": "simin o tabnak bud ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
 "error": null,
-"reading": "simin o tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
-"target": " simino tabnak bov/d ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja"
+"reading": "simin o tabnak bud ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja",
+"target": " simino tabnak bud ruye1 m/h v/lisimineye1 m/h koja o b/naguše1 @u koja"
 },
 {
 "key": "39548-0",
@@ -2563,7 +2533,7 @@
 "call": "top1",
 "input": "بنفشه زلف من ای سرو قد نسرین تن",
 "out": [
-"b/n/f$eye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/n"
+"b/n/f$eye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srin t/n"
 ]
 },
 {
@@ -2574,10 +2544,10 @@
 ]
 }
 ],
-"label": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
+"label": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srin t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
 "error": null,
-"reading": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
-"target": " b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srine1 t/nke nist con s/re1 zolf/t b/n/fše o sus/n"
+"reading": "b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srin t/nke nist con s/re1 zolf/t b/n/fše o sus/n",
+"target": " b/n/fšeye1 zolfe1 m/n @ey s/rve1 q/dde1 n/srin t/nke nist con s/re1 zolf/t b/n/fše o sus/n"
 },
 {
 "key": "39548-1",
@@ -2599,14 +2569,14 @@
 "call": "top1",
 "input": "که گل کسی نفرستد به هدیه زی گلشن",
 "out": [
-"ke gole1 k/si n/ferest/d be hedye zi gol$/n"
+"ke gol k/si n/ferest/d be hedye zi gol$/n"
 ]
 }
 ],
-"label": "b/n/fše zi to ferestad/m o xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n",
+"label": "b/n/fše zi to ferestad/m o xejel mand/mke gol k/si n/ferest/d be hedye zi golš/n",
 "error": null,
-"reading": "b/n/fše zi to ferestad/m o xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n",
-"target": " b/n/fše zi to ferestad/mo xejel mand/mke gole1 k/si n/ferest/d be hedye zi golš/n"
+"reading": "b/n/fše zi to ferestad/m o xejel mand/mke gol k/si n/ferest/d be hedye zi golš/n",
+"target": " b/n/fše zi to ferestad/mo xejel mand/mke gol k/si n/ferest/d be hedye zi golš/n"
 },
 {
 "key": "4489-0",
@@ -2621,7 +2591,7 @@
 "call": "top1",
 "input": "ای سرو و گل بستان بنگر به تهی دستان",
 "out": [
-"@ey s/rv o gole1 bostan beng/r be tohi d/stan"
+"@ey s/rv o gole1 bostan beneg/r be tohi d/stan"
 ]
 },
 {
@@ -2632,10 +2602,10 @@
 ]
 }
 ],
-"label": "@ey s/rv o gole1 bostan beng/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
+"label": "@ey s/rv o gole1 bostan beneg/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
 "error": null,
-"reading": "@ey s/rv o gole1 bostan beng/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
-"target": " @ey s/rvo gole1 bostan beng/r be tohi d/stannani deho s/d bostanhade ce be d/rvišan"
+"reading": "@ey s/rv o gole1 bostan beneg/r be tohi d/stannani deh o s/d bostanhade ce be d/rvišan",
+"target": " @ey s/rvo gole1 bostan beneg/r be tohi d/stannani deho s/d bostanhade ce be d/rvišan"
 },
 {
 "key": "4489-1",
@@ -2708,21 +2678,21 @@
 "call": "top1",
 "input": "گرد بر گرد خیالش همه در رقص شوند",
 "out": [
-"gerd b/r g/rde1 xiyal/$ h/me d/r r/qs $/v/nd"
+"gerd b/r gerde1 xial/$ h/me d/r r/qs $/v/nd"
 ]
 },
 {
 "call": "top1",
 "input": "وان خیال چو مه تو به میان چرخ زنان",
 "out": [
-"van xiyal co m/h to be miyane1 c/rxe1 z/nan"
+"van xiyal co m/h to be miyane1 c/rx z/nan"
 ]
 }
 ],
-"label": "gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan",
+"label": "gerd b/r gerde1 xial/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rx z/nan",
 "error": null,
-"reading": "gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan",
-"target": " gerd b/r g/rde1 xiyal/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rxe1 z/nan"
+"reading": "gerd b/r gerde1 xial/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rx z/nan",
+"target": " gerd b/r gerde1 xial/š h/me d/r r/qs š/v/ndvan xiyal co m/h to be miyane1 c/rx z/nan"
 },
 {
 "key": "50271-0",
@@ -2746,13 +2716,13 @@
 "n": 8,
 "out": [
 "mey nu$/m @/z @an ke kamraniye1 m/n @/st",
+"mi nu$/m @/z @an ke kamraniye1 m/n @/st",
 "meye1 nu$/m @/z @an ke kamraniye1 m/n @/st",
 "mey nu$/m @/z @an ke kamrani m/n @/st",
-"meye1 nu$/m @/z @an ke kamrani m/n @/st",
-"meyye1 nu$/m @/z @an ke kamraniye1 m/n @/st",
+"mi nu$/m @/z @an ke kamrani m/n @/st",
 "mey nu$/m @/z @an ke kam/raniye1 m/n @/st",
-"meye1 nu$/m @/z @an ke kam/raniye1 m/n @/st",
-"mi nu$/m @/z @an ke kamraniye1 m/n @/st"
+"mey nu$/m @/z @an ke kameraniye1 m/n @/st",
+"mi nu$/m @/z @an ke kam/raniye1 m/n @/st"
 ]
 }
 ],
@@ -2811,14 +2781,14 @@
 "input": "و اندیشه فردات به جز سودا نیست",
 "n": 8,
 "out": [
-"v/ @/ndi$eye1 f/rdat be joz soda nist",
 "o @/ndi$eye1 f/rdat be joz soda nist",
-"v/ @/ndi$eye1 f/rdat be joz suda nist",
 "o @/ndi$eye1 f/rdat be joz suda nist",
-"@o @/ndi$eye1 f/rdat be joz soda nist",
-"v/ @/ndi$e f/rdat be joz soda nist",
-"o @/ndisheye1 f/rdat be joz soda nist",
-"o @/ndi$e f/rdat be joz soda nist"
+"v/ @/ndi$eye1 f/rdat be joz soda nist",
+"o @/ndi$e f/rdat be joz soda nist",
+"v/ @/ndi$eye1 f/rdat be joz suda nist",
+"o @/ndi$e f/rdat be joz suda nist",
+"o @/ndi$eye1 f/rdat beh joz soda nist",
+"v/ @/ndi$e f/rdat be joz soda nist"
 ]
 }
 ],
@@ -2843,12 +2813,12 @@
 "out": [
 "zaye@ m/kon @in d/m @/r del/t bidar @/st",
 "zaye@ m/kon @in d/m @/r delet bidar @/st",
-"zaye@ m/kon @in d/m @/r del/te1 bidar @/st",
-"zaye@ m/kon @in d/m @/r delete1 bidar @/st",
-"zaye@ m/kon @in d/me1 @/r del/t bidar @/st",
-"zaye@ m/kon @in dom @/r del/t bidar @/st",
 "zaye@ m/k/n @in d/m @/r del/t bidar @/st",
-"zaye@ m/kon @in dem @/r del/t bidar @/st"
+"zaye@ m/k/n @in d/m @/r delet bidar @/st",
+"zaye@ m/kon @in d/m @/r del/te1 bidar @/st",
+"zaye@ m/k/n @in d/m @/r del/te1 bidar @/st",
+"zaye@ m/kon @in d/me1 @/r del/t bidar @/st",
+"zaye@ m/kon @in dom @/r del/t bidar @/st"
 ]
 },
 {
@@ -2857,13 +2827,13 @@
 "n": 8,
 "out": [
 "kin baqiye1 @omr ra b/qa peyda nist",
-"kin baqi @omr ra b/qa peyda nist",
 "kin baqiye1 @omr ra beqa peyda nist",
+"kin baqi @omr ra b/qa peyda nist",
+"kin baqiye1 @om/r ra b/qa peyda nist",
 "kin baqi @omr ra beqa peyda nist",
-"kin baqiye1 @omr ra boqa peyda nist",
-"kain baqiye1 @omr ra b/qa peyda nist",
-"kin baqiye1 @omr ra b/ga peyda nist",
-"kin baqi @omr ra boqa peyda nist"
+"kin baqiye1 @om/r ra beqa peyda nist",
+"kin baqi @om/r ra b/qa peyda nist",
+"kin baqiye1 @omr ra boqa peyda nist"
 ]
 }
 ],
@@ -2914,21 +2884,21 @@
 "call": "top1",
 "input": "چشم یعقوب به دیدار پسر شاد شدی",
 "out": [
-"c/$me1 y/@qub be didare1 pes/re1 $ad $odi"
+"c/$me1 y/@qub be didare1 pes/r $ad $odi"
 ]
 },
 {
 "call": "top1",
 "input": "ساقی وصل شراب صمدی پیمودی",
 "out": [
-"saqiye1 v/sle1 $/rab s/m/di peymudi"
+"saqiye1 v/sle1 $/rabe1 s/m/di peymudi"
 ]
 }
 ],
-"label": "c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi",
+"label": "c/šme1 y/@qub be didare1 pes/r šad šodisaqiye1 v/sle1 š/rabe1 s/m/di peymudi",
 "error": null,
-"reading": "c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi",
-"target": " c/šme1 y/@qub be didare1 pes/re1 šad šodisaqiye1 v/sle1 š/rab s/m/di peymudi"
+"reading": "c/šme1 y/@qub be didare1 pes/r šad šodisaqiye1 v/sle1 š/rabe1 s/m/di peymudi",
+"target": " c/šme1 y/@qub be didare1 pes/r šad šodisaqiye1 v/sle1 š/rabe1 s/m/di peymudi"
 },
 {
 "key": "64738-0",
@@ -2943,7 +2913,7 @@
 "call": "top1",
 "input": "ترا که گفت که بر برگ گل کلاله فکن",
 "out": [
-"t/ra ke goft ke b/r b/rge1 gol kolale fek/n"
+"tora ke goft ke b/r b/rge1 gol kolale fek/n"
 ]
 },
 {
@@ -2972,7 +2942,7 @@
 "call": "top1",
 "input": "به غمزه صید دل عاشقان کن و آنگه",
 "out": [
-"be q/mze seyde1 dele1 @a$eqan kon o @ang/h"
+"be q/mze seyde1 dele1 @a$eqan kon o @ange"
 ]
 },
 {
@@ -2983,10 +2953,10 @@
 ]
 }
 ],
-"label": "be q/mze seyde1 dele1 @ašeqan kon o @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
+"label": "be q/mze seyde1 dele1 @ašeqan kon o @angeb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
 "error": null,
-"reading": "be q/mze seyde1 dele1 @ašeqan kon o @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
-"target": " be q/mze seyde1 dele1 @ašeqan kono @ang/hb/hane b/r n/z/re1 n/rgese1 q/zale fek/n"
+"reading": "be q/mze seyde1 dele1 @ašeqan kon o @angeb/hane b/r n/z/re1 n/rgese1 q/zale fek/n",
+"target": " be q/mze seyde1 dele1 @ašeqan kono @angeb/hane b/r n/z/re1 n/rgese1 q/zale fek/n"
 },
 {
 "key": "68597-0",
@@ -3001,7 +2971,7 @@
 "call": "top1",
 "input": "خواهم که بزیر قدمت زار بمیرم",
 "out": [
-"xah/m ke bezir qedm/te1 zar bemir/m"
+"xah/m ke bezire1 q/d/m/t zar bemir/m"
 ]
 },
 {
@@ -3012,10 +2982,10 @@
 ]
 }
 ],
-"label": "xah/m ke bezir qedm/te1 zar bemir/mh/r c/nd koni zende deg/r bar bemir/m",
+"label": "xah/m ke bezire1 q/d/m/t zar bemir/mh/r c/nd koni zende deg/r bar bemir/m",
 "error": null,
-"reading": "xah/m ke  bezir qedm/te1 zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m",
-"target": " xah/m ke  bezir qedm/te1 zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m"
+"reading": "xah/m ke  bezire1 q/d/m/t zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m",
+"target": " xah/m ke  bezire1 q/d/m/t zar bemir/mh/r c/nd koni zende  deg/r bar bemir/m"
 },
 {
 "key": "68597-1",
@@ -3059,21 +3029,21 @@
 "call": "top1",
 "input": "در ده می لعل لاله گون صافی",
 "out": [
-"d/r dehe1 meye1 l/@le1 lale gun safi"
+"d/r deh meye1 l/@le1 lale gun safi"
 ]
 },
 {
 "call": "top1",
 "input": "بگشای ز حلق شیشه خون صافی",
 "out": [
-"bog$ay ze h/lqe1 $i$eye1 xune1 safi"
+"bog$ay ze h/lqe1 $i$e xune1 safi"
 ]
 }
 ],
-"label": "d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi",
+"label": "d/r deh meye1 l/@le1 lale gun safibogšay ze h/lqe1 šiše xune1 safi",
 "error": null,
-"reading": "d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi",
-"target": " d/r dehe1 meye1 l/@le1 lale gun safibogšay ze h/lqe1 šišeye1 xune1 safi"
+"reading": "d/r deh meye1 l/@le1 lale gun safibogšay ze h/lqe1 šiše xune1 safi",
+"target": " d/r deh meye1 l/@le1 lale gun safibogšay ze h/lqe1 šiše xune1 safi"
 },
 {
 "key": "73686-1",
@@ -3095,14 +3065,14 @@
 "call": "top1",
 "input": "یک دوست که دارد اندرون صافی",
 "out": [
-"yek dust ke dar/d @/nd/rune1 safi"
+"yek dust ke dar/d @/nd/run safi"
 ]
 }
 ],
-"label": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi",
+"label": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/run safi",
 "error": null,
-"reading": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi",
-"target": " kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/rune1 safi"
+"reading": "kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/run safi",
+"target": " kamruz borun ze jame1 mey nist m/rayek dust ke dar/d @/nd/run safi"
 },
 {
 "key": "74177-0",
@@ -3117,7 +3087,7 @@
 "call": "top1",
 "input": "لب عاشق به حرف شکوه بیداد نگشاید",
 "out": [
-"l/be1 @a$eq be h/rfe1 $okuh bidad n/go$ay/d"
+"l/be1 @a$eq be h/rfe1 $okuhe1 bidad n/go$ay/d"
 ]
 },
 {
@@ -3128,10 +3098,10 @@
 ]
 }
 ],
-"label": "l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
+"label": "l/be1 @ašeq be h/rfe1 šokuhe1 bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
 "error": null,
-"reading": "l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
-"target": " l/be1 @ašeq be h/rfe1 šokuh bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d"
+"reading": "l/be1 @ašeq be h/rfe1 šokuhe1 bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d",
+"target": " l/be1 @ašeq be h/rfe1 šokuhe1 bidad n/gošay/dz/bane1 bidelan con qonce @/z h/r bad n/gošay/d"
 },
 {
 "key": "74177-1",
@@ -3153,14 +3123,14 @@
 "call": "top1",
 "input": "که بر من آسمان هم ناوک بیداد نگشاید",
 "out": [
-"ke b/r m/ne1 @aseman h/m nav/k bidad n/go$ay/d"
+"ke b/r m/n @aseman h/m nav/ke1 bidad n/go$ay/d"
 ]
 }
 ],
-"label": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d",
+"label": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/n @aseman h/m nav/ke1 bidad n/gošay/d",
 "error": null,
-"reading": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d",
-"target": " cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/ne1 @aseman h/m nav/k bidad n/gošay/d"
+"reading": "cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/n @aseman h/m nav/ke1 bidad n/gošay/d",
+"target": " cenin k/z šeš j/h/t rahe1 @omid/m b/ste šod t/rs/mke b/r m/n @aseman h/m nav/ke1 bidad n/gošay/d"
 },
 {
 "key": "77215-0",
@@ -3182,14 +3152,14 @@
 "call": "top1",
 "input": "ز بی دردی بتر دردی ندیدم",
 "out": [
-"ze bi dordi bet/r dordi n/did/m"
+"ze bi d/rdiye1 b/t/r d/rdi n/did/m"
 ]
 }
 ],
-"label": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m",
+"label": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi d/rdiye1 b/t/r d/rdi n/did/m",
 "error": null,
-"reading": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m",
-"target": " b/si d/rd @/z q/me1 @ešq/t kešid/mze bi dordi bet/r dordi n/did/m"
+"reading": "b/si d/rd @/z q/me1 @ešq/t kešid/mze bi d/rdiye1 b/t/r d/rdi n/did/m",
+"target": " b/si d/rd @/z q/me1 @ešq/t kešid/mze bi d/rdiye1 b/t/r d/rdi n/did/m"
 },
 {
 "key": "77215-1",
@@ -3204,21 +3174,21 @@
 "call": "top1",
 "input": "یکایک درد من درمان پذیرفت",
 "out": [
-"yekayeke1 d/rde1 m/n d/rman p/ziroft"
+"yekayek d/rde1 m/n d/rman p/ziroft"
 ]
 },
 {
 "call": "top1",
 "input": "از آن دم کز تواین شربت چشیدم",
 "out": [
-"@/z @an d/m k/z tovayn $/rb/t ce$id/m"
+"@/z @an d/m k/z t/vayn $/rb/t ce$id/m"
 ]
 }
 ],
-"label": "yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m",
+"label": "yekayek d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z t/vayn š/rb/t cešid/m",
 "error": null,
-"reading": "yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m",
-"target": " yekayeke1 d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z tovayn š/rb/t cešid/m"
+"reading": "yekayek d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z t/vayn š/rb/t cešid/m",
+"target": " yekayek d/rde1 m/n d/rman p/ziroft@/z @an d/m k/z t/vayn š/rb/t cešid/m"
 },
 {
 "key": "78309-0",
@@ -3233,7 +3203,7 @@
 "call": "top1",
 "input": "ای باد نسیم یار داری",
 "out": [
-"@ey bad n/sime1 yar dari"
+"@ey bade1 n/sime1 yar dari"
 ]
 },
 {
@@ -3241,21 +3211,21 @@
 "input": "زآن نفحه مشکبار داری",
 "n": 8,
 "out": [
-"zan n/fheye1 mo$kbar dari",
 "zan n/fhe mo$kbar dari",
-"zan n/fheye1 m/$kbar dari",
-"zan n/fheye1 mo$kebar dari",
-"zan n/fhe m/$kbar dari",
+"zan n/fheye1 mo$kbar dari",
 "zan n/fhe mo$kebar dari",
-"zan n/fheye1 mo$k/bar dari",
-"zan n/fhe mo$k/bar dari"
+"zan n/fheye1 mo$kebar dari",
+"zan n/f/he mo$kbar dari",
+"zan n/fheye1 m/$kbar dari",
+"zan n/fhe m/$kbar dari",
+"zan n/fhe me$kbar dari"
 ]
 }
 ],
-"label": "@ey bad n/sime1 yar darizan n/fheye1 moškbar dari",
+"label": "@ey bade1 n/sime1 yar darizan n/fheye1 moškbar dari",
 "error": null,
-"reading": "@ey bad n/sime1 yar darizan n/fheye1 moškbar dari",
-"target": " @ey bad n/sime1 yar darizan n/fheye1 moškbar dari"
+"reading": "@ey bade1 n/sime1 yar darizan n/fheye1 moškbar dari",
+"target": " @ey bade1 n/sime1 yar darizan n/fheye1 moškbar dari"
 },
 {
 "key": "78309-1",
@@ -3270,7 +3240,7 @@
 "call": "top1",
 "input": "زنهار مکن درازدستی",
 "out": [
-"zenhar m/kon derazd/sti"
+"z/nhar m/kon derazd/sti"
 ]
 },
 {
@@ -3281,18 +3251,18 @@
 "ba torreye1 @u ce kar dari",
 "ba torre @u ce kar dari",
 "ba t/rreye1 @u ce kar dari",
-"ba torhe1 @u ce kar dari",
-"ba torfeye1 @u ce kar dari",
-"ba toreye1 @u ce kar dari",
+"ba torreye1 @u ce kare1 dari",
 "ba tor$eye1 @u ce kar dari",
-"ba torfe @u ce kar dari"
+"ba torhe1 @u ce kar dari",
+"ba torreye1 @u c/h kar dari",
+"ba t/rre @u ce kar dari"
 ]
 }
 ],
-"label": "zenhar m/kon derazd/stiba torreye1 @u ce kar dari",
+"label": "z/nhar m/kon derazd/stiba torreye1 @u ce kar dari",
 "error": null,
-"reading": "zenhar  m/kon derazd/stiba torreye1 @u ce kar dari",
-"target": " zenhar  m/kon derazd/stiba torreye1 @u ce kar dari"
+"reading": "z/nhar  m/kon derazd/stiba torreye1 @u ce kar dari",
+"target": " z/nhar  m/kon derazd/stiba torreye1 @u ce kar dari"
 },
 {
 "key": "8139-0",
@@ -3336,7 +3306,7 @@
 "call": "top1",
 "input": "گر نمازت فوت می‌شد آن زمان",
 "out": [
-"g/r n/maz/te1 fot mi$od @an z/man"
+"g/r n/maz/t fot mi$od @an z/man"
 ]
 },
 {
@@ -3347,10 +3317,10 @@
 ]
 }
 ],
-"label": "g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
+"label": "g/r n/maz/t fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
 "error": null,
-"reading": "g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
-"target": " g/r n/maz/te1 fot mišod @an z/manmiz/di @/z d/rde1 del @aho f/qan"
+"reading": "g/r n/maz/t fot mišod @an z/manmiz/di @/z d/rde1 del @ah o f/qan",
+"target": " g/r n/maz/t fot mišod @an z/manmiz/di @/z d/rde1 del @aho f/qan"
 },
 {
 "key": "85106-0",
@@ -3372,14 +3342,14 @@
 "call": "top1",
 "input": "با علو همت قد تو طوبی در قصیر",
 "out": [
-"ba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir"
+"ba @olu hemm/te1 q/dde1 to tuba d/r q/sir"
 ]
 }
 ],
-"label": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir",
+"label": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @olu hemm/te1 q/dde1 to tuba d/r q/sir",
 "error": null,
-"reading": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir",
-"target": " ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @elve1 hemm/te1 q/dde1 to tuba d/r q/sir"
+"reading": "ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @olu hemm/te1 q/dde1 to tuba d/r q/sir",
+"target": " ta xiyale1 qam/t/t begozašt ma ra d/r z/mirba @olu hemm/te1 q/dde1 to tuba d/r q/sir"
 },
 {
 "key": "85106-1",
@@ -3401,22 +3371,7 @@
 "call": "top1",
 "input": "بسته ای بر هر سر مویی چو من چندین اسیر",
 "out": [
-"b/stei b/r h/r s/re1 muyi co m/n c/ndin @/sir"
-]
-},
-{
-"call": "nbest",
-"input": "بسته ای بر هر سر مویی چو من چندین اسیر",
-"n": 8,
-"out": [
-"b/stei b/r h/r s/re1 muyi co m/n c/ndin @/sir",
-"b/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir",
-"b/ste@i b/r h/r s/re1 muyi co m/n c/ndin @/sir",
-"b/stei b/r h/r s/r muyi co m/n c/ndin @/sir",
-"b/ste @ey b/r h/r s/r muyi co m/n c/ndin @/sir",
-"b/stei b/r h/r s/re1 muyi co m/ne1 c/ndin @/sir",
-"b/stei b/r h/r serre1 muyi co m/n c/ndin @/sir",
-"b/ste@i b/r h/r s/r muyi co m/n c/ndin @/sir"
+"b/ste @ey b/r h/r s/re1 muyi co m/n c/ndin @/sir"
 ]
 }
 ],
@@ -3440,27 +3395,27 @@
 "n": 8,
 "out": [
 "del @/g/r ja be s/re1 torreye1 janan gir/d",
-"del @/g/r ja be s/re1 torre janan gir/d",
 "del @/g/r ja be s/r torreye1 janan gir/d",
+"del @/g/r ja be s/re1 torre janan gir/d",
 "del @/g/r ja be serre1 torreye1 janan gir/d",
 "del @/g/r ja be s/re1 t/rreye1 janan gir/d",
+"del @/g/r ja be s/r torre janan gir/d",
 "del @/g/r ja be s/re1 terreye1 janan gir/d",
-"del @/g/r ja be s/re1 torreye janan gir/d",
-"del @/g/r ja be s/r torre janan gir/d"
+"del @/g/r ja be s/r t/rreye1 janan gir/d"
 ]
 },
 {
 "call": "top1",
 "input": "به پریشان وطنی سازد و سامان گیرد",
 "out": [
-"be p/ri$ane1 v/t/ni saz/d o saman gir/d"
+"be p/ri$an v/t/ni saz/d o saman gir/d"
 ]
 }
 ],
-"label": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/d o saman gir/d",
+"label": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišan v/t/ni saz/d o saman gir/d",
 "error": null,
-"reading": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/d o saman gir/d",
-"target": " del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišane1 v/t/ni saz/do saman gir/d"
+"reading": "del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišan v/t/ni saz/d o saman gir/d",
+"target": " del @/g/r ja be s/re1 torreye1 janan gir/dbe p/rišan v/t/ni saz/do saman gir/d"
 },
 {
 "key": "86970-1",
@@ -3484,13 +3439,13 @@
 "n": 8,
 "out": [
 "guy @aram ze k/jtabi cugan gir/d",
-"guye1 @aram ze k/jtabi cugan gir/d",
 "guy @aram ze k/jtabi cogan gir/d",
+"guye1 @aram ze k/jtabi cugan gir/d",
 "guye1 @aram ze k/jtabi cogan gir/d",
 "guy @aram ze k/jtabiye1 cugan gir/d",
+"g/vi @aram ze k/jtabi cugan gir/d",
 "guye1 @aram ze k/jtabiye1 cugan gir/d",
-"guy @aram ze k/jtabiye1 cogan gir/d",
-"guye1 @aram ze k/jtabiye1 cogan gir/d"
+"g/vi @aram ze k/jtabi cogan gir/d"
 ]
 }
 ],
@@ -3512,7 +3467,7 @@
 "call": "top1",
 "input": "بوی کین هرگز کسی نشنیده از آب و گلم",
 "out": [
-"buye1 kin h/rgez k/si n/$enide @/z @ab o gol/m"
+"buye1 kin h/rgez k/si n/$enide @/z @ab o gel/m"
 ]
 },
 {
@@ -3523,10 +3478,10 @@
 ]
 }
 ],
-"label": "buye1 kin h/rgez k/si n/šenide @/z @ab o gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
+"label": "buye1 kin h/rgez k/si n/šenide @/z @ab o gel/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
 "error": null,
-"reading": "buye1 kin h/rgez k/si n/šenide @/z @ab o gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
-"target": " buye1 kin h/rgez k/si n/šenide @/z @abo gol/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m"
+"reading": "buye1 kin h/rgez k/si n/šenide @/z @ab o gel/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m",
+"target": " buye1 kin h/rgez k/si n/šenide @/z @abo gel/mg/r be x/s @at/š fet/d @/z mehr misuz/d del/m"
 },
 {
 "key": "90491-1",
@@ -3599,7 +3554,7 @@
 "call": "top1",
 "input": "گوارنده آبی کزین تیره خاک",
 "out": [
-"govar/nde @abi k/zin tireye1 xak"
+"govar/nde @abi k/zin tire xak"
 ]
 },
 {
@@ -3610,10 +3565,10 @@
 ]
 }
 ],
-"label": "govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak",
+"label": "govar/nde @abi k/zin tire xakbedu šay/d @/nduh ra šost pak",
 "error": null,
-"reading": "govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak",
-"target": " govar/nde @abi k/zin tireye1 xakbedu šay/d @/nduh ra šost pak"
+"reading": "govar/nde @abi k/zin tire xakbedu šay/d @/nduh ra šost pak",
+"target": " govar/nde @abi k/zin tire xakbedu šay/d @/nduh ra šost pak"
 },
 {
 "key": "9210-0",
@@ -3715,7 +3670,7 @@
 "call": "top1",
 "input": "ژاله بر گل یا خوی خجلت ز شرم روی دوست",
 "out": [
-";ale b/r gol ya xoye1 xejl/t ze $/rm ruye1 dust"
+";ale b/r gol ya xuye1 xejl/t ze $/rm ruye1 dust"
 ]
 },
 {
@@ -3726,10 +3681,10 @@
 ]
 }
 ],
-"label": ";ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
+"label": ";ale b/r gol ya xuye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
 "error": null,
-"reading": ";ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
-"target": " ;ale b/r gol ya xoye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in"
+"reading": ";ale b/r gol ya xuye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in",
+"target": " ;ale b/r gol ya xuye1 xejl/t ze š/rm ruye1 dustya @/r/q b/r jebheye1 šux set/mkar @/st @in"
 },
 {
 "key": "9255-0",
@@ -3747,12 +3702,12 @@
 "out": [
 "moq/nni bedan jorreye1 jann/vaz",
 "moq/nni bedan j/rreye1 jann/vaz",
-"moq/nniye1 bedan jorreye1 jann/vaz",
-"moq/nniye1 bedan j/rreye1 jann/vaz",
-"moq/nni bedan jerreye1 jann/vaz",
+"moqenni bedan jorreye1 jann/vaz",
 "moq/nni bedan jorre jann/vaz",
-"moqnni bedan jorreye1 jann/vaz",
-"moq/nni bedan j/rre jann/vaz"
+"moq/nni bedan jerreye1 jann/vaz",
+"moqni bedan jorreye1 jann/vaz",
+"moqini bedan jorreye1 jann/vaz",
+"moq/nni bedan jorreye1 jan/vaz"
 ]
 },
 {
@@ -3761,13 +3716,13 @@
 "n": 8,
 "out": [
 "b/r @ah/nge1 ma naleye1 no besaz",
-"b/r @ah/nge1 ma nale no besaz",
 "b/re1 @ah/nge1 ma naleye1 no besaz",
-"b/r @ah/nge1 ma naleye1 noye1 besaz",
+"b/r @ah/nge1 ma nale no besaz",
+"b/r @ah/ng ma naleye1 no besaz",
 "b/re1 @ah/nge1 ma nale no besaz",
-"b/r @ahenge1 ma naleye1 no besaz",
-"b/r @ah/nge1 ma naleye1 noh besaz",
-"b/r @ah/ng ma naleye1 no besaz"
+"b/r @ah/nge1 ma naleye1 noye1 besaz",
+"b/r @ah/nge1 ma naleye no besaz",
+"b/r @ah/nge1 ma naleyeno besaz"
 ]
 }
 ],
@@ -3796,14 +3751,14 @@
 "call": "top1",
 "input": "بدان ناله زین ناله دانیم رست",
 "out": [
-"bedan nale zin nale danim r/st"
+"bedan nale zin nale danim rost"
 ]
 }
 ],
-"label": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st",
+"label": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim rost",
 "error": null,
-"reading": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st",
-"target": " ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim r/st"
+"reading": "ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim rost",
+"target": " ke g/štim con bolbol @/z naleye1 m/stbedan nale zin nale danim rost"
 },
 {
 "key": "9282-0",
@@ -3819,28 +3774,28 @@
 "input": "اول کاین عشق‌پرستی نبود",
 "n": 8,
 "out": [
-"@/vv/l kin @e$qp/r/sti n/bov/d",
 "@/vv/l kin @e$qp/r/sti n/bud",
+"@/vv/l kin @e$qp/r/sti n/bov/d",
 "@/vv/l kin @e$qp/r/sti n/bv/d",
+"@/vv/le1 kin @e$qp/r/sti n/bud",
 "@/vv/le1 kin @e$qp/r/sti n/bov/d",
 "@/vv/l kin @e$qp/r/sti n/b/v/d",
-"@/vv/le1 kin @e$qp/r/sti n/bud",
-"@/vv/l kaine1 @e$qp/r/sti n/bov/d",
-"@/vv/l kain @e$qp/r/sti n/bov/d"
+"@/vv/le1 kin @e$qp/r/sti n/bv/d",
+"@/vv/l kin @e$qp/r/sti n/bev/d"
 ]
 },
 {
 "call": "top1",
 "input": "در عدم آوازه هستی نبود",
 "out": [
-"d/r @/d/me1 @avazeye1 h/sti n/bov/d"
+"d/r @/d/m @avazeye1 h/sti n/bud"
 ]
 }
 ],
-"label": "@/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d",
+"label": "@/vv/l kin @ešqp/r/sti n/budd/r @/d/m @avazeye1 h/sti n/bud",
 "error": null,
-"reading": "@/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d",
-"target": " @/vv/l kin @ešqp/r/sti n/bov/dd/r @/d/me1 @avazeye1 h/sti n/bov/d"
+"reading": "@/vv/l kin @ešqp/r/sti n/budd/r @/d/m @avazeye1 h/sti n/bud",
+"target": " @/vv/l kin @ešqp/r/sti n/budd/r @/d/m @avazeye1 h/sti n/bud"
 },
 {
 "key": "9282-1",
@@ -3856,14 +3811,14 @@
 "input": "مقبلی از کتم عدم ساز کرد",
 "n": 8,
 "out": [
-"moq/bb/li @/z k/tme1 @/d/m saz k/rd",
-"moq/bb/li @/z kotome1 @/d/m saz k/rd",
-"moqb/li @/z k/tme1 @/d/m saz k/rd",
 "moqbeli @/z k/tme1 @/d/m saz k/rd",
-"moq/bb/li @/z k/t/me1 @/d/m saz k/rd",
-"moq/bb/li @/z k/tm @/d/m saz k/rd",
-"moq/bb/li @/z k/tme1 @/d/me1 saz k/rd",
-"moq/bb/li @/z k/t/m @/d/m saz k/rd"
+"moqbeli @/z k/tm @/d/m saz k/rd",
+"moqbeli @/z k/t/me1 @/d/m saz k/rd",
+"moqbeli @/z k/t/m @/d/m saz k/rd",
+"moqbeli @/z kot/me1 @/d/m saz k/rd",
+"moqbeli @/z ketme1 @/d/m saz k/rd",
+"moqbeli @/z kotme1 @/d/m saz k/rd",
+"moqbeli @/z ketm @/d/m saz k/rd"
 ]
 },
 {
@@ -3874,10 +3829,10 @@
 ]
 }
 ],
-"label": "moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
+"label": "moqbeli @/z ketme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
 "error": null,
-"reading": "moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
-"target": " moq/bb/li @/z k/tme1 @/d/m saz k/rdsuye1 vojud @am/do d/r baz k/rd"
+"reading": "moqbeli @/z ketme1 @/d/m saz k/rdsuye1 vojud @am/d o d/r baz k/rd",
+"target": " moqbeli @/z ketme1 @/d/m saz k/rdsuye1 vojud @am/do d/r baz k/rd"
 },
 {
 "key": "95105-0",
@@ -3892,21 +3847,21 @@
 "call": "top1",
 "input": "جانا تو چنین بجنگ با من زچه",
 "out": [
-"jana to cenin bej/ng ba m/n z/ce"
+"jana to cenin bej/ng ba m/n z/cce"
 ]
 },
 {
 "call": "top1",
 "input": "گر دوست نئی رواست دشمن زچه",
 "out": [
-"g/r dust n/@i r/vast do$m/n z/ce"
+"g/r dust n/@i r/vast do$m/n z/cce"
 ]
 }
 ],
-"label": "jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast došm/n z/ce",
+"label": "jana to cenin bej/ng ba m/n z/cceg/r dust n/@i r/vast došm/n z/cce",
 "error": null,
-"reading": "jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast  došm/n z/ce",
-"target": " jana to cenin bej/ng ba m/n z/ceg/r dust n/@i r/vast  došm/n z/ce"
+"reading": "jana to cenin bej/ng ba m/n z/cceg/r dust n/@i r/vast  došm/n z/cce",
+"target": " jana to cenin bej/ng ba m/n z/cceg/r dust n/@i r/vast  došm/n z/cce"
 },
 {
 "key": "95105-1",
@@ -3928,14 +3883,14 @@
 "call": "top1",
 "input": "در خون من سوخته خرمن زچه",
 "out": [
-"d/r xune1 m/ne1 suxteye1 x/rm/n z/ce"
+"d/r xune1 m/ne1 suxte x/rm/n z/cce"
 ]
 }
 ],
-"label": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce",
+"label": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxte x/rm/n z/cce",
 "error": null,
-"reading": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce",
-"target": " bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxteye1 x/rm/n z/ce"
+"reading": "bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxte x/rm/n z/cce",
+"target": " bi hic s/b/b kešide dam/n rad/r xune1 m/ne1 suxte x/rm/n z/cce"
 },
 {
 "key": "99380-0",
@@ -3950,7 +3905,7 @@
 "call": "top1",
 "input": "از آن ز دیده و دل اشک و آه می‌خواهم",
 "out": [
-"@/z @an ze dide o dele1 @/$k o @ah mixah/m"
+"@/z @an ze dide o del @/$k o @ah mixah/m"
 ]
 },
 {
@@ -3961,10 +3916,10 @@
 ]
 }
 ],
-"label": "@/z @an ze dide o dele1 @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
+"label": "@/z @an ze dide o del @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
 "error": null,
-"reading": "@/z @an ze dide o dele1 @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
-"target": " @/z @an ze dide o dele1 @/ško @ah mixah/mke š/rmsar/mo @ozre1 gonah mixah/m"
+"reading": "@/z @an ze dide o del @/šk o @ah mixah/mke š/rmsar/m o @ozre1 gonah mixah/m",
+"target": " @/z @an ze dide o del @/ško @ah mixah/mke š/rmsar/mo @ozre1 gonah mixah/m"
 },
 {
 "key": "99380-1",
@@ -3988,13 +3943,13 @@
 "n": 8,
 "out": [
 "m/d/d ze hemm/te1 m/rdan rah mixah/m",
-"m/d/d ze hemm/te1 m/rdane1 rah mixah/m",
-"m/d/d ze hemm/te1 m/rdan rah mikhah/m",
-"m/d/d ze hemm/te1 m/rdane1 rah mikhah/m",
+"m/d/d ze hemm/t m/rdan rah mixah/m",
 "m/d/d ze hemm/t m/rdane1 rah mixah/m",
+"m/d/d ze hemm/te1 m/rdane1 rah mixah/m",
+"m/d/de1 ze hemm/te1 m/rdan rah mixah/m",
 "mod/d ze hemm/te1 m/rdan rah mixah/m",
-"mod/d ze hemm/te1 m/rdane1 rah mixah/m",
-"m/d/d ze hemm/t m/rdan rah mixah/m"
+"m/d/d ze h/m/t m/rdane1 rah mixah/m",
+"m/d/d ze h/m/t m/rdan rah mixah/m"
 ]
 }
 ],

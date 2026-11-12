@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/net/api_client.dart' show kUserAgent;
@@ -25,6 +26,22 @@ final _sep = Platform.pathSeparator;
 
 /// SharedPreferences key: the source key (`hf`, `github`) that served the last good download.
 const kVoiceSourcePref = 'voice.source';
+
+/// SharedPreferences key: the local day (`yyyy-mm-dd`) of the last background upgrade check, so there is at most
+/// one a day.
+const kVoiceUpgradeCheckedPref = 'voice.upgradeCheckedAt';
+
+/// SharedPreferences key: the version a background upgrade just swapped in, for a one-time notice; set at the swap,
+/// cleared by the next reading that starts.
+const kVoiceImprovedNoticePref = 'voice.improvedNotice';
+
+/// SharedPreferences key: the manifest (JSON) of an upgrade staged beside the installed voice, waiting for a reading
+/// to start; it lets the swap happen on a later run without the network.
+const _kStagedManifestPref = 'voice.stagedManifest';
+
+/// The local day of [t] as `yyyy-mm-dd`.
+String _day(DateTime t) =>
+    '${t.year.toString().padLeft(4, '0')}-${t.month.toString().padLeft(2, '0')}-${t.day.toString().padLeft(2, '0')}';
 
 /// SharedPreferences key: how fast voice [version] reads on this device, as t8: wall seconds per audio second,
 /// normalized to 8 flow steps (see [t8From]). It chooses each poem's steps, and lets the next poem start streaming
@@ -84,9 +101,11 @@ Future<void> _pruneCaches(Directory? base, String except) async {
   }
 }
 
-/// The installed voice, from `installed.json`; null when none (or it cannot be read).
+/// The installed voice, from `installed.json`; null when none (or it cannot be read). Without [folder], a swap that
+/// was killed half way is finished first, so nothing loads the old folder with files missing.
 VoiceReady? _readInstalled(Directory root, {String? folder}) {
   try {
+    if (folder == null) resumeInterruptedSwap(root);
     final dir = folder == null ? installedDir(root) : Directory('${root.path}$_sep$folder');
     if (folder != null && !File('${dir!.path}${_sep}installed.json').existsSync()) {
       return null;
@@ -195,8 +214,29 @@ class VoiceController extends Notifier<VoiceStatus> {
     final ready = ref.read(_installedVoiceProvider);
     if (ready != null) {
       _pruneCaches(ref.read(voiceCacheBaseProvider), '${ready.version}-${ready.variant}');
+      _deleteRetired();
     }
     return ready ?? const VoiceAbsent();
+  }
+
+  /// Deletes the folders a swap retired (`installed.json.old`, no `installed.json`) that were left behind: a swap
+  /// finished at startup ([resumeInterruptedSwap]) has no [_adopt] to delete the old folder. A folder holding a
+  /// stage (`staged.json`) is kept, and so is one with no record at all (a partial download, which resumes). Best
+  /// effort, in the background.
+  Future<void> _deleteRetired() async {
+    try {
+      for (final d in _root.listSync().whereType<Directory>()) {
+        bool has(String n) => File('${d.path}$_sep$n').existsSync();
+        if (has('installed.json') || has('staged.json') || !has('installed.json.old')) continue;
+        try {
+          await d.delete(recursive: true);
+        } on FileSystemException {
+          // Locked (Windows): tried again at the next launch.
+        }
+      }
+    } on FileSystemException {
+      // The root is gone, or went away while listing.
+    }
   }
 
   void _setInstalled(VoiceReady? v) => ref.read(_installedVoiceProvider.notifier).set(v);
@@ -240,6 +280,8 @@ class VoiceController extends Notifier<VoiceStatus> {
   Future<void> _download(VoiceManifest m, String variant, CancelToken cancel) async {
     final name = '${m.version}-$variant';
     try {
+      await _stopUpgrade(); // its folder may be deleted once this one is in
+      await _swapSettled(); // likewise; no other starts while this download runs
       final source = await ref
           .read(voiceDownloaderProvider)
           .install(
@@ -254,15 +296,8 @@ class VoiceController extends Notifier<VoiceStatus> {
           );
       if (!ref.mounted) return;
       await ref.read(sharedPrefsProvider).setString(kVoiceSourcePref, source);
-      final old = ref.read(_installedVoiceProvider);
-      if (old != null && old.dir.split(_sep).last != name) {
-        await _stopWorker(); // it holds the old voice's files open
-        await _deleteVersions(except: name);
-        await _deleteOldCaches(except: name);
-      }
+      final ready = await _adopt(name);
       if (!ref.mounted) return;
-      final ready = _readInstalled(_root, folder: name);
-      _setInstalled(ready);
       state = ready ?? const VoiceFailed(VoiceDownloadFailure.checksum);
     } on VoiceDownloadError catch (e) {
       if (!ref.mounted) return;
@@ -272,6 +307,174 @@ class VoiceController extends Notifier<VoiceStatus> {
       _failed(cancelled: cancel.isCancelled, kind: VoiceDownloadFailure.offline);
     } finally {
       if (identical(_cancel, cancel)) _cancel = null;
+    }
+  }
+
+  /// The `<root>/<version>-<variant>` folder [name] has just become the installed voice: stops the reader and
+  /// deletes the other versions and their readings (when it replaces another voice), forgets any staged upgrade, and
+  /// makes it the voice in use. Returns it, or null when its `installed.json` can't be read (or the controller is
+  /// gone).
+  Future<VoiceReady?> _adopt(String name) async {
+    final old = ref.read(_installedVoiceProvider);
+    if (old != null && old.dir.split(_sep).last != name) {
+      await _stopWorker(); // it holds the old voice's files open
+      await _deleteVersions(except: name);
+      await _deleteOldCaches(except: name);
+    }
+    if (!ref.mounted) return null;
+    await ref.read(sharedPrefsProvider).remove(_kStagedManifestPref);
+    if (!ref.mounted) return null;
+    final ready = _readInstalled(_root, folder: name);
+    _setInstalled(ready);
+    return ready;
+  }
+
+  // --- The background upgrade: staged beside the voice in use, swapped in when a reading starts ---
+
+  /// Cancels the running upgrade check or stage.
+  CancelToken? _upgradeCancel;
+
+  /// The running upgrade check (it never throws).
+  Future<void>? _upgrading;
+
+  /// Completes when the running upgrade check (if any) has ended.
+  @visibleForTesting
+  Future<void> get upgradeSettled => _upgrading ?? Future<void>.value();
+
+  /// Whether an upgrade may be staged, waiting for [swapIfStaged]. Cheap, so a reading only waits for
+  /// [swapIfStaged] when there is something to swap.
+  bool get upgradeStaged => ref.read(sharedPrefsProvider).getString(_kStagedManifestPref) != null;
+
+  /// Stops the running upgrade check or stage, and waits for it to end.
+  Future<void> _stopUpgrade() async {
+    _upgradeCancel?.cancel();
+    final u = _upgrading;
+    if (u != null) await u;
+  }
+
+  /// Whether [dir] is a folder directly under the voice root (the only kind a swap may move files out of).
+  bool _isVoiceFolder(String dir) => dir == '${_root.path}$_sep${dir.split(_sep).last}';
+
+  /// The running [swapIfStaged].
+  Future<void>? _swapping;
+
+  /// A swap failed in this run of the app: none is tried again until the next launch, since each try stops the
+  /// reader, which then reloads the model.
+  bool _swapFailed = false;
+
+  /// Waits for the running swap (if any) to end.
+  Future<void> _swapSettled() async {
+    final s = _swapping;
+    if (s != null) await s;
+  }
+
+  /// Swaps in an upgrade [checkUpgrade] staged for the installed variant: stops the reader, has the downloader move
+  /// the unchanged files over ([VoiceDownloader.finishSwap]), then does what a download does once installed
+  /// ([_adopt]) and records the new version for the notice ([kVoiceImprovedNoticePref]). Silent: any failure leaves
+  /// the old voice in use and shows nothing. Waits for a later reading while another is being read, a machine
+  /// reading is playing (the swap stops the reader and deletes the old readings) or an upgrade check is running
+  /// (it stages from the folder the swap empties). One at a time: a call while a swap runs gets that swap.
+  Future<void> swapIfStaged() {
+    final running = _swapping;
+    if (running != null) return running;
+    final run = _swapIfStaged();
+    _swapping = run;
+    run.whenComplete(() {
+      if (identical(_swapping, run)) _swapping = null;
+    });
+    return run;
+  }
+
+  Future<void> _swapIfStaged() async {
+    try {
+      final prefs = ref.read(sharedPrefsProvider);
+      final raw = prefs.getString(_kStagedManifestPref);
+      final old = ref.read(_installedVoiceProvider);
+      if (raw == null || old == null || state is! VoiceReady || _downloadEnded != null) return;
+      if (_upgrading != null || _swapFailed) return;
+      final m = VoiceManifest.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      final name = '${m.version}-${old.variant}';
+      if (compareVersions(m.version, old.version) <= 0 ||
+          !m.variants.containsKey(old.variant) ||
+          !_isVoiceFolder(old.dir) ||
+          old.dir.split(_sep).last == name) {
+        await prefs.remove(_kStagedManifestPref); // not an upgrade of this voice (any more)
+        return;
+      }
+      if (ref.read(_currentPrepareProvider).running != null) return;
+      final player = ref.read(playerProvider);
+      if (player.recitation?.id == kVoiceRecitationId && player.playing) return;
+      final dl = ref.read(voiceDownloaderProvider);
+      final from = Directory(old.dir);
+      if (!dl.staged(m, variant: old.variant, from: from)) return;
+      await _stopWorker(); // it holds the files about to move
+      try {
+        await dl.finishSwap(m, variant: old.variant, from: from);
+      } catch (_) {
+        // Judged by what is on disk below: a failed move was put back, and a failure once the new folder was
+        // installed is finished there.
+      }
+      if (!ref.mounted) return;
+      if (_readInstalled(_root)?.dir.split(_sep).last != name) {
+        _swapFailed = true; // the old voice is still the one
+        return;
+      }
+      final ready = await _adopt(name);
+      if (!ref.mounted || ready == null) return;
+      state = ready;
+      await prefs.setString(kVoiceImprovedNoticePref, ready.version);
+    } catch (_) {
+      _swapFailed = true; // silent, as above
+    }
+  }
+
+  /// At most once a day ([kVoiceUpgradeCheckedPref], recorded even when the check fails), while a voice is
+  /// installed: fetches the manifest and, when it has a newer version with the installed variant, stages it beside
+  /// the voice in use ([VoiceDownloader.stage]) for [swapIfStaged]. Runs in the background and shows nothing; never
+  /// downgrades.
+  void checkUpgrade() {
+    try {
+      final v = state;
+      if (v is! VoiceReady || _upgrading != null || _downloadEnded != null) return;
+      final prefs = ref.read(sharedPrefsProvider);
+      final today = _day(ref.read(voiceClockProvider)());
+      if (prefs.getString(kVoiceUpgradeCheckedPref) == today) return;
+      final cancel = _upgradeCancel = CancelToken();
+      final run = _checkUpgrade(v, today, cancel);
+      _upgrading = run;
+      run.whenComplete(() {
+        if (identical(_upgrading, run)) {
+          _upgrading = null;
+          _upgradeCancel = null;
+        }
+      });
+    } catch (_) {
+      // Silent.
+    }
+  }
+
+  Future<void> _checkUpgrade(VoiceReady v, String today, CancelToken cancel) async {
+    try {
+      final prefs = ref.read(sharedPrefsProvider);
+      await prefs.setString(kVoiceUpgradeCheckedPref, today);
+      final dl = ref.read(voiceDownloaderProvider);
+      final m = await dl.fetchManifest();
+      if (!ref.mounted || cancel.isCancelled) return;
+      if (compareVersions(m.version, v.version) <= 0 || !m.variants.containsKey(v.variant)) return;
+      // Still the voice it was started for, in its own folder under the root, and not the folder being staged.
+      if (ref.read(_installedVoiceProvider)?.dir != v.dir || !_isVoiceFolder(v.dir)) return;
+      if (v.dir.split(_sep).last == '${m.version}-${v.variant}') return;
+      final from = Directory(v.dir);
+      if (!dl.staged(m, variant: v.variant, from: from)) {
+        // The silent path never downloads the voice again: an upgrade that changes over a quarter of it is left.
+        if (dl.changedBytes(m, variant: v.variant, from: from) * 4 > m.sizeOf(v.variant)) return;
+        await dl.stage(m, variant: v.variant, from: from, cancel: cancel);
+      }
+      if (!ref.mounted || cancel.isCancelled) return;
+      if (ref.read(_installedVoiceProvider)?.dir != v.dir) return; // the voice changed meanwhile
+      await prefs.setString(_kStagedManifestPref, jsonEncode(m.toJson()));
+    } catch (_) {
+      // Silent: the old voice stays, and the next day's check tries again (a stage resumes its partial files).
     }
   }
 
@@ -297,6 +500,8 @@ class VoiceController extends Notifier<VoiceStatus> {
     final downloading = _downloadEnded;
     cancel();
     if (downloading != null) await downloading.future;
+    await _stopUpgrade(); // a stage, too, writes under the voice root
+    await _swapSettled(); // and a swap, which would install the voice again and announce it
     if (!ref.mounted) return;
     // Wait (briefly) for the cancelled prepare's part writes or join, or they could recreate cache files.
     final settling = ref.read(_currentPrepareProvider).cancelCurrent();
@@ -317,8 +522,12 @@ class VoiceController extends Notifier<VoiceStatus> {
         // A file still open: what is left is only cache.
       }
     }
-    await _deleteVersions();
+    await _deleteVersions(); // a staged upgrade's folder too
     await _deleteRest();
+    if (!ref.mounted) return;
+    final prefs = ref.read(sharedPrefsProvider);
+    await prefs.remove(_kStagedManifestPref);
+    await prefs.remove(kVoiceImprovedNoticePref); // no voice, nothing to announce
     if (!ref.mounted) return;
     _setInstalled(null);
     state = const VoiceAbsent();
@@ -339,8 +548,14 @@ class VoiceController extends Notifier<VoiceStatus> {
 
   /// The voice files would not load: delete them so the reader can download again.
   Future<void> markCorrupt() async {
+    await _stopUpgrade(); // it stages from the voice being deleted
+    await _swapSettled(); // a swap would install it again
     await _stopWorker();
     await _deleteVersions();
+    if (!ref.mounted) return;
+    final prefs = ref.read(sharedPrefsProvider);
+    await prefs.remove(_kStagedManifestPref);
+    await prefs.remove(kVoiceImprovedNoticePref); // no voice, nothing to announce
     if (!ref.mounted) return;
     _setInstalled(null);
     state = const VoiceAbsent(wasCorrupt: true);
@@ -547,6 +762,20 @@ class PrepareController extends Notifier<PrepareStatus> {
   /// The poem is read with 8, 6 or 4 flow steps ([chooseSteps]), chosen once from the remembered speed
   /// ([voiceT8Pref]) and recorded in its parts folder, so a resumed reading keeps them.
   Future<void> start(Poem p, {required bool playWhenDone, required String artist}) async {
+    // A staged voice upgrade is swapped in before the reader is used (awaited only when there is one, so a cached
+    // reading is still Prepared at once); then, at most once a day, the next upgrade is looked for in the background.
+    // The improved notice was said by the reading the swap made; the next reading spends it. Cleared before the
+    // swap below, so a swap in this very start still leaves its own notice.
+    final prefs0 = ref.read(sharedPrefsProvider);
+    if (prefs0.getString(kVoiceImprovedNoticePref) != null) await prefs0.remove(kVoiceImprovedNoticePref);
+    if (!ref.mounted) return;
+    final voiceCtrl = ref.read(voiceProvider.notifier);
+    if (voiceCtrl.upgradeStaged) {
+      await voiceCtrl.swapIfStaged();
+      if (!ref.mounted) return;
+    }
+    voiceCtrl.checkUpgrade();
+
     final current = ref.read(_currentPrepareProvider);
     final outcomeOf = Completer<_Outcome>();
     StreamSubscription<BeytAudio>? sub;

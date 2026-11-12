@@ -238,6 +238,7 @@ void main() {
         voiceCacheBaseProvider.overrideWithValue(cacheBase),
         voiceWorkerProvider.overrideWithValue(worker),
         voiceClockProvider.overrideWithValue(() => clock.now),
+        voiceDownloaderProvider.overrideWithValue(OfflineVoiceDownloader()),
       ],
     );
     addTearDown(c.dispose);

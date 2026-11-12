@@ -1007,6 +1007,9 @@ class L10nEn extends L10n {
   String get voiceOnDevice => 'Ganj voice, on this device';
 
   @override
+  String get voiceImproved => 'Machine reading got better';
+
+  @override
   String voicePreparing(String done, String total) {
     return 'Preparing… $done of $total beyts';
   }

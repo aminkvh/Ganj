@@ -78,6 +78,9 @@ String normalizeFa(String text) {
 
 String stripHarakat(String text) => _removeWhere(text, _isHarakat);
 
+/// Which reading rules made a reading; saved readings are keyed on it so older rules' readings are never reused.
+const kReadingRulesVersion = '1.2.0';
+
 /// Candidates tried against the metre and the written vowel marks.
 const int nbestCount = 8;
 
@@ -255,30 +258,65 @@ bool longAWritten(String word, String ph) {
   return 'a'.allMatches(stripEzafe(ph, base)).length <= n;
 }
 
+const String _yeAst = 'ی‌است';
+
+/// Ruled 2026-11-09: a word written with ی‌است is read -ist (زبانی‌است z/banist, not z/bani/st), unless the line then
+/// fails a metre it scans in. A one-letter stem keeps its ast (نی‌است, کی‌است).
+List<String> contractAst(List<String> words, List<String> pw, String? metre) {
+  String one(String word, String ph) {
+    final plain = stripHarakat(word);
+    if (plain.endsWith(_yeAst) && plain.length - _yeAst.length >= 2) {
+      for (final tail in const ['i/st', 'i@/st']) {
+        if (ph.endsWith(tail)) return '${ph.substring(0, ph.length - tail.length)}ist';
+      }
+    }
+    return ph;
+  }
+
+  final out = [for (var i = 0; i < words.length && i < pw.length; i++) one(words[i], pw[i])];
+  if (!_listEq(out, pw) &&
+      metre != null &&
+      metre.isNotEmpty &&
+      scans(pw.join(' '), metre) &&
+      !scans(out.join(' '), metre)) {
+    return List<String>.from(pw);
+  }
+  return out;
+}
+
+bool _listEq(List<String> a, List<String> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] != b[i]) return false;
+  }
+  return true;
+}
+
 /// A final kasra or هٔ; Unicode writes a kasra before a shadda on the same letter (حقِّ = ح ق ِ ّ).
 bool writtenEzafe(String word) =>
     word.endsWith('ه$_hamzaAbove') || word.endsWith(_kasra) || word.endsWith('$_kasra$_shadda');
 
-/// The written short vowels (a final kasra is the ezafe) occur in order among the phonemes' short vowels, and every
-/// letter carrying a shadda appears doubled (شکّر → š/kk/r).
+/// The written short vowels (a final kasra is the ezafe) occur in order among the phonemes' vowels, each as a vowel
+/// that reads it ([_markOptions]: مَی mey, کَرِیم k/rim), and every letter carrying a shadda appears doubled (شکّر →
+/// š/kk/r).
 bool harakatAgrees(String word, String ph) {
   final body = stripEzafe(ph);
   if (word.endsWith('$_kasra$_shadda')) {
     word = word.substring(0, word.length - 2) + _shadda; // حقِّ: the kasra is the ezafe
   }
-  final marks = [
-    for (final c in pyRstripChars(word, _kasra).split(''))
-      if (_markVowel.containsKey(c)) _markVowel[c]!,
-  ];
-  final shorts = [
+  final lm = _letters(word);
+  final vowels = [
     for (final c in body.split(''))
-      if (_shortVowels.contains(c)) c,
+      if (_vowels.contains(c)) c,
   ];
-  var pos = 0;
-  for (final m in marks) {
-    final idx = shorts.indexOf(m, pos);
-    if (idx < 0) return false;
-    pos = idx + 1;
+  var pos = 0; // one pass over the vowels, as Python's shared iterator
+  for (final (i, v) in _marked(lm)) {
+    final options = _markOptions(lm, i, v);
+    while (pos < vowels.length && !options.contains(vowels[pos])) {
+      pos++;
+    }
+    if (pos >= vowels.length) return false;
+    pos++;
   }
   final letters = [
     for (final c in word.split(''))
@@ -334,6 +372,187 @@ const Set<String> _noGeminate = {
   'h',
   '@',
 }; // و ی ه ع/ء: often vowels or silent in writing, too ambiguous to place
+
+// Reading the written marks (ruled 2026-11-11): each letter with its marks, the vowels that read a mark, and the repair
+const String _alefs = 'اأإآ', _ye = 'ی', _he = 'ه';
+const String _vowels = '${_shortVowels}aiu';
+// مِی is mey (the kasra is written: never mi); کِی دِی نِی are read either way, فِی لِی هِی are Arabic i
+const String _meyM = 'م';
+
+/// Python's `x in s` for a string: true for the empty string too (the last letter has no letter after it, and Python
+/// then counts '' as in ALEFS).
+bool _pyIn(String x, String s) => s.contains(x);
+
+/// One letter of a word as [_letters] gives it.
+class _Letter {
+  _Letter(this.c, this.start);
+  final String c;
+  String marks = '';
+  final bool start; // starts a morpheme
+  bool end = false; // ends a morpheme
+}
+
+/// [letter, its marks, starts a morpheme, ends a morpheme] for each letter of the word; a ZWNJ ends a morpheme.
+/// Marks are the nonspacing marks (Unicode category Mn, as Python's unicodedata has them).
+List<_Letter> _letters(String word) {
+  final out = <_Letter>[];
+  var start = true;
+  for (final c in word.runes) {
+    if (c == 0x200C) {
+      if (out.isNotEmpty) out.last.end = true;
+      start = true;
+    } else if (c == 0x200D) {
+      continue;
+    } else if (isPyMn(c)) {
+      if (out.isNotEmpty) out.last.marks += String.fromCharCode(c);
+    } else {
+      out.add(_Letter(String.fromCharCode(c), start));
+      start = false;
+    }
+  }
+  if (out.isNotEmpty) out.last.end = true;
+  return out;
+}
+
+String? _markVowelOf(String marks) {
+  for (final c in marks.split('')) {
+    final v = _markVowel[c];
+    if (v != null) return v;
+  }
+  return null;
+}
+
+/// (letter index, vowel) for each letter written with a short vowel; a kasra on the last letter is the ezafe.
+List<(int, String)> _marked(List<_Letter> lm) {
+  final out = <(int, String)>[
+    for (var i = 0; i < lm.length; i++)
+      if (_markVowelOf(lm[i].marks) case final v?) (i, v),
+  ];
+  if (out.isNotEmpty && out.last == (lm.length - 1, 'e')) out.removeLast();
+  return out;
+}
+
+/// Letter i has no vowel mark, or only the ezafe's kasra on the last letter (مَیِ).
+bool _bare(List<_Letter> lm, int i) {
+  final v = _markVowelOf(lm[i].marks);
+  return v == null || (v == 'e' && i == lm.length - 1);
+}
+
+/// Letter i + 1 is a bare ی/و ([letter]) followed by no ا and no final ی/و: the ey of هَیجا and حَیوان, the ow of دَولت
+/// (not the consonant of بَیان، بِشَوی).
+bool _semivowel(List<_Letter> lm, int i, String letter) {
+  if (i + 1 >= lm.length || lm[i + 1].c != letter || !_bare(lm, i + 1)) return false;
+  if (i + 2 >= lm.length || lm[i + 1].end) return true;
+  final n = lm[i + 2];
+  return !_pyIn(n.c, 'اآ') && !(_pyIn(n.c, _ye + _vav) && n.end);
+}
+
+/// مِی as a whole morpheme (مِی، مِی‌پرستی).
+bool _mey(List<_Letter> lm, int i) => lm[i].start && lm[i].c == _meyM && _semivowel(lm, i, _ye) && lm[i + 1].end;
+
+/// The vowels that read the mark [v] on letter [i] of _letters(word): fatha / (ey before a bare ی, the ow of a bare و
+/// as o, a before ا or the final ی of لَدَی, the e of a final ه as in کَندَه), kasra e (the long i of a bare ی after it,
+/// as in کَرِیم; مِی is ey), damma o (u before a bare و); a small alef on the letter writes a.
+Set<String> _markOptions(List<_Letter> lm, int i, String v) {
+  final after = i + 1 < lm.length ? lm[i + 1].c : '';
+  final last = i + 1 < lm.length && lm[i + 1].end;
+  final out = lm[i].marks.contains(_smallAlef) ? {v, 'a'} : {v};
+  if (v == '/') {
+    if (_pyIn(after, _alefs)) {
+      out.add('a');
+    } else if (_semivowel(lm, i, _ye)) {
+      out.addAll(last ? const {'e', 'a'} : const {'e'});
+    } else if (_semivowel(lm, i, _vav)) {
+      out.add('o');
+    } else if (after == _he && last) {
+      out.add('e');
+    }
+  } else if (v == 'e' && after == _ye && _bare(lm, i + 1) && !_mey(lm, i)) {
+    out.add('i');
+  } else if (v == 'o' && after == _vav && _bare(lm, i + 1)) {
+    out.add('u');
+  }
+  return out;
+}
+
+/// The index in [ph] of letter [i]'s consonant (the second of a doubled one), or null: the word's first letter is
+/// ph[0] when it sounds as written (an alef as @); the others are found at their occurrence counted among
+/// same-sounding letters, as in [geminate], and و ی ه ع/ء cannot be placed.
+int? _place(List<_Letter> lm, int i, String ph) {
+  int j;
+  if (i == 0) {
+    final p = _pyIn(lm[0].c, _alefs) ? '@' : _letterPhone[lm[0].c];
+    if (p == null || p.isEmpty || !ph.startsWith(p)) return null;
+    j = 0;
+  } else {
+    final p = _letterPhone[lm[i].c];
+    if (p == null || p.isEmpty || _noGeminate.contains(p)) return null;
+    var k = 0;
+    for (final x in lm.sublist(0, i)) {
+      if (_letterPhone[x.c] == p) k++;
+    }
+    final pos = [
+      for (var n = 0; n < ph.length; n++)
+        if (ph[n] == p) n,
+    ];
+    if (k >= pos.length) return null;
+    j = pos[k];
+  }
+  return pySlice(ph, j + 1, j + 2) == ph[j] ? j + 1 : j;
+}
+
+/// [ph] with the vowel after letter [i] (its consonant at [j]) read as the mark [v].
+String _readMark(List<_Letter> lm, int i, String v, String ph, int j, bool ezafe) {
+  final nxt = pySlice(ph, j + 1, j + 2);
+  final after = i + 1 < lm.length ? lm[i + 1].c : '';
+  final last = i + 1 < lm.length && lm[i + 1].end;
+  final head = ph.substring(0, j + 1), rest = pySlice(ph, j + 2, ph.length);
+  if (nxt.isNotEmpty && _markOptions(lm, i, v).contains(nxt)) return ph;
+  if (v == 'o' && after == _he && last && nxt == 'e') return ph; // سَعدُه: the Arabic -uh, not a vowel to swap
+  if (nxt.isNotEmpty && _shortVowels.contains(nxt)) return head + v + rest;
+  if (nxt == 'a' || nxt == 'i' || nxt == 'u') {
+    if (nxt == 'i' && _semivowel(lm, i, _ye) && (_mey(lm, i) || (v == '/' && (!last || lm[i].start)))) {
+      return head + (pySlice(ph, j + 2, j + 3) == 'y' ? 'e' : 'ey') + rest; // مِی mey, هَیجا heyja
+    }
+    if (nxt == 'u' && v == '/' && _semivowel(lm, i, _vav)) return '${head}o$rest'; // أَو: the ow of a bare و
+    final written = switch (nxt) {
+      'a' => _pyIn(after, _alefs) || lm[i].marks.contains(_smallAlef) || (after == _ye && last),
+      'i' => after == _ye,
+      _ => after == _vav,
+    };
+    return written ? ph : head + v + rest; // بِپْسَندی bepsandi -> beps/ndi
+  }
+  if (i < lm.length - 1 || !ezafe) return head + v + ph.substring(j + 1); // no vowel read after the letter
+  return ph;
+}
+
+/// Ruled 2026-11-11 (training labels and test couplets went against their marks when no candidate read them): the
+/// vowel after each marked letter becomes the mark (a short vowel swapped, a missing one added, a long vowel no letter
+/// writes shortened), a sukun drops the vowel after its letter, مِی is mey and وَ is va. A letter that cannot be
+/// placed ([_place]) is left, and a word that still does not agree keeps its reading. [lastVowel] false leaves the last
+/// letter's mark to the next word («خَطُّ و خال», «گُلَ انْدَر»); the لله of Allah keeps its long a.
+String followMarks(String word, String ph, {bool lastVowel = true}) {
+  if (harakatAgrees(word, ph) || stripHarakat(word).contains('لله')) return ph;
+  if (stripHarakat(word) == _vav && _markVowelOf(word) == '/') return 'v/';
+  final body = stripEzafe(ph);
+  final lm = _letters(word);
+  final vowels = {for (final (i, v) in _marked(lm)) i: v};
+  var out = body;
+  for (var i = 0; i < lm.length; i++) {
+    final quiet = lm[i].marks.contains(_sukun), v = vowels[i];
+    if (!quiet && (v == null || (i == lm.length - 1 && !lastVowel))) continue;
+    final j = _place(lm, i, out);
+    if (j == null) continue;
+    if (quiet) {
+      final nxt = pySlice(out, j + 1, j + 2);
+      if (nxt.isNotEmpty && _shortVowels.contains(nxt)) out = out.substring(0, j + 1) + pySlice(out, j + 2, out.length);
+    } else {
+      out = _readMark(lm, i, v!, out, j, body != ph);
+    }
+  }
+  final updated = out + ph.substring(body.length);
+  return harakatAgrees(word, updated) ? updated : ph;
+}
 
 List<String> _splitWords(String raw) => [
   for (final w in remapGe2pe(raw).split(' '))
@@ -579,7 +798,9 @@ class G2P {
         pw = [
           for (var i = 0; i < n; i++) words[i].endsWith(_sukun) ? stripEzafe(pw[i], plain[i]) : pw[i],
         ]; // دستْ: no ezafe
+        pw = noEzafeBeforePause(text, words, plain, pw); // «به خواب، دو چشم»: xab
         pw[n - 1] = stripEzafe(pw[n - 1], plain[n - 1]); // a hemistich ends a phrase: no ezafe across the line break
+        pw = contractAst(words, pw, metred ? metre : null);
       }
       // rank: aligned, scans the metre, agrees with the written vowel marks, then (when none aligns) the word count
       // closest to the text's — a refrain written 7 times for 4 loses to one written 5 times; ties keep the model's order
@@ -604,6 +825,12 @@ class G2P {
         for (var i = 0; i < pw.length; i++)
           tanwin(words[i], smallAlef(words[i], words[i].contains(_shadda) ? geminate(words[i], pw[i]) : pw[i])),
       ];
+      // and one that reads the marks; a mark on the last letter before و or an alef runs into that word
+      final last = [
+        for (var i = 0; i < words.length; i++)
+          i == words.length - 1 || !(plain[i + 1] == _vav || _alefs.split('').any((a) => plain[i + 1].startsWith(a))),
+      ];
+      pw = [for (var i = 0; i < pw.length; i++) followMarks(words[i], pw[i], lastVowel: last[i])];
     } else {
       mismatches++;
     }
@@ -666,6 +893,20 @@ List<String> punctuationAfterWords(String line) {
     }
   }
   return out;
+}
+
+/// Ruled 2026-11-10 («تا کی ز قدیم و مُحدَث، اومیدم و بیم»): a word right before a typed pause mark ends a phrase and
+/// takes no ezafe; a written kasra keeps it. Training labels had one there («به خواب، دو چشم» xabe1, «مَرد، اَحوَل»
+/// m/rde1). A mark typed against the next word («گفت !هر») belongs to the word before it. Returns a new list; a line
+/// whose marks do not line up with its words is left as it is.
+List<String> noEzafeBeforePause(String line, List<String> words, List<String> plain, List<String> pw) {
+  final spaced = line.split('').map((ch) => (_shortMarks + _longMarks).contains(ch) ? ' $ch ' : ch).join();
+  final marks = punctuationAfterWords(spaced);
+  if (marks.length != pw.length) return List<String>.from(pw);
+  return [
+    for (var i = 0; i < pw.length; i++)
+      (marks[i].isNotEmpty && !writtenEzafe(words[i])) ? stripEzafe(pw[i], plain[i]) : pw[i],
+  ];
 }
 
 /// A standalone «و» is read v/ (va) in prose, at the start of a line and after a pause mark, as Persian reads it

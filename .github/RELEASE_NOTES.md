@@ -8,6 +8,17 @@
 
 ## What's new · تازه‌ها
 
+### 1.6.1
+- **Machine reading reads better:** a new reading model (Ganj voice 1.2.0) places harakat, ezafe and rhymes more correctly. If you already have the voice, Ganj fetches only the new part (about 34 MB) quietly in the background and switches to it at your next reading, with a short note «Machine reading got better». The voice itself is the same.
+- **Highlighting:** machine reading now highlights each hemistich as it is read, like Ganjoor's recitations.
+
+<div dir="rtl">
+
+- **خوانش ماشینی بهتر می‌خواند:** مدل تازهٔ خوانش (آوای گنج ۱.۲.۰) حرکت‌ها، کسرهٔ اضافه و قافیه‌ها را درست‌تر می‌خواند. اگر صدا را دارید، گنج فقط بخش تازه را (حدود ۳۴ مگابایت) آرام در پس‌زمینه می‌گیرد و در خوانش بعدی به آن می‌رود، با یادداشت کوتاه «خوانش ماشینی بهتر شد». خود صدا همان است.
+- **پررنگ‌شدن:** خوانش ماشینی اکنون هر مصراع را هنگام خواندن پررنگ می‌کند، مانند خوانش‌های گنجور.
+
+</div>
+
 ### 1.6.0
 - **Machine reading (خوانش ماشینی):** poems without a recitation can now be read aloud by Ganj's own voice, made **on your device**. Tap **Machine reading** under Recitations; the voice is downloaded once (about 585 MB, only after you agree) and then works offline. Reading starts within seconds while the rest of the poem is prepared, and the beyt being read is highlighted. Lines that are not Persian (Arabic hemistichs, for example) are skipped. A poem read once plays again at once. The voice can be removed in Settings. On Android, Windows, macOS and Linux (not yet on iPhone or iPad); macOS and Linux are new to it, so please report any problem.
 - **New versions:** the copies downloaded from GitHub (Android APK, Windows, macOS, Linux) say quietly on the home screen when a newer Ganj is out, with a link to download it; Settings keeps the link. Copies from Google Play or Cafe Bazaar are updated by the store and never ask.

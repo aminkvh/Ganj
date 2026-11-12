@@ -319,6 +319,7 @@
   "voiceFailedSpace": "Not enough space on the device",
   "voiceFailedChecksum": "The voice file arrived damaged",
   "voiceOnDevice": "Ganj voice, on this device",
+  "voiceImproved": "Machine reading got better",
   "voicePreparing": "Preparing… {done} of {total} beyts",
   "voicePrepareFailed": "Could not read this poem",
   "voiceConsentBody": "This voice reads poems on this device. It downloads once ({size}) and can be removed in Settings.",

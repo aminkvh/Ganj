@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ganj/data/providers.dart' show sharedPrefsProvider;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ganj/data/api/dto/poem.dart';
 import 'package:ganj/data/api/dto/recitation.dart';
 import 'package:ganj/features/player/audio_backend.dart' show PlaylistItem;
@@ -141,10 +143,11 @@ void main() {
     bool audio = true,
     FakeAudioBackend? backend,
     VoiceManifest served = _manifest,
+    Map<String, Object> prefValues = const {},
   }) async {
     prepareCalls.clear();
     voice = _FakeVoice(status)..served = served;
-    final prefs = await mockPrefs();
+    final prefs = await mockPrefs(prefValues);
     await tester.pumpWidget(
       testApp(
         Scaffold(
@@ -339,6 +342,56 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('voice-trailing')));
       await tester.pump();
       expect(prepareCalls, ['start true خوانش ماشینی']);
+    });
+
+    group('the improved line', () {
+      Future<SharedPreferences> pumpNotice(WidgetTester tester, PrepareStatus prepare) async {
+        final c = await pumpList(
+          tester,
+          _poem(),
+          status: const VoiceReady('d', 'v1', 1, 'quality'),
+          prepare: prepare,
+          prefValues: {kVoiceImprovedNoticePref: '1.2.0'},
+        );
+        return c.read(sharedPrefsProvider);
+      }
+
+      testWidgets('replaces the plain subtitle before the poem is read', (tester) async {
+        final prefs = await pumpNotice(tester, const PrepareIdle());
+        expect(find.text('خوانش ماشینی بهتر شد'), findsOneWidget);
+        expect(find.text('صدای گنج، روی همین دستگاه'), findsNothing);
+        expect(prefs.getString(kVoiceImprovedNoticePref), '1.2.0', reason: 'not read yet: still to say');
+      });
+
+      testWidgets('stays after the swapped reading is prepared, across rebuilds', (tester) async {
+        final prefs = await pumpNotice(tester, Prepared(File('x.wav'), const []));
+        expect(find.text('خوانش ماشینی بهتر شد'), findsOneWidget);
+        await tester.tap(find.byIcon(Icons.headphones)); // collapse and open again: a fresh build
+        await tester.pumpAndSettle();
+        await tester.tap(find.byIcon(Icons.headphones));
+        await tester.pumpAndSettle();
+        expect(find.text('خوانش ماشینی بهتر شد'), findsOneWidget);
+        expect(prefs.getString(kVoiceImprovedNoticePref), '1.2.0', reason: 'only the next reading spends it');
+      });
+
+      testWidgets('never hides progress, and progress does not spend it', (tester) async {
+        final prefs = await pumpNotice(tester, const Preparing(2, 7));
+        expect(find.text('آماده‌سازی… ۲ از ۷ بیت'), findsOneWidget);
+        expect(find.text('خوانش ماشینی بهتر شد'), findsNothing);
+        expect(prefs.getString(kVoiceImprovedNoticePref), '1.2.0');
+      });
+
+      testWidgets('a failed prepare shows its error, not the notice', (tester) async {
+        await pumpNotice(tester, const PrepareFailed());
+        expect(find.text('خواندن ممکن نشد'), findsOneWidget);
+        expect(find.text('خوانش ماشینی بهتر شد'), findsNothing);
+      });
+
+      testWidgets('shows the plain line once spent', (tester) async {
+        await pumpList(tester, _poem(), status: const VoiceReady('d', 'v1', 1, 'quality'));
+        expect(find.text('صدای گنج، روی همین دستگاه'), findsOneWidget);
+        expect(find.text('خوانش ماشینی بهتر شد'), findsNothing);
+      });
     });
 
     testWidgets('the current voice toggles instead of preparing', (tester) async {

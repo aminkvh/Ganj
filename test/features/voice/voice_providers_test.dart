@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -62,7 +63,24 @@ void _install(Directory root, [VoiceManifest m = _manifest, String? variant]) {
   File('${d.path}${_sep}installed.json').writeAsStringSync(jsonEncode(j));
 }
 
-class _FakeDownloader implements VoiceDownloader {
+/// The upgrade path (stage, then swap) is not exercised by these fakes.
+mixin _NoSwap implements VoiceDownloader {
+  @override
+  Future<String> stage(VoiceManifest m, {required String variant, required Directory from, CancelToken? cancel}) =>
+      throw UnimplementedError();
+
+  @override
+  bool staged(VoiceManifest m, {required String variant, required Directory from}) => false;
+
+  @override
+  int changedBytes(VoiceManifest m, {required String variant, required Directory from}) => throw UnimplementedError();
+
+  @override
+  Future<void> finishSwap(VoiceManifest m, {required String variant, required Directory from}) =>
+      throw UnimplementedError();
+}
+
+class _FakeDownloader with _NoSwap implements VoiceDownloader {
   _FakeDownloader(this.root, {this.fail, this.manifest = _manifest});
 
   final Directory root;
@@ -91,9 +109,101 @@ class _FakeDownloader implements VoiceDownloader {
   }
 }
 
+/// The background upgrade, on disk like the real downloader: [stage] fills `<root>/<version>-<variant>` and marks
+/// it staged (held while [hold], failing with [stageFails]), [finishSwap] makes it the installed voice and retires
+/// [from]'s `installed.json` (once [swapGate], when set, completes). [changed] is what [changedBytes] reports.
+class _UpgradeDownloader implements VoiceDownloader {
+  _UpgradeDownloader(
+    this.root,
+    this.manifest, {
+    this.hold = false,
+    this.stageFails = false,
+    this.swapFails = false,
+    this.changed = 10,
+  });
+
+  final Directory root;
+  final VoiceManifest manifest;
+  bool hold;
+  final bool stageFails;
+  final bool swapFails;
+  final int changed;
+
+  /// When set, [finishSwap] waits for it.
+  Completer<void>? swapGate;
+
+  /// Completes when a [finishSwap] has started.
+  final swapStarted = Completer<void>();
+
+  int fetches = 0;
+  final staging = <String>[];
+  final swaps = <String>[];
+
+  @override
+  int changedBytes(VoiceManifest m, {required String variant, required Directory from}) => changed;
+
+  /// Completes when a [stage] has ended, staged or not.
+  final stageEnded = Completer<void>();
+
+  /// Completes when a [stage] has started.
+  final stageStarted = Completer<void>();
+
+  Directory _dir(VoiceManifest m, String variant) => Directory('${root.path}$_sep${m.version}-$variant');
+
+  @override
+  Future<VoiceManifest> fetchManifest() async {
+    fetches++;
+    return manifest;
+  }
+
+  @override
+  Future<String> install(
+    VoiceManifest m, {
+    required String variant,
+    void Function(int got, int total)? onProgress,
+    CancelToken? cancel,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<String> stage(VoiceManifest m, {required String variant, required Directory from, CancelToken? cancel}) async {
+    staging.add('${m.version}-$variant from ${from.path.split(_sep).last}');
+    try {
+      final d = _dir(m, variant)..createSync(recursive: true);
+      File('${d.path}${_sep}model.onnx.part').writeAsBytesSync([1]);
+      if (!stageStarted.isCompleted) stageStarted.complete();
+      while (hold && !(cancel?.isCancelled ?? false)) {
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      }
+      if (cancel?.isCancelled ?? false) throw const VoiceDownloadError(VoiceDownloadFailure.cancelled);
+      if (stageFails) throw const VoiceDownloadError(VoiceDownloadFailure.offline);
+      File('${d.path}${_sep}model.onnx.part').renameSync('${d.path}${_sep}model.onnx');
+      File('${d.path}${_sep}staged.json').writeAsStringSync('{}');
+      return 'hf';
+    } finally {
+      if (!stageEnded.isCompleted) stageEnded.complete();
+    }
+  }
+
+  @override
+  bool staged(VoiceManifest m, {required String variant, required Directory from}) =>
+      File('${_dir(m, variant).path}${_sep}staged.json').existsSync();
+
+  @override
+  Future<void> finishSwap(VoiceManifest m, {required String variant, required Directory from}) async {
+    swaps.add('${m.version}-$variant from ${from.path.split(_sep).last}');
+    if (!swapStarted.isCompleted) swapStarted.complete();
+    final gate = swapGate;
+    if (gate != null) await gate.future;
+    if (swapFails) throw const FileSystemException('locked');
+    _install(root, m, variant);
+    File('${from.path}${_sep}installed.json').renameSync('${from.path}${_sep}installed.json.old');
+    File('${_dir(m, variant).path}${_sep}staged.json').deleteSync();
+  }
+}
+
 /// Leaves a partial file in `<root>/v1`, then fails or (with [untilCancelled]) waits for the cancel and, like a
 /// write still in flight, touches the partial file once more before it stops.
-class _PartialDownloader implements VoiceDownloader {
+class _PartialDownloader with _NoSwap implements VoiceDownloader {
   _PartialDownloader(this.root, {this.untilCancelled = false});
 
   final Directory root;
@@ -154,7 +264,7 @@ void main() {
     }
   });
 
-  ProviderContainer container({VoiceWorker? worker, VoiceDownloader? downloader}) {
+  ProviderContainer container({VoiceWorker? worker, VoiceDownloader? downloader, DateTime Function()? clock}) {
     final c = ProviderContainer(
       overrides: [
         sharedPrefsProvider.overrideWithValue(prefs),
@@ -163,7 +273,8 @@ void main() {
         voiceRootProvider.overrideWithValue(root),
         voiceCacheBaseProvider.overrideWithValue(cacheBase),
         if (worker != null) voiceWorkerProvider.overrideWithValue(worker),
-        if (downloader != null) voiceDownloaderProvider.overrideWithValue(downloader),
+        voiceDownloaderProvider.overrideWithValue(downloader ?? OfflineVoiceDownloader()),
+        if (clock != null) voiceClockProvider.overrideWithValue(clock),
       ],
     );
     addTearDown(c.dispose);
@@ -207,6 +318,7 @@ void main() {
       final firstReady = states.indexWhere((s) => s is VoiceReady);
       expect(states.indexWhere((s) => s is VoiceDownloading), lessThan(firstReady));
       expect(prefs.getString('voice.source'), 'github');
+      expect(prefs.getString(kVoiceImprovedNoticePref), isNull, reason: 'a fresh install never announces');
     });
 
     test('controller download passes the variant; VoiceReady.variant set', () async {
@@ -627,6 +739,40 @@ void main() {
       expect(playedVoice(), isFalse);
     });
 
+    test('a reading cached under the 1.6.0 key is prepared again', () async {
+      _install(root);
+      final poem = _poem(1);
+      // The 1.6.0 key: today's recipe without the rules version in front.
+      final b = StringBuffer()
+        ..write('v1')
+        ..write('\u0000')
+        ..write(poem.metre ?? '');
+      for (final e in beytsOf(poem)) {
+        for (final l in e.req.lines) {
+          b
+            ..write('\u0000')
+            ..write(l);
+        }
+        b.write('\u0001');
+      }
+      final oldKey = sha256.convert(utf8.encode(b.toString())).toString().substring(0, 16);
+      final worker = FakeVoiceWorker();
+      final c = container(worker: worker);
+      final cache = c.read(voiceCacheProvider)!;
+      expect(cache.keyOf(poem, 'v1'), isNot(oldKey));
+      // A whole reading made by the 1.6.0 voice: finished files and a parts folder with both beyts.
+      final dir = cache.root..createSync(recursive: true);
+      File('${dir.path}$_sep${poem.id}-$oldKey.wav').writeAsBytesSync(List.filled(100, 1));
+      File('${dir.path}$_sep${poem.id}-$oldKey.sync.json').writeAsStringSync('[]');
+      final parts = Directory('${dir.path}$_sep${VoiceCache.partsName(poem.id, oldKey)}')..createSync();
+      for (final i in [0, 1]) {
+        File('${parts.path}$_sep$i.pcm').writeAsBytesSync(List.filled(200, 1));
+      }
+      await c.read(voicePrepareProvider(1).notifier).start(poem, playWhenDone: false, artist: _artist);
+      expect(c.read(voicePrepareProvider(1)), isA<Prepared>());
+      expect(worker.requested, [0, 1], reason: 'nothing of the old reading is reused');
+    });
+
     test('cache hit is Prepared immediately', () async {
       _install(root);
       final worker = FakeVoiceWorker();
@@ -674,6 +820,453 @@ void main() {
       expect(installedDir(root), isNotNull);
     });
   });
+
+  group('background upgrade', () {
+    VoiceManifest upm(String version, {bool fast = true}) => VoiceManifest(
+      version: version,
+      files: const [VoiceFile(name: 'model.onnx', size: 100, sha256: 'ab')],
+      variants: {if (fast) 'fast': const <VoiceFile>[], 'quality': const <VoiceFile>[]},
+    );
+
+    Future<void> read(ProviderContainer c, int id, {bool play = false}) =>
+        c.read(voicePrepareProvider(id).notifier).start(_poem(id), playWhenDone: play, artist: _artist);
+
+    Future<void> settled(ProviderContainer c) => c.read(voiceProvider.notifier).upgradeSettled;
+
+    List<String> rootNames() => [for (final e in root.listSync()) e.path.split(_sep).last]..sort();
+
+    test('a newer manifest is staged in the background and swapped at the next reading', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), hold: true);
+      final worker = FakeVoiceWorker();
+      final c = container(worker: worker, downloader: dl);
+      final states = <VoiceStatus>[];
+      c.listen(voiceProvider, (_, s) => states.add(s));
+      await read(c, 1);
+      await dl.stageStarted.future;
+      expect(dl.staging, ['1.2.0-fast from 1.1.0-fast']);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      dl.hold = false;
+      await settled(c);
+      expect(states, isEmpty, reason: 'the stage shows nothing');
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      expect(dl.swaps, isEmpty);
+      expect(Directory('${cacheBase.path}${_sep}1.1.0-fast').existsSync(), isTrue);
+
+      await read(c, 2);
+      expect(dl.swaps, ['1.2.0-fast from 1.1.0-fast']);
+      expect(dl.fetches, 1, reason: 'checked once today');
+      final s = c.read(voiceProvider) as VoiceReady;
+      expect(s.version, '1.2.0');
+      expect(s.variant, 'fast');
+      expect(s.dir, '${root.path}${_sep}1.2.0-fast');
+      expect(rootNames(), ['1.2.0-fast']);
+      expect(worker.disposed, isTrue, reason: 'it held the old voice');
+      expect(prefs.getString('voice.improvedNotice'), '1.2.0');
+      expect(c.read(voiceCacheProvider)!.root.path, '${cacheBase.path}${_sep}1.2.0-fast');
+      expect(Directory('${cacheBase.path}${_sep}1.1.0-fast').existsSync(), isFalse);
+    });
+
+    test('no swap mid-reading', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), hold: true);
+      final worker = FakeVoiceWorker(delay: const Duration(milliseconds: 60));
+      final c = container(worker: worker, downloader: dl);
+      final a = read(c, 1);
+      await dl.stageStarted.future;
+      dl.hold = false;
+      await settled(c); // staged while poem 1 is still being read
+      expect(c.read(voicePreparesProvider).runningPartsDir, isNotNull);
+      final b = read(c, 2); // a start while poem 1 is read: the swap waits
+      await Future.wait([a, b]);
+      expect(dl.swaps, isEmpty);
+      expect(worker.disposed, isFalse);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      expect(c.read(voicePrepareProvider(2)), isA<Prepared>());
+
+      await read(c, 3);
+      expect(dl.swaps, ['1.2.0-fast from 1.1.0-fast']);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.2.0');
+    });
+
+    test('no swap while a machine reading is playing', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1, play: true);
+      await settled(c);
+      expect(backend.isPlaying, isTrue);
+      await read(c, 2, play: true);
+      expect(dl.swaps, isEmpty);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      await c.read(playerProvider.notifier).stop();
+      await read(c, 3);
+      expect(dl.swaps, hasLength(1));
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.2.0');
+    });
+
+    test('checks at most once a day', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      var now = DateTime(2026, 11, 12, 9);
+      final dl = _UpgradeDownloader(root, upm('1.1.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl, clock: () => now);
+      await read(c, 1);
+      await settled(c);
+      await read(c, 2);
+      await settled(c);
+      expect(dl.fetches, 1);
+      expect(prefs.getString('voice.upgradeCheckedAt'), '2026-11-12');
+      now = DateTime(2026, 11, 12, 23, 59);
+      await read(c, 3);
+      await settled(c);
+      expect(dl.fetches, 1);
+      now = DateTime(2026, 11, 13, 0, 1);
+      await read(c, 4);
+      await settled(c);
+      expect(dl.fetches, 2);
+      expect(prefs.getString('voice.upgradeCheckedAt'), '2026-11-13');
+      expect(dl.staging, isEmpty, reason: 'the same version is not an upgrade');
+    });
+
+    test('no check without a voice', () async {
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(dl.fetches, 0);
+      expect(prefs.getString('voice.upgradeCheckedAt'), isNull);
+    });
+
+    test('never downgrades', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.0.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(dl.fetches, 1);
+      expect(dl.staging, isEmpty);
+      expect(rootNames(), ['1.1.0-fast']);
+    });
+
+    test('a failed stage leaves the old voice and shows nothing', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), stageFails: true);
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      final states = <VoiceStatus>[];
+      c.listen(voiceProvider, (_, s) => states.add(s));
+      await read(c, 1);
+      await settled(c);
+      expect(dl.staging, hasLength(1));
+      expect(states, isEmpty);
+      final s = c.read(voiceProvider) as VoiceReady;
+      expect(s.version, '1.1.0');
+      expect(s.lastSwitchFailed, isFalse);
+      expect(prefs.getString('voice.upgradeCheckedAt'), isNotNull, reason: 'recorded even when the check fails');
+      await read(c, 2);
+      expect(dl.swaps, isEmpty);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+      expect(c.read(voicePrepareProvider(2)), isA<Prepared>());
+    });
+
+    test('a failed swap keeps the old voice and shows nothing', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), swapFails: true);
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      final states = <VoiceStatus>[];
+      c.listen(voiceProvider, (_, s) => states.add(s));
+      await read(c, 2);
+      expect(dl.swaps, hasLength(1));
+      expect(states, isEmpty);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      expect(installedDir(root)!.path, '${root.path}${_sep}1.1.0-fast');
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+    });
+
+    test('an installed fast variant is not upgraded when the manifest has no fast', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0', fast: false));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(dl.fetches, 1);
+      expect(dl.staging, isEmpty);
+      expect(rootNames(), ['1.1.0-fast']);
+    });
+
+    test('the notice survives its own swap and is spent by the next reading', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(prefs.getString('voice.improvedNotice'), isNull, reason: 'a stage alone says nothing');
+      await read(c, 2); // swaps
+      expect(prefs.getString('voice.improvedNotice'), '1.2.0');
+      await read(c, 3); // a later reading
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+    });
+
+    test('remove() forgets the improved notice', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      await read(c, 2);
+      expect(prefs.getString('voice.improvedNotice'), '1.2.0');
+      await c.read(voiceProvider.notifier).remove();
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+    });
+
+    test('remove() deletes a pending stage', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(rootNames(), ['1.1.0-fast', '1.2.0-fast']);
+      await c.read(voiceProvider.notifier).remove();
+      expect(rootNames(), isEmpty);
+
+      // The voice downloaded again: nothing of the old stage is swapped in.
+      _install(root, upm('1.1.0'), 'fast');
+      final dl2 = _UpgradeDownloader(root, upm('1.1.0'));
+      final c2 = container(worker: FakeVoiceWorker(), downloader: dl2);
+      await read(c2, 1);
+      expect(dl2.swaps, isEmpty);
+      expect((c2.read(voiceProvider) as VoiceReady).version, '1.1.0');
+    });
+
+    test('remove() during a stage stops it, and nothing it wrote is left', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), hold: true);
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await dl.stageStarted.future;
+      await c.read(voiceProvider.notifier).remove();
+      expect(dl.stageEnded.isCompleted, isTrue, reason: 'remove waits for the stage to stop');
+      expect(rootNames(), isEmpty);
+      expect(c.read(voiceProvider), isA<VoiceAbsent>());
+    });
+
+    test('a reading during the stage uses the old voice', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), hold: true);
+      final worker = FakeVoiceWorker();
+      final c = container(worker: worker, downloader: dl);
+      await read(c, 1);
+      await dl.stageStarted.future;
+      await read(c, 2);
+      final s = c.read(voicePrepareProvider(2));
+      expect(s, isA<Prepared>());
+      expect((s as Prepared).wav.path, startsWith('${cacheBase.path}${_sep}1.1.0-fast$_sep'));
+      expect(worker.requested, [0, 1, 0, 1]);
+      expect(worker.disposed, isFalse);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      dl.hold = false;
+      await settled(c);
+    });
+
+    test('a swap killed half way is finished at the next launch', () {
+      void put(Directory d, String name, int size) =>
+          File('${d.path}$_sep$name').writeAsBytesSync(List.filled(size, 1));
+      Map<String, dynamic> f(String name, int size, String sha) => {'name': name, 'size': size, 'sha256': sha};
+      final old = Directory('${root.path}${_sep}1.1.0-fast')..createSync();
+      put(old, 'a.bin', 3);
+      put(old, 'b.bin', 4);
+      File('${old.path}${_sep}installed.json').writeAsStringSync(
+        jsonEncode({
+          'version': '1.1.0',
+          'variant': 'fast',
+          'installedAt': '2026-11-01T00:00:00.000Z',
+          'files': [f('a.bin', 3, 'aa'), f('b.bin', 4, 'b1')],
+        }),
+      );
+      // The new folder has its changed file and the marker; c.bin was moved, a.bin was not yet.
+      final nu = Directory('${root.path}${_sep}1.2.0-fast')..createSync();
+      put(nu, 'b.bin', 5);
+      put(nu, 'c.bin', 2);
+      File('${nu.path}${_sep}swapping.json').writeAsStringSync(
+        jsonEncode({
+          'from': '1.1.0-fast',
+          'version': '1.2.0',
+          'variant': 'fast',
+          'files': [f('a.bin', 3, 'aa'), f('b.bin', 5, 'b2'), f('c.bin', 2, 'cc')],
+          'move': ['a.bin', 'c.bin'],
+        }),
+      );
+      final s = container().read(voiceProvider) as VoiceReady;
+      expect(s.version, '1.2.0');
+      expect(s.dir, nu.path);
+      expect(File('${nu.path}${_sep}a.bin').existsSync(), isTrue);
+      expect(File('${nu.path}${_sep}swapping.json').existsSync(), isFalse);
+      expect(File('${old.path}${_sep}installed.json').existsSync(), isFalse);
+    });
+
+    test('two swaps at once run as one', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      final ctrl = c.read(voiceProvider.notifier);
+      await Future.wait([ctrl.swapIfStaged(), ctrl.swapIfStaged()]);
+      expect(dl.swaps, ['1.2.0-fast from 1.1.0-fast']);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.2.0');
+      expect(prefs.getString('voice.improvedNotice'), '1.2.0');
+    });
+
+    test('no swap while an upgrade check is staging', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.3.0'), hold: true);
+      final worker = FakeVoiceWorker();
+      final c = container(worker: worker, downloader: dl);
+      await read(c, 1);
+      await dl.stageStarted.future; // 1.3.0 is being staged from 1.1.0-fast
+      // An older stage, left waiting from an earlier day.
+      final older = Directory('${root.path}${_sep}1.2.0-fast')..createSync();
+      File('${older.path}${_sep}staged.json').writeAsStringSync('{}');
+      await prefs.setString('voice.stagedManifest', jsonEncode(upm('1.2.0').toJson()));
+      await read(c, 2);
+      expect(dl.swaps, isEmpty, reason: 'the stage reads the folder a swap would empty');
+      expect(worker.disposed, isFalse);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+      dl.hold = false;
+      await settled(c);
+      await read(c, 3);
+      expect(dl.swaps, ['1.3.0-fast from 1.1.0-fast']);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.3.0');
+    });
+
+    test('after a failed swap no other is tried until the next launch', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), swapFails: true);
+      final worker = _CountingWorker();
+      final c = container(worker: worker, downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      await read(c, 2);
+      expect(dl.swaps, hasLength(1));
+      expect(worker.disposals, 1);
+      await read(c, 3);
+      expect(dl.swaps, hasLength(1));
+      expect(worker.disposals, 1, reason: 'the reader is not stopped (and its model reloaded) again');
+      expect(c.read(voicePrepareProvider(3)), isA<Prepared>());
+
+      // The next launch tries again.
+      final c2 = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c2, 4);
+      expect(dl.swaps, hasLength(2));
+    });
+
+    test('remove() during a swap waits for it: no notice, nothing left', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'))..swapGate = Completer<void>();
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      final ctrl = c.read(voiceProvider.notifier);
+      final swap = ctrl.swapIfStaged();
+      await dl.swapStarted.future;
+      final removed = ctrl.remove();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      dl.swapGate!.complete();
+      await removed;
+      await swap;
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+      expect(prefs.getString('voice.stagedManifest'), isNull);
+      expect(rootNames(), isEmpty);
+      expect(c.read(voiceProvider), isA<VoiceAbsent>());
+    });
+
+    test('markCorrupt() forgets the improved notice', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'));
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      await read(c, 2);
+      expect(prefs.getString('voice.improvedNotice'), '1.2.0');
+      await c.read(voiceProvider.notifier).markCorrupt();
+      expect(prefs.getString('voice.improvedNotice'), isNull);
+    });
+
+    test('an upgrade that changes more than a quarter of the voice is not staged', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), changed: 26); // of 100 bytes
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(dl.fetches, 1);
+      expect(dl.staging, isEmpty);
+      expect(prefs.getString('voice.stagedManifest'), isNull);
+      expect(rootNames(), ['1.1.0-fast']);
+      await read(c, 2);
+      expect(dl.swaps, isEmpty);
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.1.0');
+    });
+
+    test('a quarter of the voice is still staged', () async {
+      _install(root, upm('1.1.0'), 'fast');
+      final dl = _UpgradeDownloader(root, upm('1.2.0'), changed: 25);
+      final c = container(worker: FakeVoiceWorker(), downloader: dl);
+      await read(c, 1);
+      await settled(c);
+      expect(dl.staging, hasLength(1));
+    });
+
+    test('the old folder a swap killed half way leaves is deleted at the next launch', () async {
+      void put(Directory d, String name, int size) =>
+          File('${d.path}$_sep$name').writeAsBytesSync(List.filled(size, 1));
+      Map<String, dynamic> f(String name, int size, String sha) => {'name': name, 'size': size, 'sha256': sha};
+      final old = Directory('${root.path}${_sep}1.1.0-fast')..createSync();
+      put(old, 'a.bin', 3);
+      put(old, 'b.bin', 4);
+      File('${old.path}${_sep}installed.json').writeAsStringSync(
+        jsonEncode({
+          'version': '1.1.0',
+          'variant': 'fast',
+          'installedAt': '2026-11-01T00:00:00.000Z',
+          'files': [f('a.bin', 3, 'aa'), f('b.bin', 4, 'b1')],
+        }),
+      );
+      final nu = Directory('${root.path}${_sep}1.2.0-fast')..createSync();
+      put(nu, 'b.bin', 5);
+      File('${nu.path}${_sep}swapping.json').writeAsStringSync(
+        jsonEncode({
+          'from': '1.1.0-fast',
+          'version': '1.2.0',
+          'variant': 'fast',
+          'files': [f('a.bin', 3, 'aa'), f('b.bin', 5, 'b2')],
+          'move': ['a.bin'],
+        }),
+      );
+      // Kept: a later stage, and a partial download (it resumes).
+      final staged = Directory('${root.path}${_sep}1.3.0-fast')..createSync();
+      File('${staged.path}${_sep}staged.json').writeAsStringSync('{}');
+      File('${staged.path}${_sep}installed.json.old').writeAsStringSync('{}');
+      final partial = Directory('${root.path}${_sep}1.2.0-quality')..createSync();
+      put(partial, 'model.onnx.part', 7);
+
+      final c = container();
+      expect((c.read(voiceProvider) as VoiceReady).version, '1.2.0');
+      for (var i = 0; i < 100 && old.existsSync(); i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+      }
+      expect(rootNames(), ['1.2.0-fast', '1.2.0-quality', '1.3.0-fast']);
+    });
+  });
+}
+
+/// Counts [dispose] calls and, like the real worker, reads again after one.
+class _CountingWorker extends FakeVoiceWorker {
+  int disposals = 0;
+
+  @override
+  Future<void> dispose() async => disposals++;
 }
 
 class _DyingWorker implements VoiceWorker {

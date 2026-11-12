@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/text/persian_normalize.dart';
 import '../../../core/theme/ganj_colors.dart';
 import '../../../data/api/dto/poem.dart';
+import '../../../data/providers.dart' show sharedPrefsProvider;
 import '../../../l10n/l10n.dart';
 import '../../library/library_providers.dart' show formatBytes;
 import '../../player/player_controller.dart';
@@ -102,6 +103,10 @@ class VoiceRow extends ConsumerWidget {
     final current = st.poem?.id == poem.id && st.recitation?.id == kVoiceRecitationId;
     final playing = current && st.playing;
 
+    // A background upgrade was just swapped in ([kVoiceImprovedNoticePref]): said in the row's muted subtitle until
+    // the next reading starts ([PrepareController.start] spends it).
+    final improved = voice is VoiceReady && ref.read(sharedPrefsProvider).getString(kVoiceImprovedNoticePref) != null;
+
     void start() => prep.start(poem, playWhenDone: true, artist: l.voiceRowTitle);
     void consent() => _consent(context, ref);
 
@@ -147,7 +152,8 @@ class VoiceRow extends ConsumerWidget {
             onPlay = onTrailing = start;
             trailingIcon = Icons.refresh;
           case PrepareIdle() || Prepared():
-            subtitle = l.voiceOnDevice;
+            // The one-time «got better» line stands in for the plain subtitle only; progress and errors stay.
+            subtitle = improved ? l.voiceImproved : l.voiceOnDevice;
             // In error the wav may have been evicted or cleared: start() checks the cache and prepares again.
             onPlay = () => !current || st.status == PlayerStatus.error ? start() : player.toggle();
         }
