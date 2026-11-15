@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>Test podcast</title>
+    <item>
+      <title>اپیزود۲۹- سهراب‌کُشون</title>
+      <guid isPermaLink="false">shenoto-rss-256985</guid>
+      <enclosure url="https://example.org/29.mp3" length="5013" type="audio/mpeg"/>
+      <itunes:duration>01:23:33</itunes:duration>
+    </item>
+    <item>
+      <title>اپیزود۲۶- نبرد سهراب و دختر ایران</title>
+      <guid isPermaLink="false">shenoto-rss-239249</guid>
+      <enclosure url="https://example.org/26.mp3" length="4656" type="audio/mpeg"/>
+      <itunes:duration>00:00</itunes:duration>
+    </item>
+    <item>
+      <title>No audio</title>
+      <guid>no-audio</guid>
+    </item>
+  </channel>
+</rss>

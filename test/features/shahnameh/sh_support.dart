@@ -6,11 +6,13 @@ import 'package:ganj/core/net/api_client.dart';
 import 'package:ganj/core/net/http_cache.dart';
 import 'package:ganj/data/api/ganjoor_api.dart';
 import 'package:ganj/data/db/app_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show AsyncData;
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:ganj/data/providers.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:ganj/features/map/poets_map_screen.dart';
 import 'package:ganj/features/shahnameh/data/models.dart';
+import 'package:ganj/features/shahnameh/data/podcasts.dart';
 import 'package:ganj/features/shahnameh/data/shahnameh_providers.dart';
 import 'package:ganj/features/shahnameh/data/world_loader.dart';
 import 'package:drift/native.dart';
@@ -29,10 +31,18 @@ final ShWorld realWorld = () {
   );
 }();
 
+/// The bundled podcasts, read from disk.
+final List<ShPodcast> realPodcasts = parsePodcasts(File('assets/seed/shahnameh/podcasts.json').readAsStringSync());
+
 String shFx(String name) => File('test/fixtures/shahnameh/$name').readAsStringSync();
 
 /// World from disk, live people API from fixtures (or offline), blank map tiles.
-List<Override> shOverrides({FakeAdapter? adapter, ShWorld? world, bool brokenWorld = false}) {
+List<Override> shOverrides({
+  FakeAdapter? adapter,
+  ShWorld? world,
+  bool brokenWorld = false,
+  List<ShPodcast>? podcasts,
+}) {
   final a =
       adapter ??
       FakeAdapter({
@@ -43,6 +53,7 @@ List<Override> shOverrides({FakeAdapter? adapter, ShWorld? world, bool brokenWor
       });
   return [
     shahnamehWorldProvider.overrideWith(() => _FixedWorld(brokenWorld ? null : (world ?? realWorld))),
+    shPodcastsProvider.overrideWithValue(AsyncData(podcasts ?? realPodcasts)),
     ganjoorApiProvider.overrideWithValue(
       GanjoorApi(
         dio: createDio(adapter: a),

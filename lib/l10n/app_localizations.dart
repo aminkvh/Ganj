@@ -1483,6 +1483,42 @@ abstract class L10n {
   /// **'روی نقشه'**
   String get shShowOnMap;
 
+  /// No description provided for @shListen.
+  ///
+  /// In fa, this message translates to:
+  /// **'شنیدن'**
+  String get shListen;
+
+  /// No description provided for @shPodcasts.
+  ///
+  /// In fa, this message translates to:
+  /// **'پادکست‌های شاهنامه'**
+  String get shPodcasts;
+
+  /// No description provided for @shPodcastsTitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'پادکست‌های این داستان'**
+  String get shPodcastsTitle;
+
+  /// No description provided for @shPodcastFailed.
+  ///
+  /// In fa, this message translates to:
+  /// **'فهرست قسمت‌ها بار نشد.'**
+  String get shPodcastFailed;
+
+  /// No description provided for @shPodcastNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'از خوراک عمومی خودِ هر پادکست پخش می‌شود.'**
+  String get shPodcastNote;
+
+  /// No description provided for @shPodcastPage.
+  ///
+  /// In fa, this message translates to:
+  /// **'صفحهٔ پادکست'**
+  String get shPodcastPage;
+
   /// No description provided for @shOnTimeline.
   ///
   /// In fa, this message translates to:

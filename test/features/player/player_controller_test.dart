@@ -155,4 +155,47 @@ void main() {
     await flush();
     expect(c.read(playerProvider).status, PlayerStatus.error);
   });
+
+  test('a podcast episode plays its link, keeps the episode, retries it, and stop clears it', () async {
+    const e = PlayerEpisode(
+      id: 'khodemooni/g1',
+      title: 'Episode 26',
+      podcast: 'Khodemooni',
+      audioUrl: 'https://example.org/26.mp3',
+      route: '/shahnameh?tab=timeline&section=13',
+    );
+    await ctrl().playEpisode(e);
+    var st = c.read(playerProvider);
+    expect(backend.loaded.single.toString(), e.audioUrl);
+    expect(backend.infos.single.title, 'Episode 26');
+    expect(backend.infos.single.artist, 'Khodemooni');
+    expect(st.episode?.route, e.route);
+    expect(st.poem?.id, kEpisodeId);
+    expect(st.recitation?.inSync, isFalse);
+    expect(st.status, PlayerStatus.ready);
+
+    // Skipping has nowhere to go; it leaves the episode alone.
+    await ctrl().next();
+    expect(backend.loaded, hasLength(1));
+
+    backend.emitError(StateError('dropped'));
+    await flush();
+    await ctrl().retry();
+    st = c.read(playerProvider);
+    expect(backend.loaded, hasLength(2));
+    expect(backend.loaded.last.toString(), e.audioUrl);
+    expect(st.episode?.id, e.id);
+
+    await ctrl().stop();
+    expect(c.read(playerProvider).episode, isNull);
+  });
+
+  test('playing a poem after an episode drops the episode', () async {
+    await ctrl().playEpisode(
+      const PlayerEpisode(id: 'x', title: 't', podcast: 'p', audioUrl: 'https://example.org/a.mp3', route: '/'),
+    );
+    final poem = poem2130();
+    await ctrl().play(poem, poem.recitations.first);
+    expect(c.read(playerProvider).episode, isNull);
+  });
 }

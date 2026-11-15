@@ -1,6 +1,6 @@
 # Privacy policy · سیاست حریم خصوصی
 
-*Ganj (گنج) — last updated 9 November 2026*
+*Ganj (گنج) — last updated 15 November 2026*
 
 ## English
 
@@ -25,6 +25,12 @@ request, these services can see your device's IP address:
 - **GitHub** (`github.com`, `api.github.com`): updates to the World of the Shahnameh data, checked at most once a
   week; in the versions downloaded from GitHub (not from Google Play or Cafe Bazaar), whether a newer Ganj is out,
   checked at most once a day.
+- **Podcast hosts** (Shenoto: `shenoto.net`, `shenoto.com`; Acast: `feeds.acast.com`, `sphinx.acast.com`; Castbox:
+  `rss.castbox.fm`, `s3.castbox.fm`; Spotify for Creators: `anchor.fm` and its CDN `cloudfront.net`): only
+  when you open a podcast's episodes (from a story in the World of the Shahnameh, or on the Shahnameh podcasts page),
+  the list of episodes (kept for a day); and
+  only when you play one, that episode's audio. The episodes belong to their makers and may include their own sponsor
+  messages; Acast may add ads to the audio and measures listening under its own policy ([acast.com/privacy](https://www.acast.com/privacy)).
 - **Hugging Face** (`huggingface.co`), or GitHub if it cannot be reached: the machine reading voice, downloaded
   once, only after you agree. The reading itself is made **on your device**; the poem's text is not sent anywhere.
 - **Google ML Kit** (Android, iOS): translation runs **on your device**. The language model is downloaded from
@@ -68,6 +74,11 @@ you to these requests.
 - **ویکی‌واژه** (`fa.wiktionary.org`): معنی واژه‌ها، فقط هنگام جستجوی یک واژه، و همان واژه را دریافت می‌کند.
 - **گیت‌هاب** (`github.com`، `api.github.com`): به‌روزرسانی داده‌های جهان شاهنامه، که دست‌بالا هفته‌ای یک بار بررسی
   می‌شود؛ و در نسخه‌هایی که از گیت‌هاب دریافت شده‌اند (نه از گوگل‌پلی یا کافه‌بازار)، آمدن نسخهٔ تازهٔ گنج، دست‌بالا روزی یک بار.
+- **میزبان‌های پادکست** (شنوتو: `shenoto.net` و `shenoto.com`؛ اَکَست: `feeds.acast.com` و `sphinx.acast.com`؛ کست‌باکس:
+  `rss.castbox.fm` و `s3.castbox.fm`؛ اسپاتیفای برای سازندگان: `anchor.fm` و شبکهٔ توزیعش `cloudfront.net`): فقط
+  هنگام باز کردن قسمت‌های یک پادکست (از یک داستان در جهان شاهنامه، یا در صفحهٔ پادکست‌های شاهنامه)، فهرست قسمت‌ها (که یک روز نگه داشته می‌شود)؛ و فقط هنگام پخش یک
+  قسمت، صدای همان قسمت. قسمت‌ها از آنِ سازندگانشان‌اند و ممکن است پیام حامیان خودشان را داشته باشند؛ اَکَست ممکن است
+  به صدا آگهی بیفزاید و شنیدن را با سیاست خودش می‌سنجد ([acast.com/privacy](https://www.acast.com/privacy)).
 - **هاگینگ‌فیس** (`huggingface.co`)، یا اگر در دسترس نباشد گیت‌هاب: صدای خوانش ماشینی، یک بار و فقط پس از موافقت شما
   بارگیری می‌شود. خود خوانش **روی دستگاه شما** ساخته می‌شود و متن شعر به جایی فرستاده نمی‌شود.
 - **Google ML Kit** (اندروید، آی‌اواس): ترجمه **روی خود دستگاه** انجام می‌شود. مدل زبان یک بار، پس از موافقت

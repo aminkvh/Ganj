@@ -43,6 +43,7 @@ class CategoryScreen extends ConsumerWidget {
               ),
             ),
             if (isShahnamehCat(pc.cat)) const SliverToBoxAdapter(child: ShahnamehBanner()),
+            if (pc.cat.id == kShahnamehCatId) const SliverToBoxAdapter(child: ShahnamehPodcastsCard()),
             if (pc.cat.description?.isNotEmpty ?? false)
               SliverToBoxAdapter(child: GoldCard(child: ExpandableText(pc.cat.description!))),
             ...catContentSlivers(pc.cat),

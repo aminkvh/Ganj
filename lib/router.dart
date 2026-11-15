@@ -19,6 +19,7 @@ import 'features/search/search_screen.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/shahnameh/ui/hub_screen.dart';
 import 'features/shahnameh/ui/person_sheet.dart';
+import 'features/shahnameh/ui/podcasts_screen.dart';
 import 'features/shahnameh/ui/tree_view.dart';
 import 'widgets/home_button.dart';
 import 'features/user/user_screen.dart';
@@ -86,6 +87,10 @@ final routerProvider = Provider<GoRouter>(
               place: s.uri.queryParameters['place'],
               story: s.uri.queryParameters['story'],
             ),
+          ),
+          GoRoute(
+            path: '/shahnameh/podcasts',
+            builder: (_, s) => PodcastsScreen(podcast: s.uri.queryParameters['podcast']),
           ),
           GoRoute(
             path: '/shahnameh/tree/:id',

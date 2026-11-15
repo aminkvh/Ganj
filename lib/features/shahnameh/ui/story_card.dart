@@ -6,8 +6,10 @@ import '../../../core/theme/ganj_colors.dart';
 import '../../../l10n/l10n.dart';
 import '../../../widgets/ai_badge.dart';
 import '../data/models.dart';
+import '../data/podcasts.dart';
 import '../data/shahnameh_providers.dart';
 import 'person_sheet.dart';
+import 'podcast_sheet.dart';
 import 'sh_style.dart';
 
 /// A story on the timeline: its title, one line of what happens, who is in it and where,
@@ -50,6 +52,7 @@ class StoryCard extends ConsumerWidget {
         ? (story.summaryEn != null ? (story.summaryEn!, false) : ganjoor)
         : (ganjoor ?? (story.summaryEn != null ? (story.summaryEn!, false) : null));
     final places = [for (final id in story.places) ?world.placeById(id)];
+    final podcasts = podcastsFor(ref.watch(shPodcastsProvider).value ?? const [], story.id);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
@@ -138,6 +141,12 @@ class StoryCard extends ConsumerWidget {
                     icon: const Icon(Icons.menu_book_outlined, size: 18),
                     label: Text(l.shRead),
                     onPressed: () => context.push('/poem/$id'),
+                  ),
+                if (podcasts.isNotEmpty)
+                  TextButton.icon(
+                    icon: const Icon(Icons.headphones_outlined, size: 18),
+                    label: Text(l.shListen),
+                    onPressed: () => showPodcastSheet(context, story, podcasts),
                   ),
                 if (places.isNotEmpty)
                   TextButton.icon(

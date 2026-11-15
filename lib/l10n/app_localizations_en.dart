@@ -773,6 +773,24 @@ class L10nEn extends L10n {
   String get shShowOnMap => 'On the map';
 
   @override
+  String get shListen => 'Listen';
+
+  @override
+  String get shPodcasts => 'Shahnameh podcasts';
+
+  @override
+  String get shPodcastsTitle => 'Podcasts on this story';
+
+  @override
+  String get shPodcastFailed => 'Couldn\'t load the episodes.';
+
+  @override
+  String get shPodcastNote => 'Played from each podcast\'s own public feed.';
+
+  @override
+  String get shPodcastPage => 'Podcast page';
+
+  @override
   String get shOnTimeline => 'On the timeline';
 
   @override

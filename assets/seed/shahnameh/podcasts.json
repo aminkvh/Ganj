@@ -1,0 +1,1081 @@
+{
+ "schema": 1,
+ "podcasts": [
+  {
+   "id": "khodemooni",
+   "fa": "شاهنامه خودمونی",
+   "en": "Shahnameh-e Khodemooni",
+   "authorFa": "سعید غلامی",
+   "authorEn": "Saeed Gholami",
+   "feed": "https://shenoto.net/feed/shahname",
+   "link": "https://shenoto.com/channel/podcast/shahname",
+   "stories": {
+    "kayumars": [
+     "shenoto-rss-91829"
+    ],
+    "hushang-fire": [
+     "shenoto-rss-92503"
+    ],
+    "tahmuras": [
+     "shenoto-rss-96072"
+    ],
+    "jamshid": [
+     "shenoto-rss-97265"
+    ],
+    "zahhak": [
+     "shenoto-rss-97265",
+     "shenoto-rss-99294"
+    ],
+    "fereydun-sons": [
+     "shenoto-rss-101773",
+     "shenoto-rss-103474"
+    ],
+    "zal-rudabeh": [
+     "shenoto-rss-106275",
+     "shenoto-rss-112307",
+     "shenoto-rss-126201",
+     "shenoto-rss-130499"
+    ],
+    "nowzar": [
+     "shenoto-rss-131758",
+     "shenoto-rss-134098",
+     "shenoto-rss-135235"
+    ],
+    "rakhsh": [
+     "shenoto-rss-137070",
+     "shenoto-rss-137579"
+    ],
+    "kay-qobad": [
+     "shenoto-rss-139269"
+    ],
+    "haftkhan-rostam": [
+     "shenoto-rss-140489",
+     "shenoto-rss-145261",
+     "shenoto-rss-195943",
+     "shenoto-rss-198625",
+     "shenoto-rss-207457"
+    ],
+    "hamavaran": [
+     "shenoto-rss-215028",
+     "shenoto-rss-216287",
+     "shenoto-rss-222703"
+    ],
+    "sohrab": [
+     "shenoto-rss-239249",
+     "shenoto-rss-245496",
+     "shenoto-rss-251254",
+     "shenoto-rss-256985"
+    ],
+    "siavash": [
+     "shenoto-rss-267274",
+     "shenoto-rss-274146",
+     "shenoto-rss-277697",
+     "shenoto-rss-292293",
+     "shenoto-rss-300705",
+     "shenoto-rss-305162",
+     "shenoto-rss-308650",
+     "shenoto-rss-310226",
+     "shenoto-rss-315869",
+     "shenoto-rss-380779"
+    ],
+    "kay-khosrow-return": [
+     "shenoto-rss-435868",
+     "shenoto-rss-474663",
+     "shenoto-rss-672200",
+     "shenoto-rss-936598",
+     "shenoto-rss-1115609"
+    ],
+    "farud": [
+     "shenoto-rss-1504064",
+     "shenoto-rss-1748381",
+     "shenoto-rss-1757076",
+     "shenoto-rss-1758294",
+     "shenoto-rss-1795549",
+     "shenoto-rss-1811369"
+    ],
+    "kamus": [
+     "shenoto-rss-1811369",
+     "shenoto-rss-1813833",
+     "shenoto-rss-1817359",
+     "shenoto-rss-1821883",
+     "shenoto-rss-1828025"
+    ],
+    "khaqan": [
+     "shenoto-rss-1828025",
+     "shenoto-rss-1830931"
+    ]
+   }
+  },
+  {
+   "id": "reading-ferdowsi",
+   "fa": "فردوسی‌خوانی",
+   "en": "Reading Ferdowsi",
+   "authorFa": "امیر خادم",
+   "authorEn": "Amir Khadem",
+   "feed": "https://feeds.acast.com/public/shows/6aac41b28de3b43b6a9c8227",
+   "link": "https://shows.acast.com/reading-ferdowsi",
+   "stories": {
+    "kayumars": [
+     "http://ferdowsi.blubrry.net/?p=7"
+    ],
+    "hushang-fire": [
+     "http://ferdowsi.blubrry.net/?p=14"
+    ],
+    "tahmuras": [
+     "http://ferdowsi.blubrry.net/?p=14"
+    ],
+    "jamshid": [
+     "http://ferdowsi.blubrry.net/?p=14"
+    ],
+    "zahhak": [
+     "http://ferdowsi.blubrry.net/?p=19",
+     "http://ferdowsi.blubrry.net/?p=21"
+    ],
+    "fereydun-sons": [
+     "http://ferdowsi.blubrry.net/?p=24",
+     "http://ferdowsi.blubrry.net/?p=26",
+     "http://ferdowsi.blubrry.net/?p=29"
+    ],
+    "zal-rudabeh": [
+     "http://ferdowsi.blubrry.net/?p=31",
+     "http://ferdowsi.blubrry.net/?p=34",
+     "http://ferdowsi.blubrry.net/?p=38",
+     "http://ferdowsi.blubrry.net/?p=44",
+     "http://ferdowsi.blubrry.net/?p=47"
+    ],
+    "nowzar": [
+     "http://ferdowsi.blubrry.net/?p=49",
+     "http://ferdowsi.blubrry.net/?p=53"
+    ],
+    "rakhsh": [
+     "http://ferdowsi.blubrry.net/?p=55"
+    ],
+    "kay-qobad": [
+     "http://ferdowsi.blubrry.net/?p=55",
+     "http://ferdowsi.blubrry.net/?p=58"
+    ],
+    "haftkhan-rostam": [
+     "http://ferdowsi.blubrry.net/?p=61",
+     "http://ferdowsi.blubrry.net/?p=63",
+     "http://ferdowsi.blubrry.net/?p=66"
+    ],
+    "hamavaran": [
+     "http://ferdowsi.blubrry.net/?p=69",
+     "http://ferdowsi.blubrry.net/?p=74"
+    ],
+    "sohrab": [
+     "http://ferdowsi.blubrry.net/?p=76",
+     "http://ferdowsi.blubrry.net/?p=79",
+     "http://ferdowsi.blubrry.net/?p=82",
+     "http://ferdowsi.blubrry.net/?p=85"
+    ],
+    "siavash": [
+     "http://ferdowsi.blubrry.net/?p=87",
+     "http://ferdowsi.blubrry.net/?p=93",
+     "http://ferdowsi.blubrry.net/?p=108",
+     "http://ferdowsi.blubrry.net/?p=110",
+     "http://ferdowsi.blubrry.net/?p=113",
+     "http://ferdowsi.blubrry.net/?p=116",
+     "http://ferdowsi.blubrry.net/?p=119",
+     "http://ferdowsi.blubrry.net/?p=121",
+     "https://readingferdowsi.com/?p=145",
+     "https://readingferdowsi.com/?p=150",
+     "https://readingferdowsi.com/?p=154"
+    ],
+    "kay-khosrow-return": [
+     "https://readingferdowsi.com/?p=157",
+     "https://readingferdowsi.com/?p=167",
+     "https://readingferdowsi.com/?p=169",
+     "https://readingferdowsi.com/?p=174"
+    ],
+    "farud": [
+     "https://readingferdowsi.com/?p=182",
+     "https://readingferdowsi.com/?p=184",
+     "https://readingferdowsi.com/?p=190",
+     "https://readingferdowsi.com/?p=193",
+     "https://readingferdowsi.com/?p=195"
+    ],
+    "kamus": [
+     "https://readingferdowsi.com/?p=198",
+     "https://readingferdowsi.com/?p=201",
+     "https://readingferdowsi.com/?p=206",
+     "https://readingferdowsi.com/?p=209",
+     "https://readingferdowsi.com/?p=211",
+     "https://readingferdowsi.com/?p=217"
+    ],
+    "khaqan": [
+     "https://readingferdowsi.com/?p=219",
+     "https://readingferdowsi.com/?p=225",
+     "https://readingferdowsi.com/?p=228",
+     "https://readingferdowsi.com/?p=236"
+    ],
+    "akvan": [
+     "https://readingferdowsi.com/?p=239"
+    ],
+    "bijan-manijeh": [
+     "https://readingferdowsi.com/?p=242",
+     "https://readingferdowsi.com/?p=244",
+     "https://readingferdowsi.com/?p=250",
+     "https://readingferdowsi.com/?p=256",
+     "https://readingferdowsi.com/?p=263"
+    ],
+    "twelve-rooks": [
+     "https://readingferdowsi.com/?p=268",
+     "https://readingferdowsi.com/?p=271",
+     "https://readingferdowsi.com/?p=276",
+     "https://readingferdowsi.com/?p=282",
+     "https://readingferdowsi.com/?p=284",
+     "https://readingferdowsi.com/?p=287",
+     "https://readingferdowsi.com/?p=292",
+     "https://readingferdowsi.com/?p=295"
+    ],
+    "great-war": [
+     "https://readingferdowsi.com/?p=300",
+     "https://readingferdowsi.com/?p=303",
+     "https://readingferdowsi.com/?p=311",
+     "https://readingferdowsi.com/?p=317",
+     "https://readingferdowsi.com/?p=322",
+     "https://readingferdowsi.com/?p=325",
+     "https://readingferdowsi.com/?p=327",
+     "https://readingferdowsi.com/?p=333",
+     "https://readingferdowsi.com/?p=335",
+     "https://readingferdowsi.com/?p=338",
+     "https://readingferdowsi.com/?p=361"
+    ],
+    "goshtasp-rum": [
+     "https://readingferdowsi.com/?p=369",
+     "https://readingferdowsi.com/?p=374",
+     "https://readingferdowsi.com/?p=377",
+     "https://readingferdowsi.com/?p=382"
+    ],
+    "zoroaster": [
+     "https://readingferdowsi.com/?p=388",
+     "https://readingferdowsi.com/?p=390",
+     "https://readingferdowsi.com/?p=393",
+     "https://readingferdowsi.com/?p=395",
+     "https://readingferdowsi.com/?p=398",
+     "https://readingferdowsi.com/?p=403"
+    ],
+    "haftkhan-esfandiyar": [
+     "https://readingferdowsi.com/?p=406",
+     "https://readingferdowsi.com/?p=411",
+     "https://readingferdowsi.com/?p=414",
+     "https://readingferdowsi.com/?p=419"
+    ],
+    "rostam-esfandiyar": [
+     "https://readingferdowsi.com/?p=422",
+     "https://readingferdowsi.com/?p=424",
+     "https://readingferdowsi.com/?p=428",
+     "https://readingferdowsi.com/?p=430",
+     "https://readingferdowsi.com/?p=433",
+     "https://readingferdowsi.com/?p=438",
+     "https://readingferdowsi.com/?p=441",
+     "https://readingferdowsi.com/?p=446"
+    ],
+    "shaghad": [
+     "https://readingferdowsi.com/?p=454"
+    ],
+    "bahman-homay": [
+     "https://readingferdowsi.com/?p=461",
+     "https://readingferdowsi.com/?p=467"
+    ],
+    "darab-dara": [
+     "https://readingferdowsi.com/?p=467",
+     "https://readingferdowsi.com/?p=476",
+     "https://readingferdowsi.com/?p=482",
+     "https://readingferdowsi.com/?p=484"
+    ],
+    "alexander": [
+     "https://readingferdowsi.com/?p=487",
+     "https://readingferdowsi.com/?p=489",
+     "https://readingferdowsi.com/?p=493",
+     "https://readingferdowsi.com/?p=498",
+     "https://readingferdowsi.com/?p=504",
+     "https://readingferdowsi.com/?p=506",
+     "https://readingferdowsi.com/?p=509"
+    ],
+    "ardashir": [
+     "https://readingferdowsi.com/?p=511",
+     "https://readingferdowsi.com/?p=517",
+     "https://readingferdowsi.com/?p=519",
+     "https://readingferdowsi.com/?p=522",
+     "https://readingferdowsi.com/?p=524"
+    ],
+    "shapur-rum": [
+     "https://readingferdowsi.com/?p=537",
+     "https://readingferdowsi.com/?p=539",
+     "https://readingferdowsi.com/?p=542"
+    ],
+    "bahram-gur": [
+     "https://readingferdowsi.com/?p=544",
+     "https://readingferdowsi.com/?p=550",
+     "https://readingferdowsi.com/?p=552",
+     "https://readingferdowsi.com/?p=555",
+     "https://readingferdowsi.com/?p=560",
+     "https://readingferdowsi.com/?p=566",
+     "https://readingferdowsi.com/?p=568",
+     "https://readingferdowsi.com/?p=571",
+     "https://readingferdowsi.com/?p=576",
+     "https://readingferdowsi.com/?p=582",
+     "https://readingferdowsi.com/?p=584",
+     "https://readingferdowsi.com/?p=587"
+    ],
+    "mazdak": [
+     "https://readingferdowsi.com/?p=595"
+    ],
+    "anushirvan": [
+     "https://readingferdowsi.com/?p=600",
+     "https://readingferdowsi.com/?p=603",
+     "https://readingferdowsi.com/?p=605",
+     "https://readingferdowsi.com/?p=611",
+     "https://readingferdowsi.com/?p=613",
+     "https://readingferdowsi.com/?p=616",
+     "https://readingferdowsi.com/?p=618",
+     "https://readingferdowsi.com/?p=624",
+     "https://readingferdowsi.com/?p=629",
+     "https://readingferdowsi.com/?p=632",
+     "https://readingferdowsi.com/?p=634",
+     "https://readingferdowsi.com/?p=637",
+     "https://readingferdowsi.com/?p=639",
+     "https://readingferdowsi.com/?p=645"
+    ],
+    "bahram-chubineh": [
+     "https://readingferdowsi.com/?p=649",
+     "https://readingferdowsi.com/?p=655",
+     "https://readingferdowsi.com/?p=657",
+     "https://readingferdowsi.com/?p=660",
+     "https://readingferdowsi.com/?p=662",
+     "https://readingferdowsi.com/?p=669",
+     "https://readingferdowsi.com/?p=671",
+     "https://readingferdowsi.com/?p=682",
+     "https://readingferdowsi.com/?p=684",
+     "https://readingferdowsi.com/?p=687",
+     "https://readingferdowsi.com/?p=689",
+     "https://readingferdowsi.com/?p=697",
+     "https://readingferdowsi.com/?p=702",
+     "https://readingferdowsi.com/?p=705",
+     "https://readingferdowsi.com/?p=713",
+     "https://readingferdowsi.com/?p=716",
+     "https://readingferdowsi.com/?p=718",
+     "https://readingferdowsi.com/?p=721"
+    ],
+    "khosrow-shirin": [
+     "https://readingferdowsi.com/?p=727",
+     "https://readingferdowsi.com/?p=736",
+     "https://readingferdowsi.com/?p=739",
+     "https://readingferdowsi.com/?p=741",
+     "https://readingferdowsi.com/?p=747"
+    ],
+    "fall": [
+     "https://readingferdowsi.com/?p=749",
+     "https://readingferdowsi.com/?p=755",
+     "https://readingferdowsi.com/?p=759"
+    ]
+   }
+  },
+  {
+   "id": "dastaminophen",
+   "fa": "شاهنامه با داستامینوفن",
+   "en": "Shahnameh with Dastaminophen",
+   "authorFa": "داستامینوفن",
+   "authorEn": "Dastaminophen",
+   "feed": "https://feeds.acast.com/public/shows/624afd98f3c3cf00134cc28a",
+   "link": "https://shows.acast.com/dastaminophenor-dkst-frsy-dstmynofn",
+   "stories": {
+    "kayumars": [
+     "76f4d374-2f60-4e56-b847-162de3066414"
+    ],
+    "hushang-fire": [
+     "76f4d374-2f60-4e56-b847-162de3066414"
+    ],
+    "tahmuras": [
+     "76f4d374-2f60-4e56-b847-162de3066414"
+    ],
+    "jamshid": [
+     "76f4d374-2f60-4e56-b847-162de3066414"
+    ],
+    "zahhak": [
+     "bb870485-6fdc-445b-8631-e7b7aaa7d51f",
+     "b6761301-1eb8-4369-a643-05b8c09e37cf"
+    ],
+    "fereydun-sons": [
+     "b6761301-1eb8-4369-a643-05b8c09e37cf",
+     "972479a3-8756-4484-a8c4-8046166081e1"
+    ],
+    "zal-rudabeh": [
+     "fd29b962-1602-4afa-b69b-f8e9a6bb8335",
+     "4eac77ef-3384-4d72-9df4-4beaa1a921d8",
+     "b1dbb9ef-f9b4-43a6-96cb-aef50ccbecac",
+     "7e70f065-194a-4082-b24b-6ef2bf453a56"
+    ],
+    "nowzar": [
+     "dafcb589-b5a6-46c6-b044-973d6786216c"
+    ],
+    "rakhsh": [
+     "db9dffbf-f352-4a56-9454-0be415ca8eec"
+    ],
+    "kay-qobad": [
+     "db9dffbf-f352-4a56-9454-0be415ca8eec"
+    ],
+    "haftkhan-rostam": [
+     "9ec5df13-456b-49a1-9679-51827e54d4c2",
+     "bc87fc8f-f02a-4b20-99f8-7173c0220b40"
+    ],
+    "hamavaran": [
+     "2982d3e8-b4ee-4010-9901-e8efadb221c9"
+    ],
+    "sohrab": [
+     "71e2117d-374a-4658-89e9-bc9f85579b82",
+     "cbb781eb-ff64-4bc3-a375-d08f02f6992d"
+    ],
+    "siavash": [
+     "6939a72f-e6a0-4a0d-951e-9a34c972bd67",
+     "8b5314f3-4009-4872-97ae-3deb5569486b",
+     "e0813f65-9237-445a-9ec2-552326da7d60",
+     "5da7aa5e-10aa-43ba-9109-9fd696ea7cea"
+    ],
+    "kay-khosrow-return": [
+     "e67f5d57-2d88-4175-af03-66bac28cd7ee",
+     "dd8b0cc5-3c44-42db-9a2b-748935fc44a6"
+    ],
+    "farud": [
+     "f59ab776-e2c9-4075-bbeb-aacf9609ebec"
+    ],
+    "kamus": [
+     "9087062f-6dba-4d93-8d74-e6e777e6ecba",
+     "10bccb6d-95a5-4831-ab30-b9bd4d15e344",
+     "16f2a326-9d45-4e13-a505-5648de8f2c6b",
+     "aef1f537-e4c8-489b-884f-3ce56247afd9"
+    ],
+    "khaqan": [
+     "aef1f537-e4c8-489b-884f-3ce56247afd9",
+     "97352853-7b2e-49c9-91b1-73854780590d"
+    ],
+    "akvan": [
+     "fc997102-f530-43d6-9423-b5c4e46baa9e"
+    ],
+    "bijan-manijeh": [
+     "78aa1a95-8b45-40a0-a1d3-613f4ed8c0d5",
+     "e04d3195-035f-4df7-b0bf-74aab8c2a0f7",
+     "b9ab6bb3-7649-4b9e-bb71-4d1ae67e2128",
+     "8f18341b-2fd0-4edd-b549-8102cce680c4"
+    ],
+    "twelve-rooks": [
+     "8f18341b-2fd0-4edd-b549-8102cce680c4",
+     "e78dc4be-2c7e-456e-b6ef-12ac6e3333df",
+     "4e1cb0ae-b36b-49e1-86e0-ae1cc1868249",
+     "0206fade-3740-46cc-8342-56486b7ce0cc",
+     "624eccbcb0ded50012650d27"
+    ],
+    "great-war": [
+     "624eccbcb0ded50012650d27",
+     "6258439d7c03350012ccf20a",
+     "6260201d1f4ad40013facb6d",
+     "626bfe1ef8d6df0012757d8a",
+     "62753b8cb193500012a6ee72",
+     "627e720288e07d0012e2d940",
+     "6288f15863bbdf001168fe42",
+     "6294da6e1ccd8800132b74cc",
+     "629f637f224b0600129f30f4",
+     "62a9e48ecd25d9001467a53a"
+    ],
+    "goshtasp-rum": [
+     "62c6e5797e350c001307e48b",
+     "62d41781c03c9a00140c5e8e",
+     "62e107ba4ead3c001268bbd8",
+     "62efc44c3bb02900132f4a44"
+    ],
+    "zoroaster": [
+     "62fa0813dc3af900137eec3b",
+     "63064891ea2faf0012f4e2c8",
+     "6314d6969c59c300125f410f",
+     "631da6f75474d30013096b51",
+     "63247415a8cfed001213bbe4",
+     "63984e0dea2f000011cc0990",
+     "63c3daa6bd1c040011e06325"
+    ],
+    "haftkhan-esfandiyar": [
+     "63e14e66b142980010b6e90c",
+     "63f5ff0bcef8ec001190e1d4",
+     "63ffa86324a4200011eb9438",
+     "640c84b6ae217600113d7080",
+     "641790942dec4d001103712a"
+    ],
+    "rostam-esfandiyar": [
+     "6425902a6f707e00117bd84f",
+     "6432a330cc2bdf001108cba7",
+     "643fd312996c170011ec3394",
+     "645268b26dd22500112e5a92",
+     "645b8686a28eb0001108aeb3",
+     "646b6252a561b40011787309",
+     "647b0ae784801c00112438f1",
+     "6488662bb7a3090010b3c19b",
+     "64946c78087a79001175e7a0"
+    ],
+    "shaghad": [
+     "64c8eb851e273f00112eecb6",
+     "64d10b082c5bd600129a6e21",
+     "64dccf4a264b910012b24fae"
+    ],
+    "bahman-homay": [
+     "64dccf4a264b910012b24fae",
+     "64e465d0210fe60011225d26",
+     "650ef13bafb89e001110e702",
+     "6516b89c1488340011510855"
+    ],
+    "darab-dara": [
+     "65216c4e8e657c0011e1d4e2",
+     "652c084bbfc08900124e290c",
+     "6537da9082990100119692b6",
+     "654657eba809bc0012b3d8d1"
+    ],
+    "alexander": [
+     "654657eba809bc0012b3d8d1",
+     "6550ca9a6b767e0012a95a55",
+     "655c93bab74af50012246fa8",
+     "656de8f4e3d21d0012556720",
+     "65799a173d9b370017fc0535",
+     "658291001b4a0600175c93d0",
+     "6592db040afafb0017fc8e8b",
+     "659ec5717b4c4b0016c61912",
+     "65ad36b53e8e8e001769b604"
+    ],
+    "ardashir": [
+     "65d763f4ef14180016801bbe",
+     "65e0abadbabcda0016701cb4",
+     "65f1c1cb129d0d0016a2e2da",
+     "65fc34e48c676f00168b84f9",
+     "661aaba533026f00156aa501",
+     "6623fd2d09a932001205fd62",
+     "6636698921435d001262e921",
+     "6642802a7c2bf100133e1126",
+     "664c7d002cecde0012d07df7",
+     "665debb200559f00129bfe8d",
+     "666c4752367ba80012549231"
+    ],
+    "shapur-rum": [
+     "6697d27ec86d4486beacf729",
+     "66ae6d5b1f6556b4b63c0c75",
+     "66bb81c8a7f4fbb991ff30d7",
+     "66e2d41ab3f093eeccbb42a3",
+     "66eed36a135604007e95f637",
+     "66fc2082b01fb2785c316611"
+    ],
+    "bahram-gur": [
+     "671a4dedf27beaa7696f9394",
+     "6728d0e55b575bc851b47ee0",
+     "6745c4a89db9c8215cb60ae5",
+     "67509d39a0332c2e11c45b88",
+     "675aebdcb8324e024f82ea31",
+     "6767fb5415b9614645405c9c",
+     "67814db8e83bfb002d52de36",
+     "678cc12d5dd9c67f17b7fd87",
+     "67966e7964a671b4e1461236",
+     "67a6066b3eadb4f808860042",
+     "67b36a6ebce64a06019e602e",
+     "67be111c2dbc20e82c523d01",
+     "67ec2694506c6c628cacd0a9",
+     "67f7da9a78ad3c790103511c",
+     "6800f6063808841569130b97",
+     "681253a3f3c711a5d01a1dde",
+     "685fdec192ba6694bcc5be1b",
+     "68825bff3781311f91eb00c9",
+     "68ab3c5ae2f63983a75ecf14",
+     "68f4e48f59323046caf34767",
+     "6903471e1e6d5f214e7e2784",
+     "69368d8d76f89ba373e3d833",
+     "694bfda444fae3e8021c3471",
+     "695d23bec592cd577dc7ea76",
+     "6a1889958fd07475b58ce9d9",
+     "6a37e11ef1612f1c696de56d"
+    ],
+    "mazdak": [
+     "6a5f9866c8dfbe44d8f46c00",
+     "6a96c9cfb6f00a73a907177b"
+    ],
+    "anushirvan": [
+     "6a96c9cfb6f00a73a907177b",
+     "6ab156f61fc066503dbea072",
+     "6ac8efdb8f90a39dfcebbabd",
+     "6ae36c8d5a3cc3c4c4a71e73",
+     "6af6e4c128531eda45d466da"
+    ]
+   }
+  },
+  {
+   "id": "shahpod",
+   "fa": "شاه‌پاد",
+   "en": "Shahpod",
+   "authorFa": "شاهنامه‌خوانی در کلاب‌هاوس",
+   "authorEn": "A Clubhouse reading circle",
+   "feed": "https://rss.castbox.fm/everest/06ae02901660450c961b285762a47153.xml",
+   "link": "https://castbox.fm/channel/4950443",
+   "stories": {
+    "kayumars": [
+     "album-06ae02901660450c961b285762a47153-508b3ed126b649928003e3a50be2378f"
+    ],
+    "hushang-fire": [
+     "album-06ae02901660450c961b285762a47153-508b3ed126b649928003e3a50be2378f"
+    ],
+    "tahmuras": [
+     "album-06ae02901660450c961b285762a47153-508b3ed126b649928003e3a50be2378f"
+    ],
+    "jamshid": [
+     "album-06ae02901660450c961b285762a47153-508b3ed126b649928003e3a50be2378f"
+    ],
+    "zahhak": [
+     "album-06ae02901660450c961b285762a47153-505e1e950e0548dcacf43b07246947e5",
+     "album-06ae02901660450c961b285762a47153-59b07768b7c9406ea87bb518deb4c0a3"
+    ],
+    "fereydun-sons": [
+     "album-06ae02901660450c961b285762a47153-ba2eb15190744548a35b2e6237305f89",
+     "album-06ae02901660450c961b285762a47153-d9fdb7d53c04438e81e814d3a0e72d5f",
+     "album-06ae02901660450c961b285762a47153-df28517483f24fccb69faa5e6f895a93"
+    ],
+    "zal-rudabeh": [
+     "album-06ae02901660450c961b285762a47153-8bdac78a4d68461f95cd914ac904b29a",
+     "album-06ae02901660450c961b285762a47153-6590e254676a4aa499081edc698001a6",
+     "album-06ae02901660450c961b285762a47153-782b44e8fe264c6fa9d679b646325955",
+     "album-06ae02901660450c961b285762a47153-cba95f1dda2c4fd79d7fab831daf8b92",
+     "album-06ae02901660450c961b285762a47153-943c64027a7e4dfd9a559c7a698b6bb3",
+     "album-06ae02901660450c961b285762a47153-3428e1878dcb48c48131364f6ad13f12",
+     "album-06ae02901660450c961b285762a47153-31fe0e99ad2d49bfa57108c2e67269f6"
+    ],
+    "nowzar": [
+     "album-06ae02901660450c961b285762a47153-cdf058f5789942e6be23cf698e83b0f9"
+    ],
+    "rakhsh": [
+     "album-06ae02901660450c961b285762a47153-600368346682411595499171491a5f8c"
+    ],
+    "kay-qobad": [
+     "album-06ae02901660450c961b285762a47153-aa4bbbe8d75e4ff2b57c59b6b206f460"
+    ],
+    "haftkhan-rostam": [
+     "album-06ae02901660450c961b285762a47153-401ac957e32f415d8aa8b6a8ad511a76",
+     "album-06ae02901660450c961b285762a47153-ef0afed7eec244d59f0f51b5e52a6fb9"
+    ],
+    "hamavaran": [
+     "album-06ae02901660450c961b285762a47153-f8050c7f98594e26af46d719f4d2a46a",
+     "album-06ae02901660450c961b285762a47153-6ab60714cf1e4b8ca874efdccf1ea398"
+    ],
+    "sohrab": [
+     "album-06ae02901660450c961b285762a47153-db790545f41e434e81a0a83c901ea361",
+     "album-06ae02901660450c961b285762a47153-583ef7270e974a6f8a26f05b4118d151",
+     "album-06ae02901660450c961b285762a47153-5458b51b8e554fd08825455a6bb26e2a"
+    ],
+    "siavash": [
+     "album-06ae02901660450c961b285762a47153-5c93481babf042f2a0793a7cd5b3ff41",
+     "album-06ae02901660450c961b285762a47153-a7e73daff4a34fddbda5d779ab5dc7db",
+     "album-06ae02901660450c961b285762a47153-0e104a7209344a4c9108c3dcae68a351",
+     "album-06ae02901660450c961b285762a47153-914be4556c014b59b58f448a79161ded",
+     "album-06ae02901660450c961b285762a47153-1f641f2c307243cb9b5acfd0b428c3aa",
+     "album-06ae02901660450c961b285762a47153-4adbc209d7fd48aca91253309e78450e",
+     "album-06ae02901660450c961b285762a47153-fcf720f649e6483a9213506051fd5602",
+     "album-06ae02901660450c961b285762a47153-1f431f4216ef4e6a94c52a9d91d5f682",
+     "album-06ae02901660450c961b285762a47153-3c8cd427025c460aa3fa30d536b858f2",
+     "album-06ae02901660450c961b285762a47153-24a4f3406dbc4c339cb07edcf74fc613",
+     "album-06ae02901660450c961b285762a47153-b938cab374db47ea81567e7eea7dd67f",
+     "album-06ae02901660450c961b285762a47153-2281c1d9e60e4f7db595ff830b77caa1"
+    ],
+    "kay-khosrow-return": [
+     "album-06ae02901660450c961b285762a47153-99e2e6dc2a3b497088ecd9ed71284618",
+     "album-06ae02901660450c961b285762a47153-32ce88a9fbca48fb884668848534d4be"
+    ],
+    "farud": [
+     "album-06ae02901660450c961b285762a47153-fb5b4418718342299ba3c734d23ec3f1",
+     "album-06ae02901660450c961b285762a47153-b0bd2d4a47b44e9590e65fd126547cf0",
+     "album-06ae02901660450c961b285762a47153-19b717044be447a3acf0d149c96bd239",
+     "album-06ae02901660450c961b285762a47153-9760de1ac8c64711a1cc71ac1f4b8c10",
+     "album-06ae02901660450c961b285762a47153-1f4bb6d160c34164868691f8ed9f6ac5"
+    ],
+    "kamus": [
+     "album-06ae02901660450c961b285762a47153-1f4bb6d160c34164868691f8ed9f6ac5",
+     "album-06ae02901660450c961b285762a47153-8f4effccf6a641e389227b91cbebdf17",
+     "album-06ae02901660450c961b285762a47153-1da2aa16b828493795143ac447a3d507",
+     "album-06ae02901660450c961b285762a47153-b9f0c6bc474046fba578a26dc6e76d77",
+     "album-06ae02901660450c961b285762a47153-c7f4d542b73e4c98be8943721fc754f6",
+     "album-06ae02901660450c961b285762a47153-c106aaecdbe34b2fbecfc603d6679fdc",
+     "album-06ae02901660450c961b285762a47153-5c4e4d853ed94d35a471031a5eb86c47"
+    ],
+    "khaqan": [
+     "album-06ae02901660450c961b285762a47153-c3680373529f473e81a4dfca57670415",
+     "album-06ae02901660450c961b285762a47153-69834d4904a2445ab0018c3f4c17fab6",
+     "album-06ae02901660450c961b285762a47153-68cde23df83a41228610b52118f01f87",
+     "album-06ae02901660450c961b285762a47153-5515bdd86c8a483298c1a92e62d394db",
+     "album-06ae02901660450c961b285762a47153-943eedad701d45a889c209d23cf14c5c",
+     "album-06ae02901660450c961b285762a47153-46b637e2c250405a90b153321d93d1a6",
+     "album-06ae02901660450c961b285762a47153-969ede172cd04e8ba16d3b7d42893197"
+    ],
+    "akvan": [
+     "album-06ae02901660450c961b285762a47153-5515bdd86c8a483298c1a92e62d394db",
+     "album-06ae02901660450c961b285762a47153-6b5fe5e09ea84b109f2b41b2ea24cda2"
+    ],
+    "bijan-manijeh": [
+     "album-06ae02901660450c961b285762a47153-6b5fe5e09ea84b109f2b41b2ea24cda2",
+     "album-06ae02901660450c961b285762a47153-53402ea88eb74c1390286ad73276efb7",
+     "album-06ae02901660450c961b285762a47153-ed6a995d2b8a4bb89891bd5b4db12b21",
+     "album-06ae02901660450c961b285762a47153-6709614010d4455995a79c852effb8f5",
+     "album-06ae02901660450c961b285762a47153-3998cde80b49401c8f1aa3c1535e94f4"
+    ],
+    "twelve-rooks": [
+     "album-06ae02901660450c961b285762a47153-c06c2aabf6e74bbc8b18f979dab553e5",
+     "album-06ae02901660450c961b285762a47153-02ac2f504cb54ffeb20a7a1f993b9ba1",
+     "album-06ae02901660450c961b285762a47153-53d04280d7b742f3b6db633c904e9798",
+     "album-06ae02901660450c961b285762a47153-2d3eba4b301d4a8887f8f99048f3d2b5",
+     "album-06ae02901660450c961b285762a47153-de9e786397354089ac23fa4f255fa37d",
+     "album-06ae02901660450c961b285762a47153-20d33b692bf74eedafa252ebc6f0dadb",
+     "album-06ae02901660450c961b285762a47153-3609cdf6e9724cf8b525c196c8bfdb4e",
+     "album-06ae02901660450c961b285762a47153-5fe8cd0340dc4056b7d4bb20e7e38df3",
+     "album-06ae02901660450c961b285762a47153-3f4299c769034ea792b6003fe06ca5a8",
+     "album-06ae02901660450c961b285762a47153-008390d3a63b434b999158656f09ebde",
+     "album-06ae02901660450c961b285762a47153-a844bc4bf9714d18857e2bc42f9de86f"
+    ],
+    "great-war": [
+     "album-06ae02901660450c961b285762a47153-a844bc4bf9714d18857e2bc42f9de86f",
+     "album-06ae02901660450c961b285762a47153-0b2dda43aa0640edaa473cd40f813451",
+     "album-06ae02901660450c961b285762a47153-d0a0f6ce9c594afeb3d27731d0d0b0c2",
+     "album-06ae02901660450c961b285762a47153-333ecdb37a2443e68a84c8bc5fc8f17a",
+     "album-06ae02901660450c961b285762a47153-ff79eb52760b47049efb9af721fb87b2",
+     "album-06ae02901660450c961b285762a47153-5b31c73a34f24651bb637597cc0be234",
+     "album-06ae02901660450c961b285762a47153-349577c9f4c04fffb6c1c0a4d0b6c1c4",
+     "album-06ae02901660450c961b285762a47153-c91fab57c9ea4fb0a494c8747fe31341",
+     "album-06ae02901660450c961b285762a47153-8240e75a96d5406cb3d13df8258f5935",
+     "album-06ae02901660450c961b285762a47153-1f13dc668ac94201b4c80d3ff42ce771",
+     "album-06ae02901660450c961b285762a47153-8a8e7c17cddb45fcba906fc510d2a018",
+     "album-06ae02901660450c961b285762a47153-3f146a8a88ab468cad005101de6ff316",
+     "album-06ae02901660450c961b285762a47153-079736b02c5646159c40b04998c5efa1"
+    ],
+    "goshtasp-rum": [
+     "album-06ae02901660450c961b285762a47153-85e24ce7913446c998e06945daef27df",
+     "album-06ae02901660450c961b285762a47153-5ba9c8ba59d64c3ab720f93c9ab2164c",
+     "album-06ae02901660450c961b285762a47153-1f96ac6c130b41f8a6d4b5458d3e000e",
+     "album-06ae02901660450c961b285762a47153-1eb14591f0a545329afad6b5903ecdb6"
+    ],
+    "zoroaster": [
+     "album-06ae02901660450c961b285762a47153-5fe0cafaddd1407c93db33c7103ae7a4",
+     "album-06ae02901660450c961b285762a47153-1dca236ba4e541d6a5f2141b2355b08d",
+     "album-06ae02901660450c961b285762a47153-d11e82b2f2f94cd58e7a417ff51379cf",
+     "album-06ae02901660450c961b285762a47153-aa43bb5872d643d48330338e959f6002",
+     "album-06ae02901660450c961b285762a47153-0a518d2075694df8ba661eb1190b0ea1",
+     "album-06ae02901660450c961b285762a47153-9e3729faceff47b48a3333060c6fbb77"
+    ],
+    "haftkhan-esfandiyar": [
+     "album-06ae02901660450c961b285762a47153-5916ddbfe95c458fb0c040edb629bcb1",
+     "album-06ae02901660450c961b285762a47153-144b84aa60d646ec88d2ca891a21f436",
+     "album-06ae02901660450c961b285762a47153-3c87abcfb7cf4a86ad434c4cf824efc0"
+    ],
+    "rostam-esfandiyar": [
+     "album-06ae02901660450c961b285762a47153-f4373057c4614b859dd16e46098852f5",
+     "album-06ae02901660450c961b285762a47153-51543b1630ec416fb37589c01731d4ec",
+     "album-06ae02901660450c961b285762a47153-f9a92f8c9baf4d019f78326220ab42d8",
+     "album-06ae02901660450c961b285762a47153-d8c8042bda5443cd9fd2f2d3ac009e25",
+     "album-06ae02901660450c961b285762a47153-ba2a5167aea046cda3357820ea2b4d15",
+     "album-06ae02901660450c961b285762a47153-8e1d6c7bdc3d49b2b0a9758909c34dc0",
+     "album-06ae02901660450c961b285762a47153-3f053b8bd8a440edaa8d2220d36244d3"
+    ],
+    "shaghad": [
+     "album-06ae02901660450c961b285762a47153-ef55341e8e964a8ca8dca9113caebd14",
+     "album-06ae02901660450c961b285762a47153-eaf6d4a5fc3143418e67f03a254cb303"
+    ],
+    "bahman-homay": [
+     "album-06ae02901660450c961b285762a47153-eaf6d4a5fc3143418e67f03a254cb303",
+     "album-06ae02901660450c961b285762a47153-a053b9c00dc44205b8e9f92aca6acc4d",
+     "album-06ae02901660450c961b285762a47153-f1639973a11148729663ab26e6f845dd"
+    ],
+    "darab-dara": [
+     "album-06ae02901660450c961b285762a47153-18cffe3377984036a55941058dfb796a",
+     "album-06ae02901660450c961b285762a47153-e0d3ae87ba9843f6bcee1f3a8a056071"
+    ],
+    "alexander": [
+     "album-06ae02901660450c961b285762a47153-85f36bcb6b4d402db32d7ebf0ac02bf3",
+     "album-06ae02901660450c961b285762a47153-c46714a739994eb7ae199be0c70f94a7",
+     "album-06ae02901660450c961b285762a47153-4fede69f90e74550b93bf150894d9d0d",
+     "album-06ae02901660450c961b285762a47153-eb616e53e43b4c70958e4fe1c6682567",
+     "album-06ae02901660450c961b285762a47153-62b6bd67d5a740c29fbe76bf547c3bd2",
+     "album-06ae02901660450c961b285762a47153-b3210e6f341b43a48cca67783917a33d",
+     "album-06ae02901660450c961b285762a47153-183fd0e4b5174153b19275d577184977",
+     "album-06ae02901660450c961b285762a47153-4c946a6c5c44482fbaba1e4491c51b91",
+     "album-06ae02901660450c961b285762a47153-e8794af73bc04a6fb6f73e70779d09d0"
+    ],
+    "ardashir": [
+     "album-06ae02901660450c961b285762a47153-b3162360d2e04451a546c6d1c7730874",
+     "album-06ae02901660450c961b285762a47153-31d46b4df9b8454fb164235278ab4dd3",
+     "album-06ae02901660450c961b285762a47153-dafbd49a05404f4f962e12942923c9a1",
+     "album-06ae02901660450c961b285762a47153-40516675e6dc4035a014a7f9366ab7ee",
+     "album-06ae02901660450c961b285762a47153-6ed2d372cbdf46b181fea1eae7a3aa75"
+    ],
+    "shapur-rum": [
+     "album-06ae02901660450c961b285762a47153-ef702e46779b42da90424da3afa8b612",
+     "album-06ae02901660450c961b285762a47153-6c9c4944562d4b2ebd7d10b377c576a9"
+    ],
+    "bahram-gur": [
+     "album-06ae02901660450c961b285762a47153-fff92b22674048beb04aa35e2c680bbf",
+     "album-06ae02901660450c961b285762a47153-5410749fa9bb4c11835b8724a1ef28e5",
+     "album-06ae02901660450c961b285762a47153-53ffd852a99648bb82b4f738c10bd4ab",
+     "album-06ae02901660450c961b285762a47153-a7b490bb0dcf4266b4cfe4ec4f06951e",
+     "album-06ae02901660450c961b285762a47153-2506b3c947ec44c8937c896db740bc4f",
+     "album-06ae02901660450c961b285762a47153-9ef3fe59144c42819e1624b88f4ecfa1",
+     "album-06ae02901660450c961b285762a47153-2a088527b37d46cebf32c54a83b88700",
+     "album-06ae02901660450c961b285762a47153-4e57cda12e4f44329bf8d4efbf8fe78d",
+     "album-06ae02901660450c961b285762a47153-1eeb35a909094af58c5534f07c417549",
+     "album-06ae02901660450c961b285762a47153-25bb7b38a10a430cb80d18da6c1b0ab4",
+     "album-06ae02901660450c961b285762a47153-e089d80c822e4a4bbdd36fc87e2761b5"
+    ],
+    "mazdak": [
+     "album-06ae02901660450c961b285762a47153-062b4ea696604a9fac7798857b9bd284",
+     "album-06ae02901660450c961b285762a47153-3df7909378934f0e9323b5e6df01e5ee"
+    ],
+    "anushirvan": [
+     "album-06ae02901660450c961b285762a47153-cc726a45b89946c7927b7f72f02534e8",
+     "album-06ae02901660450c961b285762a47153-0df0d7684b864a53a6bbee76715d1311",
+     "album-06ae02901660450c961b285762a47153-6a02c492d9cc423181c015f69eb4ed97",
+     "album-06ae02901660450c961b285762a47153-05493144f1be4a05bcba53d31036dc46",
+     "album-06ae02901660450c961b285762a47153-266e318074f74169a8ae67099eb54ae0",
+     "album-06ae02901660450c961b285762a47153-15bacce9dd944da195ee1449cd1d4b38",
+     "album-06ae02901660450c961b285762a47153-e2ccc0619f444c4ab8db1b517dcd941a",
+     "album-06ae02901660450c961b285762a47153-013e65fa7bbd4351b1afdc173abbb403",
+     "album-06ae02901660450c961b285762a47153-dee247138fdf4ee6b6d710c615d0151a",
+     "album-06ae02901660450c961b285762a47153-5994f085eb0f40c6940080d4756b2d70",
+     "album-06ae02901660450c961b285762a47153-c5486b6ae047483e82a77be607980668",
+     "album-06ae02901660450c961b285762a47153-092d84bb9a8745099a6c07add2396744",
+     "album-06ae02901660450c961b285762a47153-05eb88c147a14077b604c394578516a3",
+     "album-06ae02901660450c961b285762a47153-1b7464730cac476980566ce86c6771ee",
+     "album-06ae02901660450c961b285762a47153-aaae53e7f72c447786559a6f485cde3e",
+     "album-06ae02901660450c961b285762a47153-3e1aca9be7024bfcbc4a40bde1d0b094",
+     "album-06ae02901660450c961b285762a47153-be3084f5c4a0496c87a903b7b19e78d3",
+     "album-06ae02901660450c961b285762a47153-504a2ed6e16e40f1a4173482562d40b1",
+     "album-06ae02901660450c961b285762a47153-71c1e92c536843df8c8514662a9157c1",
+     "album-06ae02901660450c961b285762a47153-a449b2455dac4b2194f9ebf712e66814"
+    ],
+    "bahram-chubineh": [
+     "album-06ae02901660450c961b285762a47153-259731479cfd48879b9e81ed01257ddd",
+     "album-06ae02901660450c961b285762a47153-d1f84c1822a24b2581b9f70b6f7f2e47",
+     "album-06ae02901660450c961b285762a47153-d0e0cb6fa2d1466d956b0449f9a3e7ba",
+     "album-06ae02901660450c961b285762a47153-c86f122268a6412db0491773045a9620",
+     "album-06ae02901660450c961b285762a47153-454290b14a4c499ebcbbcaa64c044ef7",
+     "album-06ae02901660450c961b285762a47153-60a6cd2b756c4f45957eb04517a233e9",
+     "album-06ae02901660450c961b285762a47153-35f725178ffb4838aaca00bf73569762",
+     "album-06ae02901660450c961b285762a47153-d2779002518d43308ada81caf0f530d9",
+     "album-06ae02901660450c961b285762a47153-536f3caa29d84d058e568a34e0578bfa",
+     "album-06ae02901660450c961b285762a47153-ba100c496f3b424abc4fc282e3776f78",
+     "album-06ae02901660450c961b285762a47153-87eecc32e61a465e8b4cec8c66cf52ce",
+     "album-06ae02901660450c961b285762a47153-a64693b95af44399b9357daaa26a7edf",
+     "album-06ae02901660450c961b285762a47153-ec3c945001ff43bd9206533246cb8eaa",
+     "album-06ae02901660450c961b285762a47153-9e6f8664c5164afc9223f26fbd6223b3",
+     "album-06ae02901660450c961b285762a47153-7b1df2cd132b4310a948a82db41289c6",
+     "album-06ae02901660450c961b285762a47153-c5fb5622585b49559b6c955f57cd9a7d",
+     "album-06ae02901660450c961b285762a47153-bdc301e708ec42df87f489886c83fa4c",
+     "album-06ae02901660450c961b285762a47153-a5d08674ac7348c180958738433af665",
+     "album-06ae02901660450c961b285762a47153-2ada8d8f0cbe4e8bb60217e156814fb9",
+     "album-06ae02901660450c961b285762a47153-09a6f4b144894f0fbe04569c2cd6caa8",
+     "album-06ae02901660450c961b285762a47153-23039fe7eef54e94979c64d8ad277761"
+    ],
+    "khosrow-shirin": [
+     "album-06ae02901660450c961b285762a47153-23039fe7eef54e94979c64d8ad277761",
+     "album-06ae02901660450c961b285762a47153-69ba6c94ac5344208255c975282d8072",
+     "album-06ae02901660450c961b285762a47153-ac6a29ce73694b6d883fe828a1389b30",
+     "album-06ae02901660450c961b285762a47153-d253b3df98db494da5fad670190256bf",
+     "album-06ae02901660450c961b285762a47153-30f62536f55746a2b5ecd0627836663c",
+     "album-06ae02901660450c961b285762a47153-841c77b857444a40ad44254a3a59ddcc",
+     "album-06ae02901660450c961b285762a47153-4b6541079a34417aba7c74dbfc890f6d",
+     "album-06ae02901660450c961b285762a47153-f3f1856c7c7d449a8eecc8568ab5d8af"
+    ],
+    "fall": [
+     "album-06ae02901660450c961b285762a47153-e4392876e8d4469c988e642c63e81398",
+     "album-06ae02901660450c961b285762a47153-a38950c7bd7d494f9df35fd2c14128f1",
+     "album-06ae02901660450c961b285762a47153-413ad8805ff24257a16fed7eaa61323a",
+     "album-06ae02901660450c961b285762a47153-1ed6ddf874604337bd99e2987de46f82",
+     "album-06ae02901660450c961b285762a47153-d03be3e92eea41449ce21508bc1183b8"
+    ]
+   }
+  },
+  {
+   "id": "whispers",
+   "fa": "شاهنامه شنیدنی",
+   "en": "Whispers of the Shahnameh",
+   "authorFa": "سیروس ملکی",
+   "authorEn": "Sirous Maleki",
+   "feed": "https://anchor.fm/s/f4deef14/podcast/rss",
+   "link": "https://creators.spotify.com/pod/profile/parsiadab9/",
+   "stories": {
+    "kayumars": [
+     "f68ea82c-fcc1-48a9-baa6-93e59cedd931"
+    ],
+    "hushang-fire": [
+     "f68ea82c-fcc1-48a9-baa6-93e59cedd931",
+     "a3fcfdc9-535d-4f09-aa52-6090c8f00d17"
+    ],
+    "tahmuras": [
+     "a3fcfdc9-535d-4f09-aa52-6090c8f00d17"
+    ],
+    "jamshid": [
+     "58838679-c10e-4171-8ace-d07a9fac60cb"
+    ],
+    "zahhak": [
+     "58838679-c10e-4171-8ace-d07a9fac60cb",
+     "c95ef476-e98d-422e-8e09-0c715a0a83b4",
+     "853b841f-0b8d-4e45-a109-5897ea141fac"
+    ],
+    "fereydun-sons": [
+     "0f18e3f0-cd5b-471b-bbc0-b3dd5b8e9431",
+     "ca7f9f81-dd86-43cd-8e93-b4d7f7a41904",
+     "9ad73178-9e21-432d-b2a7-0de3e442ab7c",
+     "fea1d360-77fa-460a-8b31-4a7849baa2a7",
+     "0e7bfed7-1b3a-4b1f-8742-f884208af8bf",
+     "0bea801f-e6e2-46e7-92e7-ab5343f10468"
+    ],
+    "zal-rudabeh": [
+     "0bea801f-e6e2-46e7-92e7-ab5343f10468",
+     "e928247f-458c-4c91-84dd-f99fdfa93cfb",
+     "285c6d3e-485c-498d-bb29-03adf280791e",
+     "fc9dfe79-9ec3-40d0-abba-396517996981",
+     "0c3bc403-d4fb-4f1b-81b7-84feb77b33c9",
+     "261e6781-afe7-4fc7-84f5-0036c6f6e507",
+     "2e0b7cc8-d721-4f7f-886c-39918e47fb1b",
+     "4f6c9c41-e255-4288-8a07-0d21b049bdfd",
+     "73941249-b6c9-4cd9-929a-62d73a6f87d7",
+     "81c34ea8-57ca-4445-b6ad-1c8829943d09",
+     "f399651d-2ad0-43d1-a329-869dd895ddc6"
+    ],
+    "nowzar": [
+     "3f360359-91e2-4e90-9bf3-6124898a4359",
+     "276e6691-661c-45a4-b185-1c2d620354ad",
+     "07ed2347-0554-451f-8ec2-d5ab17e5e7fc"
+    ],
+    "rakhsh": [
+     "6dc4882a-2bf5-441c-ae97-2435bec42665"
+    ],
+    "kay-qobad": [
+     "6dc4882a-2bf5-441c-ae97-2435bec42665",
+     "4daa499f-17ca-47c5-b581-00468c42f205"
+    ],
+    "haftkhan-rostam": [
+     "4daa499f-17ca-47c5-b581-00468c42f205",
+     "c9f677d2-de49-4297-8e01-d1649ee18344",
+     "a6334432-64c6-46cf-bceb-bca1391daeea"
+    ],
+    "kay-khosrow-return": [
+     "eca79ab2-4653-482b-b779-f9f052a309d1",
+     "2655185d-d63a-43fd-bd3c-b1e3801a194a"
+    ],
+    "farud": [
+     "d172c6af-217e-4889-a1c5-d6fdc79c00c5",
+     "ff5292ef-04f3-4991-8ce8-bcd0b3c3a4b6",
+     "9ff95f4c-40ce-495c-8719-0775e2913f69",
+     "520ae4da-5191-4c72-890d-4f22d3dba6f1"
+    ],
+    "kamus": [
+     "31cbbf82-e1e2-48de-a136-069b6afbd974",
+     "8aab8e69-31b5-4b29-bca6-563055b55525",
+     "2b7996d7-5a27-4d07-8dce-3b19709f90a2",
+     "7ff7b2a7-fdf8-43cd-940e-405d6d896a5f",
+     "df13a889-e58f-475e-9e82-5fb52a31ca49",
+     "e41cdb8b-618f-4e17-8390-c42650b62cc9",
+     "f67d5938-1e61-4036-9262-cb3eb465e624"
+    ],
+    "khaqan": [
+     "f67d5938-1e61-4036-9262-cb3eb465e624",
+     "3c43d760-95e3-471d-b561-0d0c4bb25606",
+     "bcd89d60-cc06-4cd6-bd45-09148c2459a9",
+     "a73b2949-2b1f-477c-af01-5e969a640365",
+     "947b7179-b017-4f89-ae83-f00f5789ed2c"
+    ],
+    "akvan": [
+     "34bb08a4-7320-4449-b437-da1e73c2c74c"
+    ],
+    "bijan-manijeh": [
+     "edd8dd94-f554-4dd1-b554-49cc0d6f2a89",
+     "4e6cbe1e-7a37-4fe3-884d-877045107302",
+     "b3ffdc5f-3d52-4357-aff1-2adaf7360b4a",
+     "164fe1d1-6378-42bd-9d99-b0cb08a975d6",
+     "441221ed-c014-4f20-80e3-b3e1381cce2f",
+     "ca5c99d4-ee93-48f3-8c55-1d1accfe9313"
+    ],
+    "twelve-rooks": [
+     "76b62f22-3993-4b32-bab7-64476a574502",
+     "1863e444-ac30-4baf-90ef-3850c7f287cd",
+     "1a9990c9-8a39-41e5-89ec-c018cfa55f17",
+     "d8f6059a-5ba8-4300-bf0e-51cd732a162c",
+     "a6704060-7c00-40a9-b315-850682dbb77e",
+     "7db6034e-e99b-4af1-bab7-635a591697cf",
+     "461372dd-b9ea-475d-92fb-e1728594af13",
+     "450f64d5-51c9-48b9-863e-e74e34ec632e",
+     "a2e4e9b7-e50d-4daa-bace-b2a3d8ecf9d0",
+     "25cfe0a2-bdaa-4d01-8616-21686c55f70b",
+     "c19c0013-53bd-4fc4-a782-66e01efd421f"
+    ],
+    "great-war": [
+     "2c98406d-18f4-4537-95eb-118f2c876bdd",
+     "339d3423-004f-4fb9-b868-94d69bc786c3",
+     "f8eb9c07-009c-43d6-880e-b1b226292c60",
+     "68fa2eb5-30b1-4388-8701-e1a3bb71a89d",
+     "65b46fc6-b362-4d4f-ba17-5e2218be1492",
+     "0e4415ab-0f85-4840-87c7-8f509ea48740",
+     "2ba6b269-9d05-4ca5-a713-05c698799e32",
+     "66782a89-d788-4f46-8535-72ba4d981837",
+     "96f1d7fe-9cf5-46ca-9b38-e88930b5a739",
+     "2f147402-470a-4793-822b-18f63664c9f3",
+     "20330737-3fea-4d98-8213-f2f061d77531",
+     "b8abbb40-87be-4c48-801d-b98f4c19327a",
+     "881b051d-4920-425a-bca4-9a2b66e09567"
+    ],
+    "goshtasp-rum": [
+     "ae3e757e-6b98-413b-91cc-ecc1fb7d2898",
+     "2ac41065-3c50-4e0e-86de-f892a3ac2d88",
+     "147c88a0-0bcd-450b-a3a6-7e0cd2102b93",
+     "24224668-dd19-4fcf-914e-15cb951ac434"
+    ],
+    "zoroaster": [
+     "3d3fb634-631b-461a-aeed-3ab90802665f",
+     "9c93a814-1329-4963-b1d0-2bbbea22d4ea",
+     "2ec56d91-f05b-4381-9e7a-81ee62bd5c68",
+     "5e21a840-a954-4062-b881-ef925d80cc35",
+     "2f723242-6168-4fd1-a171-824a0815e861",
+     "63e15d24-eddf-45b3-a4fa-acdbffab46cb"
+    ],
+    "haftkhan-esfandiyar": [
+     "63e15d24-eddf-45b3-a4fa-acdbffab46cb",
+     "fe1b0831-81d0-490d-910e-cf0de24e7912",
+     "ee274ae6-5769-45b2-a42e-48d1e9ea8982"
+    ],
+    "rostam-esfandiyar": [
+     "b9ad2686-e964-47b0-973c-1d3932d3db0d",
+     "4c7ebd82-76c0-489c-8270-ab5f154602b0",
+     "1967d356-9bdc-48ef-b307-95cfaba32e32",
+     "ea4b15dc-171a-44b6-b688-78582d81848d",
+     "309c3c0f-9a78-4367-84dc-d0ede8e77d0c",
+     "8504f7c9-3866-44d7-84ae-cdc1f4d8de6e",
+     "db26d8f8-7a12-4173-80e4-4497b8182a86",
+     "fd298469-493e-42e9-badc-b542124ebf17"
+    ],
+    "shaghad": [
+     "4ce163d8-d42b-47c8-bea6-96d2ae7125cc",
+     "0c382438-a597-4f46-becf-c27d69403188"
+    ],
+    "bahman-homay": [
+     "0c382438-a597-4f46-becf-c27d69403188",
+     "5518767a-ddaf-43d0-a3ec-00ba68fd4fd2"
+    ],
+    "darab-dara": [
+     "3805a2dd-2fd0-4b11-abf9-f8cc49d4520d",
+     "8680da74-585e-4e10-836a-935f322b4a0b",
+     "7204d513-5167-4a7e-98ee-95004d2f9db8",
+     "5813d3b8-c407-42a6-8f8b-2e130d143ed2",
+     "0a7c019b-809d-432f-b578-327c60ef557e"
+    ],
+    "alexander": [
+     "0a7c019b-809d-432f-b578-327c60ef557e",
+     "1dde1ce3-8c3a-4909-bafc-09e7b95ec4a1",
+     "f71cc6e3-d3d9-4196-a7d2-21a0728fffdf",
+     "c3e48291-ab8a-426a-a9c3-8fce63f44a75",
+     "b9c8cb0a-eedd-4f7d-9144-17e9c908c8a4",
+     "6d8035a1-a95e-4d4c-814c-79cb1ed823e2",
+     "67c2163a-c205-4447-9141-63ded5f8278f",
+     "5295588b-a3d5-48c1-8205-0f782b4845db",
+     "a8b7e9b7-61dd-4ff9-b32b-8d53edea10c9",
+     "13ab3cc2-39af-41d7-b34c-b4b6e51a1c35"
+    ]
+   }
+  }
+ ]
+}

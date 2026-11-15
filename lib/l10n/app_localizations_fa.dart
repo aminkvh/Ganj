@@ -770,6 +770,24 @@ class L10nFa extends L10n {
   String get shShowOnMap => 'روی نقشه';
 
   @override
+  String get shListen => 'شنیدن';
+
+  @override
+  String get shPodcasts => 'پادکست‌های شاهنامه';
+
+  @override
+  String get shPodcastsTitle => 'پادکست‌های این داستان';
+
+  @override
+  String get shPodcastFailed => 'فهرست قسمت‌ها بار نشد.';
+
+  @override
+  String get shPodcastNote => 'از خوراک عمومی خودِ هر پادکست پخش می‌شود.';
+
+  @override
+  String get shPodcastPage => 'صفحهٔ پادکست';
+
+  @override
   String get shOnTimeline => 'در گاه‌شمار';
 
   @override

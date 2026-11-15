@@ -25,6 +25,7 @@ class PlayerState {
     this.speed = 1,
     this.follow = false,
     this.waiting = false,
+    this.episode,
   }) : timeline = timeline ?? SyncTimeline(const []);
 
   final Poem? poem;
@@ -43,6 +44,10 @@ class PlayerState {
   /// The voice stream is paused at a beyt boundary until the next beyt is made. [playing] keeps
   /// the listener's intent; the UI shows the loading ring as for [PlayerStatus.loading].
   final bool waiting;
+
+  /// Set when the media is a podcast episode rather than a reading of a poem ([poem] and
+  /// [recitation] then only carry its title and podcast).
+  final PlayerEpisode? episode;
 
   PlayerState copyWith({
     PlayerStatus? status,
@@ -66,8 +71,25 @@ class PlayerState {
     speed: speed ?? this.speed,
     follow: follow ?? this.follow,
     waiting: waiting ?? this.waiting,
+    episode: episode,
   );
 }
+
+/// A podcast episode to play: [route] is where the mini player leads back to.
+class PlayerEpisode {
+  const PlayerEpisode({
+    required this.id,
+    required this.title,
+    required this.podcast,
+    required this.audioUrl,
+    required this.route,
+  });
+
+  final String id, title, podcast, audioUrl, route;
+}
+
+/// The id of a podcast episode's pseudo-poem and pseudo-recitation (never a real id).
+const kEpisodeId = -2;
 
 final audioBackendProvider = Provider<AudioBackend>((ref) => throw UnimplementedError('override in main'));
 
@@ -395,6 +417,41 @@ class PlayerController extends Notifier<PlayerState> {
     });
   }
 
+  /// Plays a podcast [episode] from its feed's audio link (never downloaded, never synced).
+  Future<void> playEpisode(PlayerEpisode episode) {
+    _voiceWav = null;
+    final poem = Poem(
+      id: kEpisodeId,
+      title: episode.title,
+      fullTitle: episode.title,
+      fullUrl: '',
+      plainText: '',
+      verses: const [],
+    );
+    final r = Recitation(
+      id: kEpisodeId,
+      poemId: kEpisodeId,
+      title: episode.title,
+      artist: episode.podcast,
+      artistUrl: '',
+      mp3Url: episode.audioUrl,
+      mp3Size: 0,
+      audioOrder: 0,
+      inSync: false,
+    );
+    return _start(
+      poem,
+      r,
+      false,
+      () async => (
+        uri: Uri.parse(episode.audioUrl),
+        points: const <SyncPoint>[],
+        info: MediaInfo(id: 'podcast-${episode.id}', title: episode.title, artist: episode.podcast),
+      ),
+      episode: episode,
+    );
+  }
+
   /// Plays the on-device voice's [wav] with its [sync] points; no network, store or API sync.
   Future<void> playVoice(Poem poem, File wav, List<SyncPoint> sync, {required String artist}) {
     _voiceWav = wav;
@@ -416,8 +473,9 @@ class PlayerController extends Notifier<PlayerState> {
     Poem poem,
     Recitation r,
     bool? follow,
-    Future<({Uri uri, List<SyncPoint> points, MediaInfo info})> Function() source,
-  ) async {
+    Future<({Uri uri, List<SyncPoint> points, MediaInfo info})> Function() source, {
+    PlayerEpisode? episode,
+  }) async {
     final gen = ++_generation;
     _stream = null; // any voice stream ends; its later beyts are ignored
     _backendCompleted = false;
@@ -432,6 +490,7 @@ class PlayerController extends Notifier<PlayerState> {
       playing: true,
       speed: state.speed,
       follow: follow ?? state.follow,
+      episode: episode,
     );
     try {
       final src = await source();
@@ -467,6 +526,7 @@ class PlayerController extends Notifier<PlayerState> {
   Future<void> retry() async {
     final p = state.poem, r = state.recitation;
     if (p == null || r == null) return;
+    if (state.episode case final e?) return playEpisode(e);
     final s = _stream;
     if (r.id == kVoiceRecitationId && s != null) return _startStream(s.copy()); // reload the ready beyts
     final wav = _voiceWav;

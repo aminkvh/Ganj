@@ -87,7 +87,7 @@ class MiniPlayer extends ConsumerWidget {
                 lead,
                 Expanded(
                   child: InkWell(
-                    onTap: () => GoRouter.maybeOf(context)?.push('/poem/${poem.id}'),
+                    onTap: () => GoRouter.maybeOf(context)?.push(s.episode?.route ?? '/poem/${poem.id}'),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       child: s.status == PlayerStatus.error && ref.watch(audioUnavailableProvider) != null
