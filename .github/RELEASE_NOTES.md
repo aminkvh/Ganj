@@ -8,6 +8,15 @@
 
 ## What's new · تازه‌ها
 
+### 1.6.2
+- **Shahnameh podcasts:** five Persian Shahnameh podcasts can now be heard in Ganj: شاهنامه خودمونی (Saeed Gholami), فردوسی‌خوانی (Amir Khadem), شاهنامه با داستامینوفن, شاه‌پاد and شاهنامه شنیدنی (Sirous Maleki). Their episodes are matched to the stories: tap **Listen** on a story in the World of the Shahnameh, or open **Shahnameh podcasts** on the Shahnameh's page to browse every episode, story by story. Episodes play in Ganj's player, streamed from each podcast's own public feed, with credit and a link to the podcast.
+
+<div dir="rtl">
+
+- **پادکست‌های شاهنامه:** اکنون پنج پادکست فارسی شاهنامه را در گنج می‌توانید بشنوید: شاهنامه خودمونی (سعید غلامی)، فردوسی‌خوانی (امیر خادم)، شاهنامه با داستامینوفن، شاه‌پاد و شاهنامه شنیدنی (سیروس ملکی). قسمت‌ها با داستان‌ها جفت شده‌اند: روی یک داستان در جهان شاهنامه **شنیدن** را بزنید، یا در صفحهٔ شاهنامه **پادکست‌های شاهنامه** را باز کنید تا همهٔ قسمت‌ها را داستان به داستان ببینید. قسمت‌ها در پخش‌کنندهٔ گنج و از خوراک عمومی خود هر پادکست پخش می‌شوند، با نام سازنده و پیوند به پادکست.
+
+</div>
+
 ### 1.6.1
 - **Machine reading reads better:** a new reading model (Ganj voice 1.2.0) places harakat, ezafe and rhymes more correctly. If you already have the voice, Ganj fetches only the new part (about 34 MB) quietly in the background and switches to it at your next reading, with a short note «Machine reading got better». The voice itself is the same.
 - **Highlighting:** machine reading now highlights each hemistich as it is read, like Ganjoor's recitations.
