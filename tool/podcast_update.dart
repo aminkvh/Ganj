@@ -9,7 +9,8 @@
 // also agrees with Ganjoor: the first line matches, the poem exists, the numbering carries on from the
 // last episode. Everything else new is listed in unmatched.md for matching by hand.
 //
-// Writes <out>/podcasts.json ({schema, builtAt, shahnameh, poems}) and <out>/unmatched.md.
+// Writes <out>/podcasts.json ({schema, builtAt, shahnameh, poems}), <out>/unmatched.md and the same
+// list with each episode's show notes as <out>/unmatched.json.
 import 'dart:convert';
 import 'dart:io';
 
@@ -30,20 +31,34 @@ Future<String> _get(String url) async {
   return body;
 }
 
-/// A feed item: guid, title, publication date.
-typedef Item = ({String guid, String title, String date});
+/// A feed item: guid, title, publication date, and its show notes as plain text (shortened).
+typedef Item = ({String guid, String title, String date, String description});
+
+/// [html] as plain text: tags dropped, entities decoded, white space collapsed, at most [max] characters.
+String plainNotes(String html, {int max = 1500}) {
+  var s = html.replaceAll(RegExp(r'<br\s*/?>|</p>', caseSensitive: false), '\n').replaceAll(RegExp(r'<[^>]*>'), ' ');
+  try {
+    s = XmlDocumentFragment.parse(s).innerText;
+  } catch (_) {}
+  s = s.replaceAll(RegExp(r'[ \t ]+'), ' ').replaceAll(RegExp(r'\s*\n\s*'), '\n').trim();
+  return s.length > max ? '${s.substring(0, max)}…' : s;
+}
 
 /// The feed's playable items, oldest first.
 Future<List<Item>> _items(String feed) async {
   final doc = XmlDocument.parse(await _get(feed));
+  String text(XmlElement i, String name) => i.findElements(name).firstOrNull?.innerText.trim() ?? '';
   return [
     for (final i in doc.findAllElements('item'))
-      if ((i.findElements('guid').firstOrNull?.innerText.trim() ?? '') case final g when g.isNotEmpty)
+      if (text(i, 'guid') case final g when g.isNotEmpty)
         if (i.findElements('enclosure').firstOrNull?.getAttribute('url')?.isNotEmpty ?? false)
           (
             guid: g,
-            title: i.findElements('title').firstOrNull?.innerText.trim() ?? '',
-            date: i.findElements('pubDate').firstOrNull?.innerText.trim() ?? '',
+            title: text(i, 'title'),
+            date: text(i, 'pubDate'),
+            description: plainNotes(
+              [text(i, 'description'), text(i, 'itunes:summary')].firstWhere((d) => d.isNotEmpty, orElse: () => ''),
+            ),
           ),
   ].reversed.toList();
 }
@@ -173,6 +188,7 @@ Future<void> main(List<String> args) async {
   };
 
   final report = StringBuffer();
+  final waiting = <Map<String, Object?>>[];
   var added = 0, unmatched = 0, failed = 0;
   Future<void> run(Map<String, dynamic> catalog, String key) async {
     for (final p in catalog['podcasts'] as List) {
@@ -208,6 +224,18 @@ Future<void> main(List<String> args) async {
       }
       if (open.isEmpty) continue;
       unmatched += open.length;
+      waiting.addAll([
+        for (final i in open)
+          {
+            'catalog': key == 'stories' ? 'shahnameh' : 'poems',
+            'podcast': id,
+            'podcastFa': p['fa'],
+            'guid': i.guid,
+            'title': i.title,
+            'date': i.date,
+            'description': i.description,
+          },
+      ]);
       report.writeln('- **${p['fa']}** (`$id`, ${key == 'stories' ? 'Shahnameh stories' : 'poems'}):');
       for (final i in open) {
         report.writeln('  - `${i.guid}` ${i.date} — ${i.title}');
@@ -234,5 +262,7 @@ Future<void> main(List<String> args) async {
         : 'New podcast episodes that need matching by hand (add them to the catalogs in `assets/seed/`, '
               'or to `tool/podcast_skipped.json` / `tool/poem_podcast_skipped.json`):\n\n$report',
   );
+  // The same list for the matching workflow (podcast-match.yml), with each episode's show notes.
+  File('${out.path}/unmatched.json').writeAsStringSync(const JsonEncoder.withIndent('  ').convert(waiting));
   stdout.writeln('\n$added episode(s) matched by their titles; $unmatched to match by hand; $failed feed(s) failed.');
 }
