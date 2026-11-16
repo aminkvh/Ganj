@@ -8,6 +8,25 @@
 
 ## What's new · تازه‌ها
 
+### 1.6.3
+- **Podcasts on poems:** eleven Persian podcasts that read and discuss the poems can now be heard right under a poem's recitations, in a quiet «پادکست‌ها» panel: Hafez (رواق — all 495 ghazals; حافظ‌خوانی, Behrouz Razavi; هنر حافظ), Saadi's ghazals (سعدیا; شکرین حدیث سعدی), the Masnavi (مثنوی‌خوانی, Ali Erfanian — nearly the whole Masnavi; الف لام میم; Safiyeh Aslani) and Nezami (Somayeh Shokri; چای با بنفشه; Mohammadreza Taheri). Every episode is matched to the poems it is about, and only matches that were checked are shown.
+- **New episodes without an update:** the lists of podcasts and episodes now update by themselves every couple of days, so new episodes (and new podcasts) appear without a new version of Ganj. The Shahnameh podcasts' matches were rechecked too.
+- **Download a book's recitations:** on a book's page (Hafez's ghazals, a daftar of the Masnavi…) the download button offers the top recitation of each poem, every recitation, or one reciter's — with how many poems and how much space. They download one at a time and can be stopped.
+- **Search:** when nothing matches as typed, Ganj also tries the letters that sound alike (س/ص/ث, ز/ذ/ض/ظ, ت/ط, ه/ح, ق/غ) and says so. The search page now explains searching by **meaning** — ask in your own words, like «شعری برای دلتنگی در غربت» — and offers it when words find nothing.
+- **Tajik script:** off, under the verses, or **Tajik only** (in place of the Persian, for readers of Tajik). A poem Tajik Ganjoor has no text for now says so.
+- **When Ganjoor's server can't be reached:** poems are read from Ganjoor's public copy of its data instead, and some reference data comes from that copy too, which also lightens the load on Ganjoor.
+
+<div dir="rtl">
+
+- **پادکست‌های شعر:** یازده پادکست فارسی که شعرها را می‌خوانند و شرح می‌دهند، اکنون زیر خوانش‌های همان شعر، در بخش آرام «پادکست‌ها» شنیدنی‌اند: حافظ (رواق — همهٔ ۴۹۵ غزل؛ حافظ‌خوانی، بهروز رضوی؛ هنر حافظ)، غزل‌های سعدی (سعدیا؛ شکرین حدیث سعدی)، مثنوی (مثنوی‌خوانی، علی عرفانیان — تقریباً همهٔ مثنوی؛ الف لام میم؛ صفیه اصلانی) و نظامی (سمیه شکری؛ چای با بنفشه؛ محمدرضا طاهری). هر قسمت به شعرهایی که دربارهٔ آن‌هاست پیوند خورده و فقط پیوندهای بررسی‌شده نشان داده می‌شوند.
+- **قسمت‌های تازه بی‌به‌روزرسانی:** فهرست پادکست‌ها و قسمت‌ها اکنون هر چند روز خودبه‌خود به‌روز می‌شود، پس قسمت‌های تازه (و پادکست‌های تازه) بی‌نسخهٔ تازهٔ گنج می‌آیند. پیوندهای پادکست‌های شاهنامه هم دوباره بررسی شد.
+- **بارگیری خوانش‌های یک کتاب:** در صفحهٔ یک کتاب (غزلیات حافظ، یک دفتر مثنوی…) دکمهٔ بارگیری، بهترین خوانش هر شعر، همهٔ خوانش‌ها یا خوانش‌های یک خواننده را پیشنهاد می‌کند — با شمار شعرها و حجم. یکی‌یکی بارگیری می‌شوند و می‌توان آن را متوقف کرد.
+- **جستجو:** اگر با همان املا چیزی یافت نشود، گنج حروف هم‌آوا (س/ص/ث، ز/ذ/ض/ظ، ت/ط، ه/ح، ق/غ) را هم می‌آزماید و این را می‌گوید. صفحهٔ جستجو اکنون جستجو با **معنا** را توضیح می‌دهد — به زبان خودتان بپرسید، مانند «شعری برای دلتنگی در غربت» — و اگر واژه‌ها چیزی نیابند، آن را پیشنهاد می‌کند.
+- **خط تاجیکی:** خاموش، زیر بیت‌ها، یا **فقط تاجیکی** (به جای متن فارسی، برای خوانندگان تاجیک). شعری که در گنجور تاجیکی متن ندارد، اکنون این را می‌گوید.
+- **وقتی سرور گنجور در دسترس نیست:** شعرها از نسخهٔ عمومی داده‌های گنجور خوانده می‌شوند، و برخی داده‌های مرجع هم از همان نسخه می‌آیند که بار سرور گنجور را هم سبک‌تر می‌کند.
+
+</div>
+
 ### 1.6.2
 - **Shahnameh podcasts:** five Persian Shahnameh podcasts can now be heard in Ganj: شاهنامه خودمونی (Saeed Gholami), فردوسی‌خوانی (Amir Khadem), شاهنامه با داستامینوفن, شاه‌پاد and شاهنامه شنیدنی (Sirous Maleki). Their episodes are matched to the stories: tap **Listen** on a story in the World of the Shahnameh, or open **Shahnameh podcasts** on the Shahnameh's page to browse every episode, story by story. Episodes play in Ganj's player, streamed from each podcast's own public feed, with credit and a link to the podcast.
 
