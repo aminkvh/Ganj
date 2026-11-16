@@ -400,7 +400,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                 case 'share':
                   if (poem != null) _share(_withSource(poem, couplets.map((c) => c.text).join('\n')));
                 case 'tajik':
-                  ctrl.setShowTajik(!settings.showTajik);
+                  ctrl.toggleTajik();
                 case 'site':
                   if (poem != null) {
                     openExternal(context, ganjoorSiteUrl(poem.fullUrl), launcher: ref.read(urlLauncherProvider));
@@ -412,13 +412,13 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
               _menuItem('zoomIn', Icons.zoom_in, context.l10n.zoomIn),
               _menuItem('zoomOut', Icons.zoom_out, context.l10n.zoomOut),
               _menuItem('theme', Icons.brightness_6_outlined, context.l10n.switchTheme),
-              _menuItem('copy', Icons.copy, context.l10n.copyPoem),
-              _menuItem('share', Icons.share, context.l10n.share),
               _menuItem(
                 'tajik',
                 settings.showTajik ? Icons.check_box : Icons.check_box_outline_blank,
                 context.l10n.tajikScript,
               ),
+              _menuItem('copy', Icons.copy, context.l10n.copyPoem),
+              _menuItem('share', Icons.share, context.l10n.share),
               _menuItem('site', Icons.open_in_new, context.l10n.openOnGanjoor),
             ],
           ),
@@ -464,6 +464,14 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
   Widget _body(Poem p, List<Couplet> couplets, Settings s, bool wide, int? playingVOrder) {
     final c = context.ganj;
     final highlights = {..._hits, ?playingVOrder};
+    final tajik = s.showTajik ? ref.watch(tajikPoemProvider(p.fullUrl)) : null;
+    // «Tajik only»: a couplet with Tajik text shows just that; one without keeps its Persian.
+    List<String>? onlyTajik(Couplet couplet) {
+      if (s.tajikScript != TajikScript.only) return null;
+      final lines = [for (final v in couplet.verses) ?tajik?.value?[v.vOrder]];
+      return lines.isEmpty ? null : lines;
+    }
+
     return NotificationListener<ScrollNotification>(
       onNotification: (n) {
         if (n is UserScrollNotification) _userScrolledAt = DateTime.now();
@@ -549,6 +557,16 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                     ),
                   if (p.recitations.isNotEmpty || voiceRowVisible(ref, p)) RecitationList(poem: p),
                   PoemPodcastPanel(poem: p),
+                  if (tajik case AsyncData(value: final t) when t.isEmpty)
+                    Padding(
+                      key: const ValueKey('no-tajik'),
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        context.l10n.noTajikText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: c.muted, fontSize: 12),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -571,18 +589,27 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                         itemBuilder: (context, i) => Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            BeytView(
-                              key: _keyFor(couplets[i].index),
-                              couplet: couplets[i],
-                              wide: wide,
-                              scale: s.fontScale,
-                              showMeaning: _meaningHere ?? s.showMeaning,
-                              highlightVOrders: highlights,
-                              hasNote: _notes.containsKey(couplets[i].index),
-                              bookmarked: _bookmarkedCouplets.contains(couplets[i].index),
-                              onMenu: (at) => _beytMenu(p, couplets[i], at),
-                            ),
-                            if (s.showTajik) _TajikLines(fullUrl: p.fullUrl, couplet: couplets[i]),
+                            if (onlyTajik(couplets[i]) case final lines?)
+                              _TajikOnly(
+                                key: _keyFor(couplets[i].index),
+                                lines: lines,
+                                scale: s.fontScale,
+                                onMenu: (at) => _beytMenu(p, couplets[i], at),
+                              )
+                            else
+                              BeytView(
+                                key: _keyFor(couplets[i].index),
+                                couplet: couplets[i],
+                                wide: wide,
+                                scale: s.fontScale,
+                                showMeaning: _meaningHere ?? s.showMeaning,
+                                highlightVOrders: highlights,
+                                hasNote: _notes.containsKey(couplets[i].index),
+                                bookmarked: _bookmarkedCouplets.contains(couplets[i].index),
+                                onMenu: (at) => _beytMenu(p, couplets[i], at),
+                              ),
+                            if (s.tajikScript == TajikScript.below)
+                              _TajikLines(fullUrl: p.fullUrl, couplet: couplets[i]),
                             if (_translating)
                               TranslationLine(
                                 future: _translationOf(couplets[i], s.translateTo),
@@ -880,6 +907,35 @@ class _TajikLines extends ConsumerWidget {
         textDirection: TextDirection.ltr,
         // Vazirmatn has no Cyrillic: fall back to Roboto (Android), else the system's font.
         style: TextStyle(color: c.lapis, fontSize: 14, height: 1.7, fontFamilyFallback: const ['Roboto']),
+      ),
+    );
+  }
+}
+
+/// «Tajik only»: the beyt in Tajik (Cyrillic) instead of Persian, at the verse size; a tap opens the
+/// beyt's actions as for the Persian text.
+class _TajikOnly extends StatelessWidget {
+  const _TajikOnly({super.key, required this.lines, required this.scale, required this.onMenu});
+
+  final List<String> lines;
+  final double scale;
+  final ValueChanged<Offset?> onMenu;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.ganj;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => onMenu(null),
+      onSecondaryTapUp: (d) => onMenu(d.globalPosition),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          lines.join('\n'),
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr,
+          style: TextStyle(color: c.ink, fontSize: 17 * scale, height: 1.8, fontFamilyFallback: const ['Roboto']),
+        ),
       ),
     );
   }

@@ -967,6 +967,24 @@ abstract class L10n {
   /// **'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا'**
   String get meaningHint;
 
+  /// No description provided for @soundAlikeNote.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای «{term}» با همین املا چیزی نبود؛ این نتیجه‌ها با حروف هم‌آوا (مانند س و ص و ث) یافت شد.'**
+  String soundAlikeNote(String term);
+
+  /// No description provided for @meaningTip.
+  ///
+  /// In fa, this message translates to:
+  /// **'با «واژه‌ها» همان واژه‌ها در شعرها جسته می‌شود. با «معنا» می‌توانید به زبان خودتان بپرسید، مثلاً «شعری برای دلتنگی در غربت».'**
+  String get meaningTip;
+
+  /// No description provided for @searchByMeaningInstead.
+  ///
+  /// In fa, this message translates to:
+  /// **'با معنا بجویید'**
+  String get searchByMeaningInstead;
+
   /// No description provided for @semanticScope.
   ///
   /// In fa, this message translates to:
@@ -1014,6 +1032,30 @@ abstract class L10n {
   /// In fa, this message translates to:
   /// **'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند'**
   String get tajikScriptNote;
+
+  /// No description provided for @tajikOff.
+  ///
+  /// In fa, this message translates to:
+  /// **'خاموش'**
+  String get tajikOff;
+
+  /// No description provided for @tajikBelow.
+  ///
+  /// In fa, this message translates to:
+  /// **'زیر بیت‌ها'**
+  String get tajikBelow;
+
+  /// No description provided for @tajikOnly.
+  ///
+  /// In fa, this message translates to:
+  /// **'فقط تاجیکی'**
+  String get tajikOnly;
+
+  /// No description provided for @noTajikText.
+  ///
+  /// In fa, this message translates to:
+  /// **'این شعر در گنجور تاجیکی متن ندارد.'**
+  String get noTajikText;
 
   /// No description provided for @home.
   ///

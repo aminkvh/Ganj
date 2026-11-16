@@ -194,18 +194,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             value: s.showMeaning,
             onChanged: (_) => ctrl.toggleMeaning(),
           ),
-          SwitchListTile(
-            secondary: const Icon(Icons.map_outlined),
-            title: Text(context.l10n.mapStartsOnAll),
-            value: s.mapStartsOnAll,
-            onChanged: ctrl.setMapStartsOnAll,
-          ),
-          SwitchListTile(
-            secondary: const Icon(Icons.abc),
+          ListTile(
+            leading: const Icon(Icons.abc),
             title: Text(context.l10n.tajikScript),
             subtitle: Text(context.l10n.tajikScriptNote, style: TextStyle(color: c.muted, fontSize: 12)),
-            value: s.showTajik,
-            onChanged: ctrl.setShowTajik,
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(56, 0, 16, 8),
+            child: SegmentedButton<TajikScript>(
+              key: const ValueKey('tajik-script'),
+              showSelectedIcon: false,
+              segments: [
+                ButtonSegment(value: TajikScript.off, label: Text(context.l10n.tajikOff)),
+                ButtonSegment(value: TajikScript.below, label: Text(context.l10n.tajikBelow)),
+                ButtonSegment(value: TajikScript.only, label: Text(context.l10n.tajikOnly)),
+              ],
+              selected: {s.tajikScript},
+              onSelectionChanged: (v) => ctrl.setTajikScript(v.first),
+            ),
           ),
           SwitchListTile(
             secondary: const Icon(Icons.font_download_outlined),
@@ -213,6 +219,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             subtitle: Text(context.l10n.iranNastaliqNote, style: TextStyle(color: c.muted, fontSize: 12)),
             value: s.iranNastaliq,
             onChanged: ctrl.setIranNastaliq,
+          ),
+          SwitchListTile(
+            secondary: const Icon(Icons.map_outlined),
+            title: Text(context.l10n.mapStartsOnAll),
+            value: s.mapStartsOnAll,
+            onChanged: ctrl.setMapStartsOnAll,
           ),
           header(context.l10n.translate),
           ListTile(

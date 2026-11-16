@@ -42,6 +42,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   int _total = 0;
   bool _totalKnown = true;
 
+  /// The results match only with sound-alike letters swapped; [_onlineTerm] is the spelling found online.
+  bool _soundAlike = false;
+  String? _onlineTerm;
+
   /// Only the newest request may update the list.
   int _request = 0;
 
@@ -93,7 +97,16 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     // Left-out poets only matter when searching all of them.
     final exclude = _poetId == null ? ref.read(settingsProvider).excludedPoets : const <int>{};
     try {
-      final r = await ref.read(searchServiceProvider).search(term, poetId: _poetId, exclude: exclude, page: page);
+      final r = await ref
+          .read(searchServiceProvider)
+          .search(
+            term,
+            poetId: _poetId,
+            exclude: exclude,
+            page: page,
+            soundAlike: more && _soundAlike,
+            onlineTerm: more ? _onlineTerm : null,
+          );
       if (!mounted || request != _request) return;
       final seen = {for (final h in _hits) h.poemId};
       setState(() {
@@ -103,6 +116,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         _offline = r.offline;
         _total = r.total;
         _totalKnown = r.totalKnown;
+        _soundAlike = r.soundAlike;
+        _onlineTerm = r.onlineTerm;
       });
     } finally {
       if (mounted && request == _request) setState(() => _loading = false);
@@ -225,8 +240,45 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     padding: const EdgeInsets.all(8),
                     child: Text(context.l10n.offlineResults, textAlign: TextAlign.center),
                   ),
+                if (_term == null)
+                  Padding(
+                    key: const ValueKey('meaning-tip'),
+                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+                    child: Text(
+                      context.l10n.meaningTip,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: c.muted, height: 1.8),
+                    ),
+                  ),
                 if (_term != null && !_loading && _hits.isEmpty)
-                  Padding(padding: EdgeInsets.all(32), child: Text(context.l10n.nothingFound)),
+                  Padding(
+                    padding: const EdgeInsets.all(32),
+                    child: Column(
+                      children: [
+                        Text(context.l10n.nothingFound),
+                        if (!_offline)
+                          TextButton.icon(
+                            key: const ValueKey('try-meaning'),
+                            icon: const Icon(Icons.psychology_alt),
+                            label: Text(context.l10n.searchByMeaningInstead),
+                            onPressed: () {
+                              setState(() => _meaning = true);
+                              _submit();
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+                if (_soundAlike && _hits.isNotEmpty)
+                  Padding(
+                    key: const ValueKey('sound-alike-note'),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                    child: Text(
+                      context.l10n.soundAlikeNote(_term ?? ''),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: c.muted, fontSize: 12),
+                    ),
+                  ),
                 if (_hits.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.all(8),

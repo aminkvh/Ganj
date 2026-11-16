@@ -491,6 +491,18 @@ class L10nFa extends L10n {
       'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
 
   @override
+  String soundAlikeNote(String term) {
+    return 'برای «$term» با همین املا چیزی نبود؛ این نتیجه‌ها با حروف هم‌آوا (مانند س و ص و ث) یافت شد.';
+  }
+
+  @override
+  String get meaningTip =>
+      'با «واژه‌ها» همان واژه‌ها در شعرها جسته می‌شود. با «معنا» می‌توانید به زبان خودتان بپرسید، مثلاً «شعری برای دلتنگی در غربت».';
+
+  @override
+  String get searchByMeaningInstead => 'با معنا بجویید';
+
+  @override
   String semanticScope(String scope) {
     return 'نتایج محدود به: $scope';
   }
@@ -517,6 +529,18 @@ class L10nFa extends L10n {
   @override
   String get tajikScriptNote =>
       'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
+
+  @override
+  String get tajikOff => 'خاموش';
+
+  @override
+  String get tajikBelow => 'زیر بیت‌ها';
+
+  @override
+  String get tajikOnly => 'فقط تاجیکی';
+
+  @override
+  String get noTajikText => 'این شعر در گنجور تاجیکی متن ندارد.';
 
   @override
   String get home => 'خانه';

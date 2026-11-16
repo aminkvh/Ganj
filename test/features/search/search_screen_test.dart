@@ -1,11 +1,18 @@
 import 'dart:async';
 
+import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ganj/core/net/api_client.dart';
+import 'package:ganj/core/net/http_cache.dart';
+import 'package:ganj/data/api/ganjoor_api.dart';
+import 'package:ganj/data/db/app_db.dart';
+import 'package:ganj/data/providers.dart';
 import 'package:ganj/features/search/search_screen.dart';
 import 'package:ganj/features/search/search_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../support/fake_adapter.dart';
 import '../../support/fixture_repository.dart';
 import '../../support/test_app.dart';
 
@@ -19,9 +26,20 @@ class FakeSearch implements SearchService {
   final calls = <(String, int?, int)>[];
   final excludes = <Set<int>>[];
 
+  /// (soundAlike, onlineTerm) of each call.
+  final spellings = <(bool, String?)>[];
+
   @override
-  Future<SearchPage> search(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
+  Future<SearchPage> search(
+    String term, {
+    int? poetId,
+    Set<int> exclude = const {},
+    int page = 1,
+    bool soundAlike = false,
+    String? onlineTerm,
+  }) async {
     calls.add((term, poetId, page));
+    spellings.add((soundAlike, onlineTerm));
     excludes.add(exclude);
     final gate = slow[term];
     if (gate != null) return gate.future;
@@ -58,7 +76,16 @@ void main() {
         const SearchScreen(),
         prefs: prefs,
         repo: FixtureRepository(),
-        overrides: [searchServiceProvider.overrideWithValue(fake)],
+        overrides: [
+          searchServiceProvider.overrideWithValue(fake),
+          // Meaning search, when a test switches to it, answers at once (offline) instead of the network.
+          ganjoorApiProvider.overrideWithValue(
+            GanjoorApi(
+              dio: createDio(adapter: FakeAdapter({})..offline = true),
+              cache: HttpCache(AppDb(NativeDatabase.memory())),
+            ),
+          ),
+        ],
       ),
     );
     await tester.pumpAndSettle();
@@ -91,6 +118,35 @@ void main() {
     await pump(tester, const SearchPage([]));
     await submit(tester, 'ناموجود');
     expect(find.text('چیزی یافت نشد'), findsOneWidget);
+  });
+
+  testWidgets('before searching, a tip about searching by meaning', (tester) async {
+    await pump(tester, const SearchPage([]));
+    expect(find.byKey(const ValueKey('meaning-tip')), findsOneWidget);
+    await submit(tester, 'ساقی');
+    expect(find.byKey(const ValueKey('meaning-tip')), findsNothing);
+  });
+
+  testWidgets('nothing found offers searching by meaning instead', (tester) async {
+    await pump(tester, const SearchPage([]));
+    await submit(tester, 'ناموجود');
+    await tester.tap(find.byKey(const ValueKey('try-meaning')));
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
+    await tester.pumpAndSettle();
+    expect(find.text('به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا'), findsOneWidget);
+  });
+
+  testWidgets('sound-alike results say so, and more pages keep the spelling', (tester) async {
+    final fake = await pump(
+      tester,
+      const SearchPage([hit], total: 30, hasMore: true, soundAlike: true, onlineTerm: 'ساقی'),
+    );
+    await submit(tester, 'ساغی');
+    expect(find.byKey(const ValueKey('sound-alike-note')), findsOneWidget);
+    expect(find.textContaining('«ساغی»'), findsOneWidget);
+    await tester.tap(find.text('نتایج بیشتر'));
+    await tester.pumpAndSettle();
+    expect(fake.spellings.last, (true, 'ساقی'));
   });
 
   testWidgets('load more requests the next page', (tester) async {

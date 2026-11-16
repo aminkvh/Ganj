@@ -44,8 +44,9 @@ void main() {
     expect(await source(FakeAdapter({})).poem('/nobody/x/sh1'), isEmpty);
   });
 
-  Future<void> pumpPoem(WidgetTester tester, {required bool tajik, FakeAdapter? adapter}) async {
-    final prefs = await mockPrefs({'showTajik': tajik});
+  Future<void> pumpPoem(WidgetTester tester, {bool tajik = false, String? mode, FakeAdapter? adapter}) async {
+    // `showTajik` is how the option was saved before 1.6.3: on now means under the verses.
+    final prefs = await mockPrefs({'showTajik': tajik, 'tajikScript': ?mode});
     await tester.pumpWidget(
       testApp(
         const PoemScreen(id: 2130),
@@ -69,7 +70,7 @@ void main() {
 
   testWidgets('off by default, and nothing is fetched', (tester) async {
     final adapter = FakeAdapter({file: ex('tajik_sh1.json')});
-    await pumpPoem(tester, tajik: false, adapter: adapter);
+    await pumpPoem(tester, adapter: adapter);
     expect(find.textContaining(tajik3), findsNothing);
     expect(adapter.requests, isEmpty);
     await tester.pumpWidget(const SizedBox());
@@ -77,7 +78,7 @@ void main() {
   });
 
   testWidgets('the poem menu turns Tajik script on', (tester) async {
-    await pumpPoem(tester, tajik: false);
+    await pumpPoem(tester);
     await tester.tap(find.byTooltip('بیشتر'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('خط تاجیکی (سیریلیک)'));
@@ -88,16 +89,34 @@ void main() {
     await settle(tester);
   });
 
-  testWidgets('Settings has the Tajik script switch too', (tester) async {
+  testWidgets('Tajik only: the beyt in Cyrillic in place of the Persian', (tester) async {
+    await pumpPoem(tester, mode: 'only');
+    await bringIntoView(tester, find.textContaining(tajik3));
+    expect(find.textContaining(tajik3), findsOneWidget);
+    expect(find.text('به بویِ نافه‌ای کآخِر صبا زان طُرّه بُگشاید'), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+    await settle(tester);
+  });
+
+  testWidgets('a poem with no Tajik text says so, instead of showing nothing silently', (tester) async {
+    await pumpPoem(tester, mode: 'below', adapter: FakeAdapter({}));
+    expect(find.byKey(const ValueKey('no-tajik')), findsOneWidget);
+    await bringIntoView(tester, find.text('به بویِ نافه‌ای کآخِر صبا زان طُرّه بُگشاید'));
+    expect(find.text('به بویِ نافه‌ای کآخِر صبا زان طُرّه بُگشاید'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    await settle(tester);
+  });
+
+  testWidgets('Settings: off, under the verses, or Tajik only', (tester) async {
     final prefs = await mockPrefs();
     await tester.pumpWidget(testApp(const SettingsScreen(), prefs: prefs));
     await settle(tester);
-    final tile = find.text('خط تاجیکی (سیریلیک)');
-    await tester.scrollUntilVisible(tile, 200, scrollable: find.byType(Scrollable).first);
-    await tester.ensureVisible(tile);
+    final only = find.text('فقط تاجیکی');
+    await tester.scrollUntilVisible(only, 200, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(only);
     await tester.pumpAndSettle();
-    await tester.tap(tile);
+    await tester.tap(only);
     await settle(tester);
-    expect(prefs.getBool('showTajik'), isTrue);
+    expect(prefs.getString('tajikScript'), 'only');
   });
 }

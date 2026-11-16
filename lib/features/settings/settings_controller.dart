@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/providers.dart';
 
+/// The Tajik (Cyrillic) text of the verses, where Ganjoor has it: not shown, under each verse, or
+/// in place of the Persian (for readers of Tajik who don't read the Persian script).
+enum TajikScript { off, below, only }
+
 class Settings {
   const Settings({
     this.themeMode = ThemeMode.system,
@@ -11,7 +15,7 @@ class Settings {
     this.iranNastaliq = false,
     this.language = 'fa',
     this.translateTo = 'en',
-    this.showTajik = false,
+    this.tajikScript = TajikScript.off,
     this.mapStartsOnAll = true,
     this.excludedPoets = const {},
   });
@@ -27,8 +31,10 @@ class Settings {
   /// Target language of machine translation (a key of `kTranslateTargets`).
   final String translateTo;
 
-  /// Show the Tajik (Cyrillic) text under each verse, where Ganjoor has it.
-  final bool showTajik;
+  final TajikScript tajikScript;
+
+  /// Tajik text is shown in some way.
+  bool get showTajik => tajikScript != TajikScript.off;
 
   /// The poets' map opens on every century at once (otherwise on the first century).
   final bool mapStartsOnAll;
@@ -43,7 +49,7 @@ class Settings {
     bool? iranNastaliq,
     String? language,
     String? translateTo,
-    bool? showTajik,
+    TajikScript? tajikScript,
     bool? mapStartsOnAll,
     Set<int>? excludedPoets,
   }) => Settings(
@@ -53,7 +59,7 @@ class Settings {
     iranNastaliq: iranNastaliq ?? this.iranNastaliq,
     language: language ?? this.language,
     translateTo: translateTo ?? this.translateTo,
-    showTajik: showTajik ?? this.showTajik,
+    tajikScript: tajikScript ?? this.tajikScript,
     mapStartsOnAll: mapStartsOnAll ?? this.mapStartsOnAll,
     excludedPoets: excludedPoets ?? this.excludedPoets,
   );
@@ -66,13 +72,16 @@ class SettingsController extends Notifier<Settings> {
       _kIran = 'iranNastaliq',
       _kLanguage = 'language',
       _kTranslateTo = 'translateTo',
-      _kTajik = 'showTajik',
+      _kTajikOld = 'showTajik',
+      _kTajik = 'tajikScript',
       _kMapAll = 'mapStartsOnAll',
       _kExcluded = 'excludedPoets';
 
   @override
   Settings build() {
     final p = ref.watch(sharedPrefsProvider);
+    final saved = TajikScript.values.asNameMap()[p.getString(_kTajik)];
+    if (saved != null && saved != TajikScript.off) _lastTajik = saved;
     return Settings(
       themeMode: ThemeMode.values[p.getInt(_kTheme) ?? 0],
       fontScale: p.getDouble(_kScale) ?? 1.0,
@@ -80,7 +89,8 @@ class SettingsController extends Notifier<Settings> {
       iranNastaliq: p.getBool(_kIran) ?? false,
       language: p.getString(_kLanguage) == 'en' ? 'en' : 'fa',
       translateTo: p.getString(_kTranslateTo) ?? 'en',
-      showTajik: p.getBool(_kTajik) ?? false,
+      // Before 1.6.3 the option was a switch: on meant under each verse.
+      tajikScript: saved ?? ((p.getBool(_kTajikOld) ?? false) ? TajikScript.below : TajikScript.off),
       mapStartsOnAll: p.getBool(_kMapAll) ?? true,
       excludedPoets: {for (final s in p.getStringList(_kExcluded) ?? const []) ?int.tryParse(s)},
     );
@@ -125,10 +135,16 @@ class SettingsController extends Notifier<Settings> {
     ref.read(sharedPrefsProvider).setString(_kTranslateTo, to);
   }
 
-  void setShowTajik(bool on) {
-    state = state.copyWith(showTajik: on);
-    ref.read(sharedPrefsProvider).setBool(_kTajik, on);
+  void setTajikScript(TajikScript v) {
+    if (v != TajikScript.off) _lastTajik = v;
+    state = state.copyWith(tajikScript: v);
+    ref.read(sharedPrefsProvider).setString(_kTajik, v.name);
   }
+
+  /// The poem menu's switch: off, or back to how Tajik was last shown (under the verses at first).
+  void toggleTajik() => setTajikScript(state.showTajik ? TajikScript.off : _lastTajik);
+
+  TajikScript _lastTajik = TajikScript.below;
 
   void setMapStartsOnAll(bool on) {
     state = state.copyWith(mapStartsOnAll: on);

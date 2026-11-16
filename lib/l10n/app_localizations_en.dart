@@ -493,6 +493,18 @@ class L10nEn extends L10n {
       'Ask in your own words, e.g. a poem about the world\'s fickleness';
 
   @override
+  String soundAlikeNote(String term) {
+    return 'Nothing for “$term” as typed; these match with sound-alike letters (like س, ص and ث).';
+  }
+
+  @override
+  String get meaningTip =>
+      '“Words” finds those words in the poems. With “Meaning” you can ask in your own words, e.g. “a poem for missing home”.';
+
+  @override
+  String get searchByMeaningInstead => 'Search by meaning';
+
+  @override
   String semanticScope(String scope) {
     return 'Results limited to: $scope';
   }
@@ -519,6 +531,18 @@ class L10nEn extends L10n {
   @override
   String get tajikScriptNote =>
       'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
+
+  @override
+  String get tajikOff => 'Off';
+
+  @override
+  String get tajikBelow => 'Under the verses';
+
+  @override
+  String get tajikOnly => 'Tajik only';
+
+  @override
+  String get noTajikText => 'Tajik Ganjoor has no text for this poem.';
 
   @override
   String get home => 'Home';

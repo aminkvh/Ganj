@@ -25,7 +25,15 @@ class SearchHit {
 }
 
 class SearchPage {
-  const SearchPage(this.hits, {this.total = 0, this.hasMore = false, this.offline = false, this.totalKnown = true});
+  const SearchPage(
+    this.hits, {
+    this.total = 0,
+    this.hasMore = false,
+    this.offline = false,
+    this.totalKnown = true,
+    this.soundAlike = false,
+    this.onlineTerm,
+  });
 
   final List<SearchHit> hits;
   final int total;
@@ -34,7 +42,16 @@ class SearchPage {
 
   /// False when only installed packs answered: [total] then counts this page, not all matches.
   final bool totalKnown;
+
+  /// Nothing matched as typed, so these match with sound-alike letters swapped (س/ص/ث, ز/ذ/ض/ظ…).
+  final bool soundAlike;
+
+  /// The spelling Ganjoor's online search found them with, when [soundAlike]; later pages use it.
+  final String? onlineTerm;
 }
+
+/// At most this many other spellings are tried online when nothing matched (one request each).
+const _onlineSpellings = 4;
 
 const _pageSize = 20;
 
@@ -54,27 +71,49 @@ class SearchService {
 
   /// Trigram FTS query: every word must occur as a substring, like ganjoor.net's search.
   /// Words shorter than 3 letters can't use trigrams and are matched with LIKE instead.
-  static String? ftsQuery(String term) {
+  /// With [soundAlike], each word may also be spelled with sound-alike letters.
+  static String? ftsQuery(String term, {bool soundAlike = false}) {
     final long = tokens(term).where((t) => t.length >= 3).toList();
-    return long.isEmpty ? null : long.map((t) => '"$t"').join(' ');
+    if (long.isEmpty) return null;
+    return long
+        .map((t) => soundAlike ? '(${soundAlikeSpellings(t).map((v) => '"$v"').join(' OR ')})' : '"$t"')
+        .join(' ');
   }
 
-  Future<SearchPage> searchLocal(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
+  /// [term] with one word at a time spelled with sound-alike letters (the spelling as typed left out).
+  static List<String> otherSpellings(String term) {
+    final words = tokens(term);
+    return [
+      for (var i = 0; i < words.length; i++)
+        for (final v in soundAlikeSpellings(words[i]).skip(1)) [...words.take(i), v, ...words.skip(i + 1)].join(' '),
+    ];
+  }
+
+  Future<SearchPage> searchLocal(
+    String term, {
+    int? poetId,
+    Set<int> exclude = const {},
+    int page = 1,
+    bool soundAlike = false,
+  }) async {
     final words = tokens(term);
     if (words.isEmpty) return const SearchPage([]);
-    final q = ftsQuery(term);
-    final short = words.where((t) => t.length < 3).toList();
+    final q = ftsQuery(term, soundAlike: soundAlike);
+    final short = [
+      for (final t in words.where((t) => t.length < 3)) soundAlike ? soundAlikeSpellings(t) : [t],
+    ];
     final where = [
       if (q != null) 'verse_fts MATCH ?',
-      for (final _ in short) "f.norm LIKE ? ESCAPE '\\'",
+      for (final vs in short) '(${vs.map((_) => "f.norm LIKE ? ESCAPE '\\'").join(' OR ')})',
       if (poetId != null) 'f.poet_id = ?',
       if (exclude.isNotEmpty) 'f.poet_id NOT IN (${exclude.map((_) => '?').join(',')})',
     ].join(' AND ');
     final args = [
       if (q != null) Variable<String>(q),
       // % and _ typed by the reader are literal characters, not wildcards.
-      for (final s in short)
-        Variable<String>('%${s.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%'),
+      for (final vs in short)
+        for (final s in vs)
+          Variable<String>('%${s.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%'),
       if (poetId != null) Variable<int>(poetId),
       for (final id in exclude) Variable<int>(id),
     ];
@@ -122,11 +161,54 @@ class SearchService {
   }
 
   /// Local hits first, then online ones not already shown; offline → local only. [exclude]:
-  /// poets whose poems are left out («حذف آثار یک شاعر از نتایج»).
-  Future<SearchPage> search(String term, {int? poetId, Set<int> exclude = const {}, int page = 1}) async {
+  /// poets whose poems are left out («حذف آثار یک شاعر از نتایج»). When nothing matches as typed,
+  /// the first page tries sound-alike spellings ([SearchPage.soundAlike]); later pages of such a
+  /// search pass [soundAlike] and the first page's [SearchPage.onlineTerm] back.
+  Future<SearchPage> search(
+    String term, {
+    int? poetId,
+    Set<int> exclude = const {},
+    int page = 1,
+    bool soundAlike = false,
+    String? onlineTerm,
+  }) async {
+    if (soundAlike) {
+      return _merge(
+        searchLocal(term, poetId: poetId, exclude: exclude, page: page, soundAlike: true),
+        onlineTerm == null
+            ? null
+            : searchOnline(onlineTerm, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout),
+        soundAlike: true,
+        onlineTerm: onlineTerm,
+      );
+    }
     // Local and online run together; a slow network never holds back offline hits.
-    final onlineFuture = searchOnline(term, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout);
-    final local = await searchLocal(term, poetId: poetId, exclude: exclude, page: page);
+    final r = await _merge(
+      searchLocal(term, poetId: poetId, exclude: exclude, page: page),
+      searchOnline(term, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout),
+    );
+    if (page != 1 || r.hits.isNotEmpty) return r;
+    return await _soundAlikeFirstPage(term, poetId: poetId, exclude: exclude, offline: r.offline) ?? r;
+  }
+
+  Future<SearchPage> _merge(
+    Future<SearchPage> localFuture,
+    Future<SearchPage>? onlineFuture, {
+    bool soundAlike = false,
+    String? onlineTerm,
+  }) async {
+    // Started before awaiting the local search, so its failure is handled here, not unhandled.
+    onlineFuture?.ignore();
+    final local = await localFuture;
+    if (onlineFuture == null) {
+      return SearchPage(
+        local.hits,
+        total: local.total,
+        hasMore: local.hasMore,
+        totalKnown: false,
+        soundAlike: soundAlike,
+      );
+    }
     try {
       final online = await onlineFuture;
       final seen = {for (final h in local.hits) h.poemId};
@@ -134,10 +216,58 @@ class SearchService {
         [...local.hits, ...online.hits.where((h) => seen.add(h.poemId))],
         total: online.total > local.total ? online.total : local.total,
         hasMore: local.hasMore || online.hasMore,
+        soundAlike: soundAlike,
+        onlineTerm: onlineTerm,
       );
     } catch (_) {
-      return SearchPage(local.hits, total: local.total, hasMore: local.hasMore, offline: true, totalKnown: false);
+      return SearchPage(
+        local.hits,
+        total: local.total,
+        hasMore: local.hasMore,
+        offline: true,
+        totalKnown: false,
+        soundAlike: soundAlike,
+      );
     }
+  }
+
+  /// Nothing matched as typed: the installed packs with every sound-alike spelling at once, and
+  /// Ganjoor's search with up to [_onlineSpellings] other spellings, one after another until one
+  /// finds something (not when offline). Null when nothing matches either way.
+  Future<SearchPage?> _soundAlikeFirstPage(
+    String term, {
+    int? poetId,
+    Set<int> exclude = const {},
+    required bool offline,
+  }) async {
+    final local = await searchLocal(term, poetId: poetId, exclude: exclude, soundAlike: true);
+    SearchPage? online;
+    String? used;
+    if (!offline) {
+      for (final v in otherSpellings(term).take(_onlineSpellings)) {
+        try {
+          final r = await searchOnline(v, poetId: poetId, exclude: exclude).timeout(onlineTimeout);
+          if (r.hits.isNotEmpty) {
+            online = r;
+            used = v;
+            break;
+          }
+        } catch (_) {
+          break;
+        }
+      }
+    }
+    if (local.hits.isEmpty && online == null) return null;
+    final seen = {for (final h in local.hits) h.poemId};
+    return SearchPage(
+      [...local.hits, ...?online?.hits.where((h) => seen.add(h.poemId))],
+      total: online != null && online.total > local.total ? online.total : local.total,
+      hasMore: local.hasMore || (online?.hasMore ?? false),
+      offline: offline,
+      totalKnown: online != null,
+      soundAlike: true,
+      onlineTerm: used,
+    );
   }
 
   static String _snippet(String plain, String term) {
