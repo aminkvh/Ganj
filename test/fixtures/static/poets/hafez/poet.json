@@ -1,0 +1,17 @@
+{
+ "Id": 2,
+ "Name": "حافظ شیرازی",
+ "Nickname": "حافظ",
+ "Description": "خواجه شمس‌الدین محمد شیرازی متخلص به «حافظ» و مشهور به «لسان‌الغیب» غزل‌سرای بزرگ و از بزرگان شعر و ادب پارسی است. از زن",
+ "FullUrl": "/hafez",
+ "ImageUrl": "https://ganjoor.net/api/ganjoor/poet/image/hafez.gif",
+ "BirthYearInLHijri": 726,
+ "ValidBirthDate": true,
+ "DeathYearInLHijri": 792,
+ "ValidDeathDate": true,
+ "BirthPlace": "شیراز",
+ "DeathPlace": "شیراز",
+ "BirthLocationId": 1,
+ "DeathLocationId": 1,
+ "PinOrder": 1
+}

@@ -1,0 +1,876 @@
+{
+ "Id": 1354,
+ "CatId": 39,
+ "Title": "بخش ۹ - سفر فریدون و سپاهش از اروندرود تا بیت‌المقدس پایتخت ضحاک",
+ "FullTitle": "فردوسی » شاهنامه » ضحاک » بخش ۹ - سفر فریدون و سپاهش از اروندرود تا بیت‌المقدس پایتخت ضحاک",
+ "FullUrl": "/ferdousi/shahname/zahak/sh9",
+ "SourceName": "ویکی‌درج",
+ "SourceUrlSlug": "wikidorj",
+ "PoemSummary": "فریدون به کنارهٔ اروند رسید و از رودبانان اروند خواست که او و سپاهش را عبور دهند. آنها امتناع کردند. فریدون و سپاهش با اسب به آب زدند و از رود گذشتند و از آنجا تا بیت‌المقدس پایتخت ضحاک رفتند. فریدون با دیدن شکوه کاخ ضحاک دانست که ضحاک صاحب قدرتهای نهانی است و مصلحت را در آن دید که هر چه سریع‌تر به کاخ او حمله کند.",
+ "Metre": {
+  "Id": 23,
+  "Rhythm": "فعولن فعولن فعولن فعل (متقارب مثمن محذوف یا وزن شاهنامه)"
+ },
+ "Sections": [
+  {
+   "Index": 0,
+   "Number": 1,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "",
+   "PlainText": "چو آمد به نزدیک اروندرود\r\nفرستاد زی رودبانان درود\r\nبران رودبان گفت پیروز شاه\r\nکه کشتی برافگن هم اکنون به راه\r\nمرا با سپاهم بدان سو رسان\r\nاز اینها کسی را بدین سو ممان\r\nبدان تا گذر یابم از روی آب\r\nبه کشتی و زورق هم اندر شتاب\r\nنیاورد کشتی نگهبان رود\r\nنیامد بگفت فریدون فرود\r\nچنین داد پاسخ که شاه جهان\r\nچنین گفت با من سخن در نهان\r\nکه مگذار یک پشه را تا نخست\r\nجوازی بیابی و مهری درست\r\nفریدون چو بشنید شد خشمناک\r\nازان ژرف دریا نیامدش باک\r\nهم آنگه میان کیانی ببست\r\nبران باره تیزتک بر نشست\r\nسرش تیز شد کینه و جنگ را\r\nبه آب اندر افگند گلرنگ را\r\nببستند یارانش یکسر کمر\r\nهمیدون به دریا نهادند سر\r\nبر آن بادپایان با آفرین\r\nبه آب اندرون غرقه کردند زین\r\nبه خشکی رسیدند سر کینه جوی\r\nبه بیت المقدس نهادند روی\r\nکه بر پهلوانی زبان راندند\r\nهمی کنگ دژهوختش خواندند\r\nبه تازی کنون خانه پاک دان\r\nبرآورده ایوان ضحاک دان\r\nچو از دشت نزدیک شهر آمدند\r\nکزان شهر جوینده بهر آمدند\r\nز یک میل کرد آفریدون نگاه\r\nیکی کاخ دید اندر آن شهر شاه\r\nفروزنده چون مشتری بر سپهر\r\nهمه جای شادی و آرام و مهر\r\nکه ایوانش برتر ز کیوان نمود\r\nکه گفتی ستاره بخواهد بسود\r\nبدانست کان خانه اژدهاست\r\nکه جای بزرگی و جای بهاست\r\nبه یارانش گفت آنکه بر تیره خاک\r\nبرآرد چنین برز جای از مغاک\r\nبترسم همی زانکه با او جهان\r\nمگر راز دارد یکی در نهان\r\nبباید که ما را بدین جای تنگ\r\nشتابیدن آید به روز درنگ\r\nبگفت و به گرز گران دست برد\r\nعنان باره تیزتک را سپرد\r\nتو گفتی یکی آتشستی درست\r\nکه پیش نگهبان ایوان برست\r\nگران گرز برداشت از پیش زین\r\nتو گفتی همی بر نوردد زمین\r\nکس از روزبانان به در بر نماند\r\nفریدون جهان آفرین را بخواند\r\nبه اسب اندر آمد به کاخ بزرگ\r\nجهان ناسپرده جوان سترگ",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>چو آمد به نزدیک اروندرود</p></div>\r\n<div class=\"m2\"><p>فرستاد زی رودبانان درود</p></div></div>\r\n<div class=\"b\" id=\"bn2\"><div class=\"m1\"><p>بران رودبان گفت پیروز شاه</p></div>\r\n<div class=\"m2\"><p>که کشتی برافگن هم اکنون به راه</p></div></div>\r\n<div class=\"b\" id=\"bn3\"><div class=\"m1\"><p>مرا با سپاهم بدان سو رسان</p></div>\r\n<div class=\"m2\"><p>از اینها کسی را بدین سو ممان</p></div></div>\r\n<div class=\"b\" id=\"bn4\"><div class=\"m1\"><p>بدان تا گذر یابم از روی آب</p></div>\r\n<div class=\"m2\"><p>به کشتی و زورق هم اندر شتاب</p></div></div>\r\n<div class=\"b\" id=\"bn5\"><div class=\"m1\"><p>نیاورد کشتی نگهبان رود</p></div>\r\n<div class=\"m2\"><p>نیامد بگفت فریدون فرود</p></div></div>\r\n<div class=\"b\" id=\"bn6\"><div class=\"m1\"><p>چنین داد پاسخ که شاه جهان</p></div>\r\n<div class=\"m2\"><p>چنین گفت با من سخن در نهان</p></div></div>\r\n<div class=\"b\" id=\"bn7\"><div class=\"m1\"><p>که مگذار یک پشه را تا نخست</p></div>\r\n<div class=\"m2\"><p>جوازی بیابی و مهری درست</p></div></div>\r\n<div class=\"b\" id=\"bn8\"><div class=\"m1\"><p>فریدون چو بشنید شد خشمناک</p></div>\r\n<div class=\"m2\"><p>ازان ژرف دریا نیامدش باک</p></div></div>\r\n<div class=\"b\" id=\"bn9\"><div class=\"m1\"><p>هم آنگه میان کیانی ببست</p></div>\r\n<div class=\"m2\"><p>بران بارهٔ تیزتک بر نشست</p></div></div>\r\n<div class=\"b\" id=\"bn10\"><div class=\"m1\"><p>سرش تیز شد کینه و جنگ را</p></div>\r\n<div class=\"m2\"><p>به آب اندر افگند گلرنگ را</p></div></div>\r\n<div class=\"b\" id=\"bn11\"><div class=\"m1\"><p>ببستند یارانش یکسر کمر</p></div>\r\n<div class=\"m2\"><p>همیدون به دریا نهادند سر</p></div></div>\r\n<div class=\"b\" id=\"bn12\"><div class=\"m1\"><p>بر آن بادپایان با آفرین</p></div>\r\n<div class=\"m2\"><p>به آب اندرون غرقه کردند زین</p></div></div>\r\n<div class=\"b\" id=\"bn13\"><div class=\"m1\"><p>به خشکی رسیدند سر کینه جوی</p></div>\r\n<div class=\"m2\"><p>به بیت‌المقدس نهادند روی</p></div></div>\r\n<div class=\"b\" id=\"bn14\"><div class=\"m1\"><p>که بر پهلوانی زبان راندند</p></div>\r\n<div class=\"m2\"><p>هَمی کنگ دژهوختَش خواندند</p></div></div>\r\n<div class=\"b\" id=\"bn15\"><div class=\"m1\"><p>به تازی کنون خانهٔ پاک دان</p></div>\r\n<div class=\"m2\"><p>برآورده ایوان ضحاک دان</p></div></div>\r\n<div class=\"b\" id=\"bn16\"><div class=\"m1\"><p>چو از دشت نزدیک شهر آمدند</p></div>\r\n<div class=\"m2\"><p>کزان شهر جوینده بهر آمدند</p></div></div>\r\n<div class=\"b\" id=\"bn17\"><div class=\"m1\"><p>ز یک میل کرد آفریدون نگاه</p></div>\r\n<div class=\"m2\"><p>یکی کاخ دید اندر آن شهر شاه</p></div></div>\r\n<div class=\"b\" id=\"bn18\"><div class=\"m1\"><p>فروزنده چون مشتری بر سپهر</p></div>\r\n<div class=\"m2\"><p>همه جای شادی و آرام و مهر</p></div></div>\r\n<div class=\"b\" id=\"bn19\"><div class=\"m1\"><p>که ایوانش برتر ز کیوان نمود</p></div>\r\n<div class=\"m2\"><p>که گفتی ستاره بخواهد بسود</p></div></div>\r\n<div class=\"b\" id=\"bn20\"><div class=\"m1\"><p>بدانست کان خانهٔ اژدهاست</p></div>\r\n<div class=\"m2\"><p>که جای بزرگی و جای بهاست</p></div></div>\r\n<div class=\"b\" id=\"bn21\"><div class=\"m1\"><p>به یارانش گفت آنکه بر تیره خاک</p></div>\r\n<div class=\"m2\"><p>برآرد چنین برز جای از مغاک</p></div></div>\r\n<div class=\"b\" id=\"bn22\"><div class=\"m1\"><p>بترسم همی زانکه با او جهان</p></div>\r\n<div class=\"m2\"><p>مگر راز دارد یکی در نهان</p></div></div>\r\n<div class=\"b\" id=\"bn23\"><div class=\"m1\"><p>بباید که ما را بدین جای تنگ</p></div>\r\n<div class=\"m2\"><p>شتابیدن آید به روز درنگ</p></div></div>\r\n<div class=\"b\" id=\"bn24\"><div class=\"m1\"><p>بگفت و به گرز گران دست برد</p></div>\r\n<div class=\"m2\"><p>عنان بارهٔ تیزتک را سپرد</p></div></div>\r\n<div class=\"b\" id=\"bn25\"><div class=\"m1\"><p>تو گفتی یکی آتشستی درست</p></div>\r\n<div class=\"m2\"><p>که پیش نگهبان ایوان برست</p></div></div>\r\n<div class=\"b\" id=\"bn26\"><div class=\"m1\"><p>گران گرز برداشت از پیش زین</p></div>\r\n<div class=\"m2\"><p>تو گفتی همی بر نوردد زمین</p></div></div>\r\n<div class=\"b\" id=\"bn27\"><div class=\"m1\"><p>کس از روزبانان به در بر نماند</p></div>\r\n<div class=\"m2\"><p>فریدون جهان آفرین را بخواند</p></div></div>\r\n<div class=\"b\" id=\"bn28\"><div class=\"m1\"><p>به اسب اندر آمد به کاخ بزرگ</p></div>\r\n<div class=\"m2\"><p>جهان ناسپرده جوان سترگ</p></div></div>",
+   "PoemFormat": "Masnavi",
+   "CoupletsCount": 28,
+   "MetreId": 23
+  },
+  {
+   "Index": 2,
+   "Number": 2,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ندرود",
+   "PlainText": "چو آمد به نزدیک اروندرود\r\nفرستاد زی رودبانان درود",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>چو آمد به نزدیک اروندرود</p></div>\r\n<div class=\"m2\"><p>فرستاد زی رودبانان درود</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 3,
+   "Number": 3,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اه",
+   "PlainText": "بران رودبان گفت پیروز شاه\r\nکه کشتی برافگن هم اکنون به راه",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بران رودبان گفت پیروز شاه</p></div>\r\n<div class=\"m2\"><p>که کشتی برافگن هم اکنون به راه</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 4,
+   "Number": 4,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ان",
+   "PlainText": "مرا با سپاهم بدان سو رسان\r\nاز اینها کسی را بدین سو ممان",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>مرا با سپاهم بدان سو رسان</p></div>\r\n<div class=\"m2\"><p>از اینها کسی را بدین سو ممان</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 5,
+   "Number": 5,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اب",
+   "PlainText": "بدان تا گذر یابم از روی آب\r\nبه کشتی و زورق هم اندر شتاب",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بدان تا گذر یابم از روی آب</p></div>\r\n<div class=\"m2\"><p>به کشتی و زورق هم اندر شتاب</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 6,
+   "Number": 6,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "رود",
+   "PlainText": "نیاورد کشتی نگهبان رود\r\nنیامد بگفت فریدون فرود",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>نیاورد کشتی نگهبان رود</p></div>\r\n<div class=\"m2\"><p>نیامد بگفت فریدون فرود</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 7,
+   "Number": 7,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "هان",
+   "PlainText": "چنین داد پاسخ که شاه جهان\r\nچنین گفت با من سخن در نهان",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>چنین داد پاسخ که شاه جهان</p></div>\r\n<div class=\"m2\"><p>چنین گفت با من سخن در نهان</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 8,
+   "Number": 8,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ست",
+   "PlainText": "که مگذار یک پشه را تا نخست\r\nجوازی بیابی و مهری درست",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>که مگذار یک پشه را تا نخست</p></div>\r\n<div class=\"m2\"><p>جوازی بیابی و مهری درست</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 9,
+   "Number": 9,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اک",
+   "PlainText": "فریدون چو بشنید شد خشمناک\r\nازان ژرف دریا نیامدش باک",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>فریدون چو بشنید شد خشمناک</p></div>\r\n<div class=\"m2\"><p>ازان ژرف دریا نیامدش باک</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 10,
+   "Number": 10,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ست",
+   "PlainText": "هم آنگه میان کیانی ببست\r\nبران باره تیزتک بر نشست",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>هم آنگه میان کیانی ببست</p></div>\r\n<div class=\"m2\"><p>بران بارهٔ تیزتک بر نشست</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 11,
+   "Number": 11,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "نگرا",
+   "PlainText": "سرش تیز شد کینه و جنگ را\r\nبه آب اندر افگند گلرنگ را",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>سرش تیز شد کینه و جنگ را</p></div>\r\n<div class=\"m2\"><p>به آب اندر افگند گلرنگ را</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 12,
+   "Number": 12,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ر",
+   "PlainText": "ببستند یارانش یکسر کمر\r\nهمیدون به دریا نهادند سر",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>ببستند یارانش یکسر کمر</p></div>\r\n<div class=\"m2\"><p>همیدون به دریا نهادند سر</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 13,
+   "Number": 13,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ین",
+   "PlainText": "بر آن بادپایان با آفرین\r\nبه آب اندرون غرقه کردند زین",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بر آن بادپایان با آفرین</p></div>\r\n<div class=\"m2\"><p>به آب اندرون غرقه کردند زین</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 14,
+   "Number": 14,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "وی",
+   "PlainText": "به خشکی رسیدند سر کینه جوی\r\nبه بیت المقدس نهادند روی",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>به خشکی رسیدند سر کینه جوی</p></div>\r\n<div class=\"m2\"><p>به بیت‌المقدس نهادند روی</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 15,
+   "Number": 15,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اندند",
+   "PlainText": "که بر پهلوانی زبان راندند\r\nهمی کنگ دژهوختش خواندند",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>که بر پهلوانی زبان راندند</p></div>\r\n<div class=\"m2\"><p>هَمی کنگ دژهوختَش خواندند</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 16,
+   "Number": 16,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اکدان",
+   "PlainText": "به تازی کنون خانه پاک دان\r\nبرآورده ایوان ضحاک دان",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>به تازی کنون خانهٔ پاک دان</p></div>\r\n<div class=\"m2\"><p>برآورده ایوان ضحاک دان</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 17,
+   "Number": 17,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "هرامدند",
+   "PlainText": "چو از دشت نزدیک شهر آمدند\r\nکزان شهر جوینده بهر آمدند",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>چو از دشت نزدیک شهر آمدند</p></div>\r\n<div class=\"m2\"><p>کزان شهر جوینده بهر آمدند</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 18,
+   "Number": 18,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اه",
+   "PlainText": "ز یک میل کرد آفریدون نگاه\r\nیکی کاخ دید اندر آن شهر شاه",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>ز یک میل کرد آفریدون نگاه</p></div>\r\n<div class=\"m2\"><p>یکی کاخ دید اندر آن شهر شاه</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 19,
+   "Number": 19,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "هر",
+   "PlainText": "فروزنده چون مشتری بر سپهر\r\nهمه جای شادی و آرام و مهر",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>فروزنده چون مشتری بر سپهر</p></div>\r\n<div class=\"m2\"><p>همه جای شادی و آرام و مهر</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 20,
+   "Number": 20,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ود",
+   "PlainText": "که ایوانش برتر ز کیوان نمود\r\nکه گفتی ستاره بخواهد بسود",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>که ایوانش برتر ز کیوان نمود</p></div>\r\n<div class=\"m2\"><p>که گفتی ستاره بخواهد بسود</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 21,
+   "Number": 21,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "هاست",
+   "PlainText": "بدانست کان خانه اژدهاست\r\nکه جای بزرگی و جای بهاست",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بدانست کان خانهٔ اژدهاست</p></div>\r\n<div class=\"m2\"><p>که جای بزرگی و جای بهاست</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 22,
+   "Number": 22,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اک",
+   "PlainText": "به یارانش گفت آنکه بر تیره خاک\r\nبرآرد چنین برز جای از مغاک",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>به یارانش گفت آنکه بر تیره خاک</p></div>\r\n<div class=\"m2\"><p>برآرد چنین برز جای از مغاک</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 23,
+   "Number": 23,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "هان",
+   "PlainText": "بترسم همی زانکه با او جهان\r\nمگر راز دارد یکی در نهان",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بترسم همی زانکه با او جهان</p></div>\r\n<div class=\"m2\"><p>مگر راز دارد یکی در نهان</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 24,
+   "Number": 24,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "نگ",
+   "PlainText": "بباید که ما را بدین جای تنگ\r\nشتابیدن آید به روز درنگ",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بباید که ما را بدین جای تنگ</p></div>\r\n<div class=\"m2\"><p>شتابیدن آید به روز درنگ</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 25,
+   "Number": 25,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "برد",
+   "PlainText": "بگفت و به گرز گران دست برد\r\nعنان باره تیزتک را سپرد",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>بگفت و به گرز گران دست برد</p></div>\r\n<div class=\"m2\"><p>عنان بارهٔ تیزتک را سپرد</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 26,
+   "Number": 26,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "رست",
+   "PlainText": "تو گفتی یکی آتشستی درست\r\nکه پیش نگهبان ایوان برست",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>تو گفتی یکی آتشستی درست</p></div>\r\n<div class=\"m2\"><p>که پیش نگهبان ایوان برست</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 27,
+   "Number": 27,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "ین",
+   "PlainText": "گران گرز برداشت از پیش زین\r\nتو گفتی همی بر نوردد زمین",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>گران گرز برداشت از پیش زین</p></div>\r\n<div class=\"m2\"><p>تو گفتی همی بر نوردد زمین</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 28,
+   "Number": 28,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اند",
+   "PlainText": "کس از روزبانان به در بر نماند\r\nفریدون جهان آفرین را بخواند",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>کس از روزبانان به در بر نماند</p></div>\r\n<div class=\"m2\"><p>فریدون جهان آفرین را بخواند</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  },
+  {
+   "Index": 29,
+   "Number": 29,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "رگ",
+   "PlainText": "به اسب اندر آمد به کاخ بزرگ\r\nجهان ناسپرده جوان سترگ",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>به اسب اندر آمد به کاخ بزرگ</p></div>\r\n<div class=\"m2\"><p>جهان ناسپرده جوان سترگ</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 0
+  }
+ ],
+ "Verses": [
+  {
+   "VOrder": 1,
+   "Position": "Right",
+   "Text": "چو آمد به نزدیک اروندرود",
+   "CoupletIndex": 0,
+   "SectionIndex1": 0,
+   "SectionIndex2": 2,
+   "CoupletSummary": "هنگامی که به نزدیکی اروندرود رسید، با رودبانان سلام کرد."
+  },
+  {
+   "VOrder": 2,
+   "Position": "Left",
+   "Text": "فرستاد زی رودبانان درود",
+   "CoupletIndex": 0,
+   "SectionIndex1": 0,
+   "SectionIndex2": 2
+  },
+  {
+   "VOrder": 3,
+   "Position": "Right",
+   "Text": "بران رودبان گفت پیروز شاه",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0,
+   "SectionIndex2": 3,
+   "CoupletSummary": "فریدون به رودبان گفت که هم‌اکنون کشتی را آماده کن."
+  },
+  {
+   "VOrder": 4,
+   "Position": "Left",
+   "Text": "که کشتی برافگن هم اکنون به راه",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0,
+   "SectionIndex2": 3
+  },
+  {
+   "VOrder": 5,
+   "Position": "Right",
+   "Text": "مرا با سپاهم بدان سو رسان",
+   "CoupletIndex": 2,
+   "SectionIndex1": 0,
+   "SectionIndex2": 4,
+   "CoupletSummary": "مرا با سپاه خود به آن سو ببر و هیچ‌کس را جا نگذار."
+  },
+  {
+   "VOrder": 6,
+   "Position": "Left",
+   "Text": "از اینها کسی را بدین سو ممان",
+   "CoupletIndex": 2,
+   "SectionIndex1": 0,
+   "SectionIndex2": 4
+  },
+  {
+   "VOrder": 7,
+   "Position": "Right",
+   "Text": "بدان تا گذر یابم از روی آب",
+   "CoupletIndex": 3,
+   "SectionIndex1": 0,
+   "SectionIndex2": 5,
+   "CoupletSummary": "تا با کشتی و قایق هر چه سریع‌تر از این آب عبور کنیم."
+  },
+  {
+   "VOrder": 8,
+   "Position": "Left",
+   "Text": "به کشتی و زورق هم اندر شتاب",
+   "CoupletIndex": 3,
+   "SectionIndex1": 0,
+   "SectionIndex2": 5
+  },
+  {
+   "VOrder": 9,
+   "Position": "Right",
+   "Text": "نیاورد کشتی نگهبان رود",
+   "CoupletIndex": 4,
+   "SectionIndex1": 0,
+   "SectionIndex2": 6,
+   "CoupletSummary": "نگهبان رود کشتی را نیاورد و فرمان فریدون را گوش نکرد."
+  },
+  {
+   "VOrder": 10,
+   "Position": "Left",
+   "Text": "نیامد بگفت فریدون فرود",
+   "CoupletIndex": 4,
+   "SectionIndex1": 0,
+   "SectionIndex2": 6
+  },
+  {
+   "VOrder": 11,
+   "Position": "Right",
+   "Text": "چنین داد پاسخ که شاه جهان",
+   "CoupletIndex": 5,
+   "SectionIndex1": 0,
+   "SectionIndex2": 7,
+   "CoupletSummary": "او پاسخ داد که ضحاک به من گفته ..."
+  },
+  {
+   "VOrder": 12,
+   "Position": "Left",
+   "Text": "چنین گفت با من سخن در نهان",
+   "CoupletIndex": 5,
+   "SectionIndex1": 0,
+   "SectionIndex2": 7
+  },
+  {
+   "VOrder": 13,
+   "Position": "Right",
+   "Text": "که مگذار یک پشه را تا نخست",
+   "CoupletIndex": 6,
+   "SectionIndex1": 0,
+   "SectionIndex2": 8,
+   "CoupletSummary": "... که بدون مجوز با مهر درست حتی یک پشه هم نباید از این آب بگذرد."
+  },
+  {
+   "VOrder": 14,
+   "Position": "Left",
+   "Text": "جوازی بیابی و مهری درست",
+   "CoupletIndex": 6,
+   "SectionIndex1": 0,
+   "SectionIndex2": 8
+  },
+  {
+   "VOrder": 15,
+   "Position": "Right",
+   "Text": "فریدون چو بشنید شد خشمناک",
+   "CoupletIndex": 7,
+   "SectionIndex1": 0,
+   "SectionIndex2": 9,
+   "CoupletSummary": "فریدون وقتی این خبر را شنید، به شدت خشمگین شد؛ به گونه‌ای که از عمق دریا هیچ ترسی به او راه نیافت."
+  },
+  {
+   "VOrder": 16,
+   "Position": "Left",
+   "Text": "ازان ژرف دریا نیامدش باک",
+   "CoupletIndex": 7,
+   "SectionIndex1": 0,
+   "SectionIndex2": 9
+  },
+  {
+   "VOrder": 17,
+   "Position": "Right",
+   "Text": "هم آنگه میان کیانی ببست",
+   "CoupletIndex": 8,
+   "SectionIndex1": 0,
+   "SectionIndex2": 10,
+   "CoupletSummary": "در همان لحظه کمر بربست و بر اسب تندرو نشست."
+  },
+  {
+   "VOrder": 18,
+   "Position": "Left",
+   "Text": "بران بارهٔ تیزتک بر نشست",
+   "CoupletIndex": 8,
+   "SectionIndex1": 0,
+   "SectionIndex2": 10
+  },
+  {
+   "VOrder": 19,
+   "Position": "Right",
+   "Text": "سرش تیز شد کینه و جنگ را",
+   "CoupletIndex": 9,
+   "SectionIndex1": 0,
+   "SectionIndex2": 11,
+   "CoupletSummary": "آمادهٔ جنگ شد و اسبش را به آب انداخت."
+  },
+  {
+   "VOrder": 20,
+   "Position": "Left",
+   "Text": "به آب اندر افگند گلرنگ را",
+   "CoupletIndex": 9,
+   "SectionIndex1": 0,
+   "SectionIndex2": 11
+  },
+  {
+   "VOrder": 21,
+   "Position": "Right",
+   "Text": "ببستند یارانش یکسر کمر",
+   "CoupletIndex": 10,
+   "SectionIndex1": 0,
+   "SectionIndex2": 12,
+   "CoupletSummary": "همه یارانش آماده شدند و به آب زدند."
+  },
+  {
+   "VOrder": 22,
+   "Position": "Left",
+   "Text": "همیدون به دریا نهادند سر",
+   "CoupletIndex": 10,
+   "SectionIndex1": 0,
+   "SectionIndex2": 12
+  },
+  {
+   "VOrder": 23,
+   "Position": "Right",
+   "Text": "بر آن بادپایان با آفرین",
+   "CoupletIndex": 11,
+   "SectionIndex1": 0,
+   "SectionIndex2": 13,
+   "CoupletSummary": "با اسب هایشان وارد رودخانه شدند و اسب هایشان تا زین به آب فرو رفت (بادپا=اسب)"
+  },
+  {
+   "VOrder": 24,
+   "Position": "Left",
+   "Text": "به آب اندرون غرقه کردند زین",
+   "CoupletIndex": 11,
+   "SectionIndex1": 0,
+   "SectionIndex2": 13
+  },
+  {
+   "VOrder": 25,
+   "Position": "Right",
+   "Text": "به خشکی رسیدند سر کینه جوی",
+   "CoupletIndex": 12,
+   "SectionIndex1": 0,
+   "SectionIndex2": 14,
+   "CoupletSummary": "با روحیهٔ جنگجویی پس از رسیدن به خشکی به سمت بیت‌المقدس حرکت کردند."
+  },
+  {
+   "VOrder": 26,
+   "Position": "Left",
+   "Text": "به بیت‌المقدس نهادند روی",
+   "CoupletIndex": 12,
+   "SectionIndex1": 0,
+   "SectionIndex2": 14
+  },
+  {
+   "VOrder": 27,
+   "Position": "Right",
+   "Text": "که بر پهلوانی زبان راندند",
+   "CoupletIndex": 13,
+   "SectionIndex1": 0,
+   "SectionIndex2": 15,
+   "CoupletSummary": "آنها که به زبان پهلوی صحبت می‌کردند به بیت‌المقدس کنگ یا جایگاه دِژهوخت(قلعه گفتارنیک) می‌گفتند."
+  },
+  {
+   "VOrder": 28,
+   "Position": "Left",
+   "Text": "هَمی کنگ دژهوختَش خواندند",
+   "CoupletIndex": 13,
+   "SectionIndex1": 0,
+   "SectionIndex2": 15
+  },
+  {
+   "VOrder": 29,
+   "Position": "Right",
+   "Text": "به تازی کنون خانهٔ پاک دان",
+   "CoupletIndex": 14,
+   "SectionIndex1": 0,
+   "SectionIndex2": 16,
+   "CoupletSummary": "معنای بیت‌المقدس به عربی خانهٔ پاک است که کاخ ضحاک در آنجا قرار داشت"
+  },
+  {
+   "VOrder": 30,
+   "Position": "Left",
+   "Text": "برآورده ایوان ضحاک دان",
+   "CoupletIndex": 14,
+   "SectionIndex1": 0,
+   "SectionIndex2": 16
+  },
+  {
+   "VOrder": 31,
+   "Position": "Right",
+   "Text": "چو از دشت نزدیک شهر آمدند",
+   "CoupletIndex": 15,
+   "SectionIndex1": 0,
+   "SectionIndex2": 17,
+   "CoupletSummary": "وقتی از دشت نزدیک شهری رسیدند که به دنبال آن آمده بودند ...."
+  },
+  {
+   "VOrder": 32,
+   "Position": "Left",
+   "Text": "کزان شهر جوینده بهر آمدند",
+   "CoupletIndex": 15,
+   "SectionIndex1": 0,
+   "SectionIndex2": 17
+  },
+  {
+   "VOrder": 33,
+   "Position": "Right",
+   "Text": "ز یک میل کرد آفریدون نگاه",
+   "CoupletIndex": 16,
+   "SectionIndex1": 0,
+   "SectionIndex2": 18,
+   "CoupletSummary": "فریدون از فاصلهٔ یک میلی کاخی را در میان آن شهر دید ..."
+  },
+  {
+   "VOrder": 34,
+   "Position": "Left",
+   "Text": "یکی کاخ دید اندر آن شهر شاه",
+   "CoupletIndex": 16,
+   "SectionIndex1": 0,
+   "SectionIndex2": 18
+  },
+  {
+   "VOrder": 35,
+   "Position": "Right",
+   "Text": "فروزنده چون مشتری بر سپهر",
+   "CoupletIndex": 17,
+   "SectionIndex1": 0,
+   "SectionIndex2": 19,
+   "CoupletSummary": " ... که مانند مشتری در آسمان درخشان بود و در همه جایش شادی و آرامش و مهر دیده می‌شد."
+  },
+  {
+   "VOrder": 36,
+   "Position": "Left",
+   "Text": "همه جای شادی و آرام و مهر",
+   "CoupletIndex": 17,
+   "SectionIndex1": 0,
+   "SectionIndex2": 19
+  },
+  {
+   "VOrder": 37,
+   "Position": "Right",
+   "Text": "که ایوانش برتر ز کیوان نمود",
+   "CoupletIndex": 18,
+   "SectionIndex1": 0,
+   "SectionIndex2": 20,
+   "CoupletSummary": "... ایوان آن شهر باشکوه‌تر از سیاره کیوان (زحل) بود و گویی که می‌خواست سر به ستاره‌ها بساید."
+  },
+  {
+   "VOrder": 38,
+   "Position": "Left",
+   "Text": "که گفتی ستاره بخواهد بسود",
+   "CoupletIndex": 18,
+   "SectionIndex1": 0,
+   "SectionIndex2": 20
+  },
+  {
+   "VOrder": 39,
+   "Position": "Right",
+   "Text": "بدانست کان خانهٔ اژدهاست",
+   "CoupletIndex": 19,
+   "SectionIndex1": 0,
+   "SectionIndex2": 21,
+   "CoupletSummary": "متوجه شد که آنجا کاخ ضحاک و جایگاه پادشاهان است."
+  },
+  {
+   "VOrder": 40,
+   "Position": "Left",
+   "Text": "که جای بزرگی و جای بهاست",
+   "CoupletIndex": 19,
+   "SectionIndex1": 0,
+   "SectionIndex2": 21
+  },
+  {
+   "VOrder": 41,
+   "Position": "Right",
+   "Text": "به یارانش گفت آنکه بر تیره خاک",
+   "CoupletIndex": 20,
+   "SectionIndex1": 0,
+   "SectionIndex2": 22,
+   "CoupletSummary": "به یارانش گفت کسی که بر خاک تیره چنین کاخ بلندی بسازد ..."
+  },
+  {
+   "VOrder": 42,
+   "Position": "Left",
+   "Text": "برآرد چنین برز جای از مغاک",
+   "CoupletIndex": 20,
+   "SectionIndex1": 0,
+   "SectionIndex2": 22
+  },
+  {
+   "VOrder": 43,
+   "Position": "Right",
+   "Text": "بترسم همی زانکه با او جهان",
+   "CoupletIndex": 21,
+   "SectionIndex1": 0,
+   "SectionIndex2": 23,
+   "CoupletSummary": "... حتماً دانش‌های پنهانی دارد."
+  },
+  {
+   "VOrder": 44,
+   "Position": "Left",
+   "Text": "مگر راز دارد یکی در نهان",
+   "CoupletIndex": 21,
+   "SectionIndex1": 0,
+   "SectionIndex2": 23
+  },
+  {
+   "VOrder": 45,
+   "Position": "Right",
+   "Text": "بباید که ما را بدین جای تنگ",
+   "CoupletIndex": 22,
+   "SectionIndex1": 0,
+   "SectionIndex2": 24,
+   "CoupletSummary": "باید ما هر چه سریع‌تر اقدام کنیم."
+  },
+  {
+   "VOrder": 46,
+   "Position": "Left",
+   "Text": "شتابیدن آید به روز درنگ",
+   "CoupletIndex": 22,
+   "SectionIndex1": 0,
+   "SectionIndex2": 24
+  },
+  {
+   "VOrder": 47,
+   "Position": "Right",
+   "Text": "بگفت و به گرز گران دست برد",
+   "CoupletIndex": 23,
+   "SectionIndex1": 0,
+   "SectionIndex2": 25,
+   "CoupletSummary": "این را گفت و دست به گرز گران برد و فرمان اسب را به عهدهٔ خود اسب گذاشت."
+  },
+  {
+   "VOrder": 48,
+   "Position": "Left",
+   "Text": "عنان بارهٔ تیزتک را سپرد",
+   "CoupletIndex": 23,
+   "SectionIndex1": 0,
+   "SectionIndex2": 25
+  },
+  {
+   "VOrder": 49,
+   "Position": "Right",
+   "Text": "تو گفتی یکی آتشستی درست",
+   "CoupletIndex": 24,
+   "SectionIndex1": 0,
+   "SectionIndex2": 26,
+   "CoupletSummary": "مانند آتش ناگهان جلوی نگهبان کاخ ظاهر شد."
+  },
+  {
+   "VOrder": 50,
+   "Position": "Left",
+   "Text": "که پیش نگهبان ایوان برست",
+   "CoupletIndex": 24,
+   "SectionIndex1": 0,
+   "SectionIndex2": 26
+  },
+  {
+   "VOrder": 51,
+   "Position": "Right",
+   "Text": "گران گرز برداشت از پیش زین",
+   "CoupletIndex": 25,
+   "SectionIndex1": 0,
+   "SectionIndex2": 27,
+   "CoupletSummary": "گرز را برداشت و حمله کرد گویی که دارد زمین را از جا درمی‌آورد."
+  },
+  {
+   "VOrder": 52,
+   "Position": "Left",
+   "Text": "تو گفتی همی بر نوردد زمین",
+   "CoupletIndex": 25,
+   "SectionIndex1": 0,
+   "SectionIndex2": 27
+  },
+  {
+   "VOrder": 53,
+   "Position": "Right",
+   "Text": "کس از روزبانان به در بر نماند",
+   "CoupletIndex": 26,
+   "SectionIndex1": 0,
+   "SectionIndex2": 28,
+   "CoupletSummary": "هیچکس از نگهبانان ورودی باقی نماند. سپس فریدون به درگاه خدا نیایش کرد."
+  },
+  {
+   "VOrder": 54,
+   "Position": "Left",
+   "Text": "فریدون جهان آفرین را بخواند",
+   "CoupletIndex": 26,
+   "SectionIndex1": 0,
+   "SectionIndex2": 28
+  },
+  {
+   "VOrder": 55,
+   "Position": "Right",
+   "Text": "به اسب اندر آمد به کاخ بزرگ",
+   "CoupletIndex": 27,
+   "SectionIndex1": 0,
+   "SectionIndex2": 29,
+   "CoupletSummary": "فریدون آن جوان کم‌تجربهٔ زورمند با اسب وارد کاخ شد."
+  },
+  {
+   "VOrder": 56,
+   "Position": "Left",
+   "Text": "جهان ناسپرده جوان سترگ",
+   "CoupletIndex": 27,
+   "SectionIndex1": 0,
+   "SectionIndex2": 29
+  }
+ ],
+ "Tags": [
+  {
+   "CoupletIndex": 0,
+   "LocationId": 8670,
+   "VerifiedDate": false,
+   "IgnoreInCategory": false,
+   "MachineGenerated": false
+  },
+  {
+   "CoupletIndex": 1,
+   "PersonId": 24,
+   "PersonMention": "Participant",
+   "VerifiedDate": false,
+   "IgnoreInCategory": false,
+   "MachineGenerated": false,
+   "Note": "پیشنهاد هوش مصنوعی (claude-sonnet-5-5): شاه پیروز که با سپاهش از اروندرود می‌گذرد و به کاخ ضحاک می‌رسد."
+  },
+  {
+   "CoupletIndex": 12,
+   "LocationId": 124,
+   "VerifiedDate": false,
+   "IgnoreInCategory": false,
+   "MachineGenerated": false
+  },
+  {
+   "CoupletIndex": 14,
+   "PersonId": 8,
+   "PersonMention": "Participant",
+   "VerifiedDate": false,
+   "IgnoreInCategory": false,
+   "MachineGenerated": false,
+   "Note": "پیشنهاد هوش مصنوعی (claude-sonnet-5-5): صاحب کاخ بلند در بیت‌المقدس که فریدون به نبرد او می‌رود."
+  }
+ ]
+}

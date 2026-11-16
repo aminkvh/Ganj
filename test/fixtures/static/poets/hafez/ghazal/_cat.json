@@ -1,0 +1,29 @@
+{
+ "Id": 24,
+ "PoetId": 2,
+ "ParentId": 9,
+ "Title": "غزلیات",
+ "FullUrl": "/hafez/ghazal",
+ "CatType": "Default",
+ "TableOfContentsStyle": "AlphabeticWithFirstVerse",
+ "MixedModeOrder": 0,
+ "SumUpSubsGeoLocations": false,
+ "ChildCats": [],
+ "Poems": [
+  {
+   "Id": 2130,
+   "Title": "غزل شمارهٔ ۱",
+   "FullUrl": "/hafez/ghazal/sh1"
+  },
+  {
+   "Id": 2131,
+   "Title": "غزل شمارهٔ ۲",
+   "FullUrl": "/hafez/ghazal/sh2"
+  },
+  {
+   "Id": 2132,
+   "Title": "غزل شمارهٔ ۳",
+   "FullUrl": "/hafez/ghazal/sh3"
+  }
+ ]
+}

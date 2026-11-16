@@ -1,0 +1,15 @@
+{
+ "Id": 4,
+ "Name": "ابوالقاسم فردوسی",
+ "Nickname": "فردوسی",
+ "Description": "حکیم ابوالقاسم فردوسی توسی (زادهٔ ۳۲۹ ه‍.ق، ۳۱۹ ه‍.خ - درگذشتهٔ پیش از ۴۱۱ ه‍.ق، ۳۹۷ ه‍.خ در توس خراسان)، سخن‌سرای نامی ",
+ "FullUrl": "/ferdousi",
+ "ImageUrl": "https://ganjoor.net/api/ganjoor/poet/image/ferdousi.gif",
+ "BirthYearInLHijri": 329,
+ "ValidBirthDate": false,
+ "DeathYearInLHijri": 411,
+ "ValidDeathDate": false,
+ "BirthPlace": "مشهد",
+ "BirthLocationId": 14,
+ "PinOrder": 4
+}

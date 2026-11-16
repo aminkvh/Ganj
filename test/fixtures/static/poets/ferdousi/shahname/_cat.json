@@ -1,0 +1,56 @@
+{
+ "Id": 33,
+ "PoetId": 4,
+ "ParentId": 32,
+ "Title": "شاهنامه",
+ "FullUrl": "/ferdousi/shahname",
+ "BookName": "",
+ "CatType": "Book",
+ "TableOfContentsStyle": "OnlyTitles",
+ "MixedModeOrder": 0,
+ "SumUpSubsGeoLocations": true,
+ "MapName": "",
+ "ChildCats": [
+  {
+   "Id": 34,
+   "Title": "آغاز کتاب",
+   "FullUrl": "/ferdousi/shahname/aghaz"
+  },
+  {
+   "Id": 35,
+   "Title": "کیومرث",
+   "FullUrl": "/ferdousi/shahname/qmars"
+  },
+  {
+   "Id": 36,
+   "Title": "هوشنگ",
+   "FullUrl": "/ferdousi/shahname/hushang"
+  },
+  {
+   "Id": 37,
+   "Title": "طهمورث",
+   "FullUrl": "/ferdousi/shahname/tahmoores"
+  },
+  {
+   "Id": 38,
+   "Title": "جمشید",
+   "FullUrl": "/ferdousi/shahname/jamshid"
+  },
+  {
+   "Id": 39,
+   "Title": "ضحاک",
+   "FullUrl": "/ferdousi/shahname/zahak"
+  },
+  {
+   "Id": 40,
+   "Title": "فریدون",
+   "FullUrl": "/ferdousi/shahname/fereydoon"
+  },
+  {
+   "Id": 41,
+   "Title": "منوچهر",
+   "FullUrl": "/ferdousi/shahname/manoochehr"
+  }
+ ],
+ "Poems": []
+}

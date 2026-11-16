@@ -1,0 +1,30 @@
+[
+ {
+  "Id": 1,
+  "Name": "شیراز",
+  "Latitude": 29.5926,
+  "Longitude": 52.5836,
+  "MachineGenerated": false
+ },
+ {
+  "Id": 2,
+  "Name": "اصفهان",
+  "Latitude": 32.6539,
+  "Longitude": 51.666,
+  "MachineGenerated": false
+ },
+ {
+  "Id": 124,
+  "Name": "بیت‌المقدس",
+  "Latitude": 31.783333,
+  "Longitude": 35.216667,
+  "MachineGenerated": false
+ },
+ {
+  "Id": 8670,
+  "Name": "اروندرود",
+  "Latitude": 30.42748469,
+  "Longitude": 48.162946701,
+  "MachineGenerated": false
+ }
+]

@@ -1,0 +1,15 @@
+{
+ "Id": 65,
+ "Name": "حکیم نزاری قهستانی",
+ "Nickname": "حکیم نزاری",
+ "Description": "حکیم سعد الدین پسر شمس الدین پسر محمد نِزاری فوداجی بیرجندی قُهستانی در سال ۶۴۵ هجری قمری در روستای فوداج بیرجند به دنیا",
+ "FullUrl": "/nezari",
+ "ImageUrl": "https://ganjoor.net/api/ganjoor/poet/image/nezari.gif",
+ "BirthYearInLHijri": 645,
+ "ValidBirthDate": true,
+ "DeathYearInLHijri": 721,
+ "ValidDeathDate": true,
+ "BirthPlace": "فوداج",
+ "BirthLocationId": 29,
+ "PinOrder": 0
+}

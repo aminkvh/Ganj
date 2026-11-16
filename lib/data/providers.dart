@@ -7,6 +7,7 @@ import 'api/dto/cat.dart';
 import 'api/dto/poem.dart';
 import 'api/dto/poet.dart';
 import 'api/ganjoor_api.dart';
+import 'api/ganjoor_static.dart';
 import 'db/app_db.dart';
 import 'packs/local_poetry.dart';
 import '../features/player/audio_store.dart';
@@ -19,13 +20,22 @@ final appDbProvider = Provider<AppDb>((ref) => throw UnimplementedError('overrid
 /// English poet names, centuries and genre words for the English interface (loaded at start).
 final englishContentProvider = Provider<EnglishContent?>((ref) => null);
 
+/// Ganjoor's static data copy on jsDelivr: reference tables first, poems when the server fails.
+final ganjoorStaticProvider = Provider<GanjoorStatic>(
+  (ref) => GanjoorStatic(dio: createDio(), cache: HttpCache(ref.watch(appDbProvider))),
+);
 final ganjoorApiProvider = Provider<GanjoorApi>(
-  (ref) => GanjoorApi(dio: createDio(), cache: HttpCache(ref.watch(appDbProvider))),
+  (ref) => GanjoorApi(
+    dio: createDio(),
+    cache: HttpCache(ref.watch(appDbProvider)),
+    staticCopy: ref.watch(ganjoorStaticProvider),
+  ),
 );
 final poetryRepositoryProvider = Provider<PoetryRepository>(
   (ref) => PoetryRepository(
     ref.watch(ganjoorApiProvider),
     local: LocalPoetry(ref.watch(appDbProvider)),
+    staticCopy: ref.watch(ganjoorStaticProvider),
     // Read lazily: the audio store itself depends on this repository.
     offlineRecitations: (poemId) async => await ref.read(audioStoreProvider)?.downloadedFor(poemId) ?? const [],
   ),

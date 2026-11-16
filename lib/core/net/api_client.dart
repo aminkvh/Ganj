@@ -5,6 +5,9 @@ const kApiBase = 'https://api.ganjoor.net';
 
 /// Ganjoor's semantic search runs on its own server, apart from the main API.
 const kSemanticBase = 'https://ganjgah.ir';
+
+/// Ganjoor's public data copy on GitHub (ganjoor/ganjoor-data), served by jsDelivr's CDN.
+const kStaticBase = 'https://cdn.jsdelivr.net/gh/ganjoor/ganjoor-data@main';
 const kUserAgent =
     'Ganj/1.0 (+https://github.com/aminkvh/Ganj; unofficial open-source Persian poetry reader built on the Ganjoor API)';
 

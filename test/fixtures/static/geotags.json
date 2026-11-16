@@ -1,0 +1,130 @@
+[
+ {
+  "PoemId": 1354,
+  "CoupletIndex": 0,
+  "LocationId": 8670,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1354,
+  "CoupletIndex": 12,
+  "LocationId": 124,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1357,
+  "CoupletIndex": 60,
+  "LocationId": 8645,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1358,
+  "CoupletIndex": 46,
+  "LocationId": 91,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1358,
+  "CoupletIndex": 46,
+  "LocationId": 8671,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1359,
+  "CoupletIndex": 18,
+  "LocationId": 8672,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1371,
+  "CoupletIndex": 24,
+  "LocationId": 8671,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1381,
+  "CoupletIndex": 2,
+  "LocationId": 34,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 1384,
+  "CoupletIndex": 2,
+  "LocationId": 8673,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2132,
+  "CoupletIndex": 0,
+  "LocationId": 1,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2132,
+  "CoupletIndex": 0,
+  "LocationId": 37,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2132,
+  "CoupletIndex": 0,
+  "LocationId": 38,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2132,
+  "CoupletIndex": 1,
+  "LocationId": 152,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2132,
+  "CoupletIndex": 1,
+  "LocationId": 153,
+  "VerifiedDate": false,
+  "IgnoreInCategory": false,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2309,
+  "CoupletIndex": 0,
+  "LocationId": 27,
+  "VerifiedDate": false,
+  "IgnoreInCategory": true,
+  "MachineGenerated": false
+ },
+ {
+  "PoemId": 2309,
+  "CoupletIndex": 0,
+  "LocationId": 51,
+  "VerifiedDate": false,
+  "IgnoreInCategory": true,
+  "MachineGenerated": false
+ }
+]

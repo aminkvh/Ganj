@@ -1,0 +1,37 @@
+{
+ "Id": 118,
+ "PoetId": 7,
+ "Title": "سعدی",
+ "FullUrl": "/saadi",
+ "Description": "مشرف‌الدین مصلح بن عبدالله شیرازی سراینده نامی و نویسندهٔ بزرگ سده هفتم هجری قمری است. اهل ادب به وی لقب «استادِ سخن»، «",
+ "BookName": "کلیات سعدی",
+ "CatType": "Default",
+ "TableOfContentsStyle": "OnlyTitles",
+ "MixedModeOrder": 0,
+ "SumUpSubsGeoLocations": false,
+ "MapName": "",
+ "ChildCats": [
+  {
+   "Id": 119,
+   "Title": "دیوان اشعار",
+   "FullUrl": "/saadi/divan"
+  },
+  {
+   "Id": 123,
+   "Title": "بوستان",
+   "FullUrl": "/saadi/boostan"
+  },
+  {
+   "Id": 135,
+   "Title": "مواعظ",
+   "FullUrl": "/saadi/mavaez"
+  }
+ ],
+ "Poems": [
+  {
+   "Id": 77014,
+   "Title": "مقدمهٔ علی بن احمد بن ابی بکر بیستون (گردآورندهٔ دیوان شیخ سعدی، ۷۳۴ هجری قمری)",
+   "FullUrl": "/saadi/bistoon"
+  }
+ ]
+}

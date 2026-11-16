@@ -1,0 +1,29 @@
+{
+ "Id": 2045,
+ "PoetId": 65,
+ "Title": "حکیم نزاری",
+ "FullUrl": "/nezari",
+ "Description": "حکیم سعد الدین پسر شمس الدین پسر محمد نِزاری فوداجی بیرجندی قُهستانی در سال ۶۴۵ هجری قمری در روستای فوداج بیرجند به دنیا",
+ "CatType": "Default",
+ "TableOfContentsStyle": "OnlyTitles",
+ "MixedModeOrder": 0,
+ "SumUpSubsGeoLocations": false,
+ "ChildCats": [
+  {
+   "Id": 2046,
+   "Title": "غزلیات",
+   "FullUrl": "/nezari/ghazalnz"
+  },
+  {
+   "Id": 2078,
+   "Title": "دستورنامه",
+   "FullUrl": "/nezari/dasturname"
+  },
+  {
+   "Id": 2081,
+   "Title": "ترجیعات",
+   "FullUrl": "/nezari/tarjiatnz"
+  }
+ ],
+ "Poems": []
+}

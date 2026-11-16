@@ -1,0 +1,215 @@
+{
+ "Id": 41294,
+ "CatId": 1666,
+ "Title": "حکایت شمارهٔ ۱",
+ "FullTitle": "سعدی » گلستان » باب اول در سیرت پادشاهان » حکایت شمارهٔ ۱",
+ "FullUrl": "/saadi/golestan/gbab1/sh1",
+ "SourceName": "ویکی‌نبشته",
+ "SourceUrlSlug": "wikisource",
+ "PoemSummary": "سعدی در این متن از اهمیت بی‌همتای ایجاد دوستی و آشتی در میان مردم می‌گوید و حکایتی را روایت می‌کند که یک وزیر برای نجات جان یک زندانی به پادشاه دروغ می‌گوید و جان او را نجات می‌دهد و در سویی دیگر وزیری قرار دارد که برای دشمنی با وزیر اولی، راست می‌گوید. پادشاه در این میان، عمل وزیر اولی را پسندیده و پندی از دانایان و خردمندان را به‌آنها یادآوری می‌کند که دروغی که آشتی و صلح بیاورد بهتر از راستی‌است که بین مردم جنگ و فتنه ایجاد کند. ",
+ "Sections": [
+  {
+   "Index": 0,
+   "Number": 1,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "یز",
+   "PlainText": "وقت ضرورت چو نماند گریز\r\nدست بگیرد سر شمشیر تیز",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>وقتِ ضرورت چو نَمانَد گریز</p></div>\r\n<div class=\"m2\"><p>دست بگیرَد سَرِ شَمشیرِ تیز</p></div></div>",
+   "PoemFormat": "Generic",
+   "CoupletsCount": 1,
+   "MetreId": 19
+  },
+  {
+   "Index": 1,
+   "Number": 2,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "وگوید",
+   "PlainText": "هر که شاه آن کند که او گوید\r\nحیف باشد که جز نکو گوید",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>هر که شاه آن کُنَد که او گوید</p></div>\r\n<div class=\"m2\"><p>حیف باشد که جز نِکو گوید</p></div></div>",
+   "PoemFormat": "Generic",
+   "CoupletsCount": 1,
+   "MetreId": 9
+  },
+  {
+   "Index": 2,
+   "Number": 3,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "",
+   "PlainText": "جهان ای برادر نماند به کس\r\nدل اندر جهان آفرین بند و بس\r\nمکن تکیه بر ملک دنیا و پشت\r\nکه بسیار کس چون تو پرورد و کشت\r\nچو آهنگ رفتن کند جان پاک\r\nچه بر تخت مردن چه بر روی خاک",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>جَهان اِی بَرادَر نَمانَد به کَس</p></div>\r\n<div class=\"m2\"><p>دِل اَندَر جَهان‌آفرین بَند و بَس</p></div></div>\r\n<div class=\"b\" id=\"bn2\"><div class=\"m1\"><p>مَکن تکیه بَر مُلْکِ دنیا و پُشت</p></div>\r\n<div class=\"m2\"><p>که بسیار کَس چون تو پَروَرْد و کُشت</p></div></div>\r\n<div class=\"b\" id=\"bn3\"><div class=\"m1\"><p>چو آهنگِ رَفتن کُنَد جانِ پاک</p></div>\r\n<div class=\"m2\"><p>چه بَر تَخت مُردن، چه بَر رویِ خاک</p></div></div>",
+   "PoemFormat": "Masnavi",
+   "CoupletsCount": 3,
+   "MetreId": 23
+  },
+  {
+   "Index": 4,
+   "Number": 4,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "س",
+   "PlainText": "جهان ای برادر نماند به کس\r\nدل اندر جهان آفرین بند و بس",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>جَهان اِی بَرادَر نَمانَد به کَس</p></div>\r\n<div class=\"m2\"><p>دِل اَندَر جَهان‌آفرین بَند و بَس</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 2
+  },
+  {
+   "Index": 5,
+   "Number": 5,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "شت",
+   "PlainText": "مکن تکیه بر ملک دنیا و پشت\r\nکه بسیار کس چون تو پرورد و کشت",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>مَکن تکیه بَر مُلْکِ دنیا و پُشت</p></div>\r\n<div class=\"m2\"><p>که بسیار کَس چون تو پَروَرْد و کُشت</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 2
+  },
+  {
+   "Index": 6,
+   "Number": 6,
+   "SectionType": "Couplet",
+   "VerseType": "Second",
+   "RhymeLetters": "اک",
+   "PlainText": "چو آهنگ رفتن کند جان پاک\r\nچه بر تخت مردن چه بر روی خاک",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>چو آهنگِ رَفتن کُنَد جانِ پاک</p></div>\r\n<div class=\"m2\"><p>چه بَر تَخت مُردن، چه بَر رویِ خاک</p></div></div>",
+   "CoupletsCount": 1,
+   "MetreId": 23,
+   "MetreRefSectionIndex": 2
+  },
+  {
+   "Index": 7,
+   "Number": 7,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "کسنورمغلوبیصولعلیالکلب",
+   "PlainText": "إذا ییس الإنسان طال لسانه\r\nکسنور مغلوب یصول علی الکلب",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>إِذا یَئِسَ الْإِنسانُ طالَ لِسانُهُ</p></div>\r\n<div class=\"m2\"><p>کَسِنَّورٍ مَغْلُوبٍ یَصُولُ عَلَی الْکَلبِ</p></div></div>",
+   "PoemFormat": "Masnavi",
+   "Language": "ar",
+   "CoupletsCount": 1
+  }
+ ],
+ "Verses": [
+  {
+   "VOrder": 1,
+   "Position": "Paragraph",
+   "Text": "پادشاهی را شنیدم به کُشتنِ اسیری اشارت کرد. بیچاره در آن حالتِ نومیدی مَلِک را دشنام دادن گرفت و سَقَط گفتن، که گفته‌اند: هر که دست از جان بشوید، هر چه در دل دارد بگوید.",
+   "CoupletIndex": 0,
+   "CoupletSummary": "شنیده‌ام که پادشاهی به کشتن یک‌زندانی دستور داد؛ آن اسیر بیچاره در حالت ناامیدی و غم به پادشاه ناسزا گفت و دشنام‌ داد؛ (راست است‌که) گفته‌اند: «هرکس که از جان دست بشوید، هرچه در دل دارد، می‌گوید»"
+  },
+  {
+   "VOrder": 2,
+   "Position": "Right",
+   "Text": "وقتِ ضرورت چو نَمانَد گریز",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0,
+   "CoupletSummary": "هنگام بیچارگی که راه گریز بسته شود، دستِ برهنه با شمشیر بُرنده درآویزد و به جنگ برخیزد."
+  },
+  {
+   "VOrder": 3,
+   "Position": "Left",
+   "Text": "دست بگیرَد سَرِ شَمشیرِ تیز",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 4,
+   "Position": "Right",
+   "Text": "إِذا یَئِسَ الْإِنسانُ طالَ لِسانُهُ",
+   "CoupletIndex": 2,
+   "SectionIndex1": 7,
+   "CoupletSummary": "چون آدمی نومید شود زبان درازی کند، چنانکه گربهٔ شکست خورده بر سگ تاختن آرد."
+  },
+  {
+   "VOrder": 5,
+   "Position": "Left",
+   "Text": "کَسِنَّورٍ مَغْلُوبٍ یَصُولُ عَلَی الْکَلبِ",
+   "CoupletIndex": 2,
+   "SectionIndex1": 7
+  },
+  {
+   "VOrder": 6,
+   "Position": "Paragraph",
+   "Text": "مَلِک پرسید: «چه می‌گوید؟» یکی از وزرایِ نیک‌مَحضر گفت: «ای خداوند! همی گوید: وَ الْکاظِمِینَ الغَیْظَ وَ الْعافِینَ عَنِ النّاسِ». مَلِک را رحمت آمد و از سَرِ خونِ او درگذشت. وزیرِ دیگر که ضدّ او بود گفت: «ابنای جنسِ ما را نشاید در حضرتِ پادشاهان جز به راستی سخن گفتن. این مَلِک را دشنام داد و ناسزا گفت». مَلِک روی از این سخن در هم آورد و گفت: «آن دروغِ وی پسندیده‌تر آمد مَرا زین راست که تو گفتی، که رویِ آن در مصلحتی بود و بنایِ این بر خُبْثی». و خردمندان گفته‌اند: «دروغی مصلحت‌آمیز بِهْ که راستی فتنه‌انگیز».",
+   "CoupletIndex": 3,
+   "CoupletSummary": "پادشاه که (زبان او را نمی‌دانست) پرسید: «چه می‌گوید؟» یکی از وزرای شایسته و بالیاقت گفت: ای پادشاه می‌گوید که «آنانکه خشم خود را فرومی‌خورند و از مردم در می‌گذرند»؛ پادشاه بر سر رحم آمد و از کشتن او دست‌کشید و او را بخشود. وزیر دیگری که (با آن وزیر) ضدیت و دشمنی داشت گفت: فرزندان قوم ما (یا ما وزیران) شایسته نیست که در حضور پادشاه جز راست چیزی بگوییم؛ آن اسیر، دشنام و ناسزا گفت» پادشاه از حرف او خشمگین شد و گفت: «آن دروغ او را بهتر از راست تو می‌دانم زیرا دروغ او بنابر نیکی و صلح بود اما راست تو برای بداندیشی و دشمنی» زیرا دانایان و خردمندان نصیحت کرده‌اند: «دروغی صلح‌آمیز که برای آشتی دادن باشد بهتر است از راستی که دشمنی و نفرت ایجاد کند»"
+  },
+  {
+   "VOrder": 7,
+   "Position": "Right",
+   "Text": "هر که شاه آن کُنَد که او گوید",
+   "CoupletIndex": 4,
+   "SectionIndex1": 1,
+   "CoupletSummary": "کسی که شاه از او حرف‌شنوی دارد و شاه به‌حرف‌هایش عمل می‌کند؛ شایسته نیست که جز خیرخواهی و نیکویی چیز دیگری بگوید."
+  },
+  {
+   "VOrder": 8,
+   "Position": "Left",
+   "Text": "حیف باشد که جز نِکو گوید",
+   "CoupletIndex": 4,
+   "SectionIndex1": 1
+  },
+  {
+   "VOrder": 9,
+   "Position": "Paragraph",
+   "Text": "بَر طاقِ ایوانِ فریدون نِبِشته بود:",
+   "CoupletIndex": 5,
+   "CoupletSummary": "بر طاق کاخ فریدون نوشته‌شده بود:"
+  },
+  {
+   "VOrder": 10,
+   "Position": "Right",
+   "Text": "جَهان اِی بَرادَر نَمانَد به کَس",
+   "CoupletIndex": 6,
+   "SectionIndex1": 2,
+   "SectionIndex2": 4,
+   "CoupletSummary": "ای عزیز، زندگی پایدار نیست و جهان به‌کسی وفا نکرده‌است؛ دل به پروردگار ببند‌، نه‌چیز یا کس دیگری."
+  },
+  {
+   "VOrder": 11,
+   "Position": "Left",
+   "Text": "دِل اَندَر جَهان‌آفرین بَند و بَس",
+   "CoupletIndex": 6,
+   "SectionIndex1": 2,
+   "SectionIndex2": 4
+  },
+  {
+   "VOrder": 12,
+   "Position": "Right",
+   "Text": "مَکن تکیه بَر مُلْکِ دنیا و پُشت",
+   "CoupletIndex": 7,
+   "SectionIndex1": 2,
+   "SectionIndex2": 5,
+   "CoupletSummary": "بر ثروت و قدرت خود و بر قوم و اجداد خود مغرور مشو که دنیا بسیار مانند تو را پرورید و از میان برد. (پشت در اینجا یعنی هر نسلی از طرف اجداد یا اولاد‌، تبار‌، دودمان)"
+  },
+  {
+   "VOrder": 13,
+   "Position": "Left",
+   "Text": "که بسیار کَس چون تو پَروَرْد و کُشت",
+   "CoupletIndex": 7,
+   "SectionIndex1": 2,
+   "SectionIndex2": 5
+  },
+  {
+   "VOrder": 14,
+   "Position": "Right",
+   "Text": "چو آهنگِ رَفتن کُنَد جانِ پاک",
+   "CoupletIndex": 8,
+   "SectionIndex1": 2,
+   "SectionIndex2": 6,
+   "CoupletSummary": "وقتی که مرگ فرا ‌می‌رسد؛ مردن بر تخت شاهی و کف خاک تفاوتی ندارند."
+  },
+  {
+   "VOrder": 15,
+   "Position": "Left",
+   "Text": "چه بَر تَخت مُردن، چه بَر رویِ خاک",
+   "CoupletIndex": 8,
+   "SectionIndex1": 2,
+   "SectionIndex2": 6
+  }
+ ]
+}
