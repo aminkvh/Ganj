@@ -26,8 +26,8 @@ class FakeSearch implements SearchService {
   final calls = <(String, int?, int)>[];
   final excludes = <Set<int>>[];
 
-  /// (soundAlike, onlineTerm) of each call.
-  final spellings = <(bool, String?)>[];
+  /// soundAlike of each call.
+  final spellings = <bool>[];
 
   @override
   Future<SearchPage> search(
@@ -36,10 +36,9 @@ class FakeSearch implements SearchService {
     Set<int> exclude = const {},
     int page = 1,
     bool soundAlike = false,
-    String? onlineTerm,
   }) async {
     calls.add((term, poetId, page));
-    spellings.add((soundAlike, onlineTerm));
+    spellings.add(soundAlike);
     excludes.add(exclude);
     final gate = slow[term];
     if (gate != null) return gate.future;
@@ -137,16 +136,14 @@ void main() {
   });
 
   testWidgets('sound-alike results say so, and more pages keep the spelling', (tester) async {
-    final fake = await pump(
-      tester,
-      const SearchPage([hit], total: 30, hasMore: true, soundAlike: true, onlineTerm: 'ساقی'),
-    );
+    final fake = await pump(tester, const SearchPage([hit], total: 30, hasMore: true, soundAlike: true));
     await submit(tester, 'ساغی');
     expect(find.byKey(const ValueKey('sound-alike-note')), findsOneWidget);
     expect(find.textContaining('«ساغی»'), findsOneWidget);
     await tester.tap(find.text('نتایج بیشتر'));
     await tester.pumpAndSettle();
-    expect(fake.spellings.last, (true, 'ساقی'));
+    expect(fake.spellings.first, isFalse);
+    expect(fake.spellings.last, isTrue);
   });
 
   testWidgets('load more requests the next page', (tester) async {

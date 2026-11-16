@@ -42,9 +42,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   int _total = 0;
   bool _totalKnown = true;
 
-  /// The results match only with sound-alike letters swapped; [_onlineTerm] is the spelling found online.
+  /// The results match only with sound-alike letters swapped (installed poems only).
   bool _soundAlike = false;
-  String? _onlineTerm;
 
   /// Only the newest request may update the list.
   int _request = 0;
@@ -99,14 +98,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     try {
       final r = await ref
           .read(searchServiceProvider)
-          .search(
-            term,
-            poetId: _poetId,
-            exclude: exclude,
-            page: page,
-            soundAlike: more && _soundAlike,
-            onlineTerm: more ? _onlineTerm : null,
-          );
+          .search(term, poetId: _poetId, exclude: exclude, page: page, soundAlike: more && _soundAlike);
       if (!mounted || request != _request) return;
       final seen = {for (final h in _hits) h.poemId};
       setState(() {
@@ -117,7 +109,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         _total = r.total;
         _totalKnown = r.totalKnown;
         _soundAlike = r.soundAlike;
-        _onlineTerm = r.onlineTerm;
       });
     } finally {
       if (mounted && request == _request) setState(() => _loading = false);

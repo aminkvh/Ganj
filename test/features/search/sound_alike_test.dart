@@ -90,20 +90,27 @@ void main() {
     expect(page.hits.map((h) => h.poemId), contains(2130));
   });
 
-  test('online, other spellings are tried one by one until one finds something; later pages keep it', () async {
+  test('online, other spellings are never sent to Ganjoor: only installed poems match them', () async {
     final saghi = File('test/fixtures/search_saghi.json').readAsStringSync();
     final a = TermAdapter({'ساقی': saghi});
     final s = serviceWith(a);
-    final page = await s.search('ساغی', poetId: 7); // poet 7: no installed poems, online only
+    final page = await s.search('ساغی');
     expect(page.soundAlike, isTrue);
-    expect(page.onlineTerm, 'ساقی');
-    expect(page.hits, isNotEmpty);
-    expect(a.terms.first, 'ساغی', reason: 'as typed first');
-    expect(a.terms, hasLength(lessThanOrEqualTo(5)));
+    expect(page.offline, isFalse);
+    expect(page.hits.map((h) => h.poemId), contains(2130));
+    expect(page.hits.every((h) => h.local), isTrue);
+    expect(a.terms, ['ساغی'], reason: 'one request, as typed');
 
     a.terms.clear();
-    await s.search('ساغی', poetId: 7, page: 2, soundAlike: true, onlineTerm: page.onlineTerm);
-    expect(a.terms, ['ساقی']);
+    await s.search('ساغی', page: 2, soundAlike: true);
+    expect(a.terms, isEmpty, reason: 'later pages read the installed poems only');
+
+    // Poet 7 has no installed poems: nothing to show, and still no other spellings online.
+    a.terms.clear();
+    final none = await s.search('ساغی', poetId: 7);
+    expect(none.hits, isEmpty);
+    expect(none.soundAlike, isFalse);
+    expect(a.terms, ['ساغی']);
   });
 
   test('a match as typed never tries other spellings', () async {

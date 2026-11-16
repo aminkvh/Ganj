@@ -32,7 +32,6 @@ class SearchPage {
     this.offline = false,
     this.totalKnown = true,
     this.soundAlike = false,
-    this.onlineTerm,
   });
 
   final List<SearchHit> hits;
@@ -43,15 +42,11 @@ class SearchPage {
   /// False when only installed packs answered: [total] then counts this page, not all matches.
   final bool totalKnown;
 
-  /// Nothing matched as typed, so these match with sound-alike letters swapped (س/ص/ث, ز/ذ/ض/ظ…).
+  /// Nothing matched as typed, so these are installed poems that match with sound-alike letters
+  /// swapped (س/ص/ث, ز/ذ/ض/ظ…). Only installed packs are searched this way: other spellings are
+  /// never sent to Ganjoor's server, to spare it extra requests.
   final bool soundAlike;
-
-  /// The spelling Ganjoor's online search found them with, when [soundAlike]; later pages use it.
-  final String? onlineTerm;
 }
-
-/// At most this many other spellings are tried online when nothing matched (one request each).
-const _onlineSpellings = 4;
 
 const _pageSize = 20;
 
@@ -78,15 +73,6 @@ class SearchService {
     return long
         .map((t) => soundAlike ? '(${soundAlikeSpellings(t).map((v) => '"$v"').join(' OR ')})' : '"$t"')
         .join(' ');
-  }
-
-  /// [term] with one word at a time spelled with sound-alike letters (the spelling as typed left out).
-  static List<String> otherSpellings(String term) {
-    final words = tokens(term);
-    return [
-      for (var i = 0; i < words.length; i++)
-        for (final v in soundAlikeSpellings(words[i]).skip(1)) [...words.take(i), v, ...words.skip(i + 1)].join(' '),
-    ];
   }
 
   Future<SearchPage> searchLocal(
@@ -162,53 +148,49 @@ class SearchService {
 
   /// Local hits first, then online ones not already shown; offline → local only. [exclude]:
   /// poets whose poems are left out («حذف آثار یک شاعر از نتایج»). When nothing matches as typed,
-  /// the first page tries sound-alike spellings ([SearchPage.soundAlike]); later pages of such a
-  /// search pass [soundAlike] and the first page's [SearchPage.onlineTerm] back.
+  /// the first page tries sound-alike spellings in the installed packs ([SearchPage.soundAlike]);
+  /// later pages of such a search pass [soundAlike] back. Neither sends anything more online.
   Future<SearchPage> search(
     String term, {
     int? poetId,
     Set<int> exclude = const {},
     int page = 1,
     bool soundAlike = false,
-    String? onlineTerm,
   }) async {
-    if (soundAlike) {
-      return _merge(
-        searchLocal(term, poetId: poetId, exclude: exclude, page: page, soundAlike: true),
-        onlineTerm == null
-            ? null
-            : searchOnline(onlineTerm, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout),
-        soundAlike: true,
-        onlineTerm: onlineTerm,
-      );
-    }
+    if (soundAlike) return _soundAlike(term, poetId: poetId, exclude: exclude, page: page);
     // Local and online run together; a slow network never holds back offline hits.
     final r = await _merge(
       searchLocal(term, poetId: poetId, exclude: exclude, page: page),
       searchOnline(term, poetId: poetId, exclude: exclude, page: page).timeout(onlineTimeout),
     );
     if (page != 1 || r.hits.isNotEmpty) return r;
-    return await _soundAlikeFirstPage(term, poetId: poetId, exclude: exclude, offline: r.offline) ?? r;
+    final alike = await _soundAlike(term, poetId: poetId, exclude: exclude, offline: r.offline);
+    return alike.hits.isEmpty ? r : alike;
   }
 
-  Future<SearchPage> _merge(
-    Future<SearchPage> localFuture,
-    Future<SearchPage>? onlineFuture, {
-    bool soundAlike = false,
-    String? onlineTerm,
+  /// Installed poems matching [term] with sound-alike letters swapped; never asks Ganjoor's server.
+  Future<SearchPage> _soundAlike(
+    String term, {
+    int? poetId,
+    Set<int> exclude = const {},
+    int page = 1,
+    bool offline = false,
   }) async {
+    final l = await searchLocal(term, poetId: poetId, exclude: exclude, page: page, soundAlike: true);
+    return SearchPage(
+      l.hits,
+      total: l.total,
+      hasMore: l.hasMore,
+      offline: offline,
+      totalKnown: false,
+      soundAlike: true,
+    );
+  }
+
+  Future<SearchPage> _merge(Future<SearchPage> localFuture, Future<SearchPage> onlineFuture) async {
     // Started before awaiting the local search, so its failure is handled here, not unhandled.
-    onlineFuture?.ignore();
+    onlineFuture.ignore();
     final local = await localFuture;
-    if (onlineFuture == null) {
-      return SearchPage(
-        local.hits,
-        total: local.total,
-        hasMore: local.hasMore,
-        totalKnown: false,
-        soundAlike: soundAlike,
-      );
-    }
     try {
       final online = await onlineFuture;
       final seen = {for (final h in local.hits) h.poemId};
@@ -216,58 +198,10 @@ class SearchService {
         [...local.hits, ...online.hits.where((h) => seen.add(h.poemId))],
         total: online.total > local.total ? online.total : local.total,
         hasMore: local.hasMore || online.hasMore,
-        soundAlike: soundAlike,
-        onlineTerm: onlineTerm,
       );
     } catch (_) {
-      return SearchPage(
-        local.hits,
-        total: local.total,
-        hasMore: local.hasMore,
-        offline: true,
-        totalKnown: false,
-        soundAlike: soundAlike,
-      );
+      return SearchPage(local.hits, total: local.total, hasMore: local.hasMore, offline: true, totalKnown: false);
     }
-  }
-
-  /// Nothing matched as typed: the installed packs with every sound-alike spelling at once, and
-  /// Ganjoor's search with up to [_onlineSpellings] other spellings, one after another until one
-  /// finds something (not when offline). Null when nothing matches either way.
-  Future<SearchPage?> _soundAlikeFirstPage(
-    String term, {
-    int? poetId,
-    Set<int> exclude = const {},
-    required bool offline,
-  }) async {
-    final local = await searchLocal(term, poetId: poetId, exclude: exclude, soundAlike: true);
-    SearchPage? online;
-    String? used;
-    if (!offline) {
-      for (final v in otherSpellings(term).take(_onlineSpellings)) {
-        try {
-          final r = await searchOnline(v, poetId: poetId, exclude: exclude).timeout(onlineTimeout);
-          if (r.hits.isNotEmpty) {
-            online = r;
-            used = v;
-            break;
-          }
-        } catch (_) {
-          break;
-        }
-      }
-    }
-    if (local.hits.isEmpty && online == null) return null;
-    final seen = {for (final h in local.hits) h.poemId};
-    return SearchPage(
-      [...local.hits, ...?online?.hits.where((h) => seen.add(h.poemId))],
-      total: online != null && online.total > local.total ? online.total : local.total,
-      hasMore: local.hasMore || (online?.hasMore ?? false),
-      offline: offline,
-      totalKnown: online != null,
-      soundAlike: true,
-      onlineTerm: used,
-    );
   }
 
   static String _snippet(String plain, String term) {
