@@ -96,7 +96,7 @@ jobs:
           # Full output only for a login check, which reads no feed text.
           show_full_output: ${{ inputs.check_login == true }}
           claude_args: >-
-            --model claude-opus-5-5
+            --model claude-sonnet-5-5
             --max-turns 80
             --allowedTools "Read,Glob,Grep,Write(./build/podcasts/decisions.json),Bash(dart run tool/ganjoor_lookup.dart:*)"
           prompt: |
