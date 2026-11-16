@@ -1,0 +1,261 @@
+{
+ "Id": 2130,
+ "CatId": 24,
+ "Title": "غزل شمارهٔ ۱",
+ "FullTitle": "حافظ » غزلیات » غزل شمارهٔ ۱",
+ "FullUrl": "/hafez/ghazal/sh1",
+ "RhymeLetters": "لها",
+ "SourceName": "ویکی‌درج",
+ "SourceUrlSlug": "wikidorj",
+ "PoemSummary": "در این شعر حافظ از عشق و چالش‌های آن سخن می‌گوید. او از ساقی می‌خواهد که\n جامی پر کند و به او بدهد زیرا عشق در ابتدا آسان به نظر می‌رسد، امّا \nبعد با دشواری همراه می‌شود. حافظ آسایش را در این دنیا و زیر \nسایهٔ مرگ نشدنی می‌داند. او ما را به پیروی از رهنمودهای پیر مغان دعوت \nمی‌کند. در پایان، او به اهمیّت بودن در پیشگاه معشوق و غفلت‌نورزیدن از او\n اشاره می‌کند و می‌گوید دنیا را برای آنکه دوست داری رها کن.",
+ "Metre": {
+  "Id": 2,
+  "Rhythm": "مفاعیلن مفاعیلن مفاعیلن مفاعیلن (هزج مثمن سالم)"
+ },
+ "Sections": [
+  {
+   "Index": 0,
+   "Number": 1,
+   "SectionType": "WholePoem",
+   "VerseType": "First",
+   "RhymeLetters": "لها",
+   "PlainText": "الا یا ایها الساقی ادر کأسا و ناولها\r\nکه عشق آسان نمود اول ولی افتاد مشکل ها\r\nبه بوی نافه ای کآخر صبا زان طره بگشاید\r\nز تاب جعد مشکینش چه خون افتاد در دل ها\r\nمرا در منزل جانان چه امن عیش چون هر دم\r\nجرس فریاد می دارد که بربندید محمل ها\r\nبه می سجاده رنگین کن گرت پیر مغان گوید\r\nکه سالک بی خبر نبود ز راه و رسم منزل ها\r\nشب تاریک و بیم موج و گردابی چنین هایل\r\nکجا دانند حال ما سبک باران ساحل ها\r\nهمه کارم ز خودکامی به بدنامی کشید آخر\r\nنهان کی ماند آن رازی کزو سازند محفل ها\r\nحضوری گر همی خواهی از او غایب مشو حافظ\r\nمتیٰ ما تلق من تهویٰ دع الدنیا و اهملها",
+   "HtmlText": "<div class=\"b\" id=\"bn1\"><div class=\"m1\"><p>اَلا یا اَیُّهَا السّاقی اَدِرْ کَأسَاً و ناوِلْها</p></div>\r\n<div class=\"m2\"><p>که عشق آسان نمود اوّل ولی افتاد مشکل‌ها</p></div></div>\r\n<div class=\"b\" id=\"bn2\"><div class=\"m1\"><p>به بویِ نافه‌ای کآخِر صبا زان طُرّه بُگشاید</p></div>\r\n<div class=\"m2\"><p>ز تابِ جَعدِ مشکینش چه خون افتاد در دل‌ها</p></div></div>\r\n<div class=\"b\" id=\"bn3\"><div class=\"m1\"><p>مرا در منزلِ جانان چه امنِ عیش، چون هر دَم</p></div>\r\n<div class=\"m2\"><p>جَرَس فریاد می‌دارد که بَربندید مَحمِل‌ها</p></div></div>\r\n<div class=\"b\" id=\"bn4\"><div class=\"m1\"><p>به مِی سجّاده رنگین کُن گَرَت پیرِ مُغان گوید</p></div>\r\n<div class=\"m2\"><p>که سالِک بی‌خبر نَبْوَد ز راه و رسمِ منزل‌ها</p></div></div>\r\n<div class=\"b\" id=\"bn5\"><div class=\"m1\"><p>شبِ تاریک و بیمِ موج و گِردابی چنین هایل</p></div>\r\n<div class=\"m2\"><p>کجا دانند حالِ ما سبک‌بارانِ ساحل‌ها؟</p></div></div>\r\n<div class=\"b\" id=\"bn6\"><div class=\"m1\"><p>همهْ کارم ز خودکامی به بدنامی کشید آخر</p></div>\r\n<div class=\"m2\"><p>نهان کِی مانَد آن رازی کَزو سازند مَحفل‌ها؟</p></div></div>\r\n<div class=\"b\" id=\"bn7\"><div class=\"m1\"><p>حضوری گر همی خواهی از او غایب مشو حافظ</p></div>\r\n<div class=\"m2\"><p>مَتیٰ ما تَلْقَ مَنْ تَهْویٰ دَعِ الدُّنْیا وَ اَهْمِلْها</p></div></div>",
+   "PoemFormat": "Ghazal",
+   "CoupletsCount": 7,
+   "MetreId": 2
+  }
+ ],
+ "Verses": [
+  {
+   "VOrder": 1,
+   "Position": "Right",
+   "Text": "اَلا یا اَیُّهَا السّاقی اَدِرْ کَأسَاً و ناوِلْها",
+   "CoupletIndex": 0,
+   "SectionIndex1": 0,
+   "CoupletSummary": " ای ساقی! جامی را (بین حاضران) بگردان و شرابش را بر ما بنوشان، که عشق در آغاز آسان به نظر آمد اما پر از دشواری‌ها بود."
+  },
+  {
+   "VOrder": 2,
+   "Position": "Left",
+   "Text": "که عشق آسان نمود اوّل ولی افتاد مشکل‌ها",
+   "CoupletIndex": 0,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 3,
+   "Position": "Right",
+   "Text": "به بویِ نافه‌ای کآخِر صبا زان طُرّه بُگشاید",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0,
+   "CoupletSummary": "در آرزوی آن که باد بوی عطری از موهای او بیاورد، از تاب خوردن موهای او چقدر دل‌ها خون شد."
+  },
+  {
+   "VOrder": 4,
+   "Position": "Left",
+   "Text": "ز تابِ جَعدِ مشکینش چه خون افتاد در دل‌ها",
+   "CoupletIndex": 1,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 5,
+   "Position": "Right",
+   "Text": "مرا در منزلِ جانان چه امنِ عیش، چون هر دَم",
+   "CoupletIndex": 2,
+   "SectionIndex1": 0,
+   "CoupletSummary": "من در خانه جانانم چه آرامش خوشی کردن دارم هنگامی که هر دم زنگِ کاروان فریاد می‌زند که بارها را بر کجاوه‌ها ببندید."
+  },
+  {
+   "VOrder": 6,
+   "Position": "Left",
+   "Text": "جَرَس فریاد می‌دارد که بَربندید مَحمِل‌ها",
+   "CoupletIndex": 2,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 7,
+   "Position": "Right",
+   "Text": "به مِی سجّاده رنگین کُن گَرَت پیرِ مُغان گوید",
+   "CoupletIndex": 3,
+   "SectionIndex1": 0,
+   "CoupletSummary": "اگر پیر مغان به تو بگوید که جانمازت را با شراب آلوده کن، این کار را بکن؛ چرا که رهرو از راه و روش و آداب خانه و جایگاه ها ناآگاه نیست."
+  },
+  {
+   "VOrder": 8,
+   "Position": "Left",
+   "Text": "که سالِک بی‌خبر نَبْوَد ز راه و رسمِ منزل‌ها",
+   "CoupletIndex": 3,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 9,
+   "Position": "Right",
+   "Text": "شبِ تاریک و بیمِ موج و گِردابی چنین هایل",
+   "CoupletIndex": 4,
+   "SectionIndex1": 0,
+   "CoupletSummary": "در شبی تاریک در بیم موج دریا و گردابی چنین سهمگین؛ کسانی که سبک بار(آسوده یا با بار و بندیل سبک)ها بر کنار خشکی ساحل ها اند، حال ما را از کجا می دانند؟"
+  },
+  {
+   "VOrder": 10,
+   "Position": "Left",
+   "Text": "کجا دانند حالِ ما سبک‌بارانِ ساحل‌ها؟",
+   "CoupletIndex": 4,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 11,
+   "Position": "Right",
+   "Text": "همهْ کارم ز خودکامی به بدنامی کشید آخر",
+   "CoupletIndex": 5,
+   "SectionIndex1": 0,
+   "CoupletSummary": "همه کارم از به دنبال رسیدن به خواسته دل خودم، سرانجام به بدنامی کشید؛ کی رازی که دورهمی‌هایی برای بحث در مورد آن تشکیل می‌شود پنهان می‌ماند؟"
+  },
+  {
+   "VOrder": 12,
+   "Position": "Left",
+   "Text": "نهان کِی مانَد آن رازی کَزو سازند مَحفل‌ها؟",
+   "CoupletIndex": 5,
+   "SectionIndex1": 0
+  },
+  {
+   "VOrder": 13,
+   "Position": "Right",
+   "Text": "حضوری گر همی خواهی از او غایب مشو حافظ",
+   "CoupletIndex": 6,
+   "SectionIndex1": 0,
+   "CoupletSummary": "ای حافظ! اگر بودن در نزد او را می‌خواهی، از او دور و ناپیدا مباش؛ هرگاه دلدارت را دیدی، دنیا را رها کن و آن را واگذار."
+  },
+  {
+   "VOrder": 14,
+   "Position": "Left",
+   "Text": "مَتیٰ ما تَلْقَ مَنْ تَهْویٰ دَعِ الدُّنْیا وَ اَهْمِلْها",
+   "CoupletIndex": 6,
+   "SectionIndex1": 0
+  }
+ ],
+ "LiteraryTags": [
+  {
+   "CoupletIndex": 1,
+   "DeviceId": 2,
+   "Uncertain": false,
+   "Origin": "AcademicCorpus",
+   "SourceKey": "persian-literary-corpus-1.0.0 (MIT)",
+   "MachineGenerated": false,
+   "Parts": [
+    {
+     "SlotId": 5,
+     "CoupletIndex": 1,
+     "Misra": 1,
+     "WordStart": 3,
+     "WordEnd": 3,
+     "ConceptId": 1
+    },
+    {
+     "SlotId": 6,
+     "CoupletIndex": 1,
+     "Misra": 0,
+     "ConceptId": 2
+    }
+   ]
+  },
+  {
+   "CoupletIndex": 1,
+   "DeviceId": 3,
+   "Uncertain": false,
+   "Origin": "AcademicCorpus",
+   "SourceKey": "persian-literary-corpus-1.0.0 (MIT)",
+   "MachineGenerated": false,
+   "Parts": [
+    {
+     "SlotId": 7,
+     "CoupletIndex": 1,
+     "Misra": 0,
+     "Text": "خون در دل افتادن"
+    },
+    {
+     "SlotId": 8,
+     "CoupletIndex": 1,
+     "Misra": 0,
+     "Text": "به رنج و محنت افتادن"
+    }
+   ]
+  },
+  {
+   "CoupletIndex": 1,
+   "DeviceId": 5,
+   "Uncertain": false,
+   "Origin": "AcademicCorpus",
+   "SourceKey": "persian-literary-corpus-1.0.0 (MIT)",
+   "MachineGenerated": false,
+   "Parts": [
+    {
+     "SlotId": 11,
+     "CoupletIndex": 1,
+     "Misra": 1,
+     "WordStart": 2,
+     "WordEnd": 2
+    },
+    {
+     "SlotId": 12,
+     "CoupletIndex": 1,
+     "Misra": 0,
+     "Text": "امید و آرزو"
+    },
+    {
+     "SlotId": 12,
+     "CoupletIndex": 1,
+     "Misra": 0,
+     "Text": "رایحه"
+    }
+   ]
+  },
+  {
+   "CoupletIndex": 2,
+   "DeviceId": 2,
+   "Uncertain": false,
+   "Origin": "AcademicCorpus",
+   "SourceKey": "persian-literary-corpus-1.0.0 (MIT)",
+   "MachineGenerated": false,
+   "Parts": [
+    {
+     "SlotId": 5,
+     "CoupletIndex": 2,
+     "Misra": 1,
+     "WordStart": 3,
+     "WordEnd": 4,
+     "ConceptId": 3
+    },
+    {
+     "SlotId": 6,
+     "CoupletIndex": 2,
+     "Misra": 0,
+     "ConceptId": 4
+    }
+   ]
+  },
+  {
+   "CoupletIndex": 2,
+   "DeviceId": 2,
+   "Uncertain": false,
+   "Origin": "AcademicCorpus",
+   "SourceKey": "persian-literary-corpus-1.0.0 (MIT)",
+   "MachineGenerated": false,
+   "Parts": [
+    {
+     "SlotId": 5,
+     "CoupletIndex": 2,
+     "Misra": 2,
+     "WordStart": 1,
+     "WordEnd": 1,
+     "ConceptId": 5
+    },
+    {
+     "SlotId": 6,
+     "CoupletIndex": 2,
+     "Misra": 0,
+     "ConceptId": 6
+    }
+   ]
+  }
+ ]
+}

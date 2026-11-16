@@ -16,15 +16,34 @@ import 'dto/poem.dart';
 import 'dto/poet.dart';
 import 'dto/recitation.dart';
 import 'dto/semantic.dart';
+import 'ganjoor_static.dart';
 import '../packs/pack_catalog.dart';
 
 /// Typed, cached access to api.ganjoor.net. Never use /api/ganjoor/page (≈513 KB).
+///
+/// Reference tables that are the same for everyone are read from Ganjoor's static data copy
+/// ([staticCopy]) when one is given, sparing Ganjoor's server; the API answers when it fails.
 class GanjoorApi {
-  GanjoorApi({required this._dio, required this._cache, RequestPool? pool}) : _pool = pool ?? RequestPool(4);
+  GanjoorApi({required this._dio, required this._cache, RequestPool? pool, this.staticCopy})
+    : _pool = pool ?? RequestPool(4);
 
   final Dio _dio;
   final HttpCache _cache;
   final RequestPool _pool;
+  final GanjoorStatic? staticCopy;
+
+  /// [fromCopy] when there is a static copy and it answers; otherwise [live].
+  Future<T> _copyFirst<T>(Future<T> Function(GanjoorStatic s) fromCopy, Future<T> Function() live) async {
+    final s = staticCopy;
+    if (s != null) {
+      try {
+        return await fromCopy(s);
+      } catch (_) {
+        // The copy is unreachable or lacks the item: ask Ganjoor.
+      }
+    }
+    return live();
+  }
 
   static const _day = Duration(days: 1);
   static const _week = Duration(days: 7);
@@ -193,12 +212,17 @@ class GanjoorApi {
   };
 
   /// The devices and their roles (cached a month); [refresh] asks Ganjoor now, keeping the
-  /// cached list if that fails.
-  Future<List<LiteraryDevice>> literaryDevices({bool refresh = false}) =>
-      _list('/api/ganjoor/literary/devices', const {}, refresh ? Duration.zero : _month, LiteraryDevice.fromJson);
+  /// cached list if that fails. Without [refresh], the static copy is read first.
+  Future<List<LiteraryDevice>> literaryDevices({bool refresh = false}) {
+    Future<List<LiteraryDevice>> live() =>
+        _list('/api/ganjoor/literary/devices', const {}, refresh ? Duration.zero : _month, LiteraryDevice.fromJson);
+    return refresh ? live() : _copyFirst((s) => s.literaryDevices(), live);
+  }
 
-  Future<List<LiteraryTag>> literaryTags(int poemId) =>
-      _list('/api/ganjoor/literary/poem/$poemId/tags', const {}, _week, LiteraryTag.fromJson);
+  Future<List<LiteraryTag>> literaryTags(int poemId) => _copyFirst(
+    (s) => s.literaryTags(poemId),
+    () => _list('/api/ganjoor/literary/poem/$poemId/tags', const {}, _week, LiteraryTag.fromJson),
+  );
 
   /// «بسامد واژگان» of a poet or section: all words, and distinct ones.
   Future<({int total, int unique})> wordSums(int catId) async {
@@ -230,11 +254,15 @@ class GanjoorApi {
       _list('/api/people/$id/poems', const {'catId': '33'}, _month, TaggedPoem.fromJson);
 
   /// Place tags of one book section (the response also carries every person tag — 0.3–0.8 MB).
-  Future<List<PlaceTag>> catPlaceTags(int catId) async => [
-    for (final t in jsonDecode(await _get('/api/ganjoor/cat/$catId/geotag', const {}, _month)) as List)
-      if ((t as Map)['locationId'] case final int loc)
-        PlaceTag(poemId: t['poemId'] as int, coupletIndex: (t['coupletIndex'] as int?) ?? 0, locationId: loc),
-  ];
+  /// The static copy has every place tag in one small file.
+  Future<List<PlaceTag>> catPlaceTags(int catId) => _copyFirst(
+    (s) => s.catPlaceTags(catId),
+    () async => [
+      for (final t in jsonDecode(await _get('/api/ganjoor/cat/$catId/geotag', const {}, _month)) as List)
+        if ((t as Map)['locationId'] case final int loc)
+          PlaceTag(poemId: t['poemId'] as int, coupletIndex: (t['coupletIndex'] as int?) ?? 0, locationId: loc),
+    ],
+  );
 
   /// The book's story sections (Ganjoor category ids) in which a person takes part.
   Future<List<int>> personPresence(int id) async {
@@ -250,7 +278,8 @@ class GanjoorApi {
   Future<List<PoemTag>> poemTags(int poemId) =>
       _list('/api/ganjoor/poem/$poemId/geotag', const {}, _week, PoemTag.fromJson);
 
-  Future<List<GanjLocation>> locations() => _list('/api/locations', const {}, _month, GanjLocation.fromJson);
+  Future<List<GanjLocation>> locations() =>
+      _copyFirst((s) => s.locations(), () => _list('/api/locations', const {}, _month, GanjLocation.fromJson));
 
   Future<List<PoemImage>> images(int poemId) =>
       _list('/api/ganjoor/poem/$poemId/images', const {}, _week, PoemImage.fromJson);

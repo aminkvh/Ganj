@@ -16,6 +16,10 @@ request, these services can see your device's IP address:
 
 - **Ganjoor** (`api.ganjoor.net`, `i.ganjoor.net`): poems, poets, meanings, recitations, images, comments and
   downloadable poet collections.
+- **Ganjoor's public data copy** (`cdn.jsdelivr.net`, serving Ganjoor's data published on GitHub): the lists of
+  places and literary devices, a poem's literary devices and the places of the World of the Shahnameh's stories,
+  read from here first to spare Ganjoor's server (kept for a week or a month); and a poem, section or poet only
+  when Ganjoor's server does not answer.
 - **Ganjoor's semantic search** (`ganjgah.ir`): only when you search by meaning. It receives the question you type.
   When you open a result, it receives that search's number, the poem's id and its position in the list (as Ganjoor's
   own website does), so Ganjoor can improve the search.
@@ -69,6 +73,9 @@ you to these requests.
 
 - **گنجور** (`api.ganjoor.net` و `i.ganjoor.net`): شعرها، سخنوران، معنی‌ها، خوانش‌ها، تصاویر، حاشیه‌ها و
   دیوان‌های قابل‌بارگیری.
+- **نسخهٔ همگانی داده‌های گنجور** (`cdn.jsdelivr.net`، که داده‌های منتشرشدهٔ گنجور در گیت‌هاب را می‌رساند): فهرست
+  مکان‌ها و آرایه‌های ادبی، آرایه‌های ادبی هر شعر و مکان‌های داستان‌های جهان شاهنامه، که برای سبک‌تر شدن بار سرور گنجور
+  نخست از این‌جا خوانده و یک هفته تا یک ماه نگه داشته می‌شوند؛ و شعر، بخش یا سخنور فقط وقتی سرور گنجور پاسخ نمی‌دهد.
 - **جستجوی معنایی گنجور** (`ganjgah.ir`): فقط هنگام جستجو با معنا، و پرسشی که می‌نویسید. هنگام باز کردن یک
   نتیجه، شمارهٔ آن جستجو، شناسهٔ شعر و جایگاهش در فهرست فرستاده می‌شود (همان‌گونه که وبگاه گنجور می‌فرستد) تا
   گنجور جستجو را بهتر کند.

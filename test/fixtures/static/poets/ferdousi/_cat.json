@@ -1,0 +1,25 @@
+{
+ "Id": 32,
+ "PoetId": 4,
+ "Title": "فردوسی",
+ "FullUrl": "/ferdousi",
+ "Description": "حکیم ابوالقاسم فردوسی توسی (زادهٔ ۳۲۹ ه‍.ق، ۳۱۹ ه‍.خ - درگذشتهٔ پیش از ۴۱۱ ه‍.ق، ۳۹۷ ه‍.خ در توس خراسان)، سخن‌سرای نامی ",
+ "CatType": "Default",
+ "TableOfContentsStyle": "OnlyTitles",
+ "MixedModeOrder": 0,
+ "SumUpSubsGeoLocations": false,
+ "ChildCats": [
+  {
+   "Id": 33,
+   "Title": "شاهنامه",
+   "FullUrl": "/ferdousi/shahname"
+  }
+ ],
+ "Poems": [
+  {
+   "Id": 68016,
+   "Title": "هجونامه (منتسب)",
+   "FullUrl": "/ferdousi/hajvname"
+  }
+ ]
+}

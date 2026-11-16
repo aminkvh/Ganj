@@ -1,0 +1,17 @@
+{
+ "Id": 7,
+ "Name": "سعدی شیرازی",
+ "Nickname": "سعدی",
+ "Description": "مشرف‌الدین مصلح بن عبدالله شیرازی سراینده نامی و نویسندهٔ بزرگ سده هفتم هجری قمری است. اهل ادب به وی لقب «استادِ سخن»، «",
+ "FullUrl": "/saadi",
+ "ImageUrl": "https://ganjoor.net/api/ganjoor/poet/image/saadi.gif",
+ "BirthYearInLHijri": 615,
+ "ValidBirthDate": false,
+ "DeathYearInLHijri": 694,
+ "ValidDeathDate": false,
+ "BirthPlace": "شیراز",
+ "DeathPlace": "شیراز",
+ "BirthLocationId": 1,
+ "DeathLocationId": 1,
+ "PinOrder": 2
+}

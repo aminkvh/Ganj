@@ -9,10 +9,15 @@ option) any later version — see `LICENSE`. It comes with no warranty.
 ## Content
 
 - Poems, metadata, meanings (couplet summaries), recitations, manuscript images, songs, comments and the book
-  catalogue are read from the public Ganjoor API (https://api.ganjoor.net) and Ganjoor's downloadable poet packs
-  (https://i.ganjoor.net). They are curated by Ganjoor's founder Hamidreza Mohammadi and its many volunteers; each
-  recitation belongs to its reciter, and AI-written meanings are labelled as such, as on the site. Poems and
-  recitations are always fetched from Ganjoor's own servers.
+  catalogue are read from the public Ganjoor API (https://api.ganjoor.net), Ganjoor's downloadable poet packs
+  (https://i.ganjoor.net) and Ganjoor's public data copy (https://github.com/ganjoor/ganjoor-data, through
+  jsDelivr: reference tables such as places and literary devices, and poems when Ganjoor's server fails). They are
+  curated by Ganjoor's founder Hamidreza Mohammadi and its many volunteers; each recitation belongs to its reciter,
+  and AI-written meanings are labelled as such, as on the site. Poems and recitations always come from Ganjoor
+  itself.
+- Some of the literary devices tagged on Hafez's ghazals were imported by Ganjoor from «A Corpus of Persian Literary
+  Text» (version 1.0.0, Shahab Raji, Malihe Alikhani, Gerard de Melo, Matthew Stone; MIT License;
+  https://doi.org/10.5281/zenodo.7923612). The app says so under the poems that carry them.
 - «جهان شاهنامه» (World of the Shahnameh): the people of the Shahnameh, their family ties and other ties, and the
   people and place tags of its couplets come from Ganjoor's «نامبردگان» data (much of it AI-suggested and reviewed
   by Ganjoor's volunteers). A compact snapshot of it — names, short descriptions, ties, story sections, poem titles
