@@ -67,6 +67,16 @@ class GanjoorApi {
     }
   }
 
+  /// One page of every published recitation of the poems directly in [catId] (not recursive), by poem.
+  /// Not cached: each row carries its poem's text, and pages are read only to plan a download.
+  Future<List<Recitation>> catRecitationsPage(int catId, int page, {int size = 200}) => _pool.run(() async {
+    final r = await _dio.get<String>(
+      '/api/audio/published',
+      queryParameters: {'PageNumber': '$page', 'PageSize': '$size', 'catId': '$catId'},
+    );
+    return [for (final j in jsonDecode(r.data!) as List) Recitation.fromJson(j as Map<String, dynamic>)];
+  });
+
   /// Top recitation of each poem directly in [catId] (not recursive).
   Future<List<Recitation>> catTopRecitations(int catId) async => [
     for (final r in jsonDecode(await _get('/api/audio/cattop1/$catId', const {}, _week)) as List)

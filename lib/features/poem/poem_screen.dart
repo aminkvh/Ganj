@@ -20,6 +20,7 @@ import '../dictionary/dictionary.dart';
 import '../literary/literary_devices.dart';
 import '../player/player_controller.dart';
 import '../player/recitation_list.dart';
+import '../podcasts/poem_podcast_panel.dart';
 import '../voice/app/voice_providers.dart' show voicePrepareProvider, voicePreparesProvider;
 import '../voice/app/voice_row.dart' show voiceRowVisible;
 import '../settings/settings_controller.dart';
@@ -547,6 +548,7 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
                       ),
                     ),
                   if (p.recitations.isNotEmpty || voiceRowVisible(ref, p)) RecitationList(poem: p),
+                  PoemPodcastPanel(poem: p),
                 ],
               ),
             ),

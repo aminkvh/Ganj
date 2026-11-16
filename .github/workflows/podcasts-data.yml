@@ -1,0 +1,83 @@
+# Keeps the podcasts in Ganj current between app releases: every day it reads the podcasts' feeds
+# (tool/podcast_update.dart), matches the new episodes whose titles name their poem exactly, and —
+# when anything changed — publishes the lists to the "podcasts-data" pre-release, where the app looks
+# for them every couple of days. New episodes it cannot place are listed in one open issue
+# ("Podcast episodes to match") for matching by hand; a match committed to the catalogs in assets/seed/
+# reaches readers with the next run. Can also be run by hand.
+name: podcasts-data
+
+on:
+  schedule:
+    - cron: '41 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: podcasts-data
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: 3.47.6
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, flutter-version: '${{ env.FLUTTER_VERSION }}', cache: true }
+      - run: flutter pub get
+      - name: Read the feeds and match new episodes
+        run: dart run tool/podcast_update.dart build/podcasts
+      - name: Publish if the lists changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          new=build/podcasts/podcasts.json
+          if gh release view podcasts-data >/dev/null 2>&1; then
+            # Compare everything but the build times.
+            if gh release download podcasts-data -p podcasts.json.gz -O old.json.gz; then
+              strip='del(.builtAt, .shahnameh.builtAt, .poems.builtAt)'
+              if cmp -s <(jq -S "$strip" "$new") <(gunzip -c old.json.gz | jq -S "$strip"); then
+                echo "No new episodes matched; nothing to publish."
+                exit 0
+              fi
+            fi
+          else
+            gh release create podcasts-data --prerelease --target "$GITHUB_SHA" \
+              --title "Podcasts data · داده‌های پادکست‌ها" \
+              --notes "The podcast lists Ganj plays, with their episodes matched to the poems and stories; updated every day. Not an app release: Ganj downloads it by itself.
+
+          فهرست پادکست‌هایی که گنج پخش می‌کند، با قسمت‌هایشان که به شعرها و داستان‌ها پیوند خورده‌اند؛ هر روز به‌روز می‌شود. این نسخهٔ برنامه نیست؛ گنج خودش آن را بارگیری می‌کند."
+          fi
+          gzip -9 -n -c "$new" > podcasts.json.gz
+          gh release upload podcasts-data podcasts.json.gz --clobber
+          echo "Published $(jq -r .builtAt "$new"): $(stat -c %s podcasts.json.gz) bytes."
+      - name: List the episodes to match by hand
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          title="Podcast episodes to match"
+          issue=$(gh issue list --state open --search "in:title \"$title\"" --json number -q '.[0].number // empty')
+          if [ -s build/podcasts/unmatched.md ]; then
+            if [ -n "$issue" ]; then
+              gh issue edit "$issue" --body-file build/podcasts/unmatched.md
+            else
+              gh issue create --title "$title" --body-file build/podcasts/unmatched.md
+            fi
+          elif [ -n "$issue" ]; then
+            gh issue close "$issue" --comment "Every new episode is matched or skipped."
+          fi
+      # GitHub switches scheduled workflows off after 60 days without a commit in the repository.
+      # Re-enabling this one at the end of every run keeps the schedule alive on its own.
+      - name: Keep the schedule alive
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/podcasts-data.yml/enable"

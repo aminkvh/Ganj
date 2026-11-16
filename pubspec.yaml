@@ -91,6 +91,7 @@ flutter:
     - assets/seed/centuries.json
     - assets/seed/poet_names_en.json
     - assets/seed/shahnameh/
+    - assets/seed/podcasts.json
     - assets/images/map.gif
     - assets/fonts/OFL-Vazirmatn.txt
     - assets/fonts/OFL-NotoNastaliqUrdu.txt

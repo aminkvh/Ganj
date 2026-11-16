@@ -24,7 +24,8 @@
 و روی گوشی و رایانه تجربهٔ یک برنامه را ندارد.
 
 **گنج** برنامه‌ای آزاد و رایگان است که همین گنجینه را به اندروید، آی‌اواس، مک، ویندوز و لینوکس می‌برد:
-با ظاهری نزدیک به گنجور، خواندن و جستجوی بی‌اینترنت (با بارگیری دیوان هر شاعر)، پخش خوانش‌ها همگام با متن،
+با ظاهری نزدیک به گنجور، خواندن و جستجوی بی‌اینترنت (با بارگیری دیوان هر شاعر)، پخش خوانش‌ها همگام با متن (و بارگیری خوانش‌های یک کتاب یا یک خواننده)،
+پادکست‌هایی که شعرهای حافظ و سعدی و مثنوی و نظامی را می‌خوانند و شرح می‌دهند، کنار همان شعر،
 نشان و یادداشت روی همین دستگاه، نقشهٔ خاستگاه سخنوران، قفسهٔ کتاب‌ها، «جهان شاهنامه» (نامبردگان، تبارنامه‌ها،
 گاه‌شمار داستان‌ها، نقشهٔ جای‌ها و پادکست‌های شاهنامه)، و ترجمهٔ ماشینی ابیات. هدف ساده است:
 دسترس‌پذیرتر کردن شعر پارسی برای همه، و پاسداشت گنجور.
@@ -42,7 +43,8 @@ website: it isn't available offline, and it doesn't feel like an app on phones a
 
 **Ganj** is a free, open-source app that brings that treasure to Android, iOS, macOS, Windows and Linux. It looks
 close to Ganjoor, reads and searches offline (download a poet's collection once), plays recitations with the
-verse highlighted as it is read, keeps bookmarks and notes on your device only, and has the poets' birthplace map,
+verse highlighted as it is read (and downloads a book's recitations, all or one reciter's), plays podcasts
+that read and discuss the poems of Hafez, Saadi, the Masnavi and Nezami right beside them, keeps bookmarks and notes on your device only, and has the poets' birthplace map,
 the bookshelf, the World of the Shahnameh (its people, family trees, a timeline of the stories, a map of its
 places and Shahnameh podcasts), an English interface and machine translation of verses. The goal is simple: make Persian poetry
 more accessible to everyone, as a hat-tip to Ganjoor.

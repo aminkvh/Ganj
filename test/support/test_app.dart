@@ -17,6 +17,7 @@ import 'package:ganj/data/providers.dart';
 import 'package:ganj/data/repo/poetry_repository.dart';
 import 'package:ganj/features/player/audio_backend.dart';
 import 'package:ganj/features/player/player_controller.dart';
+import 'package:ganj/features/podcasts/podcast_data.dart';
 import 'package:ganj/features/update/update_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,6 +29,19 @@ final testEnglishContent = EnglishContent.fromJson(
   names: File('assets/seed/poet_names_en.json').readAsStringSync(),
   centuries: File('assets/seed/centuries.json').readAsStringSync(),
 );
+
+/// Podcast lists published between releases, for tests: none unless given; [latest] fails offline.
+class FakePodcastData implements PodcastDataSource {
+  FakePodcastData({this.savedText, this.latestText});
+
+  String? savedText, latestText;
+
+  @override
+  Future<String?> saved() async => savedText;
+
+  @override
+  Future<String> latest() async => latestText ?? (throw Exception('offline'));
+}
 
 Future<SharedPreferences> mockPrefs([Map<String, Object> values = const {}]) async {
   SharedPreferences.setMockInitialValues(values);
@@ -55,6 +69,7 @@ Widget testApp(
       if (repo != null) poetryRepositoryProvider.overrideWithValue(repo),
       audioBackendProvider.overrideWithValue(backend ?? FakeAudioBackend()),
       updateCheckerProvider.overrideWithValue(null),
+      podcastDataSourceProvider.overrideWithValue(FakePodcastData()),
       ...overrides,
     ],
     child: MaterialApp(
@@ -94,6 +109,7 @@ Widget testAppRouted(
       poetryRepositoryProvider.overrideWithValue(repo ?? FixtureRepository()),
       audioBackendProvider.overrideWithValue(backend ?? FakeAudioBackend()),
       updateCheckerProvider.overrideWithValue(null),
+      podcastDataSourceProvider.overrideWithValue(FakePodcastData()),
       initialLocationProvider.overrideWithValue(location),
       englishContentProvider.overrideWithValue(testEnglishContent),
       ...overrides,

@@ -791,6 +791,37 @@ class L10nEn extends L10n {
   String get shPodcastPage => 'Podcast page';
 
   @override
+  String poemPodcastsCount(String count) {
+    return 'Podcasts ($count)';
+  }
+
+  @override
+  String get bookAudio => 'Download recitations';
+
+  @override
+  String get bookAudioTop => 'The top recitation of each poem';
+
+  @override
+  String get bookAudioAll => 'Every recitation';
+
+  @override
+  String get bookAudioByReciter => 'By reciter';
+
+  @override
+  String bookAudioSummary(String poems, String size) {
+    return '$poems poems · $size';
+  }
+
+  @override
+  String get bookAudioNone => 'There are no recitations here.';
+
+  @override
+  String get bookAudioBusy => 'Another download is running.';
+
+  @override
+  String get bookAudioSomeFailed => 'Some recitations could not be downloaded';
+
+  @override
   String get shOnTimeline => 'On the timeline';
 
   @override

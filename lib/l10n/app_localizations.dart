@@ -1519,6 +1519,60 @@ abstract class L10n {
   /// **'صفحهٔ پادکست'**
   String get shPodcastPage;
 
+  /// No description provided for @poemPodcastsCount.
+  ///
+  /// In fa, this message translates to:
+  /// **'پادکست‌ها ({count})'**
+  String poemPodcastsCount(String count);
+
+  /// No description provided for @bookAudio.
+  ///
+  /// In fa, this message translates to:
+  /// **'بارگیری خوانش‌ها'**
+  String get bookAudio;
+
+  /// No description provided for @bookAudioTop.
+  ///
+  /// In fa, this message translates to:
+  /// **'بهترین خوانش هر شعر'**
+  String get bookAudioTop;
+
+  /// No description provided for @bookAudioAll.
+  ///
+  /// In fa, this message translates to:
+  /// **'همهٔ خوانش‌ها'**
+  String get bookAudioAll;
+
+  /// No description provided for @bookAudioByReciter.
+  ///
+  /// In fa, this message translates to:
+  /// **'به تفکیک خواننده'**
+  String get bookAudioByReciter;
+
+  /// No description provided for @bookAudioSummary.
+  ///
+  /// In fa, this message translates to:
+  /// **'{poems} شعر · {size}'**
+  String bookAudioSummary(String poems, String size);
+
+  /// No description provided for @bookAudioNone.
+  ///
+  /// In fa, this message translates to:
+  /// **'در این بخش خوانشی نیست.'**
+  String get bookAudioNone;
+
+  /// No description provided for @bookAudioBusy.
+  ///
+  /// In fa, this message translates to:
+  /// **'بارگیری دیگری در جریان است.'**
+  String get bookAudioBusy;
+
+  /// No description provided for @bookAudioSomeFailed.
+  ///
+  /// In fa, this message translates to:
+  /// **'برخی خوانش‌ها بارگیری نشد'**
+  String get bookAudioSomeFailed;
+
   /// No description provided for @shOnTimeline.
   ///
   /// In fa, this message translates to:

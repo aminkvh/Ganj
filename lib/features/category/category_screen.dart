@@ -10,6 +10,7 @@ import '../../widgets/list_tiles.dart';
 import '../../widgets/external_link.dart';
 import '../../core/text/content_en.dart';
 import '../../widgets/home_button.dart';
+import '../library/book_audio_sheet.dart';
 import '../words/word_frequency.dart';
 import '../shahnameh/ui/shahnameh_entry.dart';
 
@@ -27,6 +28,7 @@ class CategoryScreen extends ConsumerWidget {
         actions: [
           const HomeButton(),
           if (async.value case final pc?) WordFrequencyButton(catId: pc.cat.id, poetId: pc.poet.id),
+          if (async.value case final pc?) BookAudioButton(catId: pc.cat.id, title: localTitle(pc.cat.title)),
           if (async.value case final pc?) OpenOnGanjoorButton(fullUrl: pc.cat.fullUrl),
         ],
       ),

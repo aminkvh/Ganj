@@ -111,7 +111,8 @@ class _Episodes extends StatelessWidget {
     builder: (episodes) => Column(
       children: [
         for (final guid in podcast.stories[story.id] ?? const <String>[])
-          if (episodes[guid] case final e?) EpisodeTile(podcast: podcast, episode: e, story: story, closeOnPlay: true),
+          if (episodes[guid] case final e?)
+            EpisodeTile(podcast: podcast, episode: e, route: storyRoute(story), closeOnPlay: true),
       ],
     ),
   );
@@ -121,7 +122,7 @@ class _Episodes extends StatelessWidget {
 class PodcastFeed extends ConsumerWidget {
   const PodcastFeed({super.key, required this.podcast, required this.builder});
 
-  final ShPodcast podcast;
+  final PodcastShow podcast;
   final Widget Function(Map<String, PodcastEpisode> episodes) builder;
 
   @override
@@ -143,19 +144,22 @@ class PodcastFeed extends ConsumerWidget {
   }
 }
 
-/// One episode: tap to play it in the app. The mini player leads back to [story] on the timeline.
+/// Where the mini player leads back to for an episode about [story]: the story on the timeline.
+String storyRoute(ShStory story) => '/shahnameh?tab=timeline&section=${story.from}';
+
+/// One episode: tap to play it in the app. The mini player leads back to [route].
 class EpisodeTile extends ConsumerWidget {
   const EpisodeTile({
     super.key,
     required this.podcast,
     required this.episode,
-    required this.story,
+    required this.route,
     this.closeOnPlay = false,
   });
 
-  final ShPodcast podcast;
+  final PodcastShow podcast;
   final PodcastEpisode episode;
-  final ShStory story;
+  final String route;
 
   /// Close the sheet it sits in once playing.
   final bool closeOnPlay;
@@ -181,7 +185,7 @@ class EpisodeTile extends ConsumerWidget {
                 title: episode.title,
                 podcast: isEn(context) ? podcast.en : podcast.fa,
                 audioUrl: episode.audioUrl,
-                route: '/shahnameh?tab=timeline&section=${story.from}',
+                route: route,
               ),
             );
         if (closeOnPlay) Navigator.of(context).maybePop();

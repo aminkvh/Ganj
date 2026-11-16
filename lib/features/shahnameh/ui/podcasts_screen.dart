@@ -115,7 +115,7 @@ class _PodcastsScreenState extends ConsumerState<PodcastsScreen> {
                     ),
                   ),
                   for (final g in guids)
-                    if (episodes[g] case final e?) EpisodeTile(podcast: p, episode: e, story: s),
+                    if (episodes[g] case final e?) EpisodeTile(podcast: p, episode: e, route: storyRoute(s)),
                 ],
             ],
           ),

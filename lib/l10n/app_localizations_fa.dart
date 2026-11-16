@@ -788,6 +788,37 @@ class L10nFa extends L10n {
   String get shPodcastPage => 'صفحهٔ پادکست';
 
   @override
+  String poemPodcastsCount(String count) {
+    return 'پادکست‌ها ($count)';
+  }
+
+  @override
+  String get bookAudio => 'بارگیری خوانش‌ها';
+
+  @override
+  String get bookAudioTop => 'بهترین خوانش هر شعر';
+
+  @override
+  String get bookAudioAll => 'همهٔ خوانش‌ها';
+
+  @override
+  String get bookAudioByReciter => 'به تفکیک خواننده';
+
+  @override
+  String bookAudioSummary(String poems, String size) {
+    return '$poems شعر · $size';
+  }
+
+  @override
+  String get bookAudioNone => 'در این بخش خوانشی نیست.';
+
+  @override
+  String get bookAudioBusy => 'بارگیری دیگری در جریان است.';
+
+  @override
+  String get bookAudioSomeFailed => 'برخی خوانش‌ها بارگیری نشد';
+
+  @override
   String get shOnTimeline => 'در گاه‌شمار';
 
   @override
