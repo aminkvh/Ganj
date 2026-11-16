@@ -13,7 +13,16 @@ import 'selection_menu.dart';
 /// Longer Persian prose (a poet's biography, a section's description): selectable, folded
 /// after a few lines, and — in the English interface — translatable on request.
 class ExpandableText extends ConsumerStatefulWidget {
-  const ExpandableText(this.text, {super.key, this.maxLines = 4});
+  ExpandableText(String text, {super.key, this.maxLines = 4}) : text = tidyProse(text);
+
+  /// [text] without blank lines at the start or end, and at most one blank line in a row:
+  /// some of Ganjoor's descriptions begin with empty lines (even a lone no-break space), which
+  /// would fill the folded lines and hide the text behind «بیشتر».
+  static String tidyProse(String text) => text
+      .replaceAll('\r\n', '\n')
+      .replaceAll(RegExp(r'\n[ \t\u00a0\u200c]*(?=\n)'), '\n')
+      .replaceAll(RegExp(r'\n{3,}'), '\n\n')
+      .trim();
 
   final String text;
   final int maxLines;
@@ -42,42 +51,56 @@ class _ExpandableTextState extends ConsumerState<ExpandableText> {
   @override
   Widget build(BuildContext context) {
     final to = ref.watch(settingsProvider).translateTo;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SelectionArea(
-          contextMenuBuilder: ganjSelectionMenu,
-
-          child: Text(
-            widget.text,
-            maxLines: _open ? null : widget.maxLines,
-            overflow: _open ? null : TextOverflow.ellipsis,
-            textAlign: TextAlign.justify,
-            textDirection: TextDirection.rtl,
-            style: const TextStyle(height: 1.9),
-          ),
-        ),
-        if (_translation case final f?)
-          SelectionArea(
-            contextMenuBuilder: ganjSelectionMenu,
-
-            child: TranslationLine(future: f, to: to, onOpenInBrowser: () => _openInBrowser(to)),
-          ),
-        Wrap(
+    const style = TextStyle(height: 1.9);
+    return LayoutBuilder(
+      builder: (context, box) {
+        // «بیشتر» only when the folded text really is cut short.
+        final folds = (TextPainter(
+          text: TextSpan(text: widget.text, style: DefaultTextStyle.of(context).style.merge(style)),
+          textDirection: TextDirection.rtl,
+          textScaler: MediaQuery.textScalerOf(context),
+          maxLines: widget.maxLines,
+        )..layout(maxWidth: box.maxWidth)).didExceedMaxLines;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextButton(
-              onPressed: () => setState(() => _open = !_open),
-              child: Text(_open ? context.l10n.less : context.l10n.more),
-            ),
-            if (englishContent != null && _translation == null)
-              TextButton.icon(
-                onPressed: _translate,
-                icon: const Icon(Icons.translate, size: 18),
-                label: Text(context.l10n.translate),
+            SelectionArea(
+              contextMenuBuilder: ganjSelectionMenu,
+
+              child: Text(
+                widget.text,
+                maxLines: _open ? null : widget.maxLines,
+                overflow: _open ? null : TextOverflow.ellipsis,
+                textAlign: TextAlign.justify,
+                textDirection: TextDirection.rtl,
+                style: style,
               ),
+            ),
+            if (_translation case final f?)
+              SelectionArea(
+                contextMenuBuilder: ganjSelectionMenu,
+
+                child: TranslationLine(future: f, to: to, onOpenInBrowser: () => _openInBrowser(to)),
+              ),
+            Wrap(
+              children: [
+                if (_open || folds)
+                  TextButton(
+                    key: const ValueKey('expandable-more'),
+                    onPressed: () => setState(() => _open = !_open),
+                    child: Text(_open ? context.l10n.less : context.l10n.more),
+                  ),
+                if (englishContent != null && _translation == null)
+                  TextButton.icon(
+                    onPressed: _translate,
+                    icon: const Icon(Icons.translate, size: 18),
+                    label: Text(context.l10n.translate),
+                  ),
+              ],
+            ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
