@@ -93,6 +93,8 @@ jobs:
           anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           anthropic_workspace_id: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
           github_token: ${{ github.token }}
+          # Full output only for a login check, which reads no feed text.
+          show_full_output: ${{ inputs.check_login == true }}
           claude_args: >-
             --model claude-opus-5-5
             --max-turns 80
