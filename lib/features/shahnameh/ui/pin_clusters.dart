@@ -4,6 +4,11 @@ import 'dart:ui';
 /// Pins that would overlap on screen, grouped: a few fan out in a small ring so each stays
 /// tappable; more than [maxRing] become one bubble with a count (tap to zoom in) — a ring of
 /// fifty would circle half the world.
+///
+/// A ring moves pins by a fixed number of pixels, which zoomed far out is whole countries
+/// (Mecca drawn in Africa). Below [ringMinZoom] callers pass `fanOut: false` and overlapping
+/// pins become a bubble instead; above it, RingLeaderLayer ties each moved pin to its true
+/// place. A pin on its own is never moved.
 class PinGroup {
   PinGroup(this.ids, this.centre, this.offsets);
 
@@ -18,7 +23,11 @@ class PinGroup {
   bool get isBubble => offsets.isEmpty;
 }
 
-List<PinGroup> clusterPins(Map<String, Offset> px, {double size = 34, int maxRing = 5}) {
+/// The zoom from which pins may fan out in a ring: phones open the Shahnameh map near 3.8;
+/// the map goes out to 2, where 34 px is twelve degrees.
+const ringMinZoom = 3.0;
+
+List<PinGroup> clusterPins(Map<String, Offset> px, {double size = 34, int maxRing = 5, bool fanOut = true}) {
   final groups = <(Offset anchor, List<String> ids)>[];
   for (final MapEntry(key: id, value: p) in px.entries) {
     final i = groups.indexWhere((g) => (g.$1 - p).distance < size);
@@ -28,7 +37,7 @@ List<PinGroup> clusterPins(Map<String, Offset> px, {double size = 34, int maxRin
     for (final (anchor, ids) in groups)
       if (ids.length == 1)
         PinGroup(ids, px[ids.single]!, const [Offset.zero])
-      else if (ids.length > maxRing)
+      else if (!fanOut || ids.length > maxRing)
         PinGroup(ids, _mean([for (final id in ids) px[id]!]), const [])
       else
         PinGroup(ids, anchor, [for (var k = 0; k < ids.length; k++) anchor + _ring(k, ids.length, size) - px[ids[k]]!]),

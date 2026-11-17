@@ -17,6 +17,7 @@ import 'person_sheet.dart';
 import 'cluster_bubble.dart';
 import 'legend.dart' show LegendToggle;
 import 'pin_clusters.dart';
+import 'ring_leaders.dart';
 import 'sh_style.dart';
 
 /// «نقشه»: the places of the Shahnameh — Ganj's curated places with Ganjoor's tags merged in.
@@ -293,6 +294,10 @@ class _ShahnamehMapTabState extends ConsumerState<ShahnamehMapTab> {
                         ),
                       ],
                     ),
+                  RingLeaderLayer(
+                    points: {for (final p in shown) p.id: LatLng(p.lat, p.lng)},
+                    size: _PlaceMarkers._size,
+                  ),
                   _PlaceMarkers(
                     world: w,
                     places: shown,
@@ -383,7 +388,11 @@ class _PlaceMarkers extends StatelessWidget {
   Widget build(BuildContext context) {
     final camera = MapCamera.of(context);
     final byId = {for (final p in places) p.id: p};
-    final groups = clusterPins({for (final p in places) p.id: camera.projectAtZoom(LatLng(p.lat, p.lng))}, size: _size);
+    final groups = clusterPins(
+      {for (final p in places) p.id: camera.projectAtZoom(LatLng(p.lat, p.lng))},
+      size: _size,
+      fanOut: camera.zoom >= ringMinZoom,
+    );
     // Bubbles last, so they're drawn above the pins around them.
     groups.sort((a, b) => (a.isBubble ? 1 : 0).compareTo(b.isBubble ? 1 : 0));
     return MarkerLayer(

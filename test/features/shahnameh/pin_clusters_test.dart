@@ -30,4 +30,19 @@ void main() {
     final c = clusterPins({for (var i = 0; i < 10; i++) 'p$i': Offset(i * 2.0, 0)});
     expect(c.single.centre.dx, closeTo(9, 0.01));
   });
+
+  test('zoomed far out, close pins become a bubble instead of a ring that moves them', () {
+    // At world zoom a ring of pins is shifted by whole countries (Mecca drawn in Africa).
+    final c = clusterPins({'a': const Offset(0, 0), 'b': const Offset(5, 0)}, fanOut: false);
+    expect(c, hasLength(1));
+    expect(c.single.isBubble, isTrue);
+    expect(c.single.centre, const Offset(2.5, 0));
+  });
+
+  test('a lone pin is never moved, zoomed in or out', () {
+    for (final fan in [true, false]) {
+      final c = clusterPins({'a': const Offset(3, 4)}, fanOut: fan);
+      expect(c.single.offsets.single, Offset.zero);
+    }
+  });
 }

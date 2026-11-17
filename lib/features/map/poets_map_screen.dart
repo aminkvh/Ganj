@@ -16,6 +16,7 @@ import '../../widgets/poet_portrait.dart';
 import '../home/poet_tile.dart';
 import '../shahnameh/ui/cluster_bubble.dart';
 import '../shahnameh/ui/pin_clusters.dart';
+import '../shahnameh/ui/ring_leaders.dart';
 import '../settings/settings_controller.dart';
 import '../../core/text/content_en.dart';
 
@@ -88,6 +89,10 @@ class _PoetsMapScreenState extends ConsumerState<PoetsMapScreen> {
                       ),
                       children: [
                         ref.watch(mapTileLayerProvider),
+                        RingLeaderLayer(
+                          points: {for (final p in poets) '${p.id}': LatLng(p.birthLatitude!, p.birthLongitude!)},
+                          size: _PoetMarkers._w * 1.3,
+                        ),
                         _PoetMarkers(poets: poets, onSelect: (p) => setState(() => _selected = p)),
                         RichAttributionWidget(
                           showFlutterMapAttribution: false,
@@ -169,7 +174,11 @@ class _PoetMarkers extends StatelessWidget {
     final camera = MapCamera.of(context);
     final byId = {for (final p in poets) '${p.id}': p};
     LatLng at(Poet p) => LatLng(p.birthLatitude!, p.birthLongitude!);
-    final groups = clusterPins({for (final p in poets) '${p.id}': camera.projectAtZoom(at(p))}, size: _w * 1.3);
+    final groups = clusterPins(
+      {for (final p in poets) '${p.id}': camera.projectAtZoom(at(p))},
+      size: _w * 1.3,
+      fanOut: camera.zoom >= ringMinZoom,
+    );
     // Bubbles last, so they're drawn above the portraits around them.
     groups.sort((a, b) => (a.isBubble ? 1 : 0).compareTo(b.isBubble ? 1 : 0));
     return MarkerLayer(

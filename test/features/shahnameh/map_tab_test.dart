@@ -130,4 +130,33 @@ void main() {
     await settle(tester);
     expect(MapCamera.of(tester.element(find.byType(MarkerLayer))).zoom, greaterThan(before));
   });
+
+  testWidgets('zoomed all the way out, no pin is moved off its place (Mecca stays in Arabia)', (tester) async {
+    await open(tester, '/shahnameh?tab=map');
+    MapController.of(tester.element(find.byType(MarkerLayer))).move(const LatLng(30, 50), 2);
+    await settle(tester);
+    final camera = MapCamera.of(tester.element(find.byType(MarkerLayer)));
+    expect(camera.zoom, 2);
+    final map = tester.getTopLeft(find.byType(FlutterMap));
+    var pins = 0;
+    for (final p in realWorld.places) {
+      final pin = find.byKey(ValueKey('pin-${p.id}'));
+      if (pin.evaluate().isEmpty) continue;
+      pins++;
+      final drawn = tester.getBottomLeft(pin) + Offset(tester.getSize(pin).width / 2, 0) - map;
+      final place = camera.latLngToScreenOffset(LatLng(p.lat, p.lng));
+      // A lone pin's tip (or a legendary circle's centre) is on its place: 34 px here is 12°.
+      expect((drawn - place).distance, lessThan(42), reason: '${p.id} is drawn away from where it is');
+    }
+    expect(pins, greaterThan(0));
+    expect(find.byType(CircleLayer), findsOneWidget, reason: 'no ring, so no leader dots: only the legendary circles');
+  });
+
+  testWidgets('a pin fanned out of a crowd keeps a line to its true place', (tester) async {
+    await open(tester, '/shahnameh?tab=map');
+    MapController.of(tester.element(find.byType(MarkerLayer))).move(const LatLng(36.2, 52.0), 7);
+    await settle(tester);
+    // Damavand, Amol, the Alborz and the White Div's cave crowd together even here.
+    expect(find.byType(PolylineLayer), findsOneWidget);
+  });
 }
