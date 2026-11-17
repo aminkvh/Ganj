@@ -631,7 +631,16 @@ class _PoemScreenState extends ConsumerState<PoemScreen> with WidgetsBindingObse
               SliverToBoxAdapter(
                 child: PoemDevicesPanel(poemId: p.id, poetId: pc.poet.id, couplets: couplets),
               ),
-            SliverToBoxAdapter(child: PoemExtras(poem: p)),
+            // The panels ask for what the poem didn't tell only once the reader nears them.
+            SliverLayoutBuilder(
+              builder: (context, constraints) => SliverToBoxAdapter(
+                child: PoemExtras(
+                  key: ValueKey('extras-${p.id}-${p.extras != null}'),
+                  poem: p,
+                  reached: constraints.remainingCacheExtent > 0,
+                ),
+              ),
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
           ],
         ),

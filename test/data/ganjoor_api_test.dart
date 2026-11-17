@@ -32,7 +32,8 @@ void main() {
     expect(uri.path, '/api/ganjoor/poem/2130');
     expect(uri.queryParameters['verseDetails'], 'true');
     expect(uri.queryParameters['comments'], 'false');
-    expect(uri.queryParameters['images'], 'false');
+    expect(uri.queryParameters['images'], 'true', reason: 'small, and tells the page whether to show the panel');
+    expect(uri.queryParameters['songs'], 'true');
   });
 
   test('never calls the heavy /page endpoint', () async {

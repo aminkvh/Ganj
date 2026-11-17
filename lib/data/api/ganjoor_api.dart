@@ -55,8 +55,10 @@ class GanjoorApi {
     'catPoems': 'false',
     'rhymes': 'true',
     'recitations': 'true',
-    'images': 'false',
-    'songs': 'false',
+    // Images and songs come with the poem (a few KB): the page shows their panels only when
+    // there is something in them, without asking again. Comments stay out (often 100+ KB).
+    'images': 'true',
+    'songs': 'true',
     'comments': 'false',
     'verseDetails': 'true',
     'navigation': 'true',

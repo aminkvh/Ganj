@@ -1,5 +1,6 @@
 import '../../../core/text/labeled_text.dart';
 import 'cat.dart';
+import 'extras.dart';
 import 'recitation.dart';
 
 /// GanjoorService VersePosition enum.
@@ -42,6 +43,38 @@ class Verse {
   );
 }
 
+/// What the poem page's extra panels hold, as far as the poem's own answer from Ganjoor tells.
+/// A null part is unknown (not in the answer); the page then asks for it when it needs it.
+class PoemExtrasInfo {
+  const PoemExtrasInfo({this.hasRelated, this.hasQuoted, this.images, this.songs});
+
+  /// Poems in the same metre and rhyme («استقبال‌ها»): Ganjoor sends the first six with the poem.
+  final bool? hasRelated;
+
+  /// Couplets quoted in other poems: Ganjoor sends the first six with the poem.
+  final bool? hasQuoted;
+
+  final List<PoemImage>? images;
+  final List<Song>? songs;
+
+  factory PoemExtrasInfo.fromJson(Map<String, dynamic> j, Map<String, dynamic>? mainSection) {
+    final related = mainSection?['top6RelatedSections'];
+    final quoted = j['top6QuotedPoems'];
+    final images = j['images'], songs = j['songs'];
+    return PoemExtrasInfo(
+      hasRelated: related is List ? related.isNotEmpty : null,
+      hasQuoted: quoted is List ? quoted.isNotEmpty : null,
+      images: images is List ? [for (final i in images) PoemImage.fromJson(i as Map<String, dynamic>)] : null,
+      songs: songs is List
+          ? [
+              for (final s in songs.cast<Map<String, dynamic>>())
+                if (s['approved'] != false && s['rejected'] != true) Song.fromJson(s),
+            ]
+          : null,
+    );
+  }
+}
+
 class Poem {
   const Poem({
     required this.id,
@@ -57,6 +90,7 @@ class Poem {
     this.previous,
     this.metre,
     this.rhyme,
+    this.extras,
   });
 
   final int id;
@@ -72,6 +106,10 @@ class Poem {
   final PoemRef? previous;
   final String? metre;
   final String? rhyme;
+
+  /// Null when the poem didn't come from Ganjoor's server (a downloaded pack, the static copy):
+  /// the page then shows no extra panels, which couldn't load anyway.
+  final PoemExtrasInfo? extras;
 
   String get siteUrl => 'https://ganjoor.net$fullUrl';
 
@@ -89,6 +127,7 @@ class Poem {
     previous: previous,
     metre: metre,
     rhyme: rhyme,
+    extras: extras,
   );
 
   factory Poem.fromJson(Map<String, dynamic> j) {
@@ -123,6 +162,7 @@ class Poem {
       ]..sort((a, b) => a.audioOrder.compareTo(b.audioOrder)),
       metre: (main?['ganjoorMetre'] as Map<String, dynamic>?)?['rhythm'] as String?,
       rhyme: (rhyme == null || rhyme.isEmpty) ? null : rhyme,
+      extras: PoemExtrasInfo.fromJson(j, main),
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/core/net/api_client.dart';
 import 'package:ganj/core/net/http_cache.dart';
+import 'package:ganj/data/api/dto/extras.dart';
+import 'package:ganj/data/api/dto/poem.dart';
 import 'package:ganj/data/api/ganjoor_api.dart';
 import 'package:ganj/data/db/app_db.dart';
 import 'package:ganj/data/providers.dart';
@@ -31,7 +33,26 @@ void main() {
     }
   }
 
-  Future<FakeAdapter> open(WidgetTester tester, {Map<String, String> extraRoutes = const {}}) async {
+  Future<FakeAdapter> open(
+    WidgetTester tester, {
+    Map<String, String> extraRoutes = const {},
+    PoemExtrasInfo? Function(PoemExtrasInfo? fromServer)? extras,
+  }) async {
+    final repo = FixtureRepository();
+    if (extras != null) {
+      final p = await repo.poem(2130);
+      repo.poems[2130] = Poem(
+        id: p.id,
+        title: p.title,
+        fullTitle: p.fullTitle,
+        fullUrl: p.fullUrl,
+        plainText: p.plainText,
+        verses: p.verses,
+        recitations: p.recitations,
+        category: p.category,
+        extras: extras(p.extras),
+      );
+    }
     final adapter = FakeAdapter({
       '/api/ganjoor/poem/2130/songs': ex('songs_2130.json'),
       '/api/ganjoor/poem/2130/comments': ex('comments_2130.json'),
@@ -45,7 +66,7 @@ void main() {
       testApp(
         const PoemScreen(id: 2130),
         prefs: prefs,
-        repo: FixtureRepository(),
+        repo: repo,
         db: db,
         overrides: [
           ganjoorApiProvider.overrideWithValue(
@@ -90,10 +111,80 @@ void main() {
     await closeAll(tester);
   });
 
-  testWidgets('empty panel says there is nothing', (tester) async {
-    await open(tester);
+  Future<void> toEnd(WidgetTester tester) async {
+    final page = tester.state<ScrollableState>(find.byType(Scrollable).first).position;
+    for (var i = 0; i < 4; i++) {
+      page.jumpTo(page.maxScrollExtent); // the end grows as panels appear
+      await settle(tester);
+    }
+    expect(find.byKey(const ValueKey('poem-extras-2130'), skipOffstage: false), findsOneWidget);
+  }
+
+  Finder panel(String name) => find.byKey(ValueKey('panel-$name'));
+
+  testWidgets('a panel with nothing in it is not shown', (tester) async {
+    await open(tester); // Ganjoor has no manuscript images for this poem
+    await toEnd(tester);
+    expect(panel('images'), findsNothing);
+    expect(find.text('تصاویر نسخه‌های خطی'), findsNothing);
+    for (final shown in ['related', 'quoted', 'songs', 'comments']) {
+      expect(panel(shown), findsOneWidget, reason: shown);
+    }
+    await closeAll(tester);
+  });
+
+  testWidgets('comments are asked for only when the reader nears the end of the poem', (tester) async {
+    final adapter = await open(tester);
+    bool asked() => adapter.requests.any((u) => u.path.endsWith('/comments'));
+    expect(asked(), isFalse, reason: 'at the top of a long poem, nothing is asked yet');
+    await toEnd(tester);
+    expect(adapter.requests.where((u) => u.path.endsWith('/comments')), hasLength(1));
+    expect(panel('comments'), findsOneWidget);
+    await closeAll(tester);
+  });
+
+  testWidgets('what the poem says is empty is neither shown nor asked for', (tester) async {
+    final adapter = await open(
+      tester,
+      extras: (_) => const PoemExtrasInfo(hasRelated: false, hasQuoted: false, images: [], songs: []),
+      extraRoutes: {'/api/ganjoor/poem/2130/comments': '[]'},
+    );
+    await toEnd(tester);
+    for (final name in ['related', 'quoted', 'images', 'songs', 'comments']) {
+      expect(panel(name), findsNothing, reason: name);
+    }
+    final asked = adapter.requests.map((u) => u.path).toList();
+    for (final path in ['/related', '/quoteds', '/images', '/songs']) {
+      expect(asked.where((p) => p.endsWith(path)), isEmpty, reason: path);
+    }
+    expect(asked.where((p) => p.endsWith('/comments')), hasLength(1), reason: 'the poem does not count comments');
+    await closeAll(tester);
+  });
+
+  testWidgets('images that come with the poem show without asking again', (tester) async {
+    final adapter = await open(
+      tester,
+      extras: (e) => PoemExtrasInfo(
+        hasRelated: e!.hasRelated,
+        hasQuoted: e.hasQuoted,
+        songs: const [],
+        images: const [PoemImage(thumb: '', target: 'https://museum.ganjoor.net/x', alt: 'نسخهٔ قزوینی')],
+      ),
+    );
     await expand(tester, 'تصاویر نسخه‌های خطی');
-    expect(find.text('موردی نیست'), findsOneWidget);
+    expect(find.text('نسخهٔ قزوینی'), findsOneWidget);
+    expect(panel('songs'), findsNothing);
+    expect(adapter.requests.where((u) => u.path.endsWith('/images') || u.path.endsWith('/songs')), isEmpty);
+    await closeAll(tester);
+  });
+
+  testWidgets('a poem read offline (from a pack) shows no extra panels and asks for none', (tester) async {
+    final adapter = await open(tester, extras: (_) => null);
+    await toEnd(tester);
+    for (final name in ['related', 'quoted', 'images', 'songs', 'comments']) {
+      expect(panel(name), findsNothing, reason: name);
+    }
+    expect(adapter.requests.where((u) => u.path.contains('/2130/')), isEmpty);
     await closeAll(tester);
   });
 

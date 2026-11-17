@@ -100,97 +100,195 @@ class _LazyPanelState<T> extends State<LazyPanel<T>> {
 
 String _faDate(DateTime? d) => d == null ? '' : faDate(d);
 
-/// All extra sections of a poem page; each fetches its own lean endpoint lazily.
-class PoemExtras extends ConsumerWidget {
-  const PoemExtras({super.key, required this.poem});
+/// The extra sections of a poem page, each shown only when it has something in it. What the
+/// poem's own answer tells (images, songs, whether there are related or quoting poems) costs
+/// nothing more; comments, which it doesn't count, are asked for once, when the reader first
+/// nears this part of the page ([reached]). All of it follows Ganjoor through the
+/// cache, so something added there later appears here too. A poem read from a downloaded pack
+/// or the static copy shows none: offline, the panels couldn't load.
+class PoemExtras extends ConsumerStatefulWidget {
+  const PoemExtras({super.key, required this.poem, this.reached = true});
 
   final Poem poem;
 
+  /// The reader has scrolled near the panels: time to ask for what the poem didn't tell.
+  final bool reached;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // Read lazily: the API is only needed once a panel is opened.
-    GanjoorApi api() => ref.read(ganjoorApiProvider);
+  ConsumerState<PoemExtras> createState() => _PoemExtrasState();
+}
+
+class _PoemExtrasState extends ConsumerState<PoemExtras> {
+  // Each: null = no panel; otherwise the list, already on its way (or a lazy load).
+  ({Future<List<Related>> Function() load, bool known})? _related;
+  ({Future<List<Quoted>> Function() load, bool known})? _quoted;
+  Future<List<PoemImage>>? _images;
+  Future<List<Song>>? _songs;
+  Future<List<Comment>>? _comments;
+
+  bool _asked = false;
+
+  GanjoorApi get _api => ref.read(ganjoorApiProvider);
+
+  @override
+  void initState() {
+    super.initState();
+    final info = widget.poem.extras;
+    if (info == null) return;
+    final id = widget.poem.id;
+    // Known to have some: a panel that loads when opened. Known empty: none.
+    if (info.hasRelated == true) _related = (load: () => _api.related(id, 0), known: true);
+    if (info.hasQuoted == true) _quoted = (load: () => _api.quoteds(id), known: true);
+    if (info.images case final i?) _images = Future.value(i);
+    if (info.songs case final s?) _songs = Future.value(s);
+    if (widget.reached) _askUnknown();
+  }
+
+  @override
+  void didUpdateWidget(PoemExtras old) {
+    super.didUpdateWidget(old);
+    if (widget.reached) _askUnknown();
+  }
+
+  /// What the poem didn't tell is asked for once, and shown if it has anything.
+  void _askUnknown() {
+    final info = widget.poem.extras;
+    if (_asked || info == null) return;
+    _asked = true;
+    final id = widget.poem.id;
+    if (info.hasRelated == null) _related = (load: _once(() => _api.related(id, 0)), known: false);
+    if (info.hasQuoted == null) _quoted = (load: _once(() => _api.quoteds(id)), known: false);
+    if (info.images == null) _images = _api.images(id);
+    if (info.songs == null) _songs = _api.songs(id);
+    _comments = _api.comments(id);
+  }
+
+  /// [load] started now, its answer shared by whoever asks later.
+  Future<List<T>> Function() _once<T>(Future<List<T>> Function() load) {
+    final f = load();
+    return () => f;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final c = context.ganj;
-    final id = poem.id;
+    final id = widget.poem.id;
+    Widget related(Future<List<Related>> Function() load) => LazyPanel<Related>(
+      key: const ValueKey('panel-related'),
+      title: context.l10n.relatedPanel,
+      icon: Icons.compare_arrows,
+      load: load,
+      itemBuilder: (context, r) => ListTile(
+        leading: CircleAvatar(
+          backgroundColor: c.goldLight,
+          backgroundImage: r.poetImageUrl.isEmpty ? null : DiskImage('$kApiBase${r.poetImageUrl}'),
+          onBackgroundImageError: r.poetImageUrl.isEmpty ? null : (_, _) {},
+        ),
+        title: Text(localPath(r.fullTitle), maxLines: 1, overflow: TextOverflow.ellipsis),
+        subtitle: Text(
+          r.excerpt,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: c.muted),
+        ),
+        onTap: () => context.push('/url?u=${Uri.encodeComponent(r.fullUrl)}'),
+      ),
+    );
+    Widget quoted(Future<List<Quoted>> Function() load) => LazyPanel<Quoted>(
+      key: const ValueKey('panel-quoted'),
+      title: context.l10n.quotedPanel,
+      icon: Icons.format_quote,
+      load: load,
+      itemBuilder: (context, q) => ListTile(
+        title: Text([q.relatedVerse1, q.relatedVerse2].where((s) => s.isNotEmpty).join(' / ')),
+        subtitle: Text(localPath(q.fullTitle), style: TextStyle(color: c.muted)),
+        onTap: () => q.relatedPoemId != null
+            ? context.push('/poem/${q.relatedPoemId}')
+            : context.push('/url?u=${Uri.encodeComponent(q.fullUrl)}'),
+      ),
+    );
     return Column(
+      key: ValueKey('poem-extras-$id'),
       children: [
-        LazyPanel<Related>(
-          key: const ValueKey('panel-related'),
-          title: context.l10n.relatedPanel,
-          icon: Icons.compare_arrows,
-          load: () => api().related(id, 0),
-          itemBuilder: (context, r) => ListTile(
-            leading: CircleAvatar(
-              backgroundColor: c.goldLight,
-              backgroundImage: r.poetImageUrl.isEmpty ? null : DiskImage('$kApiBase${r.poetImageUrl}'),
-              onBackgroundImageError: r.poetImageUrl.isEmpty ? null : (_, _) {},
-            ),
-            title: Text(localPath(r.fullTitle), maxLines: 1, overflow: TextOverflow.ellipsis),
-            subtitle: Text(
-              r.excerpt,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: c.muted),
-            ),
-            onTap: () => context.push('/url?u=${Uri.encodeComponent(r.fullUrl)}'),
-          ),
-        ),
-        LazyPanel<Quoted>(
-          key: const ValueKey('panel-quoted'),
-          title: context.l10n.quotedPanel,
-          icon: Icons.format_quote,
-          load: () => api().quoteds(id),
-          itemBuilder: (context, q) => ListTile(
-            title: Text([q.relatedVerse1, q.relatedVerse2].where((s) => s.isNotEmpty).join(' / ')),
-            subtitle: Text(localPath(q.fullTitle), style: TextStyle(color: c.muted)),
-            onTap: () => q.relatedPoemId != null
-                ? context.push('/poem/${q.relatedPoemId}')
-                : context.push('/url?u=${Uri.encodeComponent(q.fullUrl)}'),
-          ),
-        ),
-        LazyPanel<PoemImage>(
-          key: const ValueKey('panel-images'),
-          title: context.l10n.imagesPanel,
-          icon: Icons.image_outlined,
-          load: () => api().images(id),
-          itemBuilder: (context, im) => ListTile(
-            leading: SizedBox(
-              width: 48,
-              height: 64,
-              child: Image(
-                image: DiskImage(im.thumb),
-                fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => Icon(Icons.image_not_supported, color: c.muted),
+        if (_related case final r?)
+          r.known ? related(r.load) : _IfAny(future: r.load(), panel: (items) => related(() async => items)),
+        if (_quoted case final q?)
+          q.known ? quoted(q.load) : _IfAny(future: q.load(), panel: (items) => quoted(() async => items)),
+        if (_images case final f?)
+          _IfAny(
+            future: f,
+            panel: (items) => LazyPanel<PoemImage>(
+              key: const ValueKey('panel-images'),
+              title: context.l10n.imagesPanel,
+              icon: Icons.image_outlined,
+              load: () async => items,
+              itemBuilder: (context, im) => ListTile(
+                leading: SizedBox(
+                  width: 48,
+                  height: 64,
+                  child: Image(
+                    image: DiskImage(im.thumb),
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => Icon(Icons.image_not_supported, color: c.muted),
+                  ),
+                ),
+                title: Text(im.alt, maxLines: 2, overflow: TextOverflow.ellipsis),
+                trailing: Icon(Icons.open_in_new, color: c.muted, size: 18),
+                onTap: () => openExternal(context, im.target),
               ),
             ),
-            title: Text(im.alt, maxLines: 2, overflow: TextOverflow.ellipsis),
-            trailing: Icon(Icons.open_in_new, color: c.muted, size: 18),
-            onTap: () => openExternal(context, im.target),
           ),
-        ),
-        LazyPanel<Song>(
-          key: const ValueKey('panel-songs'),
-          title: context.l10n.songsPanel,
-          icon: Icons.music_note_outlined,
-          load: () => api().songs(id),
-          itemBuilder: (context, s) => ListTile(
-            leading: Icon(Icons.music_note, color: c.brandRed),
-            title: Text(s.artist),
-            subtitle: Text([s.track, s.album].where((x) => x.isNotEmpty).join(' — '), style: TextStyle(color: c.muted)),
-            trailing: Icon(Icons.open_in_new, color: c.muted, size: 18),
-            onTap: () => openExternal(context, s.url),
+        if (_songs case final f?)
+          _IfAny(
+            future: f,
+            panel: (items) => LazyPanel<Song>(
+              key: const ValueKey('panel-songs'),
+              title: context.l10n.songsPanel,
+              icon: Icons.music_note_outlined,
+              load: () async => items,
+              itemBuilder: (context, s) => ListTile(
+                leading: Icon(Icons.music_note, color: c.brandRed),
+                title: Text(s.artist),
+                subtitle: Text(
+                  [s.track, s.album].where((x) => x.isNotEmpty).join(' — '),
+                  style: TextStyle(color: c.muted),
+                ),
+                trailing: Icon(Icons.open_in_new, color: c.muted, size: 18),
+                onTap: () => openExternal(context, s.url),
+              ),
+            ),
           ),
-        ),
-        LazyPanel<Comment>(
-          key: const ValueKey('panel-comments'),
-          title: context.l10n.commentsPanel,
-          icon: Icons.forum_outlined,
-          load: () => api().comments(id),
-          itemBuilder: (context, cm) => _CommentTile(comment: cm),
-        ),
+        if (_comments case final f?)
+          _IfAny(
+            future: f,
+            panel: (items) => LazyPanel<Comment>(
+              key: const ValueKey('panel-comments'),
+              title: context.l10n.commentsPanel,
+              icon: Icons.forum_outlined,
+              load: () async => items,
+              itemBuilder: (context, cm) => _CommentTile(comment: cm),
+            ),
+          ),
       ],
     );
   }
+}
+
+/// [panel] once [future] brings at least one item; nothing while it loads, if it fails or is empty.
+class _IfAny<T> extends StatelessWidget {
+  const _IfAny({required this.future, required this.panel});
+
+  final Future<List<T>> future;
+  final Widget Function(List<T> items) panel;
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<List<T>>(
+    future: future,
+    builder: (context, snap) => switch (snap.data) {
+      final items? when items.isNotEmpty => panel(items),
+      _ => const SizedBox.shrink(),
+    },
+  );
 }
 
 class _CommentTile extends StatelessWidget {
