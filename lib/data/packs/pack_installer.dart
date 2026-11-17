@@ -19,10 +19,15 @@ class PackInstaller {
   final Directory _tmpRoot;
   static final _oneAtATime = RequestPool(1);
 
-  Future<ImportResult> install(PackInfo pack, {void Function(double)? onProgress}) =>
-      _oneAtATime.run(() => _install(pack, onProgress));
+  /// Cancelling [cancel] stops the download; nothing of it is kept (a previous version stays).
+  Future<ImportResult> install(PackInfo pack, {void Function(double)? onProgress, CancelToken? cancel}) =>
+      _oneAtATime.run(() => _install(pack, onProgress, cancel));
 
-  Future<ImportResult> _install(PackInfo pack, void Function(double)? onProgress) async {
+  Future<ImportResult> _install(PackInfo pack, void Function(double)? onProgress, CancelToken? cancel) async {
+    // Cancelled while waiting for another install to finish.
+    if (cancel?.isCancelled ?? false) {
+      throw DioException.requestCancelled(requestOptions: RequestOptions(), reason: 'cancelled');
+    }
     await _tmpRoot.create(recursive: true);
     final work = await _tmpRoot.createTemp('pack_');
     final wasInstalled = (await installedPoets(_db)).contains(pack.poetId);
@@ -32,6 +37,7 @@ class PackInstaller {
         pack.url,
         zip.path,
         options: Options(headers: {'Accept': '*/*'}),
+        cancelToken: cancel,
         onReceiveProgress: (got, total) => onProgress?.call(total > 0 ? got / total : 0),
       );
       final out = Directory('${work.path}${Platform.pathSeparator}x');

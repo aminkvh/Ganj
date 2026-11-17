@@ -97,11 +97,13 @@ class BookAudioJob {
 }
 
 /// How a finished book download ended.
-enum BookAudioResult { done, stopped, someFailed }
+enum BookAudioResult { done, stopped, discarded, someFailed }
 
 class BookAudioJobs extends Notifier<BookAudioJob?> {
   @override
   BookAudioJob? build() => null;
+
+  bool _discard = false;
 
   /// Downloads [choice] (already-downloaded files are skipped); null if another download is running.
   Future<BookAudioResult?> start(int catId, String label, BookAudioChoice choice, AudioStore store) async {
@@ -109,6 +111,8 @@ class BookAudioJobs extends Notifier<BookAudioJob?> {
     final cancel = CancelToken();
     state = BookAudioJob(catId: catId, label: label, done: 0, total: choice.recitations.length, cancel: cancel);
     var failed = 0;
+    final saved = <int>[];
+    _discard = false;
     try {
       await downloadPlan(
         PoetAudioPlan(choice.recitations),
@@ -116,19 +120,31 @@ class BookAudioJobs extends Notifier<BookAudioJob?> {
         cancel: cancel,
         onItem: (done, _) => state = state?.progress(done),
         onFailure: (_) => failed++,
+        onSaved: (r) => saved.add(r.id),
       );
+      if (_discard) await discardJob(store, choice.recitations, saved);
     } finally {
       state = null;
       ref.invalidate(downloadedAudioProvider);
     }
-    return cancel.isCancelled
+    return _discard
+        ? BookAudioResult.discarded
+        : cancel.isCancelled
         ? BookAudioResult.stopped
         : failed > 0
         ? BookAudioResult.someFailed
         : BookAudioResult.done;
   }
 
+  /// Pauses: what is saved stays, and starting the book again continues where it stopped.
   void stop() => state?.cancel.cancel();
+
+  /// Stops and removes what this download saved.
+  void discard() {
+    if (state == null) return;
+    _discard = true;
+    state!.cancel.cancel();
+  }
 }
 
 final bookAudioJobProvider = NotifierProvider<BookAudioJobs, BookAudioJob?>(BookAudioJobs.new);

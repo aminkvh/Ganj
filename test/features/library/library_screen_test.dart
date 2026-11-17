@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart' show CancelToken;
 import 'package:drift/drift.dart' show driftRuntimeOptions;
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class FakeInstaller implements PackInstaller {
   final AppDb db;
 
   @override
-  Future<ImportResult> install(PackInfo pack, {void Function(double)? onProgress}) async {
+  Future<ImportResult> install(PackInfo pack, {void Function(double)? onProgress, CancelToken? cancel}) async {
     onProgress?.call(0.5);
     return importGdb(db, buildHafezGdb(Directory.systemTemp.createTempSync('lib_')), pack);
   }

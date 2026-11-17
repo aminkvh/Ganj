@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ganj/core/text/html_text.dart';
@@ -16,7 +17,13 @@ class FlakyStore implements AudioStore {
   final done = <int>[];
 
   @override
-  Future<void> download(Recitation r, {void Function(double)? onProgress}) async {
+  int partialBytes(int id) => 0;
+
+  @override
+  Future<void> discardPartial(int id) async {}
+
+  @override
+  Future<void> download(Recitation r, {void Function(double)? onProgress, dio.CancelToken? cancel}) async {
     if (r.id == 2) throw StateError('network');
     done.add(r.id);
   }

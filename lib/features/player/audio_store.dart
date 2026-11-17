@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/net/resumable_download.dart';
 import '../../data/api/dto/recitation.dart';
 import '../../data/repo/poetry_repository.dart';
 
@@ -32,7 +33,17 @@ abstract class AudioStore {
   bool isDownloaded(int id);
   Uri mp3Uri(int id);
   Future<List<SyncPoint>?> savedSync(int id);
-  Future<void> download(Recitation r, {void Function(double)? onProgress});
+
+  /// Saves [r]. Cancelling [cancel] pauses it: the part already fetched stays, and the next
+  /// [download] continues from there.
+  Future<void> download(Recitation r, {void Function(double)? onProgress, CancelToken? cancel});
+
+  /// Bytes of a paused or interrupted download of [id]; 0 when there is none.
+  int partialBytes(int id);
+
+  /// Throws away a paused download of [id].
+  Future<void> discardPartial(int id);
+
   Future<void> delete(int id);
 }
 
@@ -46,6 +57,19 @@ class FileAudioStore implements AudioStore {
   File _mp3(int id) => File('${root.path}${Platform.pathSeparator}$id.mp3');
   File _sync(int id) => File('${root.path}${Platform.pathSeparator}$id.sync.json');
   File _meta(int id) => File('${root.path}${Platform.pathSeparator}$id.meta.json');
+  File _part(int id) => File('${_mp3(id).path}.part');
+
+  @override
+  int partialBytes(int id) {
+    final f = _part(id);
+    return f.existsSync() ? f.lengthSync() : 0;
+  }
+
+  @override
+  Future<void> discardPartial(int id) async {
+    final f = _part(id);
+    if (f.existsSync()) await f.delete();
+  }
 
   @override
   Future<List<DownloadedRecitation>> listDownloaded() async {
@@ -96,15 +120,17 @@ class FileAudioStore implements AudioStore {
   }
 
   @override
-  Future<void> download(Recitation r, {void Function(double)? onProgress}) async {
+  Future<void> download(Recitation r, {void Function(double)? onProgress, CancelToken? cancel}) async {
     await root.create(recursive: true);
-    final part = File('${_mp3(r.id).path}.part');
-    await _dio.download(
+    final part = _part(r.id);
+    await resumableDownload(
+      _dio,
       r.mp3Url,
-      part.path,
-      onReceiveProgress: (got, total) => onProgress?.call(total > 0 ? got / total : 0),
+      part,
+      cancel: cancel,
       // i.ganjoor.net answers 406 to the API client's JSON-only Accept header.
-      options: Options(headers: {'Accept': '*/*'}),
+      headers: const {'Accept': '*/*'},
+      onBytes: (got, total) => onProgress?.call(total > 0 ? got / total : 0),
     );
     List<SyncPoint> sync;
     try {
@@ -119,7 +145,7 @@ class FileAudioStore implements AudioStore {
 
   @override
   Future<void> delete(int id) async {
-    for (final f in [_mp3(id), _sync(id), _meta(id)]) {
+    for (final f in [_mp3(id), _sync(id), _meta(id), _part(id)]) {
       if (f.existsSync()) await f.delete();
     }
   }

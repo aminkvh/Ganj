@@ -140,8 +140,7 @@ class L10nEn extends L10n {
       'O Hafez of Shiraz, keeper of every secret,\nI ask you by God and by your Shakh-e Nabat\nto reveal to me whatever is right and good for me.';
 
   @override
-  String get faalIntention =>
-      'Hold your wish in your heart, then open your fortune.';
+  String get faalIntention => 'Hold your wish in your heart, then open your fortune.';
 
   @override
   String get faalOpen => 'Open the fortune';
@@ -195,8 +194,7 @@ class L10nEn extends L10n {
   String get machineTranslation => 'Machine translation';
 
   @override
-  String get machineTranslationOfMeaning =>
-      'Machine translation of the meaning';
+  String get machineTranslationOfMeaning => 'Machine translation of the meaning';
 
   @override
   String get modelTitle => 'Download translation model';
@@ -228,8 +226,7 @@ class L10nEn extends L10n {
   String get modelRemoved => 'Translation model removed';
 
   @override
-  String get translateInBrowser =>
-      'On computers, translations open in Google Translate';
+  String get translateInBrowser => 'On computers, translations open in Google Translate';
 
   @override
   String packReady(String name) {
@@ -247,8 +244,7 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get packRemoveBody =>
-      'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
+  String get packRemoveBody => 'You\'ll need to download it again to read offline. Bookmarks and notes are kept.';
 
   @override
   String packRemoveFailed(String name) {
@@ -276,7 +272,22 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get downloadStopped => 'Download stopped';
+  String get downloadStopped => 'Download paused; start it again to continue where it stopped';
+
+  @override
+  String get downloadDiscarded => 'Download cancelled and removed';
+
+  @override
+  String get discardDownload => 'Cancel and delete';
+
+  @override
+  String get pauseDownload => 'Pause download';
+
+  @override
+  String get resumeDownload => 'Resume download';
+
+  @override
+  String get voicePaused => 'Voice download paused; tap to continue';
 
   @override
   String recitationsDownloaded(String name) {
@@ -370,8 +381,7 @@ class L10nEn extends L10n {
   String get howToInstall => 'How to install';
 
   @override
-  String get audioNeedsMpv =>
-      'Recitations on Linux need libmpv, e.g. sudo apt install libmpv2';
+  String get audioNeedsMpv => 'Recitations on Linux need libmpv, e.g. sudo apt install libmpv2';
 
   @override
   String get speed => 'Speed';
@@ -489,8 +499,7 @@ class L10nEn extends L10n {
   String get searchMeaning => 'Meaning';
 
   @override
-  String get meaningHint =>
-      'Ask in your own words, e.g. a poem about the world\'s fickleness';
+  String get meaningHint => 'Ask in your own words, e.g. a poem about the world\'s fickleness';
 
   @override
   String soundAlikeNote(String term) {
@@ -513,8 +522,7 @@ class L10nEn extends L10n {
   String get semanticGlobal => 'Search all of Ganjoor';
 
   @override
-  String get semanticResting =>
-      'Meaning search is resting right now; try again a little later';
+  String get semanticResting => 'Meaning search is resting right now; try again a little later';
 
   @override
   String get semanticOffline => 'Meaning search needs the internet';
@@ -529,8 +537,7 @@ class L10nEn extends L10n {
   String get tajikScript => 'Tajik (Cyrillic) script';
 
   @override
-  String get tajikScriptNote =>
-      'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
+  String get tajikScriptNote => 'Tajik text of the verses from Tajik Ganjoor (tj.ganjoor.net), where it exists';
 
   @override
   String get tajikOff => 'Off';
@@ -554,8 +561,7 @@ class L10nEn extends L10n {
   String get allPoets => 'All poets';
 
   @override
-  String get offlineResults =>
-      'Offline results — only from downloaded collections';
+  String get offlineResults => 'Offline results — only from downloaded collections';
 
   @override
   String get nothingFound => 'Nothing found';
@@ -608,8 +614,7 @@ class L10nEn extends L10n {
   String get clearCache => 'Clear cache';
 
   @override
-  String get clearCacheNote =>
-      'Downloaded collections, recitations and bookmarks are kept';
+  String get clearCacheNote => 'Downloaded collections, recitations and bookmarks are kept';
 
   @override
   String get about => 'About';
@@ -696,8 +701,7 @@ class L10nEn extends L10n {
   String get shahnamehWorld => 'World of the Shahnameh';
 
   @override
-  String get shBannerSubtitle =>
-      'People, family trees, a timeline of the stories and a map';
+  String get shBannerSubtitle => 'People, family trees, a timeline of the stories and a map';
 
   @override
   String get shTimeline => 'Timeline';
@@ -920,8 +924,7 @@ class L10nEn extends L10n {
   String get shGanjAi => 'AI · Ganj';
 
   @override
-  String get shGanjAiNote =>
-      'Written by AI for Ganj — not from Ganjoor, and not yet reviewed.';
+  String get shGanjAiNote => 'Written by AI for Ganj — not from Ganjoor, and not yet reviewed.';
 
   @override
   String get shReport => 'Report a problem';
@@ -930,8 +933,7 @@ class L10nEn extends L10n {
   String get shReportWhat => 'What\'s wrong?';
 
   @override
-  String get shAiTagsNote =>
-      'Tags suggested by Ganjoor\'s AI and approved by Ganjoor\'s volunteers.';
+  String get shAiTagsNote => 'Tags suggested by Ganjoor\'s AI and approved by Ganjoor\'s volunteers.';
 
   @override
   String shReportCopied(String email) {
@@ -992,8 +994,7 @@ class L10nEn extends L10n {
   String get shLegendAges => 'Box colour: the age they first appear in';
 
   @override
-  String get shLegendBranch =>
-      'Folded (+) or open (−) branch; tap to fold or open';
+  String get shLegendBranch => 'Folded (+) or open (−) branch; tap to fold or open';
 
   @override
   String get shLegendFocus => 'The person the network is centred on';
@@ -1002,8 +1003,7 @@ class L10nEn extends L10n {
   String get shLegendSize => 'Bigger circle: a greater figure';
 
   @override
-  String get shLegendLines =>
-      'Solid: kin and conflict; dashed: service; dotted: alliance';
+  String get shLegendLines => 'Solid: kin and conflict; dashed: service; dotted: alliance';
 
   @override
   String get literaryDevices => 'Literary devices';
@@ -1117,8 +1117,7 @@ class L10nEn extends L10n {
   String get voiceFastNote => 'Faster on most phones';
 
   @override
-  String get voiceQualityNote =>
-      'The clearer voice; slower phones prepare longer';
+  String get voiceQualityNote => 'The clearer voice; slower phones prepare longer';
 
   @override
   String voiceRemoveVariant(String variant, String size) {

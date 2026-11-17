@@ -62,8 +62,7 @@ import 'app_localizations_fa.dart';
 /// be consistent with the languages listed in the L10n.supportedLocales
 /// property.
 abstract class L10n {
-  L10n(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -83,19 +82,15 @@ abstract class L10n {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('fa'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('fa')];
 
   /// No description provided for @appName.
   ///
@@ -574,8 +569,38 @@ abstract class L10n {
   /// No description provided for @downloadStopped.
   ///
   /// In fa, this message translates to:
-  /// **'بارگیری متوقف شد'**
+  /// **'بارگیری متوقف شد؛ با بارگیری دوباره از همان‌جا ادامه می‌یابد'**
   String get downloadStopped;
+
+  /// No description provided for @downloadDiscarded.
+  ///
+  /// In fa, this message translates to:
+  /// **'بارگیری لغو و پاک شد'**
+  String get downloadDiscarded;
+
+  /// No description provided for @discardDownload.
+  ///
+  /// In fa, this message translates to:
+  /// **'لغو و پاک کردن'**
+  String get discardDownload;
+
+  /// No description provided for @pauseDownload.
+  ///
+  /// In fa, this message translates to:
+  /// **'توقف بارگیری'**
+  String get pauseDownload;
+
+  /// No description provided for @resumeDownload.
+  ///
+  /// In fa, this message translates to:
+  /// **'ادامهٔ بارگیری'**
+  String get resumeDownload;
+
+  /// No description provided for @voicePaused.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت صدا نیمه‌کاره مانده؛ برای ادامه بزنید'**
+  String get voicePaused;
 
   /// No description provided for @recitationsDownloaded.
   ///
@@ -2129,8 +2154,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'fa'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'fa'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;

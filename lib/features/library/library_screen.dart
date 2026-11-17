@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +26,11 @@ class LibraryScreen extends ConsumerStatefulWidget {
 
 class _LibraryScreenState extends ConsumerState<LibraryScreen> {
   final _busy = <int, double>{}; // poetId → progress
+  final _packCancel = <int, dio.CancelToken>{}; // poetId → its running download
   String _filter = '';
   String? _audioJob; // status line of a whole-poet audio download
   CancelToken? _audioCancel;
+  bool _audioDiscard = false;
 
   void _snack(String text) {
     if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
@@ -35,20 +38,23 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
 
   Future<void> _install(PackInfo p) async {
     final l = context.l10n;
+    final cancel = _packCancel[p.poetId] = dio.CancelToken();
     setState(() => _busy[p.poetId] = 0);
     try {
       await ref
           .read(packInstallerProvider)
           .install(
             p,
+            cancel: cancel,
             onProgress: (v) {
               if (mounted) setState(() => _busy[p.poetId] = v);
             },
           );
       _snack(l.packReady(p.name));
     } catch (_) {
-      _snack(l.packFailed(p.name));
+      _snack(cancel.isCancelled ? l.downloadDiscarded : l.packFailed(p.name));
     } finally {
+      _packCancel.remove(p.poetId);
       if (mounted) setState(() => _busy.remove(p.poetId));
       ref.invalidate(installedPacksProvider);
     }
@@ -101,6 +107,8 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
       );
       if (ok != true || !mounted) return;
       final cancel = _audioCancel = CancelToken();
+      final saved = <int>[];
+      _audioDiscard = false;
       await downloadPlan(
         plan,
         store,
@@ -108,8 +116,16 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
         onItem: (done, total) {
           if (mounted) setState(() => _audioJob = l.jobProgress(p.name, localDigits(done), localDigits(total)));
         },
+        onSaved: (r) => saved.add(r.id),
       );
-      _snack(cancel.isCancelled ? l.downloadStopped : l.recitationsDownloaded(p.name));
+      if (_audioDiscard) await discardJob(store, plan.recitations, saved);
+      _snack(
+        _audioDiscard
+            ? l.downloadDiscarded
+            : cancel.isCancelled
+            ? l.downloadStopped
+            : l.recitationsDownloaded(p.name),
+      );
     } catch (_) {
       _snack(l.recitationsFailed);
     } finally {
@@ -138,7 +154,21 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
             if (_audioJob != null)
               MaterialBanner(
                 content: Text(_audioJob!),
-                actions: [TextButton(onPressed: () => _audioCancel?.cancel(), child: Text(context.l10n.stop))],
+                actions: [
+                  TextButton(
+                    key: const ValueKey('poet-audio-discard'),
+                    onPressed: () {
+                      _audioDiscard = true;
+                      _audioCancel?.cancel();
+                    },
+                    child: Text(context.l10n.discardDownload),
+                  ),
+                  TextButton(
+                    key: const ValueKey('poet-audio-stop'),
+                    onPressed: () => _audioCancel?.cancel(),
+                    child: Text(context.l10n.pauseDownload),
+                  ),
+                ],
               ),
             Expanded(child: TabBarView(children: [_packs(), _audio()])),
           ],
@@ -198,6 +228,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
   Widget _packTile(PackInfo p, String? installedDate) {
     final c = context.ganj;
     final busy = _busy[p.poetId];
+    final cancel = _packCancel[p.poetId];
     final installed = installedDate != null;
     final update = installed && p.pubDate.compareTo(installedDate) > 0;
     return ListTile(
@@ -213,7 +244,25 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
         style: TextStyle(color: c.muted, fontSize: 12),
       ),
       onTap: installed ? () => context.push('/poet/${p.poetId}') : null,
-      trailing: busy != null
+      trailing: busy != null && cancel != null
+          // Downloading: the ring is a cancel button.
+          ? IconButton(
+              key: ValueKey('pack-cancel-${p.poetId}'),
+              tooltip: context.l10n.cancel,
+              onPressed: () => cancel.cancel('cancelled'),
+              icon: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 28,
+                    height: 28,
+                    child: CircularProgressIndicator(strokeWidth: 2, value: busy == 0 ? null : busy),
+                  ),
+                  Icon(Icons.close, size: 14, color: c.muted),
+                ],
+              ),
+            )
+          : busy != null
           ? SizedBox(
               width: 32,
               height: 32,

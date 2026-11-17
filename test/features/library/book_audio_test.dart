@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart' as dio;
+
 import 'dart:convert';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
@@ -48,7 +50,13 @@ class MemoryStore implements AudioStore {
   final failing = <int>{};
 
   @override
-  Future<void> download(Recitation r, {void Function(double)? onProgress}) async {
+  int partialBytes(int id) => 0;
+
+  @override
+  Future<void> discardPartial(int id) async {}
+
+  @override
+  Future<void> download(Recitation r, {void Function(double)? onProgress, dio.CancelToken? cancel}) async {
     await Future<void>.delayed(const Duration(milliseconds: 1));
     if (failing.contains(r.id)) throw Exception('unreachable');
     done.add(r.id);

@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart' as dio;
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -29,10 +31,20 @@ class MemoryAudioStore implements AudioStore {
   @override
   Future<List<SyncPoint>?> savedSync(int id) async => null;
 
+  /// Paused downloads: id → bytes fetched.
+  final parts = <int, int>{};
+
   @override
-  Future<void> download(Recitation r, {void Function(double)? onProgress}) async {
+  int partialBytes(int id) => parts[id] ?? 0;
+
+  @override
+  Future<void> discardPartial(int id) async => parts.remove(id);
+
+  @override
+  Future<void> download(Recitation r, {void Function(double)? onProgress, dio.CancelToken? cancel}) async {
     onProgress?.call(1);
     done.add(r.id);
+    parts.remove(r.id);
   }
 
   @override
@@ -155,5 +167,52 @@ void main() {
     await tester.tap(find.byKey(ValueKey('rec-dl-${rec.id}')));
     await tester.pumpAndSettle();
     expect(find.byIcon(Icons.download_outlined), findsOneWidget);
+  });
+
+  testWidgets('a paused recitation download can be resumed or thrown away', (tester) async {
+    final prefs = await mockPrefs();
+    final mem = MemoryAudioStore()..parts[rec.id] = 300000;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [audioStoreProvider.overrideWithValue(mem)],
+        child: testApp(
+          Scaffold(
+            body: Center(child: DownloadButton(recitation: rec)),
+          ),
+          prefs: prefs,
+        ),
+      ),
+    );
+    final menu = find.byKey(ValueKey('rec-dl-menu-${rec.id}'));
+    expect(menu, findsOneWidget, reason: 'paused, not a fresh download');
+    expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+
+    await tester.tap(menu);
+    await tester.pumpAndSettle();
+    expect(find.text('ادامهٔ بارگیری'), findsOneWidget);
+    await tester.tap(find.text('لغو و پاک کردن'));
+    await tester.pumpAndSettle();
+    expect(mem.parts, isEmpty);
+    expect(find.byIcon(Icons.download_outlined), findsOneWidget);
+
+    mem.parts[rec.id] = 300000;
+    await tester.pumpWidget(
+      ProviderScope(
+        key: const ValueKey('again'),
+        overrides: [audioStoreProvider.overrideWithValue(mem)],
+        child: testApp(
+          Scaffold(
+            body: Center(child: DownloadButton(recitation: rec)),
+          ),
+          prefs: prefs,
+        ),
+      ),
+    );
+    await tester.tap(menu);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('ادامهٔ بارگیری'));
+    await tester.pumpAndSettle();
+    expect(mem.isDownloaded(rec.id), isTrue);
+    expect(find.byIcon(Icons.download_done), findsOneWidget);
   });
 }

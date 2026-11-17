@@ -114,11 +114,17 @@ class VoiceRow extends ConsumerWidget {
     VoidCallback? onPlay;
     IconData? trailingIcon;
     VoidCallback? onTrailing;
+    String? trailingTooltip;
     var busy = false; // a spinner in place of the trailing icon
 
     switch (voice) {
       case VoiceAbsent(:final wasCorrupt):
-        subtitle = wasCorrupt ? l.voiceWasCorrupt : l.voiceGetOnce;
+        // A paused download left its part files: getting the voice again continues them.
+        subtitle = wasCorrupt
+            ? l.voiceWasCorrupt
+            : _hasPartial(ref)
+            ? l.voicePaused
+            : l.voiceGetOnce;
         onPlay = onTrailing = consent;
         trailingIcon = Icons.download;
       case VoiceChecking():
@@ -127,7 +133,9 @@ class VoiceRow extends ConsumerWidget {
       case VoiceDownloading(:final got, :final total):
         final pct = total <= 0 ? 0 : (got * 100 ~/ total).clamp(0, 100);
         subtitle = l.voiceDownloading(localDigits(pct));
-        trailingIcon = Icons.close;
+        // Stopping keeps what is fetched (the next start continues): a pause. Settings removes it.
+        trailingIcon = Icons.pause;
+        trailingTooltip = l.pauseDownload;
         onTrailing = ref.read(voiceProvider.notifier).cancel;
       case VoiceFailed(:final kind):
         subtitle = switch (kind) {
@@ -182,9 +190,18 @@ class VoiceRow extends ConsumerWidget {
           ? null
           : IconButton(
               key: const ValueKey('voice-trailing'),
+              tooltip: trailingTooltip,
               icon: Icon(trailingIcon, color: c.muted),
               onPressed: onTrailing,
             ),
     );
+  }
+
+  static bool _hasPartial(WidgetRef ref) {
+    try {
+      return voiceRootBytes(ref.read(voiceRootProvider)) > 0;
+    } catch (_) {
+      return false; // no voice folder here (tests, unsupported platforms)
+    }
   }
 }

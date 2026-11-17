@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,6 +24,7 @@ class PoetPackButton extends ConsumerStatefulWidget {
 
 class _PoetPackButtonState extends ConsumerState<PoetPackButton> {
   double? _progress;
+  CancelToken? _cancel;
 
   Future<void> _install() async {
     final packs = ref.read(packCatalogProvider).value ?? const [];
@@ -30,20 +32,25 @@ class _PoetPackButtonState extends ConsumerState<PoetPackButton> {
     if (p == null) return;
     final l = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
+    final cancel = _cancel = CancelToken();
     setState(() => _progress = 0);
     try {
       await ref
           .read(packInstallerProvider)
           .install(
             p,
+            cancel: cancel,
             onProgress: (v) {
               if (mounted) setState(() => _progress = v);
             },
           );
       messenger.showSnackBar(SnackBar(content: Text(l.packReady(localPoet(p.poetId, p.name)))));
     } catch (_) {
-      messenger.showSnackBar(SnackBar(content: Text(l.packFailed(localPoet(p.poetId, p.name)))));
+      messenger.showSnackBar(
+        SnackBar(content: Text(cancel.isCancelled ? l.downloadDiscarded : l.packFailed(localPoet(p.poetId, p.name)))),
+      );
     } finally {
+      _cancel = null;
       if (mounted) {
         setState(() => _progress = null);
         ref.invalidate(installedPacksProvider);
@@ -90,7 +97,18 @@ class _PoetPackButtonState extends ConsumerState<PoetPackButton> {
           children: [
             LinearProgressIndicator(value: progress > 0 ? progress : null),
             const SizedBox(height: 4),
-            Text(localDigits('${(progress * 100).round()}٪'), style: TextStyle(color: c.muted, fontSize: 12)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(localDigits('${(progress * 100).round()}٪'), style: TextStyle(color: c.muted, fontSize: 12)),
+                if (_cancel != null)
+                  TextButton(
+                    key: const ValueKey('poet-pack-cancel'),
+                    onPressed: () => _cancel?.cancel('cancelled'),
+                    child: Text(l.cancel),
+                  ),
+              ],
+            ),
           ],
         ),
       );

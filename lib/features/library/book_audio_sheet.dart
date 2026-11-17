@@ -81,6 +81,7 @@ class BookAudioPanel extends ConsumerWidget {
       null => l.bookAudioBusy,
       BookAudioResult.done => l.recitationsDownloaded(title),
       BookAudioResult.stopped => l.downloadStopped,
+      BookAudioResult.discarded => l.downloadDiscarded,
       BookAudioResult.someFailed => l.bookAudioSomeFailed,
     };
     messenger.showSnackBar(SnackBar(content: Text(msg)));
@@ -117,10 +118,20 @@ class BookAudioPanel extends ConsumerWidget {
         LinearProgressIndicator(value: job.total == 0 ? null : job.done / job.total, color: c.gold),
         Align(
           alignment: AlignmentDirectional.centerEnd,
-          child: TextButton(
-            key: const ValueKey('book-audio-stop'),
-            onPressed: () => ref.read(bookAudioJobProvider.notifier).stop(),
-            child: Text(l.stop),
+          child: Wrap(
+            spacing: 4,
+            children: [
+              TextButton(
+                key: const ValueKey('book-audio-discard'),
+                onPressed: () => ref.read(bookAudioJobProvider.notifier).discard(),
+                child: Text(l.discardDownload),
+              ),
+              TextButton(
+                key: const ValueKey('book-audio-stop'),
+                onPressed: () => ref.read(bookAudioJobProvider.notifier).stop(),
+                child: Text(l.pauseDownload),
+              ),
+            ],
           ),
         ),
       ] else

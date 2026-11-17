@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart' as dio;
+
 import 'dart:convert';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
@@ -41,7 +43,13 @@ class CountingStore implements AudioStore {
   final done = <int>[];
 
   @override
-  Future<void> download(Recitation r, {void Function(double)? onProgress}) async {
+  int partialBytes(int id) => 0;
+
+  @override
+  Future<void> discardPartial(int id) async {}
+
+  @override
+  Future<void> download(Recitation r, {void Function(double)? onProgress, dio.CancelToken? cancel}) async {
     running++;
     if (running > peak) peak = running;
     await Future<void>.delayed(const Duration(milliseconds: 5));
@@ -56,8 +64,75 @@ class CountingStore implements AudioStore {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
+/// Each file takes until its token stops it (or a moment); records what is deleted and discarded.
+class SlowStore implements AudioStore {
+  SlowStore(this.done);
+
+  final List<int> done;
+  final deleted = <int>[], discarded = <int>[];
+
+  @override
+  int partialBytes(int id) => 0;
+
+  @override
+  Future<void> discardPartial(int id) async => discarded.add(id);
+
+  @override
+  Future<void> delete(int id) async {
+    deleted.add(id);
+    done.remove(id);
+  }
+
+  @override
+  Future<void> download(Recitation r, {void Function(double)? onProgress, dio.CancelToken? cancel}) async {
+    // The first file is quick; the others take two seconds unless stopped.
+    final takes = Duration(milliseconds: r.id == 1 ? 1 : 2000);
+    await Future.any([if (cancel != null) cancel.whenCancel, Future<void>.delayed(takes)]);
+    if (cancel?.isCancelled ?? false) {
+      throw dio.DioException.requestCancelled(requestOptions: dio.RequestOptions(), reason: 'paused');
+    }
+    done.add(r.id);
+  }
+
+  @override
+  bool isDownloaded(int id) => done.contains(id);
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
+
+  Recitation r(int id) => Recitation.fromJson(rec(id, 100 + id, 1000));
+
+  test('stopping a job stops the file in progress at once, and is not a failure', () async {
+    final store = SlowStore([]);
+    final cancel = CancelToken();
+    final saved = <int>[], failed = <int>[];
+    final job = downloadPlan(
+      PoetAudioPlan([r(1), r(2), r(3)]),
+      store,
+      cancel: cancel,
+      onSaved: (x) {
+        saved.add(x.id);
+        if (x.id == 1) Future<void>.delayed(const Duration(milliseconds: 5), cancel.cancel); // during file 2
+      },
+      onFailure: (x) => failed.add(x.id),
+    );
+    await job.timeout(const Duration(milliseconds: 1000), onTimeout: () => fail('file 2 was not stopped at once'));
+    expect(saved, [1]);
+    expect(failed, isEmpty);
+  });
+
+  test('discarding a job removes only what it saved, and the part it left', () async {
+    final store = SlowStore([7]); // already on the device before the job
+    final plan = [r(7), r(1), r(2)];
+    await discardJob(store, plan, [1]);
+    expect(store.deleted, [1]);
+    expect(store.done, [7]);
+    expect(store.discarded, [7, 1, 2]);
+  });
 
   test('plans every category recursively and sums sizes; downloads one at a time', () async {
     final db = AppDb(NativeDatabase.memory());

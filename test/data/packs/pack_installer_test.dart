@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:archive/archive.dart';
+import 'package:dio/dio.dart';
 import 'package:drift/drift.dart' show driftRuntimeOptions;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -44,6 +45,14 @@ void main() {
     await installer.install(hafezPack, onProgress: (v) => progress = v);
     expect(await installedPoets(db), {2});
     expect(progress, isNotNull);
+    expect(dir.listSync().whereType<Directory>().where((d) => d.path.contains('pack_')), isEmpty);
+  });
+
+  test('a cancelled download installs nothing and leaves no temp files', () async {
+    adapter.binary['/android/gdb/hafez.zip'] = zipOf(buildHafezGdb(Directory.systemTemp.createTempSync('src_')));
+    final cancel = CancelToken()..cancel('cancelled');
+    await expectLater(installer.install(hafezPack, cancel: cancel), throwsA(isA<DioException>()));
+    expect(await installedPoets(db), isEmpty);
     expect(dir.listSync().whereType<Directory>().where((d) => d.path.contains('pack_')), isEmpty);
   });
 

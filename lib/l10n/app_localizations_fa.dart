@@ -226,8 +226,7 @@ class L10nFa extends L10n {
   String get modelRemoved => 'مدل ترجمه حذف شد';
 
   @override
-  String get translateInBrowser =>
-      'روی رایانه، ترجمه در Google Translate باز می‌شود';
+  String get translateInBrowser => 'روی رایانه، ترجمه در Google Translate باز می‌شود';
 
   @override
   String packReady(String name) {
@@ -245,8 +244,7 @@ class L10nFa extends L10n {
   }
 
   @override
-  String get packRemoveBody =>
-      'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
+  String get packRemoveBody => 'برای خواندن آفلاین دوباره باید بارگیری شود. نشان‌ها و یادداشت‌ها می‌مانند.';
 
   @override
   String packRemoveFailed(String name) {
@@ -274,7 +272,22 @@ class L10nFa extends L10n {
   }
 
   @override
-  String get downloadStopped => 'بارگیری متوقف شد';
+  String get downloadStopped => 'بارگیری متوقف شد؛ با بارگیری دوباره از همان‌جا ادامه می‌یابد';
+
+  @override
+  String get downloadDiscarded => 'بارگیری لغو و پاک شد';
+
+  @override
+  String get discardDownload => 'لغو و پاک کردن';
+
+  @override
+  String get pauseDownload => 'توقف بارگیری';
+
+  @override
+  String get resumeDownload => 'ادامهٔ بارگیری';
+
+  @override
+  String get voicePaused => 'دریافت صدا نیمه‌کاره مانده؛ برای ادامه بزنید';
 
   @override
   String recitationsDownloaded(String name) {
@@ -368,8 +381,7 @@ class L10nFa extends L10n {
   String get howToInstall => 'راهنمای نصب';
 
   @override
-  String get audioNeedsMpv =>
-      'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
+  String get audioNeedsMpv => 'پخش خوانش روی لینوکس به libmpv نیاز دارد؛ برای نمونه: sudo apt install libmpv2';
 
   @override
   String get speed => 'سرعت';
@@ -487,8 +499,7 @@ class L10nFa extends L10n {
   String get searchMeaning => 'معنا';
 
   @override
-  String get meaningHint =>
-      'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
+  String get meaningHint => 'به زبان خودتان بپرسید؛ مثلاً: شعری دربارهٔ بی‌وفایی دنیا';
 
   @override
   String soundAlikeNote(String term) {
@@ -511,8 +522,7 @@ class L10nFa extends L10n {
   String get semanticGlobal => 'جستجوی سراسری';
 
   @override
-  String get semanticResting =>
-      'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
+  String get semanticResting => 'جستجوی معنایی اکنون در دسترس نیست؛ کمی بعد دوباره امتحان کنید';
 
   @override
   String get semanticOffline => 'جستجوی معنایی به اینترنت نیاز دارد';
@@ -527,8 +537,7 @@ class L10nFa extends L10n {
   String get tajikScript => 'خط تاجیکی (سیریلیک)';
 
   @override
-  String get tajikScriptNote =>
-      'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
+  String get tajikScriptNote => 'متن تاجیکی ابیات از گنجور تاجیکی (tj.ganjoor.net)، برای شعرهایی که دارند';
 
   @override
   String get tajikOff => 'خاموش';
@@ -605,8 +614,7 @@ class L10nFa extends L10n {
   String get clearCache => 'پاک‌کردن حافظهٔ موقت';
 
   @override
-  String get clearCacheNote =>
-      'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
+  String get clearCacheNote => 'مجموعه‌های بارگیری‌شده، خوانش‌ها و نشان‌ها دست نمی‌خورند';
 
   @override
   String get about => 'درباره';
@@ -693,8 +701,7 @@ class L10nFa extends L10n {
   String get shahnamehWorld => 'جهان شاهنامه';
 
   @override
-  String get shBannerSubtitle =>
-      'نامبردگان، تبارنامه‌ها، گاه‌شمار داستان‌ها و نقشه';
+  String get shBannerSubtitle => 'نامبردگان، تبارنامه‌ها، گاه‌شمار داستان‌ها و نقشه';
 
   @override
   String get shTimeline => 'گاه‌شمار';
@@ -917,8 +924,7 @@ class L10nFa extends L10n {
   String get shGanjAi => 'هوش مصنوعی · گنج';
 
   @override
-  String get shGanjAiNote =>
-      'نوشتهٔ هوش مصنوعی برای گنج؛ از گنجور نیست و هنوز بازبینی نشده است.';
+  String get shGanjAiNote => 'نوشتهٔ هوش مصنوعی برای گنج؛ از گنجور نیست و هنوز بازبینی نشده است.';
 
   @override
   String get shReport => 'گزارش خطا';
@@ -927,8 +933,7 @@ class L10nFa extends L10n {
   String get shReportWhat => 'چه چیزی نادرست است؟';
 
   @override
-  String get shAiTagsNote =>
-      'برچسب‌ها را هوش مصنوعی گنجور پیشنهاد داده و داوطلبان گنجور تأیید کرده‌اند.';
+  String get shAiTagsNote => 'برچسب‌ها را هوش مصنوعی گنجور پیشنهاد داده و داوطلبان گنجور تأیید کرده‌اند.';
 
   @override
   String shReportCopied(String email) {
@@ -989,8 +994,7 @@ class L10nFa extends L10n {
   String get shLegendAges => 'رنگ قاب: دورانی که نخستین بار در آن می‌آید';
 
   @override
-  String get shLegendBranch =>
-      'شاخهٔ بسته (+) یا باز (−)؛ برای باز و بسته کردن بزنید';
+  String get shLegendBranch => 'شاخهٔ بسته (+) یا باز (−)؛ برای باز و بسته کردن بزنید';
 
   @override
   String get shLegendFocus => 'کسی که شبکه بر گرد او است';
@@ -999,8 +1003,7 @@ class L10nFa extends L10n {
   String get shLegendSize => 'گوی بزرگ‌تر: نامدارتر';
 
   @override
-  String get shLegendLines =>
-      'خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی';
+  String get shLegendLines => 'خط پیوسته: خویشاوندی و دشمنی؛ خط‌چین: خدمت؛ نقطه‌چین: همراهی';
 
   @override
   String get literaryDevices => 'آرایه‌های ادبی';
@@ -1114,8 +1117,7 @@ class L10nFa extends L10n {
   String get voiceFastNote => 'سریع‌تر روی بیشتر گوشی‌ها';
 
   @override
-  String get voiceQualityNote =>
-      'صدای روشن‌تر؛ گوشی‌های کندتر بیشتر آماده می‌کنند';
+  String get voiceQualityNote => 'صدای روشن‌تر؛ گوشی‌های کندتر بیشتر آماده می‌کنند';
 
   @override
   String voiceRemoveVariant(String variant, String size) {
