@@ -153,6 +153,7 @@ jobs:
           git reset --hard HEAD
           git clean -ffdx
           flutter pub get > /dev/null
+          git restore lib/l10n # pub get regenerates these, wrapped at 80 columns instead of 120
           out=$(dart run tool/podcast_match_apply.dart "$RUNNER_TEMP/unmatched.json" "$RUNNER_TEMP/decisions.json" "$RUNNER_TEMP/summary.md")
           echo "$out"
           cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
