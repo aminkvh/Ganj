@@ -150,6 +150,14 @@ int lastNumber(Iterable<Item> matched, RegExp re) {
   return n;
 }
 
+/// Titles of episodes a podcast repeats its regular ones in: never matched, never listed.
+final _ignored = {
+  // One long archive file after every ten ghazals; each ghazal has its own episode.
+  'saadia': RegExp(r'بدون\s*تدوین'),
+};
+
+bool ignored(String podcast, String title) => _ignored[podcast]?.hasMatch(title) ?? false;
+
 Future<void> main(List<String> args) async {
   final out = Directory(args.isNotEmpty ? args.first : 'build/podcasts')..createSync(recursive: true);
   final sh = jsonDecode(File(_shCatalog).readAsStringSync()) as Map<String, dynamic>;
@@ -208,6 +216,7 @@ Future<void> main(List<String> args) async {
       final open = <Item>[];
       for (final item in items) {
         if (mapped.contains(item.guid) || (skipped[id]?.contains(item.guid) ?? false)) continue;
+        if (ignored(id, item.title)) continue;
         final paths = rule == null ? null : await rule.$1(item, last);
         if (paths == null) {
           open.add(item);
