@@ -1,5 +1,5 @@
-# Proposes matches for the podcast episodes that podcasts-data.yml could not place by their titles
-# (the "Podcast episodes to match" issue), as a pull request for the maintainer to check and merge.
+# Matches the podcast episodes that podcasts-data.yml could not place by their titles
+# (the "Podcast episodes to match" issue).
 #
 # Safety, in order:
 # - Claude signs in with workload identity federation (no API key stored here); the federation rule
@@ -8,8 +8,9 @@
 #   run) and write one file, build/podcasts/decisions.json. Feed text is data, never instructions.
 # - Its decisions are then applied from a clean checkout by tool/podcast_match_apply.dart, which keeps
 #   only episodes really waiting, real poems and stories, and never changes an existing match.
-# - Nothing reaches readers until the maintainer merges the pull request; the next podcasts-data run
-#   publishes it.
+# - A match is merged by itself only when the episode's own title proves it (tool/podcast_auto_rules.dart)
+#   and the podcast tests pass. Everything else waits for the maintainer in a pull request. The next
+#   podcasts-data run publishes what is merged.
 name: podcast-match
 
 on:
@@ -77,6 +78,7 @@ jobs:
           dart run tool/podcast_update.dart build/podcasts
           # Kept outside the checkout, where Claude cannot change it.
           cp build/podcasts/unmatched.json "$RUNNER_TEMP/unmatched.json"
+          cp build/podcasts/podcasts.json "$RUNNER_TEMP/current.json"
           n=$(jq length "$RUNNER_TEMP/unmatched.json")
           echo "$n episode(s) waiting."
           if [ "$n" = 0 ] && [ "${{ inputs.check_login }}" = true ]; then n=check; fi
@@ -143,8 +145,8 @@ jobs:
             Copy podcast ids and guids exactly from unmatched.json. If you can confirm nothing, write
             {"episodes": []}.
 
-      - name: Check and apply the decisions from a clean checkout
-        id: apply
+      - name: Check the decisions from a clean checkout and apply the certain ones
+        id: auto
         if: steps.gate.outputs.run == 'true' && steps.list.outputs.count != '0'
         run: |
           set -euo pipefail
@@ -153,16 +155,52 @@ jobs:
           git reset --hard HEAD
           git clean -ffdx
           flutter pub get > /dev/null
-          git restore lib/l10n # pub get regenerates these, wrapped at 80 columns instead of 120
-          out=$(dart run tool/podcast_match_apply.dart "$RUNNER_TEMP/unmatched.json" "$RUNNER_TEMP/decisions.json" "$RUNNER_TEMP/summary.md")
+          cat > "$RUNNER_TEMP/apply.sh" <<'EOF'
+          set -euo pipefail
+          out=$(dart run tool/podcast_match_apply.dart "$RUNNER_TEMP/unmatched.json" "$RUNNER_TEMP/decisions.json" "$RUNNER_TEMP/summary.md" "$RUNNER_TEMP/current.json" "$1")
           echo "$out"
           cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          flutter test test/features/podcasts test/tool
+          git restore lib/l10n # pub get and test regenerate these, wrapped at 80 columns instead of 120
           changed=$(git status --porcelain | awk '{print $2}' | sort)
           allowed=$(printf '%s\n' assets/seed/podcasts.json assets/seed/shahnameh/podcasts.json tool/podcast_skipped.json tool/poem_podcast_skipped.json | sort)
           if [ -n "$changed" ] && [ -n "$(comm -23 <(echo "$changed") <(echo "$allowed"))" ]; then
             echo "Unexpected files changed:"; comm -23 <(echo "$changed") <(echo "$allowed"); exit 1
           fi
           echo "changed=$([ -n "$changed" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          EOF
+          bash "$RUNNER_TEMP/apply.sh" auto
+
+      - name: Merge the certain ones
+        if: steps.auto.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$BRANCH-auto"
+          git add assets/seed/podcasts.json assets/seed/shahnameh/podcasts.json
+          git commit -q -m "Podcast matches proven by their titles" -m "Proposed by Claude; let through by tool/podcast_auto_rules.dart."
+          git push -f origin "$BRANCH-auto"
+          pr=$(gh pr list --state open --head "$BRANCH-auto" --json number -q '.[0].number // empty')
+          if [ -z "$pr" ]; then
+            gh pr create --base main --head "$BRANCH-auto" --title "Podcast matches proven by their titles" --body-file "$RUNNER_TEMP/summary.md"
+          else
+            gh pr edit "$pr" --body-file "$RUNNER_TEMP/summary.md"
+          fi
+          # GitHub may need a moment to see that the branch can be merged. A merge commit keeps this
+          # commit as it is, so the review branch below builds on it.
+          for i in 1 2 3 4 5; do
+            if gh pr merge "$BRANCH-auto" --merge --match-head-commit "$(git rev-parse HEAD)"; then exit 0; fi
+            sleep 10
+          done
+          exit 1
+
+      - name: Apply the ones to review
+        id: apply
+        if: steps.gate.outputs.run == 'true' && steps.list.outputs.count != '0'
+        run: bash "$RUNNER_TEMP/apply.sh" review
 
       - name: Open the pull request
         if: steps.apply.outputs.changed == 'true'

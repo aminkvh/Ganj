@@ -2,7 +2,7 @@
 // Claude never edits the catalogs itself: it only writes a decisions file, and this script — run from
 // a clean checkout — decides what of it may go in.
 //
-//   dart run tool/podcast_match_apply.dart <unmatched.json> <decisions.json> <summary.md>
+//   dart run tool/podcast_match_apply.dart <unmatched.json> <decisions.json> <summary.md> <current.json> auto|review
 //
 // decisions.json: {"episodes": [{"podcast": id, "guid": g, "poems": [paths]} |
 //                               {"podcast": id, "guid": g, "stories": [story ids]} |
@@ -11,12 +11,15 @@
 // A decision is applied only when: the episode is one waiting to be matched (unmatched.json, written by
 // tool/podcast_update.dart from the live feeds), it is decided once, Shahnameh episodes name real story
 // ids (assets/seed/shahnameh/ages.json) and poem episodes name poems that exist on Ganjoor. Anything
-// else is rejected and listed. Existing matches are never changed or removed. Writes a summary for the
+// else is rejected and listed. "auto" applies only the matches that tool/podcast_auto_rules.dart lets
+// through without review, "review" only the others; current.json is the list podcast_update.dart built,
+// with the title rules' matches in it. Existing matches are never changed or removed. Writes a summary for the
 // pull request; exits 0 with "applied N" on stdout (N may be 0).
 import 'dart:convert';
 import 'dart:io';
 
-import 'podcast_update.dart' show confirmPoem;
+import 'podcast_auto_rules.dart';
+import 'podcast_update.dart' show confirmPoem, ganjoorCat;
 
 const _shCatalog = 'assets/seed/shahnameh/podcasts.json';
 const _poemCatalog = 'assets/seed/podcasts.json';
@@ -42,8 +45,11 @@ String _safe(Object? s, {int max = 300}) {
 }
 
 Future<void> main(List<String> args) async {
-  if (args.length != 3) {
-    stderr.writeln('Usage: dart run tool/podcast_match_apply.dart <unmatched.json> <decisions.json> <summary.md>');
+  if (args.length != 5 || !const ['auto', 'review'].contains(args[4])) {
+    stderr.writeln(
+      'Usage: dart run tool/podcast_match_apply.dart <unmatched.json> <decisions.json> <summary.md> '
+      '<current.json> auto|review',
+    );
     exit(2);
   }
   final waiting = {
@@ -55,9 +61,11 @@ Future<void> main(List<String> args) async {
       ? ((jsonDecode(decisionsFile.readAsStringSync()) as Map<String, dynamic>)['episodes'] as List? ?? const [])
       : const [];
 
+  final auto = args[4] == 'auto';
+  final published = _read(args[3]);
   final stories = {
     for (final age in (_read('assets/seed/shahnameh/ages.json')['ages'] as List))
-      for (final s in (age['stories'] as List)) s['id'] as String,
+      for (final s in (age['stories'] as List)) s['id'] as String: s['fa'] as String,
   };
   final sh = _read(_shCatalog), poems = _read(_poemCatalog);
   final shSkip = _read(_shSkipped), poemSkip = _read(_poemSkipped);
@@ -65,6 +73,7 @@ Future<void> main(List<String> args) async {
       (catalog['podcasts'] as List).cast<Map<String, dynamic>>().firstWhere((p) => p['id'] == id);
 
   final applied = <String>[], rejected = <String>[];
+  var merged = 0; // by the auto run before this one
   final seen = <String>{};
   for (final raw in decisions) {
     String? why;
@@ -82,7 +91,7 @@ Future<void> main(List<String> args) async {
     } else if (!skip && w['catalog'] == 'shahnameh') {
       if (d['stories'] == null || targets.length > 6) why = 'a Shahnameh episode needs 1–6 "stories"';
       for (final t in targets) {
-        if (!stories.contains(t)) why ??= 'no story "$t"';
+        if (!stories.containsKey(t)) why ??= 'no story "$t"';
       }
     } else if (!skip) {
       if (d['poems'] == null || targets.length > 40) why = 'a poem episode needs 1–40 "poems"';
@@ -96,10 +105,31 @@ Future<void> main(List<String> args) async {
     final label =
         '**${_safe(w?['podcastFa'] ?? d['podcast'], max: 60)}** — ${_safe(w?['title'] ?? d['guid'], max: 120)}';
     if (why != null) {
-      rejected.add('- $label: rejected, $why.');
+      if (!auto) rejected.add('- $label: rejected, $why.');
       continue;
     }
     final id = w!['podcast'] as String;
+    final isSh = w['catalog'] == 'shahnameh';
+    final current =
+        podcast(published[isSh ? 'shahnameh' : 'poems'] as Map<String, dynamic>, id)[isSh ? 'stories' : 'poems']
+            as Map<String, dynamic>;
+    final review = skip
+        ? 'a skip hides the episode for good'
+        : await whyReview(
+            catalog: w['catalog'] as String,
+            podcast: id,
+            title: '${w['title']}',
+            targets: targets,
+            current: current,
+            storyNames: stories,
+            firstLines: ganjoorCat,
+          );
+    // Later decisions of this run are judged with this one counted, whichever run applies it.
+    for (final t in targets) {
+      ((current[t] ??= <dynamic>[]) as List).add(w['guid']);
+    }
+    if (!auto && review == null) merged++;
+    if (auto != (review == null)) continue;
     if (skip) {
       ((w['catalog'] == 'shahnameh' ? shSkip : poemSkip)[id] ??= <dynamic>[]) as List;
       ((w['catalog'] == 'shahnameh' ? shSkip : poemSkip)[id] as List).add(w['guid']);
@@ -111,7 +141,9 @@ Future<void> main(List<String> args) async {
         ((map[t] ??= <dynamic>[]) as List).add(w['guid']);
       }
     }
-    applied.add('- $label → ${skip ? 'skipped' : targets.map((t) => '`$t`').join(', ')}  \n  _${_safe(d['reason'])}_');
+    applied.add(
+      '- $label → ${skip ? 'skipped' : targets.map((t) => '`$t`').join(', ')}  \n  _${_safe(d['reason'])}_${review == null ? '' : '  \n  Waits for review: $review.'}',
+    );
   }
 
   if (applied.isNotEmpty) {
@@ -120,18 +152,19 @@ Future<void> main(List<String> args) async {
     _write(_shSkipped, shSkip);
     _write(_poemSkipped, poemSkip);
   }
-  final left = waiting.length - applied.length;
+  final left = waiting.length - applied.length - merged;
   File(args[2]).writeAsStringSync(
     [
       'Episodes matched by Claude in the podcast-match workflow. Each one was checked by '
           '`tool/podcast_match_apply.dart`: it was waiting in the feeds, and its poems exist on Ganjoor '
-          '(or its stories in the app). **Check the matches, then merge**; the next daily run publishes them.',
+          '(or its stories in the app). '
+          '${auto ? 'Each title also passed `tool/podcast_auto_rules.dart`, so these are merged without review' : '**Check the matches, then merge**'}; '
+          'the next daily run publishes them.',
       '',
       '### Matched or skipped (${applied.length})',
       ...applied,
       if (rejected.isNotEmpty) ...['', '### Rejected by the check (${rejected.length})', ...rejected],
-      '',
-      '$left episode(s) are still waiting and stay in the "Podcast episodes to match" issue.',
+      if (!auto) ...['', '$left episode(s) are still waiting and stay in the "Podcast episodes to match" issue.'],
     ].join('\n'),
   );
   stdout.writeln('applied ${applied.length}');
